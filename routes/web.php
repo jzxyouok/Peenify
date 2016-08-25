@@ -22,6 +22,8 @@ Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::resource('categories', 'CategoriesController');
+Route::resource('products', 'ProductsController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

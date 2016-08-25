@@ -29,3 +29,11 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
         'status' => 1
     ];
 });
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'diablo3',
+        'description' => 'dead',
+        'status' => 1
+    ];
+});

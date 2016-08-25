@@ -1,11 +1,11 @@
 <?php
 
-use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class CategoryServiceTest extends TestCase
+class ProductServiceTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -21,56 +21,56 @@ class CategoryServiceTest extends TestCase
 
     /**
      * @test
-     * @group category
+     * @group product
      */
     public function testAll()
     {
-        $repository = $this->initMock(CategoryRepository::class);
+        $repository = $this->initMock(ProductRepository::class);
         $repository->shouldReceive('all')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new \App\Services\ProductService($repository);
 
         $service->all();
     }
 
     /**
      * @test
-     * @group category
+     * @group product
      */
     public function testCreate()
     {
-        $repository = $this->initMock(CategoryRepository::class);
+        $repository = $this->initMock(ProductRepository::class);
         $repository->shouldReceive('create')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new \App\Services\ProductService($repository);
 
         $service->create(['name' => 'test', 'description' => 'test2']);
     }
 
     /**
      * @test
-     * @group category
+     * @group product
      */
     public function testShow()
     {
-        $repository = $this->initMock(CategoryRepository::class);
+        $repository = $this->initMock(ProductRepository::class);
         $repository->shouldReceive('findOrFail')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new \App\Services\ProductService($repository);
 
         $service->findOrFail(1);
     }
 
     /**
      * @test
-     * @group category
+     * @group product
      */
     public function testUpdate()
     {
-        $repository = $this->initMock(CategoryRepository::class);
+        $repository = $this->initMock(ProductRepository::class);
         $repository->shouldReceive('update')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new \App\Services\ProductService($repository);
 
         $service->update(1, [
             'name' => 'updated',
@@ -80,14 +80,14 @@ class CategoryServiceTest extends TestCase
 
     /**
      * @test
-     * @group category
+     * @group product
      */
     public function testDestroy()
     {
-        $repository = $this->initMock(CategoryRepository::class);
+        $repository = $this->initMock(ProductRepository::class);
         $repository->shouldReceive('destroy')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new \App\Services\ProductService($repository);
 
         $service->destroy(1);
     }
