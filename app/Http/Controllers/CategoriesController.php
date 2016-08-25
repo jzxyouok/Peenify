@@ -35,7 +35,7 @@ class CategoriesController extends Controller
     {
         $this->categoryService->create($request->all());
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('message', '建立成功');
     }
 
     public function show($id)
@@ -56,13 +56,13 @@ class CategoriesController extends Controller
     {
         $this->categoryService->update($id, $request->all());
 
-        return redirect()->route('categories.show', $id);
+        return redirect()->route('categories.show', $id)->with('message', '編輯成功');
     }
 
     public function destroy($id)
     {
         $this->categoryService->destroy($id);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('message', '刪除成功');
     }
 }

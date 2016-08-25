@@ -25,10 +25,13 @@ class CategoriesControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $service = $this->initMock(\App\Services\CategoryService::class);
-        $service->shouldReceive('all')->once()->andReturn(new Collection());
+        factory(\App\Category::class)->create();
+        factory(\App\Category::class)->create([
+            'name' => 'games',
+            'description' => 'this is a game'
+        ]);
 
-        $this->visit(route('categories.index'))->see('All Category');
+        $this->visit(route('categories.index'))->see('movies')->see('games');
     }
 
     /**

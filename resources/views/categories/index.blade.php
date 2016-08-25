@@ -1,7 +1,14 @@
-<h1>All Category</h1>
+@extends('layouts.app')
 
-@if($categories->isEmpty())
-    @foreach($categories as $category)
-        <h2>{{ $category->name }}</h2>
-    @endforeach
-@endif
+@section('content')
+
+    <div class="container">
+        <h1>All Categories</h1>
+        @foreach($categories as $category)
+            <h3><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></h3>
+            <p>{{ $category->description }}</p>
+            <p>{{ $category->created_at->diffForHumans() }}</p>
+        @endforeach
+    </div>
+
+@endsection
