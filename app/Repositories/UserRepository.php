@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Repositories;
+
+use App\User;
+
+class UserRepository
+{
+    /**
+     * @var \Eloquent
+     */
+    private $model;
+
+    public function __construct(User $model)
+    {
+        $this->model = $model;
+    }
+
+
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        return $this->model->updateOrCreate($attributes, $values);
+    }
+}

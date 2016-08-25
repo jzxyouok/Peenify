@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\UserService;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
@@ -28,15 +29,20 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    /**
+     * @var UserService
+     */
+    private $userService;
 
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param UserService $userService
      */
-    public function __construct()
+    public function __construct(UserService $userService)
     {
         $this->middleware('guest', ['except' => 'logout']);
+        $this->userService = $userService;
     }
 
     /**
@@ -54,7 +60,8 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('facebook')->user();
-
-        dd($user);
+        $user = $this->userService->updateOrCreateWithFacebook($user);
+        Auth::loginUsingId($user->id);
+        return redirect()->back();
     }
 }
