@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+ * Facebook login
+ */
+Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::resource('categories', 'CategoriesController');
 Auth::routes();
 

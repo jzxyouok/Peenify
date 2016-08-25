@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id' => env('client_id'),
+        'client_secret' => env('client_secret'),
+        'redirect' => 'http://minimalism.dev/auth/facebook/callback',
+    ],
 ];
