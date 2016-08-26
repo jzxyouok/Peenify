@@ -51,3 +51,11 @@ $factory->define(App\Collection::class, function (Faker\Generator $faker) {
         'status' => 1
     ];
 });
+
+$factory->define(App\Wishlist::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'my wishlist',
+        'description' => 'this is a game',
+        'status' => 1
+    ];
+});

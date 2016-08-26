@@ -26,6 +26,7 @@ Route::resource('products', 'ProductsController');
 Route::resource('comments', 'CommentsController');
 
 Route::resource('collections', 'CollectionsController');
+Route::resource('wishlists', 'WishlistsController');
 
 Auth::routes();
 
