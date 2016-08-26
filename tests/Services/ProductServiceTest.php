@@ -40,11 +40,19 @@ class ProductServiceTest extends TestCase
     public function testCreate()
     {
         $repository = $this->initMock(ProductRepository::class);
-        $repository->shouldReceive('create')->once();
+        $repository->shouldReceive('create')->once()->andReturn(new \App\Product([
+            'id' => 1,
+            'name' => 'test',
+            'description' => 'test2',
+        ]));
 
         $service = new \App\Services\ProductService($repository);
 
-        $service->create(['name' => 'test', 'description' => 'test2']);
+        $service->create([
+            'name' => 'test',
+            'description' => 'test2',
+            'cover' => $this->fakeUpload(),
+        ]);
     }
 
     /**

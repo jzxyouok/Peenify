@@ -18,10 +18,10 @@
                 {{--<label for="name">產品網址</label>--}}
                 {{--<input type="text" name="site" class="form-control">--}}
             {{--</div>--}}
-            {{--<div class="form-group">--}}
-                {{--<label for="name">產品封面</label>--}}
-                {{--<input type="file" name="cover" class="form-control">--}}
-            {{--</div>--}}
+            <div class="form-group">
+                <label for="name">產品封面</label>
+                <input type="file" name="cover" class="form-control">
+            </div>
             {{--<div class="form-group">--}}
                 {{--<label for="name">Tags</label>--}}
                 {{--<input type="text" name="tags" class="form-control">--}}

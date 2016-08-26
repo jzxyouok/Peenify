@@ -20,11 +20,11 @@
                 {{--<label for="name">產品網址</label>--}}
                 {{--<input type="text" name="site" class="form-control" value="{{ $product->site }}">--}}
             {{--</div>--}}
-            {{--<div class="form-group">--}}
-                {{--<label for="name">產品封面</label>--}}
-                {{--<img src="{{ image_path('product', $product->cover) }}" alt="">--}}
-                {{--<input type="file" name="cover" class="form-control">--}}
-            {{--</div>--}}
+            <div class="form-group">
+                <label for="name">產品封面</label>
+                <img src="{{ Storage::disk('public')->url("covers/product/" . $product->id . "/" . $product->cover) }}">
+                <input type="file" name="cover" class="form-control">
+            </div>
             <div class="form-group">
                 <input type="submit" value="更新" class="btn btn-default">
             </div>

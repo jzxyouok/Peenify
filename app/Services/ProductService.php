@@ -23,7 +23,15 @@ class ProductService
 
     public function create(array $attributes)
     {
-        return $this->productRepository->create($attributes);
+        $product = $this->productRepository->create($attributes);
+
+        $attributes['cover']->storeAs('covers/product/' .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
+
+        $product->cover = $cover;
+
+        $product->save();
+
+        return $product;
     }
 
     public function findOrFail($id)

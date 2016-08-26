@@ -52,7 +52,8 @@ class ProductsControllerTest extends TestCase
     {
         $this->call('post', route('products.store'), [
             'name' => 'world of warcraft',
-            'description' => 'this is warcraft'
+            'description' => 'this is warcraft',
+            'cover' => $this->fakeUpload(),
         ]);
 
         $this->assertResponseStatus(302);

@@ -3,9 +3,9 @@
 @section('content')
 
     <div class="container">
-        {{--@if($product->cover)--}}
-            {{--<img src="{{ image_path('product', $product->cover) }}">--}}
-        {{--@endif--}}
+        @if($product->cover)
+            <img src="{{ Storage::disk('public')->url("covers/product/" . $product->id . "/" . $product->cover) }}">
+        @endif
         <h1>{{ $product->name }}</h1>
         <p>{{ $product->description }}</p>
 

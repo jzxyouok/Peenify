@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\UploadedFile;
+
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -35,5 +37,10 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $this->app->instance($class, $mock);
 
         return $mock;
+    }
+
+    public function fakeUpload()
+    {
+        return new UploadedFile(storage_path('app/test.png'), 'test.png');
     }
 }
