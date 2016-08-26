@@ -37,3 +37,9 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'status' => 1
     ];
 });
+
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
+    return [
+        'description' => 12345,
+    ];
+});

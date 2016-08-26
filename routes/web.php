@@ -23,6 +23,7 @@ Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbac
 
 Route::resource('categories', 'CategoriesController');
 Route::resource('products', 'ProductsController');
+Route::resource('comments', 'CommentsController');
 
 Auth::routes();
 
