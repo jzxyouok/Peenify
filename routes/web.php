@@ -25,6 +25,8 @@ Route::resource('categories', 'CategoriesController');
 Route::resource('products', 'ProductsController');
 Route::resource('comments', 'CommentsController');
 
+Route::resource('collections', 'CollectionsController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

@@ -61,6 +61,15 @@
                         <li><a href="{{ route('products.index') }}">所有</a></li>
                     </ul>
                 </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-expanded="false">收藏集</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ route('collections.create') }}">建立</a></li>
+                        <li><a href="{{ route('collections.index') }}">所有</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
