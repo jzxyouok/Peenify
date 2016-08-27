@@ -4,7 +4,7 @@
 
     <div class="container">
         <h1>Edit User</h1>
-        <form action="#" method="post" role="form" enctype="multipart/form-data">
+        <form action="{{ route('users.update') }}" method="post" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
             <div class="form-group">

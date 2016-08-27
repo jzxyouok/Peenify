@@ -27,21 +27,23 @@ Route::group(['prefix' => 'users'], function () {
         'uses' => 'UsersController@index',
     ]);
 
-    Route::match(['PUT', 'PATCH'], '{id}', [
-        'as' => 'users.update',
-        'uses' => 'UsersController@update',
-    ]);
-
-    Route::get('{id}/edit', [
-        'as' => 'users.edit',
-        'uses' => 'UsersController@edit',
-    ]);
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('edit', [
+            'as' => 'users.edit',
+            'uses' => 'UsersController@edit',
+        ]);
+        Route::match(['PUT', 'PATCH'], 'update', [
+            'as' => 'users.update',
+            'uses' => 'UsersController@update',
+        ]);
+    });
 
     Route::get('{id}', [
         'as' => 'users.show',
         'uses' => 'UsersController@show',
     ]);
 });
+
 
 Route::resource('categories', 'CategoriesController');
 Route::resource('products', 'ProductsController');

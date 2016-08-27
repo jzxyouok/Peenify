@@ -35,7 +35,6 @@ class UsersControllerTest extends TestCase
     /**
      * @test
      * @group user
-     * @param $id
      */
     public function show()
     {
@@ -51,11 +50,13 @@ class UsersControllerTest extends TestCase
      */
     public function edit()
     {
+        $this->loginFakeUser();
+
         factory(\App\User::class)->create([
             'name' => 'yish',
         ]);
 
-        $this->visit(route('users.edit', 1))->see('yish');
+        $this->visit(route('users.edit'))->see('yish');
     }
     /**
      * @test
@@ -63,9 +64,11 @@ class UsersControllerTest extends TestCase
      */
     public function update()
     {
+        $this->loginFakeUser();
+
         factory(\App\User::class)->create();
 
-        $this->call('put', route('users.update', 1), [
+        $this->call('put', route('users.update'), [
             'name' => 'updated!',
             'description' => 'this is travel, updated!'
         ]);

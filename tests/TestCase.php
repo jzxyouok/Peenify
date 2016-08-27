@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\UploadedFile;
 
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
@@ -42,5 +43,16 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function fakeUpload()
     {
         return new UploadedFile(storage_path('app/test.png'), 'test.png');
+    }
+
+    public function loginFakeUser()
+    {
+        Session::start();
+
+        $user = factory(User::class)->create([
+            'name' => 'yish'
+        ]);
+
+        $this->be($user);
     }
 }

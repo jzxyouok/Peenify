@@ -33,17 +33,17 @@ class UsersController extends Controller
         return view('users.show', compact('user'));
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $user = $this->userService->findOrFail($id);
+        $user = $this->userService->findOrFail(auth()->user()->id);
 
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $this->userService->update($id, $request->all());
+        $this->userService->update(auth()->user()->id, $request->all());
 
-        return redirect()->route('users.show', $id)->with('message', '編輯成功');
+        return redirect()->route('users.show', auth()->user()->id)->with('message', '編輯成功');
     }
 }
