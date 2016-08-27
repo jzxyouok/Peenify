@@ -17,6 +17,11 @@
                           class="form-control">{{ $user->description }}</textarea>
             </div>
             <div class="form-group">
+                <label for="name">大頭貼</label>
+                <img src="{{ !$user->avatar ?: image_path('avatars.user', $user->id, $user->avatar) }}">
+                <input type="file" name="avatar" class="form-control">
+            </div>
+            <div class="form-group">
                 <input type="submit" value="更新" class="btn btn-default">
             </div>
         </form>

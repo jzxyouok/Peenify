@@ -3,9 +3,7 @@
 @section('content')
 
     <div class="container">
-        @if($product->cover)
-            <img src="{{ Storage::disk('public')->url("covers/product/" . $product->id . "/" . $product->cover) }}">
-        @endif
+        <img src="{{ !$product->cover ?: image_path('covers.product', $product->id, $product->cover) }}">
         <h1>{{ $product->name }}</h1>
         <p>{{ $product->description }}</p>
 

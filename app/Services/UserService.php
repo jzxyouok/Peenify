@@ -21,6 +21,7 @@ class UserService
         return $this->userRepository->updateOrCreate(['email' => $user->email], [
             'facebook_user_id' => $user->id,
             'name'     => $user->name,
+            'password' => bcrypt(str_random(10)),
         ]);
     }
 
@@ -36,6 +37,11 @@ class UserService
 
     public function update($id, array $attributes)
     {
+        if (isset($attributes['avatar'])) {
+            $attributes['avatar']->storeAs('avatars/user/' .  $id, $avatar = $attributes['avatar']->hashName(), 'public');
+            $attributes = array_set($attributes, 'avatar', $avatar);
+        }
+
         return $this->userRepository->update($id, $attributes);
     }
 }

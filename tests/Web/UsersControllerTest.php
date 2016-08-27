@@ -52,12 +52,9 @@ class UsersControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        factory(\App\User::class)->create([
-            'name' => 'yish',
-        ]);
-
         $this->visit(route('users.edit'))->see('yish');
     }
+
     /**
      * @test
      * @group user
@@ -66,11 +63,10 @@ class UsersControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        factory(\App\User::class)->create();
-
         $this->call('put', route('users.update'), [
             'name' => 'updated!',
-            'description' => 'this is travel, updated!'
+            'description' => 'this is travel, updated!',
+            'avatar' => $this->fakeUpload(),
         ]);
 
         $this->assertResponseStatus(302);
