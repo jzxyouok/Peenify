@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <img src="{{ !$product->cover ?: image_path('covers.product', $product->id, $product->cover) }}">
+        <img src="{{ !$product->cover ?: image_path('cover.product', $product->id, $product->cover) }}">
         <h1>{{ $product->name }}</h1>
         <p>{{ $product->description }}</p>
 

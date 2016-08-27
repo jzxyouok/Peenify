@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label for="name">大頭貼</label>
-                <img src="{{ !$user->avatar ?: image_path('avatars.user', $user->id, $user->avatar) }}">
+                <img src="{{ !$user->avatar ?: image_path('avatar.user', $user->id, $user->avatar) }}">
                 <input type="file" name="avatar" class="form-control">
             </div>
             <div class="form-group">

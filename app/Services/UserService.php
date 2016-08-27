@@ -38,7 +38,7 @@ class UserService
     public function update($id, array $attributes)
     {
         if (isset($attributes['avatar'])) {
-            $attributes['avatar']->storeAs('avatars/user/' .  $id, $avatar = $attributes['avatar']->hashName(), 'public');
+            $attributes['avatar']->storeAs(config('image-path.avatar.user') .  $id, $avatar = $attributes['avatar']->hashName(), 'public');
             $attributes = array_set($attributes, 'avatar', $avatar);
         }
 

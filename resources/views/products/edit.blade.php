@@ -22,7 +22,7 @@
             {{--</div>--}}
             <div class="form-group">
                 <label for="name">產品封面</label>
-                <img src="{{ !$product->cover ?: image_path('covers.product', $product->id, $product->cover) }}">
+                <img src="{{ !$product->cover ?: image_path('cover.product', $product->id, $product->cover) }}">
                 <input type="file" name="cover" class="form-control">
             </div>
             <div class="form-group">

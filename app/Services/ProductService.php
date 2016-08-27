@@ -25,7 +25,7 @@ class ProductService
     {
         $product = $this->productRepository->create($attributes);
 
-        $attributes['cover']->storeAs('covers/product/' .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
+        $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
 
         $product->cover = $cover;
 
@@ -42,10 +42,10 @@ class ProductService
     public function update($id, array $attributes)
     {
         if (isset($attributes['cover'])) {
-            $attributes['cover']->storeAs('covers/product/' .  $id, $cover = $attributes['cover']->hashName(), 'public');
+            $attributes['cover']->storeAs(config('image-path.cover.product') .  $id, $cover = $attributes['cover']->hashName(), 'public');
             $attributes = array_set($attributes, 'cover', $cover);
         }
-        
+
         return $this->productRepository->update($id, $attributes);
     }
 
