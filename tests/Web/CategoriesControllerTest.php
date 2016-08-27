@@ -89,7 +89,7 @@ class CategoriesControllerTest extends TestCase
     {
         factory(\App\Category::class)->create();
 
-        $this->call('put', route('categories.show', 1), [
+        $this->call('put', route('categories.update', 1), [
             'name' => 'updated!',
             'description' => 'this is travel, updated!'
         ]);

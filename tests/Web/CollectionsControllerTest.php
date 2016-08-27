@@ -87,7 +87,7 @@ class CollectionsControllerTest extends TestCase
     {
         factory(\App\Collection::class)->create();
 
-        $this->call('put', route('collections.show', 1), [
+        $this->call('put', route('collections.update', 1), [
             'name' => 'updated!',
             'description' => 'this is travel, updated!'
         ]);

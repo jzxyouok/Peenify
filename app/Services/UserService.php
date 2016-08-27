@@ -23,4 +23,19 @@ class UserService
             'name'     => $user->name,
         ]);
     }
+
+    public function all()
+    {
+        return $this->userRepository->all();
+    }
+
+    public function findOrFail($id)
+    {
+        return $this->userRepository->findOrFail($id);
+    }
+
+    public function update($id, array $attributes)
+    {
+        return $this->userRepository->update($id, $attributes);
+    }
 }

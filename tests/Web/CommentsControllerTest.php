@@ -86,7 +86,7 @@ class CommentsControllerTest extends TestCase
     {
         factory(\App\Comment::class)->create();
 
-        $this->call('put', route('comments.show', 1), [
+        $this->call('put', route('comments.update', 1), [
             'description' => 'updated!'
         ]);
 

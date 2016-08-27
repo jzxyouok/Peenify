@@ -89,7 +89,7 @@ class ProductsControllerTest extends TestCase
     {
         factory(\App\Product::class)->create();
 
-        $this->call('put', route('products.show', 1), [
+        $this->call('put', route('products.update', 1), [
             'name' => 'updated!',
             'description' => 'this is travel, updated!'
         ]);

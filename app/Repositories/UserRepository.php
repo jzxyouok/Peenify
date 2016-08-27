@@ -4,12 +4,12 @@ namespace App\Repositories;
 
 use App\User;
 
-class UserRepository
+class UserRepository extends Repository
 {
     /**
      * @var \Eloquent
      */
-    private $model;
+    protected $model;
 
     public function __construct(User $model)
     {
