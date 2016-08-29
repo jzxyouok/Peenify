@@ -41,16 +41,19 @@ class ProductServiceTest extends TestCase
     {
         $this->loginFakeUser();
         factory(\App\Product::class)->create();
+        $category = factory(\App\Category::class)->create();
 
         $service = app(\App\Services\ProductService::class);
 
         $service->create([
+            'category_id' => $category->id,
             'name' => 'test',
             'description' => 'test2',
             'cover' => $this->fakeUpload(),
         ]);
 
         $this->seeInDatabase('products', [
+            'category_id' => $category->id,
             'name' => 'test',
             'description' => 'test2',
             'user_id' => auth()->user()->id,

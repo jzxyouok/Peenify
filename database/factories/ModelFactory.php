@@ -34,6 +34,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 $factory->define(App\Product::class, function (Faker\Generator $faker) {
     return [
         'user_id' => factory(App\User::class)->create(),
+        'category_id' => factory(App\Category::class)->create(),
         'name' => 'diablo3',
         'description' => 'dead',
         'status' => 1

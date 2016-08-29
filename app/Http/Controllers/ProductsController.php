@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,15 @@ class ProductsController extends Controller
      * @var ProductService
      */
     private $productService;
+    /**
+     * @var CategoryService
+     */
+    private $categoryService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, CategoryService $categoryService)
     {
         $this->productService = $productService;
+        $this->categoryService = $categoryService;
     }
 
     public function index()
@@ -28,7 +34,9 @@ class ProductsController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categories = $this->categoryService->all();
+
+        return view('products.create', compact('categories'));
     }
 
     public function store(Request $request)

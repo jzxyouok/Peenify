@@ -42,6 +42,7 @@ class ProductsControllerTest extends TestCase
         $this->loginFakeUser();
 
         $this->visit(route('products.create'))
+            ->see('Choose Category')
             ->see('Create Product')
             ->see('create');
     }
@@ -53,8 +54,10 @@ class ProductsControllerTest extends TestCase
     public function testStore()
     {
         $this->loginFakeUser();
+        $category = factory(\App\Category::class)->create();
 
         $this->call('post', route('products.store'), [
+            'category_id' => $category->id,
             'name' => 'world of warcraft',
             'description' => 'this is warcraft',
             'cover' => $this->fakeUpload(),

@@ -25,11 +25,9 @@ class ProductService extends Service
     {
         $product = $this->productRepository->create($this->authUser($attributes));
 
-        if (isset($attributes['avatar'])) {
-            $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
-            $product->cover = $cover;
-        }
-
+        $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
+        
+        $product->cover = $cover;
         $product->save();
 
         return $product;
