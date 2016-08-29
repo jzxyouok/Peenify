@@ -46,11 +46,11 @@ Route::group(['prefix' => 'users'], function () {
 
 
 Route::resource('categories', 'CategoriesController');
-Route::resource('products', 'ProductsController');
-Route::resource('comments', 'CommentsController');
+    Route::resource('products', 'ProductsController');
+        Route::resource('comments', 'CommentsController');
 
-Route::resource('collections', 'CollectionsController');
-Route::resource('wishlists', 'WishlistsController');
+Route::resource('collections', 'CollectionsController'); //relations with product
+Route::resource('wishlists', 'WishlistsController'); //relations with product
 
 Auth::routes();
 

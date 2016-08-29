@@ -9,6 +9,6 @@ class Wishlist extends Model
     protected $table = 'wishlists';
 
     protected $fillable = [
-        'name', 'description', 'status'
+        'name', 'description', 'status', 'user_id',
     ];
 }

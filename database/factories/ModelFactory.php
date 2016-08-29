@@ -24,6 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Category::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => factory(App\User::class)->create(),
         'name' => 'movies',
         'description' => 'this is movie',
         'status' => 1
@@ -32,6 +33,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Product::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => factory(App\User::class)->create(),
         'name' => 'diablo3',
         'description' => 'dead',
         'status' => 1
@@ -40,12 +42,15 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => factory(App\User::class)->create(),
+        'product_id' => factory(App\Product::class)->create(),
         'description' => 12345,
     ];
 });
 
 $factory->define(App\Collection::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => factory(App\User::class)->create(),
         'name' => 'my collection',
         'description' => 'this is a game',
         'status' => 1
@@ -54,6 +59,7 @@ $factory->define(App\Collection::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Wishlist::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => factory(App\User::class)->create(),
         'name' => 'my wishlist',
         'description' => 'this is a game',
         'status' => 1

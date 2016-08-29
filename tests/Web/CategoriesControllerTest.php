@@ -25,8 +25,11 @@ class CategoriesControllerTest extends TestCase
      */
     public function testIndex()
     {
+        $this->loginFakeUser();
+
         factory(\App\Category::class)->create();
         factory(\App\Category::class)->create([
+            'user_id' => auth()->user()->id,
             'name' => 'games',
             'description' => 'this is a game'
         ]);
@@ -51,7 +54,10 @@ class CategoriesControllerTest extends TestCase
      */
     public function testStore()
     {
+        $this->loginFakeUser();
+
         $this->call('post', route('categories.store'), [
+            'user_id' => auth()->user()->id,
             'name' => 'travel',
             'description' => 'this is travel'
         ]);

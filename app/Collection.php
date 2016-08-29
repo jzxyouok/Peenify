@@ -9,6 +9,6 @@ class Collection extends Model
     protected $table = 'collections';
 
     protected $fillable = [
-        'name', 'description', 'status'
+        'name', 'description', 'status', 'user_id',
     ];
 }

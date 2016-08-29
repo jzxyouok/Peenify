@@ -50,7 +50,10 @@ class ProductsControllerTest extends TestCase
      */
     public function testStore()
     {
+        $this->loginFakeUser();
+
         $this->call('post', route('products.store'), [
+            'user_id' => auth()->user()->id,
             'name' => 'world of warcraft',
             'description' => 'this is warcraft',
             'cover' => $this->fakeUpload(),

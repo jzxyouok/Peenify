@@ -49,7 +49,10 @@ class CollectionsControllerTest extends TestCase
      */
     public function testStore()
     {
+        $this->loginFakeUser();
+
         $this->call('post', route('collections.store'), [
+            'user_id' => auth()->user()->id,
             'name' => 'travel',
             'description' => 'this is travel'
         ]);

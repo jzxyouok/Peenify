@@ -42,6 +42,7 @@ class ProductServiceTest extends TestCase
         $repository = $this->initMock(ProductRepository::class);
         $repository->shouldReceive('create')->once()->andReturn(new \App\Product([
             'id' => 1,
+            'user_id' => 1,
             'name' => 'test',
             'description' => 'test2',
         ]));

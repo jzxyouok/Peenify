@@ -49,7 +49,11 @@ class CommentsControllerTest extends TestCase
      */
     public function testStore()
     {
+        $this->loginFakeUser();
+
         $this->call('post', route('comments.store'), [
+            'product_id' => 1,
+            'user_id' => auth()->user()->id,
             'description' => 'this is a comment'
         ]);
 
