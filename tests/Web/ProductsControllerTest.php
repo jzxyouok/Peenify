@@ -69,9 +69,19 @@ class ProductsControllerTest extends TestCase
      */
     public function testShow()
     {
-        factory(\App\Product::class)->create();
+        $product = factory(\App\Product::class)->create();
 
-        $this->visit(route('products.show', 1))->see('diablo3');
+        factory(\App\Comment::class)->create([
+            'product_id' => $product->id,
+            'description' => 'hihi'
+        ]);
+
+        factory(\App\Comment::class)->create([
+            'product_id' => $product->id,
+            'description' => 'hihi2'
+        ]);
+
+        $this->visit(route('products.show', 1))->see('diablo3')->see('hihi')->see('hihi2');
     }
 
     /**

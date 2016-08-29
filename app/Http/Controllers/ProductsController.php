@@ -42,9 +42,7 @@ class ProductsController extends Controller
     {
         $product = $this->productService->findOrFail($id);
 
-        $comments = $this->productService->withComments($product);
-
-        return view('products.show', compact('product', 'comments'));
+        return view('products.show', compact('product'));
     }
 
     public function edit($id)

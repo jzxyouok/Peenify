@@ -129,10 +129,23 @@ Route::group(['prefix' => 'comments'], function () {
             'as' => 'comments.store',
             'uses' => 'CommentsController@store',
         ]);
+
+        Route::get('{comment}/edit', [
+            'as' => 'comments.edit',
+            'uses' => 'CommentsController@edit',
+        ]);
+
+        Route::match(['PUT', 'PATCH'], '{comment}', [
+            'as' => 'comments.update',
+            'uses' => 'CommentsController@update',
+        ]);
+
+        Route::delete('{comment}', [
+            'as' => 'comments.destroy',
+            'uses' => 'CommentsController@destroy',
+        ]);
     });
 });
-
-//Route::resource('comments', 'CommentsController');
 
 Route::resource('collections', 'CollectionsController'); //relations with product
 Route::resource('wishlists', 'WishlistsController'); //relations with product

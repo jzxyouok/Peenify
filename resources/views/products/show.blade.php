@@ -34,7 +34,7 @@
         ])
 
         @include('comments._partials.show', [
-            'comments' => $comments,
+            'comments' => $product->comments,
             'product_id' => $product->id,
         ])
     </div>

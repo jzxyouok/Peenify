@@ -35,11 +35,6 @@ class ProductService extends Service
         return $product;
     }
 
-    public function findWithComments($id)
-    {
-        return $this->productRepository->findWithComments($id);
-    }
-
     public function findOrFail($id)
     {
         return $this->productRepository->findOrFail($id);
@@ -58,10 +53,5 @@ class ProductService extends Service
     public function destroy($id)
     {
         return $this->productRepository->destroy($id);
-    }
-
-    public function withComments($product)
-    {
-        return $this->productRepository->withComments($product);
     }
 }

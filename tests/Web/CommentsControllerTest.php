@@ -20,7 +20,7 @@ class CommentsControllerTest extends TestCase
 
     /**
      * @test
-     * @group comment1
+     * @group comment
      */
     public function store()
     {
@@ -37,7 +37,7 @@ class CommentsControllerTest extends TestCase
 
     /**
      * @test
-     * @group comment1
+     * @group comment
      */
     public function testShow()
     {
@@ -63,6 +63,8 @@ class CommentsControllerTest extends TestCase
      */
     public function testEdit()
     {
+        $this->loginFakeUser();
+
         factory(\App\Comment::class)->create();
 
         $this->visit(route('comments.edit', 1))->see(12345);
