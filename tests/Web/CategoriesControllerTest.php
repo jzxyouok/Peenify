@@ -122,4 +122,25 @@ class CategoriesControllerTest extends TestCase
 
         $this->assertResponseStatus(302);
     }
+
+    /**
+     * @test
+     * @group category
+     */
+    public function products()
+    {
+        $category = factory(\App\Category::class)->create();
+
+        factory(\App\Product::class)->create([
+            'category_id' => $category->id,
+            'name' => 'Product1',
+        ]);
+
+        factory(\App\Product::class)->create([
+            'category_id' => $category->id,
+            'name' => 'Product2',
+        ]);
+
+        $this->visit(route('categories.show', 1))->see('Product1')->see('Product2');
+    }
 }

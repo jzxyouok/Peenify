@@ -13,7 +13,12 @@
             {{ method_field('DELETE') }}
             <input type="submit" value="delete" class="btn btn-danger">
         </form>
-        <!-- user -->
+
+    @include('categories._partials.products', [
+                'products' => $category->products,
+                ])
+
+    <!-- user -->
     </div>
 
 @endsection

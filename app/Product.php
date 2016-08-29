@@ -12,6 +12,11 @@ class Product extends Model
         'id', 'name', 'description', 'status', 'cover', 'user_id',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);

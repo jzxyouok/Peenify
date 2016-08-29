@@ -56,9 +56,9 @@ Route::group(['prefix' => 'categories'], function () {
             'uses' => 'CategoriesController@store',
         ]);
 
-        Route::get('{category}', [
-            'as' => 'categories.show',
-            'uses' => 'CategoriesController@show',
+        Route::get('{category}/products', [
+            'as' => 'categories.products',
+            'uses' => 'CategoriesController@products',
         ]);
 
         Route::match(['PUT', 'PATCH'], '{category}', [
@@ -80,6 +80,11 @@ Route::group(['prefix' => 'categories'], function () {
     Route::get('/', [
         'as' => 'categories.index',
         'uses' => 'CategoriesController@index',
+    ]);
+
+    Route::get('{category}', [
+        'as' => 'categories.show',
+        'uses' => 'CategoriesController@show',
     ]);
 });
 
