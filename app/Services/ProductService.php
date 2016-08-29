@@ -26,7 +26,7 @@ class ProductService extends Service
         $product = $this->productRepository->create($this->authUser($attributes));
 
         $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
-        
+
         $product->cover = $cover;
         $product->save();
 
