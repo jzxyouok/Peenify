@@ -84,7 +84,7 @@ Route::group(['prefix' => 'categories'], function () {
 });
 
 Route::group(['prefix' => 'products'], function () {
-    Route::group(['middleware' => 'auth'], function() {
+    Route::group(['middleware' => 'auth'], function () {
         Route::get('create', [
             'as' => 'products.create',
             'uses' => 'ProductsController@create',
@@ -122,7 +122,17 @@ Route::group(['prefix' => 'products'], function () {
     ]);
 });
 
-Route::resource('comments', 'CommentsController');
+Route::group(['prefix' => 'comments'], function () {
+    //login 才能看留言
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('{product}', [
+            'as' => 'comments.store',
+            'uses' => 'CommentsController@store',
+        ]);
+    });
+});
+
+//Route::resource('comments', 'CommentsController');
 
 Route::resource('collections', 'CollectionsController'); //relations with product
 Route::resource('wishlists', 'WishlistsController'); //relations with product

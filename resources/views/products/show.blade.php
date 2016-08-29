@@ -29,14 +29,14 @@
         {{--</form>--}}
         {{--<!-- user -->--}}
 
-        {{--@include('comments._partials.create', [--}}
-            {{--'product_id' => $product->id--}}
-        {{--])--}}
+        @include('comments._partials.create', [
+            'product_id' => $product->id
+        ])
 
-        {{--@include('comments._partials.show', [--}}
-            {{--'comments' => $comments,--}}
-            {{--'product_id' => $product->id,--}}
-        {{--])--}}
+        @include('comments._partials.show', [
+            'comments' => $comments,
+            'product_id' => $product->id,
+        ])
     </div>
 
 @endsection

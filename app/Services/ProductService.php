@@ -25,13 +25,19 @@ class ProductService extends Service
     {
         $product = $this->productRepository->create($this->authUser($attributes));
 
-        $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
-
-        $product->cover = $cover;
+        if (isset($attributes['avatar'])) {
+            $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
+            $product->cover = $cover;
+        }
 
         $product->save();
 
         return $product;
+    }
+
+    public function findWithComments($id)
+    {
+        return $this->productRepository->findWithComments($id);
     }
 
     public function findOrFail($id)
@@ -52,5 +58,10 @@ class ProductService extends Service
     public function destroy($id)
     {
         return $this->productRepository->destroy($id);
+    }
+
+    public function withComments($product)
+    {
+        return $this->productRepository->withComments($product);
     }
 }

@@ -35,16 +35,21 @@ class CommentServiceTest extends TestCase
 
     /**
      * @test
-     * @group comment
+     * @group comment1
      */
     public function testCreate()
     {
-        $repository = $this->initMock(CommentRepository::class);
-        $repository->shouldReceive('create')->once();
+        $this->loginFakeUser();
+        $product = factory(\App\Product::class)->create();
+        $service = app(\App\Services\CommentService::class);
 
-        $service = new \App\Services\CommentService($repository);
+        $service->create(['description' => 'test2'], $product->id);
 
-        $service->create(['description' => 'test2']);
+        $this->seeInDatabase('comments', [
+            'product_id' => $product->id,
+            'user_id' => auth()->user()->id,
+            'description' => 'test2',
+        ]);
     }
 
     /**

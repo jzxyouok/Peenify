@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Repositories\CommentRepository;
 
-class CommentService
+class CommentService extends Service
 {
     /**
      * @var CommentRepository
@@ -21,9 +21,11 @@ class CommentService
         return $this->commentRepository->all();
     }
 
-    public function create(array $attributes)
+    public function create(array $attributes, $product_id)
     {
-        return $this->commentRepository->create($attributes);
+        $attributes = array_add($attributes, 'product_id', $product_id);
+
+        return $this->commentRepository->create($this->authUser($attributes));
     }
 
     public function findOrFail($id)

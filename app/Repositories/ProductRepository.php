@@ -15,4 +15,9 @@ class ProductRepository extends Repository
     {
         $this->model = $model;
     }
+
+    public function withComments($product)
+    {
+        return $product->with('comments')->get();
+    }
 }

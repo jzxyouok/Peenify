@@ -11,4 +11,9 @@ class Product extends Model
     protected $fillable = [
         'id', 'name', 'description', 'status', 'cover', 'user_id',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

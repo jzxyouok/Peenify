@@ -20,40 +20,15 @@ class CommentsControllerTest extends TestCase
 
     /**
      * @test
-     * @group comment
+     * @group comment1
      */
-    public function testIndex()
-    {
-        factory(\App\Comment::class)->create();
-        factory(\App\Comment::class)->create([
-            'description' => 'this is a comment'
-        ]);
-
-        $this->visit(route('comments.index'))->see('this is a comment');
-    }
-
-    /**
-     * @test
-     * @group comment
-     */
-    public function testCreate()
-    {
-        $this->visit(route('comments.create'))
-            ->see('Create Comment')
-            ->see('create');
-    }
-
-    /**
-     * @test
-     * @group comment
-     */
-    public function testStore()
+    public function store()
     {
         $this->loginFakeUser();
 
-        $this->call('post', route('comments.store'), [
-            'product_id' => 1,
-            'user_id' => auth()->user()->id,
+        $product = factory(\App\Product::class)->create();
+
+        $this->call('post', route('comments.store', $product->id), [
             'description' => 'this is a comment'
         ]);
 
@@ -62,13 +37,24 @@ class CommentsControllerTest extends TestCase
 
     /**
      * @test
-     * @group comment
+     * @group comment1
      */
     public function testShow()
     {
-        factory(\App\Comment::class)->create();
+        $product = factory(\App\Product::class)->create();
 
-        $this->visit(route('comments.show', 1))->see(12345);
+        factory(\App\Comment::class)->create([
+            'product_id' => $product->id,
+            'user_id' => factory(\App\User::class)->create(),
+            'description' => 'hi'
+        ]);
+        factory(\App\Comment::class)->create([
+            'product_id' => $product->id,
+            'user_id' => factory(\App\User::class)->create(),
+            'description' => 'hi 2',
+        ]);
+
+        $this->visit(route('products.show', 1))->see('hi')->see('hi 2');
     }
 
     /**

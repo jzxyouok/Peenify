@@ -19,30 +19,11 @@ class CommentsController extends Controller
         $this->commentService = $commentService;
     }
 
-    public function index()
+    public function store(Request $request, $product_id)
     {
-        $comments = $this->commentService->all();
+        $this->commentService->create($request->all(), $product_id);
 
-        return view('comments.index', compact('comments'));
-    }
-
-    public function create()
-    {
-        return view('comments.create');
-    }
-
-    public function store(Request $request)
-    {
-        $this->commentService->create($request->all());
-
-        return redirect()->route('comments.index')->with('message', '建立成功');
-    }
-
-    public function show($id)
-    {
-        $comment = $this->commentService->findOrFail($id);
-
-        return view('comments.show', compact('comment'));
+        return redirect()->route('products.show', $product_id)->with('message', '建立成功');
     }
 
     public function edit($id)
