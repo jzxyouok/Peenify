@@ -25,11 +25,8 @@ class CategoriesControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $this->loginFakeUser();
-
         factory(\App\Category::class)->create();
         factory(\App\Category::class)->create([
-            'user_id' => auth()->user()->id,
             'name' => 'games',
             'description' => 'this is a game'
         ]);
@@ -43,6 +40,8 @@ class CategoriesControllerTest extends TestCase
      */
     public function testCreate()
     {
+        $this->loginFakeUser();
+
         $this->visit(route('categories.create'))
             ->see('Create Category')
             ->see('create');
@@ -71,6 +70,8 @@ class CategoriesControllerTest extends TestCase
      */
     public function testShow()
     {
+        $this->loginFakeUser();
+
         factory(\App\Category::class)->create();
 
         $this->visit(route('categories.show', 1))->see('movies');
@@ -82,6 +83,8 @@ class CategoriesControllerTest extends TestCase
      */
     public function testEdit()
     {
+        $this->loginFakeUser();
+
         factory(\App\Category::class)->create();
 
         $this->visit(route('categories.edit', 1))->see('movies');
@@ -93,6 +96,8 @@ class CategoriesControllerTest extends TestCase
      */
     public function testUpdate()
     {
+        $this->loginFakeUser();
+
         factory(\App\Category::class)->create();
 
         $this->call('put', route('categories.update', 1), [
@@ -109,6 +114,8 @@ class CategoriesControllerTest extends TestCase
      */
     public function testDestroy()
     {
+        $this->loginFakeUser();
+
         factory(\App\Category::class)->create();
 
         $this->call('delete', route('categories.destroy', 1));

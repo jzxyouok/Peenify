@@ -1,6 +1,7 @@
 <?php
 
 use App\Repositories\CategoryRepository;
+use App\Services\CategoryService;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -28,7 +29,7 @@ class CategoryServiceTest extends TestCase
         $repository = $this->initMock(CategoryRepository::class);
         $repository->shouldReceive('all')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new CategoryService($repository);
 
         $service->all();
     }
@@ -39,12 +40,15 @@ class CategoryServiceTest extends TestCase
      */
     public function testCreate()
     {
-        $repository = $this->initMock(CategoryRepository::class);
-        $repository->shouldReceive('create')->once();
+        $this->loginFakeUser();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = app(CategoryService::class);
 
         $service->create(['name' => 'test', 'description' => 'test2']);
+
+        $this->seeInDatabase('categories', [
+            'name' => 'test', 'description' => 'test2', 'user_id' => auth()->user()->id,
+        ]);
     }
 
     /**
@@ -56,7 +60,7 @@ class CategoryServiceTest extends TestCase
         $repository = $this->initMock(CategoryRepository::class);
         $repository->shouldReceive('findOrFail')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new CategoryService($repository);
 
         $service->findOrFail(1);
     }
@@ -67,14 +71,21 @@ class CategoryServiceTest extends TestCase
      */
     public function testUpdate()
     {
-        $repository = $this->initMock(CategoryRepository::class);
-        $repository->shouldReceive('update')->once();
+        $this->loginFakeUser();
 
-        $service = new \App\Services\CategoryService($repository);
+        factory(\App\Category::class)->create();
+
+        $service = app(CategoryService::class);
 
         $service->update(1, [
             'name' => 'updated',
             'description' => 'updated'
+        ]);
+
+        $this->seeInDatabase('categories', [
+            'name' => 'updated',
+            'description' => 'updated',
+            'user_id' => auth()->user()->id,
         ]);
     }
 
@@ -87,7 +98,7 @@ class CategoryServiceTest extends TestCase
         $repository = $this->initMock(CategoryRepository::class);
         $repository->shouldReceive('destroy')->once();
 
-        $service = new \App\Services\CategoryService($repository);
+        $service = new CategoryService($repository);
 
         $service->destroy(1);
     }

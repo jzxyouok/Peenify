@@ -44,10 +44,47 @@ Route::group(['prefix' => 'users'], function () {
     ]);
 });
 
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('/', [
+        'as' => 'categories.index',
+        'uses' => 'CategoriesController@index',
+    ]);
 
-Route::resource('categories', 'CategoriesController');
-    Route::resource('products', 'ProductsController');
-        Route::resource('comments', 'CommentsController');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('create', [
+            'as' => 'categories.create',
+            'uses' => 'CategoriesController@create',
+        ]);
+
+        Route::post('store', [
+            'as' => 'categories.store',
+            'uses' => 'CategoriesController@store',
+        ]);
+
+        Route::get('{category}', [
+            'as' => 'categories.show',
+            'uses' => 'CategoriesController@show',
+        ]);
+
+        Route::match(['PUT', 'PATCH'], '{category}', [
+            'as' => 'categories.update',
+            'uses' => 'CategoriesController@update',
+        ]);
+
+        Route::get('{category}/edit', [
+            'as' => 'categories.edit',
+            'uses' => 'CategoriesController@edit',
+        ]);
+
+        Route::delete('{category}', [
+            'as' => 'categories.destroy',
+            'uses' => 'CategoriesController@destroy',
+        ]);
+    });
+});
+//Route::resource('categories', 'CategoriesController');
+Route::resource('products', 'ProductsController');
+Route::resource('comments', 'CommentsController');
 
 Route::resource('collections', 'CollectionsController'); //relations with product
 Route::resource('wishlists', 'WishlistsController'); //relations with product

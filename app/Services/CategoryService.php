@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Repositories\CategoryRepository;
 
-class CategoryService
+class CategoryService extends Service
 {
     /**
      * @var CategoryRepository
@@ -22,7 +22,7 @@ class CategoryService
 
     public function create(array $attributes)
     {
-        return $this->categoryRepository->create($attributes);
+        return $this->categoryRepository->create($this->authUser($attributes));
     }
 
     public function findOrFail($id)
@@ -32,7 +32,7 @@ class CategoryService
 
     public function update($id, array $attributes)
     {
-        return $this->categoryRepository->update($id, $attributes);
+        return $this->categoryRepository->update($id, $this->authUser($attributes));
     }
 
     public function destroy($id)
