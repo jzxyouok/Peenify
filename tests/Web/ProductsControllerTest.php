@@ -39,6 +39,8 @@ class ProductsControllerTest extends TestCase
      */
     public function testCreate()
     {
+        $this->loginFakeUser();
+
         $this->visit(route('products.create'))
             ->see('Create Product')
             ->see('create');
@@ -53,7 +55,6 @@ class ProductsControllerTest extends TestCase
         $this->loginFakeUser();
 
         $this->call('post', route('products.store'), [
-            'user_id' => auth()->user()->id,
             'name' => 'world of warcraft',
             'description' => 'this is warcraft',
             'cover' => $this->fakeUpload(),
@@ -79,6 +80,8 @@ class ProductsControllerTest extends TestCase
      */
     public function testEdit()
     {
+        $this->loginFakeUser();
+
         factory(\App\Product::class)->create();
 
         $this->visit(route('products.edit', 1))->see('diablo3');
@@ -90,6 +93,8 @@ class ProductsControllerTest extends TestCase
      */
     public function testUpdate()
     {
+        $this->loginFakeUser();
+
         factory(\App\Product::class)->create();
 
         $this->call('put', route('products.update', 1), [
@@ -106,6 +111,8 @@ class ProductsControllerTest extends TestCase
      */
     public function testDestroy()
     {
+        $this->loginFakeUser();
+
         factory(\App\Product::class)->create();
 
         $this->call('delete', route('products.destroy', 1));

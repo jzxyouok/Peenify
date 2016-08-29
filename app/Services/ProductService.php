@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Repositories\ProductRepository;
 
-class ProductService
+class ProductService extends Service
 {
     /**
      * @var ProductRepository
@@ -23,7 +23,7 @@ class ProductService
 
     public function create(array $attributes)
     {
-        $product = $this->productRepository->create($attributes);
+        $product = $this->productRepository->create($this->authUser($attributes));
 
         $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
 
@@ -46,7 +46,7 @@ class ProductService
             $attributes = array_set($attributes, 'cover', $cover);
         }
 
-        return $this->productRepository->update($id, $attributes);
+        return $this->productRepository->update($id, $this->authUser($attributes));
     }
 
     public function destroy($id)

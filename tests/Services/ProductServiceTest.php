@@ -39,20 +39,21 @@ class ProductServiceTest extends TestCase
      */
     public function testCreate()
     {
-        $repository = $this->initMock(ProductRepository::class);
-        $repository->shouldReceive('create')->once()->andReturn(new \App\Product([
-            'id' => 1,
-            'user_id' => 1,
-            'name' => 'test',
-            'description' => 'test2',
-        ]));
+        $this->loginFakeUser();
+        factory(\App\Product::class)->create();
 
-        $service = new \App\Services\ProductService($repository);
+        $service = app(\App\Services\ProductService::class);
 
         $service->create([
             'name' => 'test',
             'description' => 'test2',
             'cover' => $this->fakeUpload(),
+        ]);
+
+        $this->seeInDatabase('products', [
+            'name' => 'test',
+            'description' => 'test2',
+            'user_id' => auth()->user()->id,
         ]);
     }
 
@@ -76,14 +77,20 @@ class ProductServiceTest extends TestCase
      */
     public function testUpdate()
     {
-        $repository = $this->initMock(ProductRepository::class);
-        $repository->shouldReceive('update')->once();
+        $this->loginFakeUser();
+        factory(\App\Product::class)->create();
 
-        $service = new \App\Services\ProductService($repository);
+        $service = app(\App\Services\ProductService::class);
 
         $service->update(1, [
             'name' => 'updated',
             'description' => 'updated'
+        ]);
+
+        $this->seeInDatabase('products', [
+            'name' => 'updated',
+            'description' => 'updated',
+            'user_id' => auth()->user()->id,
         ]);
     }
 

@@ -44,6 +44,7 @@ class UsersControllerTest extends TestCase
 
         $this->visit(route('users.show', 1))->see('yish');
     }
+
     /**
      * @test
      * @group user
