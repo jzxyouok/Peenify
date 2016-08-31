@@ -1,5 +1,5 @@
 <h1>Create Comment</h1>
-<form action="{{ route('comments.store', $product_id) }}" method="post" role="form">
+<form action="{{ route('comments.store', ['commentable_type' => $commentable_type, 'commentable_id' => $commentable_id]) }}" method="post" role="form">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="description">評論</label>

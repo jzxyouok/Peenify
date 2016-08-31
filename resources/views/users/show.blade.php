@@ -10,4 +10,12 @@
         <a class="btn btn-default" href="{{ route('users.edit') }}">Edit</a>
     </div>
 
+    @include('comments._partials.create', [
+    'commentable_type' => 'user',
+    'commentable_id' => $user->id,
+])
+
+    @include('comments._partials.show', [
+        'comments' => $user->comments
+    ])
 @endsection

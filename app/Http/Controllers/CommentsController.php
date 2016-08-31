@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Product;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
 
@@ -19,11 +21,11 @@ class CommentsController extends Controller
         $this->commentService = $commentService;
     }
 
-    public function store(Request $request, $product_id)
+    public function store(Request $request, $commentable_type, $commentable_id)
     {
-        $this->commentService->create($request->all(), $product_id);
+        $this->commentService->saveComment($commentable_type, $commentable_id, $request->all());
 
-        return redirect()->route('products.show', $product_id)->with('message', '建立成功');
+        return redirect()->route("{$commentable_type}s.show", $commentable_id)->with('message', '建立成功');
     }
 
     public function edit($id)

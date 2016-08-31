@@ -130,7 +130,7 @@ Route::group(['prefix' => 'products'], function () {
 Route::group(['prefix' => 'comments'], function () {
     //login 才能看留言
     Route::group(['middleware' => 'auth'], function () {
-        Route::post('{product}', [
+        Route::post('{commentable_type}/{commentable_id}', [
             'as' => 'comments.store',
             'uses' => 'CommentsController@store',
         ]);

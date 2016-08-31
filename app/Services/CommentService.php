@@ -42,4 +42,9 @@ class CommentService extends Service
     {
         return $this->commentRepository->destroy($id);
     }
+
+    public function saveComment($commentable_type, $commentable_id, $attributes)
+    {
+        return $this->commentRepository->saveComment($commentable_type, $commentable_id, $this->authUser($attributes));
+    }
 }

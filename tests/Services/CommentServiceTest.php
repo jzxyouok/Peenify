@@ -35,18 +35,39 @@ class CommentServiceTest extends TestCase
 
     /**
      * @test
-     * @group comment1
+     * @group comment
      */
-    public function testCreate()
+    public function testCreateWithProduct()
     {
         $this->loginFakeUser();
         $product = factory(\App\Product::class)->create();
         $service = app(\App\Services\CommentService::class);
 
-        $service->create(['description' => 'test2'], $product->id);
+        $service->saveComment('product', $product->id, ['description' => 'test2']);
 
         $this->seeInDatabase('comments', [
-            'product_id' => $product->id,
+            'commentable_id' => $product->id,
+            'commentable_type' => 'product',
+            'user_id' => auth()->user()->id,
+            'description' => 'test2',
+        ]);
+    }
+
+    /**
+     * @test
+     * @group comment
+     */
+    public function testCreateWithUser()
+    {
+        $this->loginFakeUser();
+        $user = factory(\App\User::class)->create();
+        $service = app(\App\Services\CommentService::class);
+
+        $service->saveComment('user', $user->id, ['description' => 'test2']);
+
+        $this->seeInDatabase('comments', [
+            'commentable_id' => $user->id,
+            'commentable_type' => 'user',
             'user_id' => auth()->user()->id,
             'description' => 'test2',
         ]);

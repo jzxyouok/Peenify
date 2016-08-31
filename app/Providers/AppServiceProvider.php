@@ -6,6 +6,7 @@ use App\Category;
 use App\Comment;
 use App\Product;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Carbon::setLocale(config('app.locale'));
+
         if($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }

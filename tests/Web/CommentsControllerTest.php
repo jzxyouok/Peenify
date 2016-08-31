@@ -22,13 +22,32 @@ class CommentsControllerTest extends TestCase
      * @test
      * @group comment
      */
-    public function store()
+    public function storeWithProduct()
     {
         $this->loginFakeUser();
 
         $product = factory(\App\Product::class)->create();
 
-        $this->call('post', route('comments.store', $product->id), [
+        $this->call('post', route('comments.store', ['commentable_type' => 'product',
+        'commentable_id' => $product->id]), [
+            'description' => 'this is a comment'
+        ]);
+
+        $this->assertResponseStatus(302);
+    }
+
+    /**
+     * @test
+     * @group comment
+     */
+    public function storeWithUser()
+    {
+        $this->loginFakeUser();
+
+        $user = factory(\App\User::class)->create();
+
+        $this->call('post', route('comments.store', ['commentable_type' => 'user',
+            'commentable_id' => $user->id]), [
             'description' => 'this is a comment'
         ]);
 
@@ -44,12 +63,12 @@ class CommentsControllerTest extends TestCase
         $product = factory(\App\Product::class)->create();
 
         factory(\App\Comment::class)->create([
-            'product_id' => $product->id,
+            'commentable_id' => $product->id,
             'user_id' => factory(\App\User::class)->create(),
             'description' => 'hi'
         ]);
         factory(\App\Comment::class)->create([
-            'product_id' => $product->id,
+            'commentable_id' => $product->id,
             'user_id' => factory(\App\User::class)->create(),
             'description' => 'hi 2',
         ]);

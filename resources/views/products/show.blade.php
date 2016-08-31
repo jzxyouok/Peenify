@@ -30,7 +30,8 @@
         {{--<!-- user -->--}}
 
         @include('comments._partials.create', [
-            'product_id' => $product->id
+            'commentable_type' => 'product',
+            'commentable_id' => $product->id,
         ])
 
         @include('comments._partials.show', [

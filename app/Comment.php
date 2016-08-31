@@ -11,4 +11,9 @@ class Comment extends Model
     protected $fillable = [
         'description', 'status', 'user_id', 'product_id',
     ];
+
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
 }

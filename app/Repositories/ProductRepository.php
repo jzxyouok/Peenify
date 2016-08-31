@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Comment;
 use App\Product;
 
 class ProductRepository extends Repository
