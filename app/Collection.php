@@ -11,4 +11,9 @@ class Collection extends Model
     protected $fillable = [
         'name', 'description', 'status', 'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
