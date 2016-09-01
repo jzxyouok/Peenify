@@ -31,6 +31,16 @@ Route::group(['prefix' => 'users'], function () {
             'as' => 'users.update',
             'uses' => 'UsersController@update',
         ]);
+
+//        Route::get('{user}/wishlist', [
+//            'as' => 'wishlists.showByUser',
+//            'uses' => 'WishlistsController@showByUser'
+//        ]);
+//
+//        Route::post('wishlists/{wishable_type}/{wishable_id}', [
+//            'as' => 'wishlists.sync',
+//            'uses' => 'WishlistsController@sync'
+//        ]);
     });
 
     Route::get('/', [
@@ -38,7 +48,12 @@ Route::group(['prefix' => 'users'], function () {
         'uses' => 'UsersController@index',
     ]);
 
-    Route::get('{id}', [
+    Route::get('{user}/emojis', [
+        'as' => 'users.emojis',
+        'uses' => 'EmojisController@showByUser'
+    ]);
+
+    Route::get('{user}', [
         'as' => 'users.show',
         'uses' => 'UsersController@show',
     ]);
@@ -153,7 +168,14 @@ Route::group(['prefix' => 'comments'], function () {
 });
 
 Route::resource('collections', 'CollectionsController'); //relations with product
-Route::resource('wishlists', 'WishlistsController'); //relations with product
+
+//Emoji
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('emojis/{emojiable_type}/{emojiable_id}', [
+        'as' => 'emojis.sync',
+        'uses' => 'EmojisController@sync',
+    ]);
+});
 
 Auth::routes();
 

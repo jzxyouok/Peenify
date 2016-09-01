@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Extensions\EmojiableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use EmojiableTrait;
+
     protected $table = 'products';
 
     protected $fillable = [

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWishlistsTable extends Migration
+class CreateEmojisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateWishlistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wishlists', function (Blueprint $table) {
+        Schema::create('emojis', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('emojiable_id');
+            $table->string('emojiable_type');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('name');
-            $table->text('description');
-            $table->tinyInteger('status')->default(1);
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateWishlistsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('wishlists');
+        Schema::drop('emojis');
     }
 }
