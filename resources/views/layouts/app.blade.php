@@ -71,14 +71,14 @@
                     </ul>
                 </li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">願望清單</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ route('collections.create') }}">建立</a></li>
-                        <li><a href="{{ route('collections.index') }}">所有</a></li>
-                    </ul>
-                </li>
+                {{--<li class="dropdown">--}}
+                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"--}}
+                       {{--aria-expanded="false">願望清單</a>--}}
+                    {{--<ul class="dropdown-menu" role="menu">--}}
+                        {{--<li><a href="{{ route('collections.create') }}">建立</a></li>--}}
+                        {{--<li><a href="{{ route('collections.index') }}">所有</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -97,6 +97,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{ route('users.show', auth()->user()->id) }}">個人頁面</a>
+                                <a href="{{ route('users.emojis', auth()->user()->id) }}">已經評分過的</a>
                                 <a href="{{ route('users.edit') }}">Edit</a>
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault();
