@@ -32,15 +32,20 @@ Route::group(['prefix' => 'users'], function () {
             'uses' => 'UsersController@update',
         ]);
 
-//        Route::get('{user}/wishlist', [
-//            'as' => 'wishlists.showByUser',
-//            'uses' => 'WishlistsController@showByUser'
-//        ]);
-//
-//        Route::post('wishlists/{wishable_type}/{wishable_id}', [
-//            'as' => 'wishlists.sync',
-//            'uses' => 'WishlistsController@sync'
-//        ]);
+        Route::get('{user}/wishlist', [
+            'as' => 'wishes.user',
+            'uses' => 'WishesController@showByUser'
+        ]);
+
+        Route::post('wishes/{product}', [
+            'as' => 'wishes.store',
+            'uses' => 'WishesController@store'
+        ]);
+
+        Route::delete('wishes/{product}', [
+            'as' => 'wishes.destroy',
+            'uses' => 'WishesController@destroy'
+        ]);
     });
 
     Route::get('/', [

@@ -15,6 +15,11 @@
             <input type="submit" value="delete" class="btn btn-danger">
         </form>
 
+        <form action="{{ route('wishes.store', $product->id) }}" method="post">
+            {{ csrf_field() }}
+            <input type="submit" value="加到願望" class="btn btn-danger">
+        </form>
+
 
         @include('products._partials.emojis', [
             'type' => 'product',

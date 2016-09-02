@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class UsersControllerTest extends TestCase
 {
     use DatabaseMigrations;
+
     public function setUp()
     {
         parent::setUp();

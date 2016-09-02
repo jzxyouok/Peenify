@@ -58,3 +58,10 @@ $factory->define(App\Collection::class, function (Faker\Generator $faker) {
         'status' => 1
     ];
 });
+
+$factory->define(App\Wish::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => factory(App\User::class)->create(),
+        'product_id' => factory(App\Product::class)->create(),
+    ];
+});
