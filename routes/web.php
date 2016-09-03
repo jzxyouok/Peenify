@@ -58,6 +58,11 @@ Route::group(['prefix' => 'users'], function () {
         'uses' => 'EmojisController@showByUser'
     ]);
 
+    Route::get('{user}/follows', [
+        'as' => 'users.follows',
+        'uses' => 'FollowsController@showByUser'
+    ]);
+
     Route::get('{user}', [
         'as' => 'users.show',
         'uses' => 'UsersController@show',
@@ -174,11 +179,16 @@ Route::group(['prefix' => 'comments'], function () {
 
 Route::resource('collections', 'CollectionsController'); //relations with product
 
-//Emoji
+//Emoji, Follow
 Route::group(['middleware' => 'auth'], function () {
     Route::post('emojis/{emojiable_type}/{emojiable_id}', [
         'as' => 'emojis.sync',
         'uses' => 'EmojisController@sync',
+    ]);
+
+    Route::post('follows/{followable_type}/{followable_id}', [
+        'as' => 'follows.sync',
+        'uses' => 'FollowsController@sync',
     ]);
 });
 

@@ -10,6 +10,11 @@
         <a class="btn btn-default" href="{{ route('users.edit') }}">Edit</a>
     </div>
 
+    @include('users._partials.follows', [
+    'type' => 'user',
+    'id' => $user->id,
+])
+
     @include('comments._partials.create', [
     'commentable_type' => 'user',
     'commentable_id' => $user->id,
