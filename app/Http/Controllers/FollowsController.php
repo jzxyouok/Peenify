@@ -23,13 +23,15 @@ class FollowsController extends Controller
     {
         $result = $this->followService->syncFollow($followable_type, $followable_id, $request->all());
 
-        return redirect()->back()->with('message', ($result) ? '新建成功' : '編輯成功');
+        return redirect()->back()->with('message', ($result) ? '新建成功' : '刪除成功');
     }
 
     public function showByUser($user_id)
     {
         $follows = $this->followService->getAllByUser($user_id);
 
-        return view('users.follows', compact('follows'));
+        $followeds = $this->followService->getUserByType($user_id);
+
+        return view('users.follows', compact('follows', 'followeds'));
     }
 }

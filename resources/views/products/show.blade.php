@@ -21,9 +21,9 @@
         </form>
 
 
-        @include('products._partials.emojis', [
+        @include('_partials.emojis', [
+            'relation' => $product,
             'type' => 'product',
-            'id' => $product->id,
         ])
 
         @include('comments._partials.create', [

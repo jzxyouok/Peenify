@@ -10,7 +10,7 @@
         <a class="btn btn-default" href="{{ route('users.edit') }}">Edit</a>
     </div>
 
-    @include('users._partials.follows', [
+    @include('_partials.follows', [
     'type' => 'user',
     'id' => $user->id,
 ])

@@ -16,9 +16,13 @@ class UserRepository extends Repository
         $this->model = $model;
     }
 
-
     public function updateOrCreate(array $attributes, array $values = [])
     {
         return $this->model->updateOrCreate($attributes, $values);
+    }
+
+    public function getUserByIds($userIds)
+    {
+        return $this->model->whereIn('id', $userIds)->get();
     }
 }

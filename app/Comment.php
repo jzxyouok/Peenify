@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Extensions\EmojiableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use EmojiableTrait;
+
     protected $table = 'comments';
 
     protected $fillable = [

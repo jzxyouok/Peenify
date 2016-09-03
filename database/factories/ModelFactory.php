@@ -24,7 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Category::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => factory(App\User::class)->create(),
+        'user_id' => factory(App\User::class)->create()->id,
         'name' => 'movies',
         'description' => 'this is movie',
         'status' => 1
@@ -33,8 +33,8 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Product::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => factory(App\User::class)->create(),
-        'category_id' => factory(App\Category::class)->create(),
+        'user_id' => factory(App\User::class)->create()->id,
+        'category_id' => factory(App\Category::class)->create()->id,
         'name' => 'diablo3',
         'description' => 'dead',
         'status' => 1
@@ -43,16 +43,16 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => factory(App\User::class)->create(),
+        'user_id' => factory(App\User::class)->create()->id,
         'commentable_type' => 'product',
-        'commentable_id' => factory(\App\Product::class)->create(),
+        'commentable_id' => factory(\App\Product::class)->create()->id,
         'description' => 12345,
     ];
 });
 
 $factory->define(App\Collection::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => factory(App\User::class)->create(),
+        'user_id' => factory(App\User::class)->create()->id,
         'name' => 'my collection',
         'description' => 'this is a game',
         'status' => 1
@@ -61,7 +61,15 @@ $factory->define(App\Collection::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Wish::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => factory(App\User::class)->create(),
-        'product_id' => factory(App\Product::class)->create(),
+        'user_id' => factory(App\User::class)->create()->id,
+        'product_id' => factory(App\Product::class)->create()->id,
+    ];
+});
+
+$factory->define(App\Follow::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => factory(App\User::class)->create()->id,
+        'followable_type' => 'category',
+        'followable_id' => factory(\App\Category::class)->create()->id,
     ];
 });
