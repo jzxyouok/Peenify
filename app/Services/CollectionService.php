@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Repositories\CollectionRepository;
 
-class CollectionService
+class CollectionService extends Service
 {
     /**
      * @var CollectionRepository
@@ -23,7 +23,7 @@ class CollectionService
 
     public function create(array $attributes)
     {
-        return $this->collectionRepository->create($attributes);
+        return $this->collectionRepository->create($this->authUser($attributes));
     }
 
     public function findOrFail($id)
@@ -33,7 +33,7 @@ class CollectionService
 
     public function update($id, array $attributes)
     {
-        return $this->collectionRepository->update($id, $attributes);
+        return $this->collectionRepository->update($id, $this->authUser($attributes));
     }
 
     public function destroy($id)

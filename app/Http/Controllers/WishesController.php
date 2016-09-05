@@ -23,7 +23,7 @@ class WishesController extends Controller
     {
         $this->wishService->create($product_id);
 
-        return redirect()->back()->with('message', '新增到願望清單了');
+        return response()->json(['status' => 'success', 'message' => '新增到願望清單了']);
     }
 
     public function showByUser($user_id)

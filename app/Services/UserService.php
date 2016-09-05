@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 
-class UserService
+class UserService extends Service
 {
     /**
      * @var UserRepository
