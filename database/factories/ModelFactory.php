@@ -73,3 +73,32 @@ $factory->define(App\Follow::class, function (Faker\Generator $faker) {
         'followable_id' => factory(\App\Category::class)->create()->id,
     ];
 });
+
+$factory->define(App\Vendor::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => factory(App\User::class)->create()->id,
+        'name' => '福斯',
+        'description' => '21世紀炸雞',
+        'agent' => '我是代理商',
+    ];
+});
+
+$factory->define(App\Author::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => factory(App\User::class)->create()->id,
+        'name' => '拉拉雅拉伯汗',
+        'description' => '我拍過鋼鐵人我超厲害的',
+        'gender' => 'male',
+        'country' => 'TW',
+    ];
+});
+
+$factory->define(App\Actor::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => factory(App\User::class)->create()->id,
+        'name' => '李奧納多皮卡丘',
+        'description' => '我拍過鐵達尼號',
+        'gender' => 'male',
+        'country' => 'US',
+    ];
+});

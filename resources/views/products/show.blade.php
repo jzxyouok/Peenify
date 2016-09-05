@@ -5,7 +5,15 @@
     <div class="container">
         <img src="{{ !$product->cover ?: image_path('cover.product', $product->id, $product->cover) }}">
         <h1>{{ $product->name }}</h1>
-        <p>{{ $product->description }}</p>
+        <p>{{ $product->description }}</p><br>
+        <h2>導演</h2>
+        @foreach($product->authors as $author)
+            {{ $author->name }} <br />
+        @endforeach
+        <h3>演員</h3>
+        @foreach($product->actors as $actor)
+            {{ $actor->name }} <br />
+        @endforeach
 
         <a class="btn btn-default" href="{{ route('products.edit', $product->id) }}">Edit</a>
 

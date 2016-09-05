@@ -29,4 +29,19 @@ class Product extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function vendors()
+    {
+        return $this->belongsToMany(Vendor::class);
+    }
+
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class);
+    }
+
+    public function actors()
+    {
+        return $this->belongsToMany(Actor::class);
+    }
 }

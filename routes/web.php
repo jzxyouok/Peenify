@@ -179,6 +179,9 @@ Route::group(['prefix' => 'comments'], function () {
 
 Route::resource('collections', 'CollectionsController'); //relations with product
 
+
+Route::resource('authors', 'AuthorsController');
+
 //Emoji, Follow
 Route::group(['middleware' => 'auth'], function () {
     Route::post('emojis/{emojiable_type}/{emojiable_id}', [
