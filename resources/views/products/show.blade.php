@@ -68,8 +68,7 @@
                 }, function (result) {
                     if (result.status == 'success') {
                         swal("Good job!", result.message, "success");
-                        $this.toggleClass("remove-wishlist");
-                        $this.text("從願望清單移除");
+                        $this.toggleClass("remove-wishlist").text("從願望清單移除");
                     } else {
                         swal("Ooooops!", "Something have wrong...", "error")
                     }
