@@ -181,10 +181,6 @@ Route::resource('collections', 'CollectionsController'); //relations with produc
 
 
 Route::group(['middleware' => 'auth'], function () {
-
-    Route::resource('authors', 'AuthorsController');
-    Route::resource('actors', 'ActorsController');
-
     Route::post('emojis/{emojiable_type}/{emojiable_id}', [
         'as' => 'emojis.sync',
         'uses' => 'EmojisController@sync',
@@ -195,6 +191,10 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'FollowsController@sync',
     ]);
 });
+
+Route::resource('authors', 'AuthorsController');
+Route::resource('actors', 'ActorsController');
+Route::resource('vendors', 'VendorsController');
 
 Auth::routes();
 

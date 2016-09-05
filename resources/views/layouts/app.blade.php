@@ -89,6 +89,15 @@
                         <li><a href="{{ route('actors.index') }}">所有</a></li>
                     </ul>
                 </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-expanded="false">vendor</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ route('vendors.create') }}">建立</a></li>
+                        <li><a href="{{ route('vendors.index') }}">所有</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
