@@ -36,68 +36,19 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                Laravel
+                Minimal
             </a>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                &nbsp;
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">分類</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ route('categories.create') }}">建立</a></li>
-                        <li><a href="{{ route('categories.index') }}">所有</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">產品</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ route('products.create') }}">建立</a></li>
-                        <li><a href="{{ route('products.index') }}">所有</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">收藏集</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ route('collections.create') }}">建立</a></li>
-                        <li><a href="{{ route('collections.index') }}">所有</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">author</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ route('authors.create') }}">建立</a></li>
-                        <li><a href="{{ route('authors.index') }}">所有</a></li>
-                    </ul>
-                </li>
-
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">actor</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ route('actors.create') }}">建立</a></li>
-                        <li><a href="{{ route('actors.index') }}">所有</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-expanded="false">vendor</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ route('vendors.create') }}">建立</a></li>
-                        <li><a href="{{ route('vendors.index') }}">所有</a></li>
-                    </ul>
-                </li>
+            <ul class="nav navbar-nav">&nbsp;
+                <li><a href="{{ route('categories.index') }}">分類</a></li>
+                <li><a href="{{ route('products.index') }}">產品</a></li>
+                <li><a href="{{ route('collections.index') }}">收藏集</a></li>
+                <li><a href="{{ route('authors.index') }}">作者</a></li>
+                <li><a href="{{ route('actors.index') }}">演員</a></li>
+                <li><a href="{{ route('vendors.index') }}">廠商</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -141,6 +92,7 @@
 
 @include('layouts.message')
 
+@yield('style')
 @yield('content')
 
 <!-- Scripts -->
