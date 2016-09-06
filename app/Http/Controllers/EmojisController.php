@@ -23,7 +23,7 @@ class EmojisController extends Controller
     {
         $result = $this->emojiService->syncEmoji($emojiable_type, $emojiable_id, $request->all());
 
-        return redirect()->back()->with('message', ($result) ? '新建成功' : '編輯成功');
+        return response()->json(['status' => ($result) ? 'create' : 'edit']);
     }
 
     public function showByUser($user_id)

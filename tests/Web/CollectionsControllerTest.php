@@ -89,7 +89,7 @@ class CollectionsControllerTest extends TestCase
     public function testUpdate()
     {
         $this->loginFakeUser();
-        
+
         factory(\App\Collection::class)->create();
 
         $this->call('put', route('collections.update', 1), [

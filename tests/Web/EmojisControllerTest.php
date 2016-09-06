@@ -28,13 +28,13 @@ class EmojissControllerTest extends TestCase
 
         $product = factory(\App\Product::class)->create();
 
-        $this->call('post', route('emojis.sync', [
+        $result = $this->call('post', route('emojis.sync', [
             'emojiable_type' => 'product',
             'emojiable_id' => $product->id,
             'type' => 'like'
         ]));
 
-        $this->assertResponseStatus(302);
+        $this->assertJson($result->content());
     }
 
     /**

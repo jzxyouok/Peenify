@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        .emoji {
+            scale: 10,10;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -29,10 +37,29 @@
             <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單</div>
         @endif
 
+        <h3>Like: {{ $product->emojis()->where('type', 'like')->count() }}</h3>
+        <h3>Normal: {{ $product->emojis()->where('type', 'normal')->count() }}</h3>
+        <h3>Bad: {{ $product->emojis()->where('type', 'bad')->count() }}</h3>
 
         @include('_partials.emojis', [
-            'relation' => $product,
-            'type' => 'product',
+        'relation' => $product,
+        'type' => 'product',
+        'emoji' => 'like',
+        'icon' => '&#x1F44D;',
+        ])
+
+        @include('_partials.emojis', [
+        'relation' => $product,
+        'type' => 'product',
+        'emoji' => 'normal',
+        'icon' => '&#x1F466;',
+        ])
+
+        @include('_partials.emojis', [
+        'relation' => $product,
+        'type' => 'product',
+        'emoji' => 'bad',
+        'icon' => '&#x1F44E;',
         ])
 
         @include('comments._partials.create', [
@@ -63,6 +90,25 @@
                     } else {
                         swal("Wwwwwwww...", "產品被移除了", "success");
                         $this.addClass('btn-default').removeClass('btn-danger').text("加到願望清單");
+                    }
+                });
+            });
+
+            $(document).on('click', '.emoji', function () {
+                var $this = $(this);
+                var token = $this.data('token');
+                var id = $this.data('id');
+                var type = $this.data('type');
+                var emoji = $this.data('emoji');
+                $.post('/emojis/' + type + '/' + id, {
+                    '_token': token,
+                    'type': emoji
+                }, function (result) {
+                    if (result.status == 'create') {
+                        $this.addClass('btn-danger').removeClass('btn-default');
+                    } else {
+                        $(".emoji").removeClass('btn-danger').addClass('btn-default');
+                        $this.addClass('btn-danger').removeClass('btn-default');
                     }
                 });
             });
