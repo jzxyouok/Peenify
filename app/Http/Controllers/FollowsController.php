@@ -23,7 +23,7 @@ class FollowsController extends Controller
     {
         $result = $this->followService->syncFollow($followable_type, $followable_id, $request->all());
 
-        return redirect()->back()->with('message', ($result) ? '新建成功' : '刪除成功');
+        return response()->json(['status' => ($result) ? 'create' : 'edit']);
     }
 
     public function showByUser($user_id)

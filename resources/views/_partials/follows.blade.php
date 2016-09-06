@@ -1,6 +1,7 @@
-<div>
-    <form action="{{ route('follows.sync', ['followable_type' => $type, 'followable_id' => $id]) }}" method="post">
-        {{ csrf_field() }}
-        <input type="submit" value="關注" class="btn btn-danger">
-    </form>
-</div>
+@if($relation->follows()->where('user_id', auth()->user()->id)->count())
+    <div class="follow btn btn-danger" data-type="{{ $type }}"
+         data-id={{ $relation->id }} data-token={{ csrf_token() }}> 取消關注 </div>
+@else
+    <div class="follow btn btn-default" data-type="{{ $type }}"
+         data-id={{ $relation->id }} data-token={{ csrf_token() }}> 關注 </div>
+@endif
