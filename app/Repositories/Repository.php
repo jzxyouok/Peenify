@@ -14,7 +14,7 @@ abstract class Repository
         return $this->model->all();
     }
 
-    public function create($attributes)
+    public function create(array $attributes = [])
     {
         return $this->model->create($attributes);
     }
@@ -34,5 +34,13 @@ abstract class Repository
     public function destroy($id)
     {
         return $this->model->destroy($id);
+    }
+
+    public function setSlugGenerator()
+    {
+        $this->model->setSlugGenerator(function($name) {
+            return base64_encode($name);
+        });
+        return $this->model;
     }
 }

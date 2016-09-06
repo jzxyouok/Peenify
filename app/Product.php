@@ -4,10 +4,11 @@ namespace App;
 
 use App\Extensions\EmojiableTrait;
 use Illuminate\Database\Eloquent\Model;
+use Cartalyst\Tags\TaggableTrait;
 
 class Product extends Model
 {
-    use EmojiableTrait;
+    use EmojiableTrait, TaggableTrait;
 
     protected $table = 'products';
 

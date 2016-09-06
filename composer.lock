@@ -4,9 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "886df80d46930c75d50f3101390e20fe",
-    "content-hash": "6bd2918622bd4413429f4181978fe1bb",
+    "hash": "dfc31e717b1722ada1d9ee9621fd608a",
+    "content-hash": "172e36d086028f39ff623eb284d23769",
     "packages": [
+        {
+            "name": "cartalyst/tags",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cartalyst/tags.git",
+                "reference": "587382f29c46dd0963e394c4f71bc6ecde2e2a64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cartalyst/tags/zipball/587382f29c46dd0963e394c4f71bc6ecde2e2a64",
+                "reference": "587382f29c46dd0963e394c4f71bc6ecde2e2a64",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.3.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.3.*"
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cartalyst\\Tags\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cartalyst LLC",
+                    "email": "help@cartalyst.com",
+                    "homepage": "https://cartalyst.com"
+                }
+            ],
+            "description": "Easily add tags to your Eloquent models.",
+            "keywords": [
+                "cartalyst",
+                "laravel",
+                "php",
+                "tags"
+            ],
+            "time": "2016-09-06 09:58:16"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",

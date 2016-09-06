@@ -28,10 +28,10 @@
                 <label for="name">產品封面</label>
                 <input type="file" name="cover" class="form-control">
             </div>
-            {{--<div class="form-group">--}}
-            {{--<label for="name">Tags</label>--}}
-            {{--<input type="text" name="tags" class="form-control">--}}
-            {{--</div>--}}
+            <div class="form-group">
+            <label for="name">Tags</label>
+            <input type="text" name="tags" class="form-control">
+            </div>
             <div class="form-group">
                 <input type="submit" value="建立" class="btn btn-default">
             </div>

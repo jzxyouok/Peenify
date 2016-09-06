@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .emoji {
-            scale: 10,10;
+
         }
     </style>
 @endsection

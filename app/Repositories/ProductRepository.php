@@ -16,4 +16,9 @@ class ProductRepository extends Repository
     {
         $this->model = $model;
     }
+
+    public function create(array $attributes = [])
+    {
+        return parent::setSlugGenerator()->create($attributes);
+    }
 }

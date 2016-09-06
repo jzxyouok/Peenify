@@ -61,6 +61,7 @@ class ProductsControllerTest extends TestCase
             'name' => 'world of warcraft',
             'description' => 'this is warcraft',
             'cover' => $this->fakeUpload(),
+            'tags' => [1,2,3,4],
         ]);
 
         $this->assertResponseStatus(302);

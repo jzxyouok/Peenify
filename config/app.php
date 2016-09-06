@@ -169,6 +169,7 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Cartalyst\Tags\TagsServiceProvider::class,
 
         /*
          * Application Service Providers...

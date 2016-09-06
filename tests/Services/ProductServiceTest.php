@@ -40,7 +40,6 @@ class ProductServiceTest extends TestCase
     public function testCreate()
     {
         $this->loginFakeUser();
-        factory(\App\Product::class)->create();
         $category = factory(\App\Category::class)->create();
 
         $service = app(\App\Services\ProductService::class);
@@ -50,6 +49,7 @@ class ProductServiceTest extends TestCase
             'name' => 'test',
             'description' => 'test2',
             'cover' => $this->fakeUpload(),
+            'tags' => "1,2,3,我是中文",
         ]);
 
         $this->seeInDatabase('products', [
@@ -57,6 +57,44 @@ class ProductServiceTest extends TestCase
             'name' => 'test',
             'description' => 'test2',
             'user_id' => auth()->user()->id,
+        ]);
+
+        $this->seeInDatabase('tags', [
+            'name' => 1
+        ]);
+        $this->seeInDatabase('tags', [
+            'name' => 2
+        ]);
+        $this->seeInDatabase('tags', [
+            'name' => 3
+        ]);
+        $this->seeInDatabase('tags', [
+            'name' => '我是中文',
+            'slug' => base64_encode('我是中文'),
+        ]);
+
+        $this->seeInDatabase('tagged', [
+            'taggable_type' => 'product',
+            'taggable_id' => 1,
+            'tag_id' => 1
+        ]);
+
+        $this->seeInDatabase('tagged', [
+            'taggable_type' => 'product',
+            'taggable_id' => 1,
+            'tag_id' => 2
+        ]);
+
+        $this->seeInDatabase('tagged', [
+            'taggable_type' => 'product',
+            'taggable_id' => 1,
+            'tag_id' => 3
+        ]);
+
+        $this->seeInDatabase('tagged', [
+            'taggable_type' => 'product',
+            'taggable_id' => 1,
+            'tag_id' => 4
         ]);
     }
 
