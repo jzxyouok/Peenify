@@ -39,6 +39,8 @@ class CollectionServiceTest extends TestCase
      */
     public function testCreate()
     {
+        $this->loginFakeUser();
+
         $repository = $this->initMock(CollectionRepository::class);
         $repository->shouldReceive('create')->once();
 
@@ -67,6 +69,8 @@ class CollectionServiceTest extends TestCase
      */
     public function testUpdate()
     {
+        $this->loginFakeUser();
+
         $repository = $this->initMock(CollectionRepository::class);
         $repository->shouldReceive('update')->once();
 

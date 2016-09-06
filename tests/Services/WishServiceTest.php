@@ -58,4 +58,20 @@ class WishServiceTest extends TestCase
             'user_id' => auth()->user()->id,
         ]);
     }
+
+    public function getWishByProductAndAuth()
+    {
+        $this->loginFakeUser();
+
+        $product = factory(\App\Product::class)->create();
+
+        $service = app(WishService::class);
+
+        $service->destroy($product->id);
+
+        $this->dontSeeInDatabase('wishes', [
+            'product_id' => $product->id,
+            'user_id' => auth()->user()->id,
+        ]);
+    }
 }

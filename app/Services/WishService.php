@@ -32,4 +32,9 @@ class WishService extends Service
     {
         return $this->wishRepository->destroyByUser($product_id, auth()->user()->id);
     }
+
+    public function getWishByProductAndAuth($product_id)
+    {
+        return $this->wishRepository->getWishByProduct($product_id, auth()->user()->id);
+    }
 }

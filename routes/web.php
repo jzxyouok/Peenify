@@ -38,13 +38,8 @@ Route::group(['prefix' => 'users'], function () {
         ]);
 
         Route::post('wishes/{product}', [
-            'as' => 'wishes.store',
-            'uses' => 'WishesController@store'
-        ]);
-
-        Route::delete('wishes/{product}', [
-            'as' => 'wishes.destroy',
-            'uses' => 'WishesController@destroy'
+            'as' => 'wishes.sync',
+            'uses' => 'WishesController@sync'
         ]);
     });
 

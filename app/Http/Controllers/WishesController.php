@@ -19,13 +19,6 @@ class WishesController extends Controller
         $this->wishService = $wishService;
     }
 
-    public function store($product_id)
-    {
-        $this->wishService->create($product_id);
-
-        return response()->json(['status' => 'success', 'message' => '新增到願望清單了']);
-    }
-
     public function showByUser($user_id)
     {
         $wishes = $this->wishService->getAllByUser($user_id);
@@ -33,10 +26,17 @@ class WishesController extends Controller
         return view('users.wishes', compact('wishes'));
     }
 
-    public function destroy($product_id)
+    public function sync($product_id)
     {
-        $this->wishService->destroy($product_id);
+        if ($this->wishService->getWishByProductAndAuth($product_id)) {
+            $this->wishService->destroy($product_id);
+            $status = 'delete';
+        } else {
+            $this->wishService->create($product_id);
 
-        return redirect()->back()->with('message', '移除成功');
+            $status = 'create';
+        }
+
+        return response()->json(['status' => $status]);
     }
 }

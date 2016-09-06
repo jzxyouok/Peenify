@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-    <style>
-    .remove-wishlist {
-        color:red;
-    }
-    </style>
-@endsection
-
 @section('content')
 
     <div class="container">
@@ -31,12 +23,11 @@
             <input type="submit" value="delete" class="btn btn-danger">
         </form>
 
-        {{--<form action="{{ route('wishes.store', $product->id) }}" method="post">--}}
-        {{--{{ csrf_field() }}--}}
-        {{--<input type="submit" value="加到願望" class="btn btn-danger">--}}
-        {{--</form>--}}
-
-        <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單</div>
+        @if($product->wishes->count())
+            <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除</div>
+        @else
+            <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單</div>
+        @endif
 
 
         @include('_partials.emojis', [
@@ -66,11 +57,12 @@
                 $.post('/users/wishes/' + id, {
                     '_token': token
                 }, function (result) {
-                    if (result.status == 'success') {
-                        swal("Good job!", result.message, "success");
-                        $this.toggleClass("remove-wishlist").text("從願望清單移除");
+                    if (result.status == 'create') {
+                        swal("Good job!", "已經把產品加進去囉", "success");
+                        $this.addClass('btn-danger').removeClass('btn-default').text("從願望清單移除");
                     } else {
-                        swal("Ooooops!", "Something have wrong...", "error")
+                        swal("Wwwwwwww...", "產品被移除了", "success");
+                        $this.addClass('btn-default').removeClass('btn-danger').text("加到願望清單");
                     }
                 });
             });

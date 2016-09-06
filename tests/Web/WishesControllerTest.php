@@ -21,21 +21,6 @@ class WishesControllerTest extends TestCase
      * @test
      * @group wish
      */
-    public function store()
-    {
-        $this->loginFakeUser();
-
-        $product = factory(\App\Product::class)->create();
-
-        $this->call('post', route('wishes.store', $product->id));
-
-        $this->assertResponseStatus(302);
-    }
-
-    /**
-     * @test
-     * @group wish
-     */
     public function show()
     {
         $this->loginFakeUser();
@@ -54,14 +39,34 @@ class WishesControllerTest extends TestCase
      * @test
      * @group wish
      */
-    public function destroy()
+    public function syncWithCreate()
     {
         $this->loginFakeUser();
 
         $product = factory(\App\Product::class)->create();
 
-        $this->call('post', route('wishes.destroy', $product->id));
+        $result = $this->call('post', route('wishes.sync', $product->id));
 
-        $this->assertResponseStatus(302);
+        $this->assertJson($result->content());
+    }
+
+    /**
+     * @test
+     * @group wish
+     */
+    public function syncWithDelete()
+    {
+        $this->loginFakeUser();
+
+        $product = factory(\App\Product::class)->create();
+
+        factory(\App\Wish::class)->create([
+            'product_id' => $product->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        $result = $this->call('post', route('wishes.sync', $product->id));
+
+        $this->assertJson($result->content());
     }
 }

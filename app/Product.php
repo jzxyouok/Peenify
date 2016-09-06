@@ -25,6 +25,11 @@ class Product extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function wishes()
+    {
+        return $this->hasMany(Wish::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
