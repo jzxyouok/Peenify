@@ -102,3 +102,10 @@ $factory->define(App\Actor::class, function (Faker\Generator $faker) {
         'country' => 'US',
     ];
 });
+
+$factory->define(App\Role::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'Administrator',
+        'description' => '管理員',
+    ];
+});

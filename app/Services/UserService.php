@@ -44,4 +44,9 @@ class UserService extends Service
 
         return $this->userRepository->update($id, $attributes);
     }
+
+    public function attachRoles($id, $role_ids)
+    {
+        return $this->userRepository->attachRoles($id, (array)$role_ids);
+    }
 }

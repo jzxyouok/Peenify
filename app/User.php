@@ -47,4 +47,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Collection::class);
     }
+
+    /**
+     * 屬於該使用者的身份。
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }

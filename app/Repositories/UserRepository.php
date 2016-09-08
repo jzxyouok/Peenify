@@ -25,4 +25,11 @@ class UserRepository extends Repository
     {
         return $this->model->whereIn('id', $userIds)->get();
     }
+
+    public function attachRoles($user_id, $role_ids)
+    {
+        $user = $this->model->find($user_id);
+
+        return $user->roles()->attach($role_ids);
+    }
 }

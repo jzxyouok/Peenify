@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Services\UserService;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -28,15 +29,20 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    /**
+     * @var UserService
+     */
+    private $userService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserService $userService)
     {
         $this->middleware('guest');
+        $this->userService = $userService;
     }
 
     /**
@@ -62,10 +68,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $this->userService->attachRoles($user->id, 3);//Beta
+
+        return $user;
     }
 }
