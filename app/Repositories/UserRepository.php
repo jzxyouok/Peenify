@@ -32,4 +32,9 @@ class UserRepository extends Repository
 
         return $user->roles()->attach($role_ids);
     }
+
+    public function fillToSave($instance, $attributes)
+    {
+        return $instance->fill($attributes)->save();
+    }
 }

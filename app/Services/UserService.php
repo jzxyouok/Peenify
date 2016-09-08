@@ -18,11 +18,20 @@ class UserService extends Service
 
     public function updateOrCreateWithFacebook($user)
     {
-        return $this->userRepository->updateOrCreate(['email' => $user->email], [
+        $model = $this->userRepository->firstOrNew(['email' => $user->email]);
+
+        $this->userRepository->fillToSave($model, [
             'facebook_user_id' => $user->id,
-            'name'     => $user->name,
-            'password' => bcrypt(str_random(10)),
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => ($model->exists) ? $model->password : bcrypt(str_random(10)),
         ]);
+
+        if ($model->exists) {
+            $this->userRepository->attachRoles($model->id, 3); //beta
+        }
+
+        return $model;
     }
 
     public function all()
@@ -38,7 +47,8 @@ class UserService extends Service
     public function update($id, array $attributes)
     {
         if (isset($attributes['avatar'])) {
-            $attributes['avatar']->storeAs(config('image-path.avatar.user') .  $id, $avatar = $attributes['avatar']->hashName(), 'public');
+            $attributes['avatar']->storeAs(config('image-path.avatar.user') . $id,
+                $avatar = $attributes['avatar']->hashName(), 'public');
             $attributes = array_set($attributes, 'avatar', $avatar);
         }
 
