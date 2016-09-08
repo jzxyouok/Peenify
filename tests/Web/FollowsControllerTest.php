@@ -34,7 +34,7 @@ class FollowsControllerTest extends TestCase
             'type' => 'like'
         ]));
 
-        $this->assertResponseStatus(302);
+        $this->assertResponseStatus(200);
     }
 
     /**

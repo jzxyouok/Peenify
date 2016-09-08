@@ -8,9 +8,10 @@
             <h3><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></h3>
 
             @include('_partials.follows', [
-'type' => 'category',
-'id' => $category->id,
-])
+            'relation' => $category,
+            'type' => 'category',
+            ])
+
             <p>{{ $category->description }}</p>
             <p>{{ $category->created_at->diffForHumans() }}</p>
         @endforeach
