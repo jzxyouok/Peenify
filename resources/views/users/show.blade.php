@@ -48,7 +48,18 @@
                     if (result.status == 'create') {
                         $this.addClass('btn-danger').removeClass('btn-default').text('取消關注');
                     } else {
-                        $this.addClass('btn-default').removeClass('btn-danger').text('關注');
+                        swal({
+                            title: "Are you sure?",
+                            text: "你要取消關注這個人嗎？？",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "對，我不想看到他了",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("取消關注成功!", "你已經取消關注他囉", "success");
+                            $this.addClass('btn-default').removeClass('btn-danger').text('關注');
+                        });
                     }
                 });
             });
