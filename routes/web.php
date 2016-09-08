@@ -15,17 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/api/tags/autocomplete', function() {
-    if (request()->get('term')) {
-        $tags = [];
-        foreach (App\Tag::where('name', 'like', "%" . request()->get('term') . "%")->get() as $tag) {
-            $tags[] = $tag->name;
-        }
-
-        return response()->json($tags);
-    }
-    return response()->json('No results found');
-});
 
 /*
  * Facebook login
@@ -196,6 +185,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('follows/{followable_type}/{followable_id}', [
         'as' => 'follows.sync',
         'uses' => 'FollowsController@sync',
+    ]);
+
+    Route::get('/api/tags/ajaxTags', [
+        'as' => 'tags.term',
+        'uses' => 'TagsController@ajaxTags',
     ]);
 });
 

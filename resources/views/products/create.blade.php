@@ -47,7 +47,7 @@
             tags: true,
             multiple: true,
             ajax: {
-                url: '/api/tags/autocomplete',
+                url: '/api/tags/ajaxTags',
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {

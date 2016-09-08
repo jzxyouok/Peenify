@@ -23,6 +23,13 @@
             {{ $actor->name }} <br/>
         @endforeach
 
+        <h3>Tag</h3>
+        <div>
+            @foreach($product->tags as $tag)
+                {{ $tag->name }}
+            @endforeach
+        </div>
+
         <a class="btn btn-default" href="{{ route('products.edit', $product->id) }}">Edit</a>
 
         <form action="{{ route('products.destroy', $product->id) }}" method="post">
