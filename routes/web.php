@@ -200,3 +200,10 @@ Route::resource('vendors', 'VendorsController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], function() {
+    Route::get('/', [
+        'as' => 'backend.index',
+        'uses' => 'Backend\HomeController@index',
+    ]);
+});
