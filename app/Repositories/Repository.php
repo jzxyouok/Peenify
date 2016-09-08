@@ -11,7 +11,7 @@ abstract class Repository
 
     public function all()
     {
-        return $this->model->all();
+        return $this->model->latest()->get();
     }
 
     public function create(array $attributes = [])

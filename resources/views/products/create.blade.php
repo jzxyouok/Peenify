@@ -29,12 +29,44 @@
                 <input type="file" name="cover" class="form-control">
             </div>
             <div class="form-group">
-            <label for="name">Tags</label>
-            <input type="text" name="tags" class="form-control">
+                <label for="name">Tags</label>
+                <select name="tags[]" id="tags" class="form-control">
+
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="建立" class="btn btn-default">
             </div>
         </form>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $('#tags').select2({
+            tags: true,
+            multiple: true,
+            ajax: {
+                url: '/api/tags/autocomplete',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        term: params.term,
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: $(data).map(function (index, text) {
+                            return {
+                                id: text,
+                                text: text
+                            }
+                        }).get()
+                    };
+                },
+                cache: true
+            }
+        });
+    </script>
 @endsection

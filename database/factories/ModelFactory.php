@@ -109,3 +109,11 @@ $factory->define(App\Role::class, function (Faker\Generator $faker) {
         'description' => '管理員',
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'namespace' => 'product',
+        'slug' => base64_encode($faker->name)
+    ];
+});

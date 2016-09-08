@@ -15,6 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/api/tags/autocomplete', function() {
+    if (request()->get('term')) {
+        $tags = [];
+        foreach (App\Tag::where('name', 'like', "%" . request()->get('term') . "%")->get() as $tag) {
+            $tags[] = $tag->name;
+        }
+
+        return response()->json($tags);
+    }
+    return response()->json('No results found');
+});
+
 /*
  * Facebook login
  */
