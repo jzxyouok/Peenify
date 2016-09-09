@@ -2,38 +2,54 @@
 
 @section('content')
     <div class="container">
-        <h1>Create Product</h1>
+        <h1>建立產品</h1>
+
         <form action="{{ route('products.store') }}" method="post" role="form" enctype="multipart/form-data">
-            <h3>Choose Category</h3>
-            <select name="category_id">
+            <h3>選擇分類</h3>
+            <select class="form-control" name="category_id">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
+
             {{ csrf_field() }}
+
             <div class="form-group">
                 <label for="name">產品名稱</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
             </div>
+
             <div class="form-group">
                 <label for="description">產品描述</label>
                 <textarea name="description" rows="4" cols="50" placeholder="請輸入產品描述..."
-                          class="form-control"></textarea>
+                          class="form-control" value="{{ old('description') }}"></textarea>
             </div>
-            {{--<div class="form-group">--}}
-            {{--<label for="name">產品網址</label>--}}
-            {{--<input type="text" name="site" class="form-control">--}}
-            {{--</div>--}}
+
+            <div class="form-group">
+                <label for="name">產品網址</label>
+                <input type="text" name="site" class="form-control">
+            </div>
+
             <div class="form-group">
                 <label for="name">產品封面</label>
                 <input type="file" name="cover" class="form-control">
             </div>
-            <div class="form-group">
-                <label for="name">Tags</label>
-                <select name="tags[]" id="tags" class="form-control">
 
-                </select>
+            <div class="form-group">
+                <label for="name">釋出時間</label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input name="launched_at" type='text' class="form-control"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
+
+            <div class="form-group">
+                <label for="name">標籤</label>
+                <select name="tags[]" id="tags" class="form-control"></select>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="建立" class="btn btn-default">
             </div>
@@ -43,6 +59,12 @@
 
 @section('script')
     <script>
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss'
+            });
+        });
+
         $('#tags').select2({
             tags: true,
             multiple: true,
