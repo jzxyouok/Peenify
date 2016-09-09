@@ -8,6 +8,14 @@
               enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
+
+            <h3>選擇分類</h3>
+            <select class="form-control" name="category_id">
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $product->category->id == $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
+                @endforeach
+            </select>
+
             <div class="form-group">
                 <label for="name">產品名稱</label>
                 <input type="text" name="name" value="{{ $product->name }}" class="form-control">

@@ -78,9 +78,11 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+        $categories = $this->categoryService->all();
+
         $product = $this->productService->findOrFail($id);
 
-        return view('products.edit', compact('product'));
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
