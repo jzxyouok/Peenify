@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('cover')->nullable();
-            $table->string('url')->nullable();
+            $table->string('site')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->dateTime('launched_at')->nullable();
             $table->timestamps();

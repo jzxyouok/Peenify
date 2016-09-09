@@ -21,4 +21,15 @@ class ProductRepository extends Repository
     {
         return parent::setSlugGenerator()->create($attributes);
     }
+
+    public function update($id, array $attributes)
+    {
+        $product = $this->model->find($id);
+
+        $product->update($attributes);
+
+        $product->tag($attributes['tags']);
+
+        return $product->save();
+    }
 }
