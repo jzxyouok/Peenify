@@ -42,9 +42,7 @@ class CategoriesControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->visit(route('categories.create'))
-            ->see('Create Category')
-            ->see('create');
+        $this->visit(route('categories.create'))->assertResponseStatus(200);
     }
 
     /**

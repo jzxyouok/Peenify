@@ -22,7 +22,17 @@ class CategoryService extends Service
 
     public function create(array $attributes)
     {
-        return $this->categoryRepository->create($this->authUser($attributes));
+        $category = $this->categoryRepository->create($this->authUser($attributes));
+
+        $cover = (isset($attributes['cover'])) ?
+            $attributes['cover']->storeAs(config('image-path.cover.category') . $category->id,
+                $attributes['cover']->hashName(), 'public') : null;
+
+        $category->cover = $cover;
+
+        $category->save();
+
+        return $category;
     }
 
     public function findOrFail($id)

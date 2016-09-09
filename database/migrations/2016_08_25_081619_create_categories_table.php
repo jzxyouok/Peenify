@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('name');
             $table->text('description');
+            $table->string('cover')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

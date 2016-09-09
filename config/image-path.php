@@ -5,6 +5,7 @@ return [
 
     'cover' => [
         'product' => 'cover/product/',
+        'category' => 'cover/category/',
     ],
 
     'avatar' => [

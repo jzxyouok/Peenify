@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Http\Requests\CategoryRequest;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
@@ -19,6 +21,10 @@ class CategoriesController extends Controller
         $this->categoryService = $categoryService;
     }
 
+    /**
+     * 分類首頁
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $categories = $this->categoryService->all();
@@ -26,12 +32,21 @@ class CategoriesController extends Controller
         return view('categories.index', compact('categories'));
     }
 
+    /**
+     * 建立分類
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('categories.create');
     }
 
-    public function store(Request $request)
+    /**
+     * 儲存分類
+     * @param Category $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(CategoryRequest $request)
     {
         $this->categoryService->create($request->all());
 
