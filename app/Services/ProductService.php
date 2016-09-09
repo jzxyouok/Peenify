@@ -27,7 +27,9 @@ class ProductService extends Service
 
         $product->tag($attributes['tags']);
 
-        $attributes['cover']->storeAs(config('image-path.cover.product') .  $product->id, $cover = $attributes['cover']->hashName(), 'public');
+        $cover = (isset($attributes['cover'])) ?
+            $attributes['cover']->storeAs(config('image-path.cover.product') . $product->id,
+                $attributes['cover']->hashName(), 'public') : null;
 
         $product->cover = $cover;
 
@@ -44,7 +46,8 @@ class ProductService extends Service
     public function update($id, array $attributes)
     {
         if (isset($attributes['cover'])) {
-            $attributes['cover']->storeAs(config('image-path.cover.product') .  $id, $cover = $attributes['cover']->hashName(), 'public');
+            $attributes['cover']->storeAs(config('image-path.cover.product') . $id,
+                $cover = $attributes['cover']->hashName(), 'public');
             $attributes = array_set($attributes, 'cover', $cover);
         }
 

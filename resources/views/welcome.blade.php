@@ -55,7 +55,7 @@
         }
 
         .links > a {
-            color: #636b6f;
+            color: #FFFFFF;
             padding: 0 25px;
             font-size: 12px;
             font-weight: 600;
@@ -73,7 +73,7 @@
         }
 
         body {
-            background-image: url("http://i.imgur.com/Hd1Cucl.png");
+            background-color: #2A4F63;
             background-position: 50% 100%;
         }
 
@@ -88,35 +88,26 @@
         #fb-btn {
             border-bottom: 4px solid #3A558E;
         }
+
+        .nav-btn {
+            color: #FFFFFF;
+        }
     </style>
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    {{--@if (Route::has('login'))--}}
-        {{--<div class="top-right links">--}}
-            {{--<a href="{{ url('/login') }}">Login</a>--}}
-            {{--<a href="{{ url('/register') }}">Register</a>--}}
-        {{--</div>--}}
-    {{--@endif--}}
+    @if (Route::has('login'))
+        <div class="top-right links">
+            <a href="{{ url('/login') }}">Login</a>
+            <a href="{{ url('/auth/facebook') }}">Login via Facebook</a>
+            <a href="{{ url('/register') }}">Register</a>
+        </div>
+    @endif
 
     <div class="content">
         <div class="title m-b-md">
             Welcome to Minimal, 查詢評分的平台。
         </div>
-
-        <div class="flex-center customBtn">
-            <a id="register-btn" class="btn btn-default btn-lg" href="{{ url('/register') }}">馬上註冊</a>
-        </div>
-
-        <div class="flex-center customBtn">
-            <a id="login-btn" class="btn btn-default btn-lg" href="{{ url('/login') }}">登入</a>
-        </div>
-
-        <div class="flex-center customBtn">
-            <a id="fb-btn" class="btn btn-default btn-lg facebook" href="{{ url('/auth/facebook') }}">透過 Facebook 註冊登入</a>
-        </div>
-
-
     </div>
 </div>
 </body>

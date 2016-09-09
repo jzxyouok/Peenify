@@ -102,6 +102,33 @@ class ProductServiceTest extends TestCase
      * @test
      * @group product
      */
+    public function testCreateNoCover()
+    {
+        $this->loginFakeUser();
+        $category = factory(\App\Category::class)->create();
+
+        $service = app(\App\Services\ProductService::class);
+
+        $service->create([
+            'category_id' => $category->id,
+            'name' => 'test',
+            'description' => 'test2',
+            'cover' => null,
+            'tags' => "1,2,3,我是中文",
+        ]);
+
+        $this->seeInDatabase('products', [
+            'category_id' => $category->id,
+            'name' => 'test',
+            'description' => 'test2',
+            'user_id' => auth()->user()->id,
+        ]);
+    }
+
+    /**
+     * @test
+     * @group product
+     */
     public function testShow()
     {
         $repository = $this->initMock(ProductRepository::class);
