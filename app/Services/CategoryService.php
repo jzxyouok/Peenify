@@ -42,6 +42,12 @@ class CategoryService extends Service
 
     public function update($id, array $attributes)
     {
+        if (isset($attributes['cover'])) {
+            $attributes['cover']->storeAs(config('image-path.cover.category') . $id,
+                $cover = $attributes['cover']->hashName(), 'public');
+            $attributes = array_set($attributes, 'cover', $cover);
+        }
+
         return $this->categoryRepository->update($id, $this->authUser($attributes));
     }
 

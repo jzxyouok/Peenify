@@ -53,6 +53,11 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index')->with('message', '建立成功');
     }
 
+    /**
+     * 顯示單獨分類
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         $category = $this->categoryService->findOrFail($id);
@@ -60,6 +65,11 @@ class CategoriesController extends Controller
         return view('categories.show', compact('category'));
     }
 
+    /**
+     * 編輯分類
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $category = $this->categoryService->findOrFail($id);
@@ -67,6 +77,12 @@ class CategoriesController extends Controller
         return view('categories.edit', compact('category'));
     }
 
+    /**
+     * 更新分類
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $this->categoryService->update($id, $request->all());
@@ -74,6 +90,11 @@ class CategoriesController extends Controller
         return redirect()->route('categories.show', $id)->with('message', '編輯成功');
     }
 
+    /**
+     * 刪除分類
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         $this->categoryService->destroy($id);

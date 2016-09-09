@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="name">產品封面</label>
                 <img class="form-control"
-                     src="{{ ($product->cover) ? image_path('cover.product', $product->id, $product->cover):'holder.js/800x600' }}">
+                     src="{{ ($product->cover) ? image_path($product->cover):'holder.js/800x600' }}">
                 <input type="file" name="cover" class="form-control">
             </div>
 
