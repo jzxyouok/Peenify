@@ -24,19 +24,15 @@
         @endforeach
 
         <h3>Tag</h3>
-        <div>
-            @foreach($product->tags as $tag)
-                {{ $tag->name }}
-            @endforeach
-        </div>
+        @include('products._partials.tags', [
+        'product' => $product
+        ])
 
-        <a class="btn btn-default" href="{{ route('products.edit', $product->id) }}">Edit</a>
+        <a class="btn btn-default" href="{{ route('products.edit', $product->id) }}">編輯</a>
 
-        <form action="{{ route('products.destroy', $product->id) }}" method="post">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            <input type="submit" value="delete" class="btn btn-danger">
-        </form>
+        @include('products._partials.destroy', [
+        'product' => $product
+        ])
 
         @if($product->wishes->count())
             <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除</div>
@@ -44,30 +40,23 @@
             <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單</div>
         @endif
 
-        <h3>Like: {{ $product->emojis()->where('type', 'like')->count() }}</h3>
-        <h3>Normal: {{ $product->emojis()->where('type', 'normal')->count() }}</h3>
-        <h3>Bad: {{ $product->emojis()->where('type', 'bad')->count() }}</h3>
+        <div class="form-group">
+            @include('_partials.emojis', [
+                'relation' => $product,
+                'type' => 'product',
+                'emoji' => 'like',
+                'icon' => '&#x1F44D;',
+                ])
+            <span class="badge emoji-count">{{ $product->emojis()->where('type', 'like')->count() }}</span>
 
-        @include('_partials.emojis', [
-        'relation' => $product,
-        'type' => 'product',
-        'emoji' => 'like',
-        'icon' => '&#x1F44D;',
-        ])
-
-        @include('_partials.emojis', [
-        'relation' => $product,
-        'type' => 'product',
-        'emoji' => 'normal',
-        'icon' => '&#x1F466;',
-        ])
-
-        @include('_partials.emojis', [
-        'relation' => $product,
-        'type' => 'product',
-        'emoji' => 'bad',
-        'icon' => '&#x1F44E;',
-        ])
+            @include('_partials.emojis', [
+                'relation' => $product,
+                'type' => 'product',
+                'emoji' => 'bad',
+                'icon' => '&#x1F44E;',
+                ])
+            <span class="badge emoji-count">{{ $product->emojis()->where('type', 'bad')->count() }}</span>
+        </div>
 
         @include('comments._partials.create', [
             'commentable_type' => 'product',
