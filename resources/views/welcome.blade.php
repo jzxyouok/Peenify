@@ -96,11 +96,16 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
+    @if (Route::has('login') && Auth::guest())
         <div class="top-right links">
             <a href="{{ url('/login') }}">Login</a>
             <a href="{{ url('/auth/facebook') }}">Login via Facebook</a>
             <a href="{{ url('/register') }}">Register</a>
+        </div>
+
+    @else
+        <div class="top-right links">
+            <a href="{{ url('/home') }}">Home</a>
         </div>
     @endif
 

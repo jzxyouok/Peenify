@@ -41,10 +41,7 @@ class ProductsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->visit(route('products.create'))
-            ->see('Choose Category')
-            ->see('Create Product')
-            ->see('create');
+        $this->visit(route('products.create'))->assertResponseStatus(200);
     }
 
     /**
@@ -61,6 +58,7 @@ class ProductsControllerTest extends TestCase
             'name' => 'world of warcraft',
             'description' => 'this is warcraft',
             'cover' => $this->fakeUpload(),
+            'site' => 'http://www.yahoo.com.tw',
             'tags' => [1,2,3,4],
         ]);
 
