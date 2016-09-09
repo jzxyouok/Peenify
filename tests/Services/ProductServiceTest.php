@@ -152,7 +152,8 @@ class ProductServiceTest extends TestCase
 
         $service->update(1, [
             'name' => 'updated',
-            'description' => 'updated'
+            'description' => 'updated',
+            'tags' => [1,2,3,4]
         ]);
 
         $this->seeInDatabase('products', [
