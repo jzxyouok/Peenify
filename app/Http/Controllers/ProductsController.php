@@ -54,7 +54,11 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->productService->create($request->all());
+        $filename = (is_null($request->file('cover'))) ? null : upload_image('product', $request->file('cover'));
+
+        $data = $request->all();
+
+        $this->productService->create(array_set($data, 'cover', $filename));
 
         return redirect()->route('products.index')->with('message', '建立成功');
     }
@@ -93,7 +97,7 @@ class ProductsController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        $this->productService->update($id, $request->all());
+        $this->productService->update($id, update_image($request, 'cover', 'product'));
 
         return redirect()->route('products.show', $id)->with('message', '編輯成功');
     }

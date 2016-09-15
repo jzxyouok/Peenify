@@ -28,7 +28,8 @@ class ProductRequest extends FormRequest
             'description' => 'required',
             'category_id' => 'required',
             'launched_at' => 'required',
-            'site' => 'url'
+            'site' => 'url',
+            'tags' => 'required',
         ];
     }
 
@@ -39,7 +40,8 @@ class ProductRequest extends FormRequest
             'description.required' => '產品描述 必填',
             'category_id.required' => '類別 必填',
             'launched_at.required' => '釋出時間 必填',
-            'site.url' => 'URL 必須是正確格式'
+            'site.url' => 'URL 必須是正確格式',
+            'tags.required' => '標籤 必填',
         ];
     }
 }

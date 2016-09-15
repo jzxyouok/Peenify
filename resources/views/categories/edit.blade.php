@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="name">類別封面</label>
-                <img src="{{ image_path($category->cover) }}" alt="">
+                <img src="{{ image_path('category', $category->cover) }}" alt="">
                 <input type="file" name="cover" class="form-control">
             </div>
             <div class="form-group">

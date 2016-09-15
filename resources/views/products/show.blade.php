@@ -11,7 +11,7 @@
 @section('content')
 
     <div class="container">
-        <img src="{{ ($product->cover) ? image_path($product->cover):'holder.js/800x600' }}">
+        <img src="{{ ($product->cover) ? image_path('product', $product->cover):'holder.js/800x600' }}">
         <h1>{{ $product->name }}</h1>
         <p>{{ $product->description }}</p><br>
         <h2>導演</h2>

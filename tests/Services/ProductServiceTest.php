@@ -48,7 +48,7 @@ class ProductServiceTest extends TestCase
             'category_id' => $category->id,
             'name' => 'test',
             'description' => 'test2',
-            'cover' => $this->fakeUpload(),
+            'cover' => '1234.png',
             'tags' => "1,2,3,我是中文",
         ]);
 
