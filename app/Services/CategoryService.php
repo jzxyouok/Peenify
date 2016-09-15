@@ -22,17 +22,7 @@ class CategoryService extends Service
 
     public function create(array $attributes)
     {
-        $category = $this->categoryRepository->create($this->authUser($attributes));
-
-        $cover = (isset($attributes['cover'])) ?
-            $attributes['cover']->storeAs(config('image-path.cover.category') . $category->id,
-                $attributes['cover']->hashName(), 'public') : null;
-
-        $category->cover = $cover;
-
-        $category->save();
-
-        return $category;
+        return $this->categoryRepository->create($this->authUser($attributes));
     }
 
     public function findOrFail($id)
@@ -42,12 +32,6 @@ class CategoryService extends Service
 
     public function update($id, array $attributes)
     {
-        if (isset($attributes['cover'])) {
-            $attributes['cover']->storeAs(config('image-path.cover.category') . $id,
-                $cover = $attributes['cover']->hashName(), 'public');
-            $attributes = array_set($attributes, 'cover', $cover);
-        }
-
         return $this->categoryRepository->update($id, $this->authUser($attributes));
     }
 
