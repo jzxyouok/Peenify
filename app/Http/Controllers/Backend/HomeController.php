@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +11,15 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     /**
+     * @var ProductService
+     */
+    private $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,6 +27,13 @@ class HomeController extends Controller
     public function index()
     {
         return view('backend.index');
+    }
+
+    public function product()
+    {
+        $products = $this->productService->all();
+
+        return view('backend.products.index', compact('products'));
     }
 
     /**

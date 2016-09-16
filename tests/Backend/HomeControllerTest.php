@@ -54,6 +54,16 @@ class HomeControllerTest extends TestCase
         ]);
 
         $this->visit(route('backend.index'))->see('儀表板');
+    }
 
+    /**
+     * @group backend
+     * @test
+     */
+    public function product()
+    {
+        factory(\App\Product::class)->times(5)->create();
+
+        $this->visit(route('backend.product'))->see(5);
     }
 }

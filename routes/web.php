@@ -196,14 +196,30 @@ Route::group(['middleware' => 'auth'], function () {
 Route::resource('authors', 'AuthorsController');
 Route::resource('actors', 'ActorsController');
 Route::resource('vendors', 'VendorsController');
+Route::group(['prefix' => 'tags'], function () {
+    Route::get('/', [
+        'as' => 'tags.index',
+        'uses' => 'TagsController@index',
+    ]);
+
+    Route::get('{tag}', [
+        'as' => 'tags.show',
+        'uses' => 'TagsController@show',
+    ]);
+});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], function() {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], function () {
     Route::get('/', [
         'as' => 'backend.index',
         'uses' => 'Backend\HomeController@index',
+    ]);
+
+    Route::get('products', [
+       'as' => 'backend.product',
+        'uses' => 'Backend\HomeController@product',
     ]);
 });

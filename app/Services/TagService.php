@@ -22,4 +22,14 @@ class TagService
             return $tag->name;
         });
     }
+
+    public function all()
+    {
+        return $this->tagRepository->all();
+    }
+
+    public function findOrFail($id)
+    {
+        return $this->tagRepository->findOrFail($id);
+    }
 }

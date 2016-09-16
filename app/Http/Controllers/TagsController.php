@@ -19,6 +19,20 @@ class TagsController extends Controller
         $this->tagService = $tagService;
     }
 
+    public function index()
+    {
+        $tags = $this->tagService->all();
+
+        return view('tags.index', compact('tags'));
+    }
+
+    public function show($id)
+    {
+        $tag = $this->tagService->findOrFail($id);
+
+        return view('tags.show', compact('tag'));
+    }
+
     public function ajaxTags()
     {
         $name = request()->get('term');

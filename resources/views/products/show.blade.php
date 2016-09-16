@@ -3,7 +3,11 @@
 @section('style')
     <style>
         .emoji {
+        }
 
+        .image-size {
+            width: 50%;
+            height: 50%;
         }
     </style>
 @endsection
@@ -11,34 +15,29 @@
 @section('content')
 
     <div class="container">
-        <img src="{{ ($product->cover) ? image_path('product', $product->cover):'holder.js/800x600' }}">
-        <h1>{{ $product->name }}</h1>
-        <p>{{ $product->description }}</p><br>
-        <h2>導演</h2>
-        @foreach($product->authors as $author)
-            {{ $author->name }} <br/>
-        @endforeach
-        <h3>演員</h3>
-        @foreach($product->actors as $actor)
-            {{ $actor->name }} <br/>
-        @endforeach
+        <img class="image-size" src="{{ ($product->cover) ? image_path('product', $product->cover):'holder.js/800x600' }}">
 
-        <h3>Tag</h3>
         @include('products._partials.tags', [
-        'product' => $product
-        ])
+            'product' => $product
+            ])
+
+        <h1>
+            {{ $product->name }}
+
+            @if($product->wishes->count())
+                <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除</div>
+            @else
+                <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單</div>
+            @endif
+        </h1>
+        <p>{{ $product->description }}</p><br>
+
+        @if ($product->category == 'movie')
+            @include('products._partials.authors')
+            @include('products._partials.actors')
+        @endif
 
         <a class="btn btn-default" href="{{ route('products.edit', $product->id) }}">編輯</a>
-
-        @include('products._partials.destroy', [
-        'product' => $product
-        ])
-
-        @if($product->wishes->count())
-            <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除</div>
-        @else
-            <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單</div>
-        @endif
 
         <div class="form-group">
             @include('_partials.emojis', [
@@ -61,6 +60,7 @@
         @include('comments._partials.create', [
             'commentable_type' => 'product',
             'commentable_id' => $product->id,
+            'relation' => $product,
         ])
 
         @include('comments._partials.show', [

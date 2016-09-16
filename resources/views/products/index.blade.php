@@ -11,10 +11,13 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    {{ $product->description }}
+                    {{ str_limit($product->description) }}
                 </div>
 
                 <div class="panel-footer">
+                    @include('products._partials.tags', [
+                        '$product' => $product
+                    ])
                     {{ $product->created_at->diffForHumans() }}
                 </div>
             </div>

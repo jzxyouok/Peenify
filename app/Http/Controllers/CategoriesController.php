@@ -43,7 +43,7 @@ class CategoriesController extends Controller
 
     /**
      * 儲存分類
-     * @param Category $request
+     * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CategoryRequest $request)
