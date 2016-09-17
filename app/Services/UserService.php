@@ -20,14 +20,16 @@ class UserService extends Service
     {
         $model = $this->userRepository->firstOrNew(['email' => $user->email]);
 
+        $exist = $model->exists;
+
         $this->userRepository->fillToSave($model, [
             'facebook_user_id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
-            'password' => ($model->exists) ? $model->password : bcrypt(str_random(10)),
+            'password' => ($exist) ? $model->password : bcrypt(str_random(10)),
         ]);
 
-        if ($model->exists) {
+        if (! $exist) {
             $this->userRepository->attachRoles($model->id, 3); //beta
         }
 
