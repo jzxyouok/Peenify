@@ -18,6 +18,7 @@ class CreateActorsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('name');
             $table->text('description');
+            $table->string('avatar')->nullable();
             $table->enum('gender', ['male', 'female']);
             $table->string('country');
             $table->tinyInteger('status')->default(1);

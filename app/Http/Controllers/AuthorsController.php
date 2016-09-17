@@ -34,7 +34,11 @@ class AuthorsController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorService->create($request->all());
+        $filename = (is_null($request->file('avatar'))) ? null : upload_image('avatars.authors', $request->file('avatar'));
+
+        $data = $request->all();
+
+        $this->authorService->create(array_set($data, 'avatar', $filename));
 
         return redirect()->route('authors.index')->with('message', '建立成功');
     }
@@ -55,7 +59,7 @@ class AuthorsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->authorService->update($id, $request->all());
+        $this->authorService->update($id, update_image($request, 'avatar', 'avatars.authors'));
 
         return redirect()->route('authors.show', $id)->with('message', '編輯成功');
     }

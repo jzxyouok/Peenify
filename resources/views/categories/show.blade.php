@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="container">
+        <img src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/800x600' }}">
         <h1>{{ $category->name }}</h1>
         <p>{{ $category->description }}</p>
 

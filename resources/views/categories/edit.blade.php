@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h1>Edit Category</h1>
+        <h1>編輯分類</h1>
 
         <form action="{{ route('categories.update', $category->id) }}" method="post" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="name">類別封面</label>
-                <img src="{{ ($category->cover) ? image_path('category', $category->cover):'holder.js/800x600' }}" alt="">
+                <img src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/800x600' }}" alt="">
                 <input type="file" name="cover" class="form-control">
             </div>
             <div class="form-group">

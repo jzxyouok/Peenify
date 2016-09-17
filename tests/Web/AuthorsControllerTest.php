@@ -40,9 +40,7 @@ class AuthorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->visit(route('authors.create'))
-            ->see('Create Author')
-            ->see('create');
+        $this->visit(route('authors.create'))->assertResponseStatus(200);
     }
 
     /**

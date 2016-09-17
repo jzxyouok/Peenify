@@ -68,7 +68,6 @@ class UsersControllerTest extends TestCase
         $this->call('put', route('users.update'), [
             'name' => 'updated!',
             'description' => 'this is travel, updated!',
-            'avatar' => $this->fakeUpload(),
         ]);
 
         $this->assertResponseStatus(302);

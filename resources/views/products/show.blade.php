@@ -15,7 +15,7 @@
 @section('content')
 
     <div class="container">
-        <img class="image-size" src="{{ ($product->cover) ? image_path('product', $product->cover):'holder.js/800x600' }}">
+        <img class="image-size" src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x600' }}">
 
         @include('products._partials.tags', [
             'product' => $product

@@ -40,9 +40,7 @@ class ActorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->visit(route('actors.create'))
-            ->see('Create Actor')
-            ->see('create');
+        $this->visit(route('actors.create'))->assertResponseStatus(200);
     }
 
     /**

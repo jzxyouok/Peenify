@@ -38,9 +38,7 @@ class CollectionsControllerTest extends TestCase
      */
     public function testCreate()
     {
-        $this->visit(route('collections.create'))
-            ->see('Create Collection')
-            ->see('create');
+        $this->visit(route('collections.create'))->assertResponseStatus(200);
     }
 
     /**

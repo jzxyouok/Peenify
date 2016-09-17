@@ -48,7 +48,7 @@ class CategoriesController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $filename = (is_null($request->file('cover'))) ? null : upload_image('category', $request->file('cover'));
+        $filename = (is_null($request->file('cover'))) ? null : upload_image('categories', $request->file('cover'));
 
         $data = $request->all();
 
@@ -89,7 +89,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->categoryService->update($id, update_image($request, 'cover', 'category'));
+        $this->categoryService->update($id, update_image($request, 'cover', 'categories'));
 
         return redirect()->route('categories.show', $id)->with('message', '編輯成功');
     }

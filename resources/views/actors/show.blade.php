@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="container">
+        <img class="image-size" src="{{ ($actor->avatar) ? image_path('avatars.actors', $actor->avatar):'holder.js/300x300' }}">
         <h1>{{ $actor->name }}</h1>
         <p>{{ $actor->description }}</p>
         <p>{{ $actor->gender }}</p>

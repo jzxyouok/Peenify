@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h1>Edit Collection</h1>
+        <h1>編輯收藏集</h1>
         <form action="{{ route('collections.update', $collection->id) }}" method="post" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PUT') }}

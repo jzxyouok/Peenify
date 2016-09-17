@@ -54,7 +54,7 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $filename = (is_null($request->file('cover'))) ? null : upload_image('product', $request->file('cover'));
+        $filename = (is_null($request->file('cover'))) ? null : upload_image('products', $request->file('cover'));
 
         $data = $request->all();
 
@@ -97,7 +97,7 @@ class ProductsController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        $this->productService->update($id, update_image($request, 'cover', 'product'));
+        $this->productService->update($id, update_image($request, 'cover', 'products'));
 
         return redirect()->route('products.show', $id)->with('message', '編輯成功');
     }

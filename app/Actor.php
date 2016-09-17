@@ -9,7 +9,7 @@ class Actor extends Model
     protected $table = 'actors';
 
     protected $fillable = [
-        'id', 'name', 'description', 'status', 'gender', 'user_id', 'country',
+        'id', 'name', 'description', 'status', 'gender', 'user_id', 'country', 'avatar'
     ];
 
     public function products()

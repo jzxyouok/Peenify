@@ -34,7 +34,11 @@ class ActorsController extends Controller
 
     public function store(Request $request)
     {
-        $this->actorService->create($request->all());
+        $filename = (is_null($request->file('avatar'))) ? null : upload_image('avatars.actors', $request->file('avatar'));
+
+        $data = $request->all();
+
+        $this->actorService->create(array_set($data, 'avatar', $filename));
 
         return redirect()->route('actors.index')->with('message', '建立成功');
     }
@@ -55,7 +59,7 @@ class ActorsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->actorService->update($id, $request->all());
+        $this->actorService->update($id, update_image($request, 'avatar', 'avatars.actors'));
 
         return redirect()->route('actors.show', $id)->with('message', '編輯成功');
     }

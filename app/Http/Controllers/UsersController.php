@@ -42,7 +42,7 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $this->userService->update(auth()->user()->id, $request->all());
+        $this->userService->update(auth()->user()->id, update_image($request, 'avatar', 'avatars.users'));
 
         return redirect()->route('users.show', auth()->user()->id)->with('message', '編輯成功');
     }

@@ -9,7 +9,7 @@ class Author extends Model
     protected $table = 'authors';
 
     protected $fillable = [
-        'id', 'name', 'description', 'status', 'gender', 'user_id', 'country',
+        'id', 'name', 'description', 'status', 'gender', 'user_id', 'country', 'avatar'
     ];
 
     public function products()

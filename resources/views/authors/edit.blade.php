@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h1>Edit Author</h1>
+        <h1>編輯作者</h1>
 
         <form action="{{ route('authors.update', $author->id) }}" method="post" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
@@ -17,7 +17,11 @@
                 <textarea name="description" rows="4" cols="50"
                           class="form-control">{{ $author->description }}</textarea>
             </div>
-
+            <div class="form-group">
+                <label for="name">大頭貼</label>
+                <img src="{{ !$author->avatar ?: image_path('avatars.authors', $author->avatar) }}">
+                <input type="file" name="avatar" class="form-control">
+            </div>
             <div class="form-group">
                 <input type="radio" name="gender" value="male" {{ ($author->gender == 'male') ? 'checked' : ''}}> 男 <br />
                 <input type="radio" name="gender" value="female" {{ ($author->gender == 'female') ? 'checked' : ''}}> 女 <br />

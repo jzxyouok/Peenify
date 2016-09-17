@@ -11,7 +11,7 @@
 @section('content')
 
     <div class="container">
-        <img src="{{ !$user->avatar ?: image_path('avatar.user', $user->avatar) }}">
+        <img class="image-size" src="{{ ($user->avatar) ? image_path('avatars.users', $user->avatar):'holder.js/300x300' }}">
         <h1>{{ $user->name }}</h1>
         <p>{{ $user->description }}</p>
 

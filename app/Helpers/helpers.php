@@ -24,7 +24,7 @@ if (!function_exists('upload_image')) {
     {
         $filename = $file->hashName();
 
-        $file->storePubliclyAs('public/' . $path, $filename);
+        $file->storePubliclyAs('public/' . str_replace('.', '/', $path), $filename);
 
         return $filename;
     }
