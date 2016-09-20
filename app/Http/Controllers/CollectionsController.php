@@ -65,4 +65,11 @@ class CollectionsController extends Controller
 
         return redirect()->route('collections.index')->with('message', '刪除成功');
     }
+
+    public function addProduct(Request $request, $product_id)
+    {
+        $this->collectionService->syncProduct($request->get('collection_id'), $product_id);
+
+        return redirect()->back()->with('message', '加入成功');
+    }
 }

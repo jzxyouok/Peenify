@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Services\AuthorService;
 use App\Services\CategoryService;
+use App\Services\CollectionService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -18,11 +20,21 @@ class ProductsController extends Controller
      * @var CategoryService
      */
     private $categoryService;
+    /**
+     * @var CollectionService
+     */
+    private $collectionService;
+    /**
+     * @var AuthorService
+     */
+    private $authorService;
 
-    public function __construct(ProductService $productService, CategoryService $categoryService)
+    public function __construct(ProductService $productService, CategoryService $categoryService, CollectionService $collectionService, AuthorService $authorService)
     {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
+        $this->collectionService = $collectionService;
+        $this->authorService = $authorService;
     }
 
     /**
@@ -44,7 +56,9 @@ class ProductsController extends Controller
     {
         $categories = $this->categoryService->all();
 
-        return view('products.create', compact('categories'));
+        $authors = $this->authorService->all();
+
+        return view('products.create', compact('categories', 'authors'));
     }
 
     /**
@@ -58,7 +72,11 @@ class ProductsController extends Controller
 
         $data = $request->all();
 
-        $this->productService->create(array_set($data, 'cover', $filename));
+        $product = $this->productService->create(array_set($data, 'cover', $filename));
+
+        if (!empty($request->get('authors'))) {
+            $product->authors()->sync($request->get('authors'));
+        }
 
         return redirect()->route('products.index')->with('message', '建立成功');
     }
@@ -72,7 +90,9 @@ class ProductsController extends Controller
     {
         $product = $this->productService->findOrFail($id);
 
-        return view('products.show', compact('product'));
+        $collections = $this->collectionService->getAllByUser(auth()->user()->id);
+
+        return view('products.show', compact('product', 'collections'));
     }
 
     /**

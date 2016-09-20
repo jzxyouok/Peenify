@@ -174,6 +174,10 @@ Route::group(['prefix' => 'comments'], function () {
 });
 
 Route::resource('collections', 'CollectionsController'); //relations with product
+Route::post('collections/addProduct/{product}', [
+    'as' => 'collections.addProduct',
+    'uses' => 'CollectionsController@addProduct',
+]);
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -219,7 +223,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], 
     ]);
 
     Route::get('products', [
-       'as' => 'backend.product',
+        'as' => 'backend.product',
         'uses' => 'Backend\HomeController@product',
     ]);
 });

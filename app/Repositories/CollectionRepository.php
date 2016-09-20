@@ -12,4 +12,16 @@ class CollectionRepository extends Repository
     {
         $this->model = $model;
     }
+
+    public function syncProduct($id, $product_id)
+    {
+        $collection = $this->model->find($id);
+
+        return $collection->products()->sync(array($product_id));
+    }
+
+    public function getAllByUser($user_id)
+    {
+        return $this->model->where('user_id', $user_id)->get();
+    }
 }

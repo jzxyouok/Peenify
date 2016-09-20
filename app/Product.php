@@ -50,4 +50,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Actor::class);
     }
+
+    public function collections()
+    {
+        return $this->belongsToMany(Collection::class);
+    }
 }

@@ -12,6 +12,13 @@
                 @endforeach
             </select>
 
+            <h3>選擇作者</h3>
+            <select multiple class="form-control" name="authors[]">
+                @foreach($authors as $author)
+                    <option value="{{ $author->id }}">{{ $author->name }}</option>
+                @endforeach
+            </select>
+
             {{ csrf_field() }}
 
             <div class="form-group">
@@ -22,7 +29,7 @@
             <div class="form-group">
                 <label for="description">產品描述</label>
                 <textarea name="description" rows="4" cols="50" placeholder="請輸入產品描述..."
-                          class="form-control" value="{{ old('description') }}"></textarea>
+                          class="form-control">{{ old('description') }}</textarea>
             </div>
 
             <div class="form-group">
@@ -74,7 +81,7 @@
                 delay: 250,
                 data: function (params) {
                     return {
-                        term: params.term,
+                        term: params.term
                     };
                 },
                 processResults: function (data, params) {

@@ -15,7 +15,8 @@
 @section('content')
 
     <div class="container">
-        <img class="image-size" src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x600' }}">
+        <img class="image-size"
+             src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x600' }}">
 
         @include('products._partials.tags', [
             'product' => $product
@@ -25,12 +26,19 @@
             {{ $product->name }}
 
             @if($product->wishes->count())
-                <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除</div>
+                <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除
+                </div>
             @else
-                <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單</div>
+                <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單
+                </div>
             @endif
         </h1>
         <p>{{ $product->description }}</p><br>
+
+        @include('products._partials.addCollection', [
+            'collections' => $collections,
+            'product' => $product,
+        ])
 
         @if ($product->category == 'movie')
             @include('products._partials.authors')

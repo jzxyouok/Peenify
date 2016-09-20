@@ -40,4 +40,14 @@ class CollectionService extends Service
     {
         return $this->collectionRepository->destroy($id);
     }
+
+    public function syncProduct($id, $product_id)
+    {
+        return $this->collectionRepository->syncProduct($id, $product_id);
+    }
+
+    public function getAllByUser($user_id)
+    {
+        return $this->collectionRepository->getAllByUser($user_id);
+    }
 }
