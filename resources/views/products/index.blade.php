@@ -25,3 +25,12 @@
         @endforeach
     </div>
 @endsection
+
+@section('style')
+    <style>
+        #tag-link {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+    </style>
+    @endsection
