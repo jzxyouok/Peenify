@@ -40,7 +40,10 @@ class ProductServiceTest extends TestCase
     public function testCreate()
     {
         $this->loginFakeUser();
+
         $category = factory(\App\Category::class)->create();
+        $author = factory(\App\Author::class)->create();
+        $actor = factory(\App\Actor::class)->create();
 
         $service = app(\App\Services\ProductService::class);
 
@@ -50,6 +53,8 @@ class ProductServiceTest extends TestCase
             'description' => 'test2',
             'cover' => '1234.png',
             'tags' => "1,2,3,我是中文",
+            'authors' => [$author->id],
+            'actors' => [$actor->id],
         ]);
 
         $this->seeInDatabase('products', [
@@ -57,6 +62,16 @@ class ProductServiceTest extends TestCase
             'name' => 'test',
             'description' => 'test2',
             'user_id' => auth()->user()->id,
+        ]);
+
+        $this->seeInDatabase('author_product', [
+            'product_id' => 1,
+            'author_id' => 1,
+        ]);
+
+        $this->seeInDatabase('actor_product', [
+            'product_id' => 1,
+            'actor_id' => 1,
         ]);
 
         $this->seeInDatabase('tags', [
@@ -153,7 +168,7 @@ class ProductServiceTest extends TestCase
         $service->update(1, [
             'name' => 'updated',
             'description' => 'updated',
-            'tags' => [1,2,3,4]
+            'tags' => [1, 2, 3, 4]
         ]);
 
         $this->seeInDatabase('products', [

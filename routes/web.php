@@ -173,7 +173,7 @@ Route::group(['prefix' => 'comments'], function () {
     });
 });
 
-Route::resource('collections', 'CollectionsController'); //relations with product
+Route::resource('collections', 'CollectionsController');
 Route::post('collections/addProduct/{product}', [
     'as' => 'collections.addProduct',
     'uses' => 'CollectionsController@addProduct',

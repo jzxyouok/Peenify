@@ -1,4 +1,4 @@
 <h3>演員</h3>
 @foreach($product->actors as $actor)
-    {{ $actor->name }} <br/>
+    <div><a href="{{ route('actors.show', $actor->id) }}">{{ $actor->name }}</a></div>
 @endforeach

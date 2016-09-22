@@ -27,6 +27,14 @@ class ProductService extends Service
 
         $product->tag($attributes['tags']);
 
+        if (isset($attributes['authors'])) {
+            $this->syncAuthorIfExist($attributes['authors'], $product);
+        }
+
+        if (isset($attributes['actors'])) {
+            $this->syncActorIfExist($attributes['actors'], $product);
+        }
+
         return $product;
     }
 
@@ -43,5 +51,23 @@ class ProductService extends Service
     public function destroy($id)
     {
         return $this->productRepository->destroy($id);
+    }
+
+    public function syncAuthorIfExist($authorsId, $product)
+    {
+        if (!empty($authorsId)) {
+            $this->productRepository->syncAuthors($product, $authorsId);
+        }
+
+        return;
+    }
+
+    public function syncActorIfExist($actorsId, $product)
+    {
+        if (!empty($actorsId)) {
+            $this->productRepository->syncActors($product, $actorsId);
+        }
+
+        return;
     }
 }

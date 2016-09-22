@@ -13,15 +13,23 @@ class CollectionRepository extends Repository
         $this->model = $model;
     }
 
-    public function syncProduct($id, $product_id)
+    public function attachProduct($id, $product_id)
     {
         $collection = $this->model->find($id);
 
-        return $collection->products()->sync(array($product_id));
+        return $collection->products()->attach($product_id);
     }
 
     public function getAllByUser($user_id)
     {
         return $this->model->where('user_id', $user_id)->get();
+    }
+
+    public function getByUser($id, $user_id)
+    {
+        return $this->model->where([
+            'id' => $id,
+            'user_id' => $user_id,
+        ])->get();
     }
 }

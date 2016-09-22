@@ -3,23 +3,17 @@
 @section('content')
     <div class="container">
         <h1>建立產品</h1>
-
         <form action="{{ route('products.store') }}" method="post" role="form" enctype="multipart/form-data">
-            <h3>選擇分類</h3>
-            <select class="form-control" name="category_id">
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
+        {{ csrf_field() }}
 
-            <h3>選擇作者</h3>
-            <select multiple class="form-control" name="authors[]">
-                @foreach($authors as $author)
-                    <option value="{{ $author->id }}">{{ $author->name }}</option>
-                @endforeach
-            </select>
+        <!--類別清單-->
+        @include('products._lists.categories')
 
-            {{ csrf_field() }}
+        <!--作者清單-->
+        @include('products._lists.authors')
+
+        <!--演員清單-->
+        @include('products._lists.actors')
 
             <div class="form-group">
                 <label for="name">產品名稱</label>

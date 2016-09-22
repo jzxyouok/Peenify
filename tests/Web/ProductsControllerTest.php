@@ -71,6 +71,8 @@ class ProductsControllerTest extends TestCase
      */
     public function testShow()
     {
+
+
         $product = factory(\App\Product::class)->create();
 
         factory(\App\Comment::class)->create([

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('style')
     <style>
         .emoji {
@@ -18,13 +17,13 @@
         <img class="image-size"
              src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x600' }}">
 
+        <!--標籤-->
         @include('products._partials.tags', [
             'product' => $product
             ])
 
         <h1>
             {{ $product->name }}
-
             @if($product->wishes->count())
                 <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除
                 </div>
@@ -35,12 +34,17 @@
         </h1>
         <p>{{ $product->description }}</p><br>
 
-        @include('products._partials.addCollection', [
-            'collections' => $collections,
-            'product' => $product,
-        ])
+        @if (auth()->check())
+            @include('products._forms.collections', [
+                'product' => $product,
+            ])
+        @endif
 
-        @if ($product->category == 'movie')
+        @include('products._partials.collections', [
+                    'product' => $product,
+                ])
+
+        @if ($product->category->name == '電影')
             @include('products._partials.authors')
             @include('products._partials.actors')
         @endif

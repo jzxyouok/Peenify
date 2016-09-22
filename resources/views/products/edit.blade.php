@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@inject('categories', 'App\Services\CategoryService')
+
 @section('content')
 
     <div class="container">

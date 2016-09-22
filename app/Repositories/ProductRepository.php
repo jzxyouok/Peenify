@@ -32,4 +32,14 @@ class ProductRepository extends Repository
 
         return $product->save();
     }
+
+    public function syncAuthors($product, $authorsId)
+    {
+        return $product->authors()->sync($authorsId);
+    }
+
+    public function syncActors($product, $actorsId)
+    {
+        return $product->actors()->sync($actorsId);
+    }
 }
