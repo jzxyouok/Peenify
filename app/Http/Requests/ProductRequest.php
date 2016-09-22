@@ -30,6 +30,7 @@ class ProductRequest extends FormRequest
             'launched_at' => 'required',
             'site' => 'url',
             'tags' => 'required',
+            'cover' => 'sometimes|mimes:jpeg,bmp,png'
         ];
     }
 
@@ -42,6 +43,7 @@ class ProductRequest extends FormRequest
             'launched_at.required' => '釋出時間 必填',
             'site.url' => 'URL 必須是正確格式',
             'tags.required' => '標籤 必填',
+            'cover.mimes' => '格式錯誤，必須是 jpeg,bmp,png',
         ];
     }
 }
