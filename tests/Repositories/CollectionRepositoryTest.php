@@ -30,7 +30,7 @@ class CollectionRepositoryTest extends TestCase
 
         $repository = app(\App\Repositories\CollectionRepository::class);
 
-        $repository->syncProduct($collection->id, $product->id);
+        $repository->attachProduct($collection->id, $product->id);
 
         $this->seeInDatabase('collection_product', [
             'collection_id' => 1,

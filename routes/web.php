@@ -11,161 +11,269 @@
 |
 */
 
+/*
+ * 歡迎頁面，到時候要客製化跟 promote 一些產品特性
+ */
 Route::get('/', function () {
     return view('welcome');
 });
 
-
 /*
- * Facebook login
+ * Facebook 登入回呼跟寫入服務
  */
 Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
+/*
+ * User 可操作功能
+ */
 Route::group(['prefix' => 'users'], function () {
     Route::group(['middleware' => 'auth'], function () {
+        /*
+         * 編輯個人資料
+         */
         Route::get('edit', [
             'as' => 'users.edit',
             'uses' => 'UsersController@edit',
         ]);
+
+        /*
+         * 更新個人資料
+         */
         Route::match(['PUT', 'PATCH'], 'update', [
             'as' => 'users.update',
             'uses' => 'UsersController@update',
         ]);
 
+        /*
+         * User 願望清單
+         */
         Route::get('{user}/wishlist', [
             'as' => 'wishes.user',
             'uses' => 'WishesController@showByUser'
         ]);
 
+        /*
+         * 加入或刪除願望
+         */
         Route::post('wishes/{product}', [
             'as' => 'wishes.sync',
             'uses' => 'WishesController@sync'
         ]);
     });
 
+    /*
+     * 所有 User 清單
+     */
     Route::get('/', [
         'as' => 'users.index',
         'uses' => 'UsersController@index',
     ]);
 
+    /*
+     * User 評分過的所有 product
+     */
     Route::get('{user}/emojis', [
         'as' => 'users.emojis',
         'uses' => 'EmojisController@showByUser'
     ]);
 
+    /*
+     * User 跟隨以及被跟隨的清單
+     */
     Route::get('{user}/follows', [
         'as' => 'users.follows',
         'uses' => 'FollowsController@showByUser'
     ]);
 
+    /*
+     * User 個人資料
+     */
     Route::get('{user}', [
         'as' => 'users.show',
         'uses' => 'UsersController@show',
     ]);
 });
 
+/*
+ * Category 類別 可操作功能
+ * ex: 電影／遊戲／旅遊／餐廳／文具／．．．．
+ */
 Route::group(['prefix' => 'categories'], function () {
     Route::group(['middleware' => 'auth'], function () {
+
+        /*
+         * 建立類別
+         * TODO 由後台建立
+         */
         Route::get('create', [
             'as' => 'categories.create',
             'uses' => 'CategoriesController@create',
         ]);
 
+        /*
+         * 儲存建立類別
+         * TODO 由後台建立
+         */
         Route::post('/', [
             'as' => 'categories.store',
             'uses' => 'CategoriesController@store',
         ]);
 
+        /*
+         * 取得分類下的所有產品
+         * TODO 搬移到外面不需登入也可操作
+         */
         Route::get('{category}/products', [
             'as' => 'categories.products',
             'uses' => 'CategoriesController@products',
         ]);
 
+        /*
+         * 編輯類別
+         * TODO 由後台建立
+         */
         Route::match(['PUT', 'PATCH'], '{category}', [
             'as' => 'categories.update',
             'uses' => 'CategoriesController@update',
         ]);
 
+        /*
+         * 更新類別
+         * TODO 由後台建立
+         */
         Route::get('{category}/edit', [
             'as' => 'categories.edit',
             'uses' => 'CategoriesController@edit',
         ]);
 
+        /*
+         * 刪除類別
+         * TODO 改軟刪除
+         */
         Route::delete('{category}', [
             'as' => 'categories.destroy',
             'uses' => 'CategoriesController@destroy',
         ]);
     });
 
+    /*
+     * 類別清單
+     */
     Route::get('/', [
         'as' => 'categories.index',
         'uses' => 'CategoriesController@index',
     ]);
 
+    /*
+     * 類別頁面
+     */
     Route::get('{category}', [
         'as' => 'categories.show',
         'uses' => 'CategoriesController@show',
     ]);
 });
 
+/*
+ * 產品可操作功能
+ */
 Route::group(['prefix' => 'products'], function () {
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth']], function () {
+        /*
+         * 建立產品
+         */
         Route::get('create', [
             'as' => 'products.create',
             'uses' => 'ProductsController@create',
         ]);
 
+        /*
+         * 儲存建立產品
+         */
         Route::post('/', [
             'as' => 'products.store',
             'uses' => 'ProductsController@store',
         ]);
 
-        Route::match(['PUT', 'PATCH'], '{product}', [
-            'as' => 'products.update',
-            'uses' => 'ProductsController@update',
-        ]);
-
+        /*
+         * 編輯產品
+         */
         Route::get('{product}/edit', [
             'as' => 'products.edit',
             'uses' => 'ProductsController@edit',
         ]);
 
+        /*
+         * 更新產品
+         */
+        Route::match(['PUT', 'PATCH'], '{product}', [
+            'as' => 'products.update',
+            'uses' => 'ProductsController@update',
+        ]);
+
+        /*
+         * 刪除產品
+         * TODO 軟刪除
+         */
         Route::delete('{product}', [
             'as' => 'products.destroy',
             'uses' => 'ProductsController@destroy',
         ]);
     });
 
+    /*
+     * 所有產品清單
+     */
     Route::get('/', [
         'as' => 'products.index',
         'uses' => 'ProductsController@index',
     ]);
 
+    /*
+     * 產品頁面
+     */
     Route::get('{product}', [
         'as' => 'products.show',
         'uses' => 'ProductsController@show',
     ]);
 });
 
+/*
+ * Comment 評論 可操作功能
+ */
 Route::group(['prefix' => 'comments'], function () {
     //login 才能看留言
     Route::group(['middleware' => 'auth'], function () {
+        /*
+         * 儲存建立評論
+         */
         Route::post('{commentable_type}/{commentable_id}', [
             'as' => 'comments.store',
             'uses' => 'CommentsController@store',
         ]);
 
+        /*
+         * 編輯評論
+         * TODO 評論者只能編輯自己評論
+         */
         Route::get('{comment}/edit', [
             'as' => 'comments.edit',
             'uses' => 'CommentsController@edit',
         ]);
 
+        /*
+         * 更新評論
+         * TODO 評論者只能更新自己評論
+         */
         Route::match(['PUT', 'PATCH'], '{comment}', [
             'as' => 'comments.update',
             'uses' => 'CommentsController@update',
         ]);
 
+        /*
+         * 刪除評論
+         * TODO 評論者只能刪除自己評論
+         */
         Route::delete('{comment}', [
             'as' => 'comments.destroy',
             'uses' => 'CommentsController@destroy',
@@ -173,7 +281,15 @@ Route::group(['prefix' => 'comments'], function () {
     });
 });
 
+/*
+ * 收藏集 CURD
+ * TODO 依照需求後續拆解
+ */
 Route::resource('collections', 'CollectionsController');
+
+/*
+ * 將產品加入到自訂的收藏集內
+ */
 Route::post('collections/addProduct/{product}', [
     'as' => 'collections.addProduct',
     'uses' => 'CollectionsController@addProduct',
@@ -181,47 +297,100 @@ Route::post('collections/addProduct/{product}', [
 
 
 Route::group(['middleware' => 'auth'], function () {
+    /*
+     * 同步評分
+     * TODO 重構
+     */
     Route::post('emojis/{emojiable_type}/{emojiable_id}', [
         'as' => 'emojis.sync',
         'uses' => 'EmojisController@sync',
     ]);
 
+    /*
+     * 同步跟隨
+     * TODO 重構
+     */
     Route::post('follows/{followable_type}/{followable_id}', [
         'as' => 'follows.sync',
         'uses' => 'FollowsController@sync',
     ]);
 
+    /*
+     * 標籤 auto complete api 接口
+     */
     Route::get('/api/tags/ajaxTags', [
         'as' => 'tags.term',
         'uses' => 'TagsController@ajaxTags',
     ]);
 });
 
+/*
+ * 作者/導演 CURD
+ * TODO 依照需求做拆解
+ */
 Route::resource('authors', 'AuthorsController');
+
+/*
+ * 演員 CURD
+ * TODO 依照需求做拆解
+ */
 Route::resource('actors', 'ActorsController');
+
+/*
+ * 廠商/代理商 CURD
+ * TODO 依照需求做拆解
+ */
 Route::resource('vendors', 'VendorsController');
+
+/*
+ * Tag 標籤 可操作功能
+ */
 Route::group(['prefix' => 'tags'], function () {
+
+    /*
+     * 所有標籤清單
+     */
     Route::get('/', [
         'as' => 'tags.index',
         'uses' => 'TagsController@index',
     ]);
 
+    /*
+     * 標籤頁面
+     */
     Route::get('{tag}', [
         'as' => 'tags.show',
         'uses' => 'TagsController@show',
     ]);
 });
 
+/*
+ * 登入/註冊／忘記密碼 功能 Laravel make:auth
+ */
 Auth::routes();
 
+/*
+ * 登錄頁面
+ * TODO 客製化與清單調整
+ */
 Route::get('/home', 'HomeController@index');
 
+/*
+ * Backend 後台可操作功能
+ * TODO 依據需求開始加強操作
+ */
 Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], function () {
+    /*
+     * 後台登錄頁面
+     */
     Route::get('/', [
         'as' => 'backend.index',
         'uses' => 'Backend\HomeController@index',
     ]);
 
+    /*
+     * 所有產品頁面
+     */
     Route::get('products', [
         'as' => 'backend.product',
         'uses' => 'Backend\HomeController@product',

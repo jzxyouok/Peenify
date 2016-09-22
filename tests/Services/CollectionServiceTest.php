@@ -107,6 +107,6 @@ class CollectionServiceTest extends TestCase
 
         $service = new \App\Services\CollectionService($repository);
 
-        $service->syncProduct(1, 1);
+        $service->attachProduct(1, 1);
     }
 }

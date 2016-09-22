@@ -41,6 +41,8 @@ class ProductsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
+        $this->beAdmin();
+
         $this->visit(route('products.create'))->assertResponseStatus(200);
     }
 
@@ -51,6 +53,9 @@ class ProductsControllerTest extends TestCase
     public function testStore()
     {
         $this->loginFakeUser();
+
+        $this->beAdmin();
+
         $category = factory(\App\Category::class)->create();
 
         $this->call('post', route('products.store'), [
@@ -71,7 +76,9 @@ class ProductsControllerTest extends TestCase
      */
     public function testShow()
     {
+        $this->loginFakeUser();
 
+        $this->beAdmin();
 
         $product = factory(\App\Product::class)->create();
 
@@ -98,9 +105,11 @@ class ProductsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        factory(\App\Product::class)->create();
+        $this->beAdmin();
 
-        $this->visit(route('products.edit', 1))->see('diablo3');
+        $product = factory(\App\Product::class)->create();
+
+        $this->visit(route('products.edit', $product->id))->see('diablo3');
     }
 
     /**
@@ -110,6 +119,8 @@ class ProductsControllerTest extends TestCase
     public function testUpdate()
     {
         $this->loginFakeUser();
+
+        $this->beAdmin();
 
         factory(\App\Product::class)->create();
 
@@ -128,6 +139,8 @@ class ProductsControllerTest extends TestCase
     public function testDestroy()
     {
         $this->loginFakeUser();
+
+        $this->beAdmin();
 
         factory(\App\Product::class)->create();
 

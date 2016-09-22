@@ -113,15 +113,17 @@ class CollectionsControllerTest extends TestCase
 
     /**
      * @test
-     * @group collection
+     * @group collection1
      */
     public function addProductToCollection()
     {
-        factory(\App\Product::class)->create();
+        $product = factory(\App\Product::class)->create();
 
-        factory(\App\Collection::class)->create();
+        $collection = factory(\App\Collection::class)->create();
 
-        $this->call('post', route('collections.addProduct', [1, 1]));
+        $this->call('post', route('collections.addProduct', $product->id), [
+            'collection_id' => $collection->id,
+        ]);
 
         $this->assertResponseStatus(302);
     }
