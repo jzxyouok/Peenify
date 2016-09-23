@@ -70,4 +70,9 @@ class ProductService extends Service
 
         return;
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->productRepository->LatestPagination($page);
+    }
 }

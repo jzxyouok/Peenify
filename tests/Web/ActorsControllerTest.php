@@ -40,6 +40,8 @@ class ActorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
+        $this->beAdmin();
+
         $this->visit(route('actors.create'))->assertResponseStatus(200);
     }
 
@@ -50,6 +52,8 @@ class ActorsControllerTest extends TestCase
     public function testStore()
     {
         $this->loginFakeUser();
+
+        $this->beAdmin();
 
         $this->call('post', route('actors.store'), [
             'user_id' => auth()->user()->id,
@@ -83,6 +87,8 @@ class ActorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
+        $this->beAdmin();
+
         $actor = factory(\App\Actor::class)->create();
 
         $this->visit(route('actors.edit', 1))->see($actor->name);
@@ -95,6 +101,8 @@ class ActorsControllerTest extends TestCase
     public function testUpdate()
     {
         $this->loginFakeUser();
+
+        $this->beAdmin();
 
         factory(\App\Actor::class)->create();
 
@@ -113,6 +121,8 @@ class ActorsControllerTest extends TestCase
     public function testDestroy()
     {
         $this->loginFakeUser();
+
+        $this->beAdmin();
 
         factory(\App\Actor::class)->create();
 

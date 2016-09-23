@@ -178,7 +178,7 @@ Route::group(['prefix' => 'categories'], function () {
  * 產品可操作功能
  */
 Route::group(['prefix' => 'products'], function () {
-    Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['auth', 'backend.auth']], function () {
         /*
          * 建立產品
          */
@@ -242,7 +242,6 @@ Route::group(['prefix' => 'products'], function () {
  * Comment 評論 可操作功能
  */
 Route::group(['prefix' => 'comments'], function () {
-    //login 才能看留言
     Route::group(['middleware' => 'auth'], function () {
         /*
          * 儲存建立評論
@@ -252,38 +251,34 @@ Route::group(['prefix' => 'comments'], function () {
             'uses' => 'CommentsController@store',
         ]);
 
-        /*
-         * 編輯評論
-         * TODO 評論者只能編輯自己評論
+        /**
+         * 擁有者可以編輯與更新自己的評論
          */
-        Route::get('{comment}/edit', [
-            'as' => 'comments.edit',
-            'uses' => 'CommentsController@edit',
-        ]);
+        Route::group(['middleware' => 'owner:comment'], function () {
+            /*
+             * 編輯評論
+             */
+            Route::get('{comment}/edit', [
+                'as' => 'comments.edit',
+                'uses' => 'CommentsController@edit',
+            ]);
 
-        /*
-         * 更新評論
-         * TODO 評論者只能更新自己評論
-         */
-        Route::match(['PUT', 'PATCH'], '{comment}', [
-            'as' => 'comments.update',
-            'uses' => 'CommentsController@update',
-        ]);
+            /*
+             * 更新評論
+             */
+            Route::match(['PUT', 'PATCH'], '{comment}', [
+                'as' => 'comments.update',
+                'uses' => 'CommentsController@update',
+            ]);
+        });
 
-        /*
-         * 刪除評論
-         * TODO 評論者只能刪除自己評論
-         */
-        Route::delete('{comment}', [
-            'as' => 'comments.destroy',
-            'uses' => 'CommentsController@destroy',
-        ]);
     });
 });
 
 /*
  * 收藏集 CURD
  * TODO 依照需求後續拆解
+ * User
  */
 Route::resource('collections', 'CollectionsController');
 
@@ -325,28 +320,144 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /*
- * 作者/導演 CURD
- * TODO 依照需求做拆解
+ * 作者/導演
  */
-Route::resource('authors', 'AuthorsController');
+Route::group(['prefix' => 'authors'], function () {
+    /**
+     * Accessible Administrator.
+     */
+    Route::group(['middleware' => ['auth', 'backend.auth']], function() {
+        Route::get('create', [
+            'as' => 'authors.create',
+            'uses' => 'AuthorsController@create',
+        ]);
+
+        Route::post('/', [
+            'as' => 'authors.store',
+            'uses' => 'AuthorsController@store',
+        ]);
+
+        Route::get('{author}/edit', [
+            'as' => 'authors.edit',
+            'uses' => 'AuthorsController@edit',
+        ]);
+
+        Route::match(['PUT', 'PATCH'], '{author}', [
+            'as' => 'authors.update',
+            'uses' => 'AuthorsController@update',
+        ]);
+
+        Route::delete('{author}', [
+            'as' => 'authors.destroy',
+            'uses' => 'AuthorsController@destroy',
+        ]);
+    });
+
+    Route::get('/', [
+        'as' => 'authors.index',
+        'uses' => 'AuthorsController@index',
+    ]);
+
+    Route::get('{author}', [
+        'as' => 'authors.show',
+        'uses' => 'AuthorsController@show',
+    ]);
+});
 
 /*
- * 演員 CURD
- * TODO 依照需求做拆解
+ * 演員
  */
-Route::resource('actors', 'ActorsController');
+Route::group(['prefix' => 'actors'], function () {
+    /**
+     * Accessible Administrator.
+     */
+    Route::group(['middleware' => ['auth', 'backend.auth']], function() {
+        Route::get('create', [
+            'as' => 'actors.create',
+            'uses' => 'ActorsController@create',
+        ]);
+
+        Route::post('/', [
+            'as' => 'actors.store',
+            'uses' => 'ActorsController@store',
+        ]);
+
+        Route::get('{actor}/edit', [
+            'as' => 'actors.edit',
+            'uses' => 'ActorsController@edit',
+        ]);
+
+        Route::match(['PUT', 'PATCH'], '{actor}', [
+            'as' => 'actors.update',
+            'uses' => 'ActorsController@update',
+        ]);
+
+        Route::delete('{actor}', [
+            'as' => 'actors.destroy',
+            'uses' => 'ActorsController@destroy',
+        ]);
+    });
+
+    Route::get('/', [
+        'as' => 'actors.index',
+        'uses' => 'ActorsController@index',
+    ]);
+
+    Route::get('{actor}', [
+        'as' => 'actors.show',
+        'uses' => 'ActorsController@show',
+    ]);
+});
 
 /*
  * 廠商/代理商 CURD
- * TODO 依照需求做拆解
  */
-Route::resource('vendors', 'VendorsController');
+Route::group(['prefix' => 'vendors'], function () {
+    /**
+     * Accessible Administrator.
+     */
+    Route::group(['middleware' => ['auth', 'backend.auth']], function() {
+        Route::get('create', [
+            'as' => 'vendors.create',
+            'uses' => 'VendorsController@create',
+        ]);
+
+        Route::post('/', [
+            'as' => 'vendors.store',
+            'uses' => 'VendorsController@store',
+        ]);
+
+        Route::get('{vendor}/edit', [
+            'as' => 'vendors.edit',
+            'uses' => 'VendorsController@edit',
+        ]);
+
+        Route::match(['PUT', 'PATCH'], '{vendor}', [
+            'as' => 'vendors.update',
+            'uses' => 'VendorsController@update',
+        ]);
+
+        Route::delete('{vendor}', [
+            'as' => 'vendors.destroy',
+            'uses' => 'VendorsController@destroy',
+        ]);
+    });
+
+    Route::get('/', [
+        'as' => 'vendors.index',
+        'uses' => 'VendorsController@index',
+    ]);
+
+    Route::get('{vendor}', [
+        'as' => 'vendors.show',
+        'uses' => 'VendorsController@show',
+    ]);
+});
 
 /*
  * Tag 標籤 可操作功能
  */
 Route::group(['prefix' => 'tags'], function () {
-
     /*
      * 所有標籤清單
      */
@@ -394,5 +505,13 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], 
     Route::get('products', [
         'as' => 'backend.product',
         'uses' => 'Backend\HomeController@product',
+    ]);
+
+    /*
+     * 刪除評論
+     */
+    Route::delete('{comment}', [
+        'as' => 'comments.destroy',
+        'uses' => 'CommentsController@destroy',
     ]);
 });

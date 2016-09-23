@@ -42,4 +42,9 @@ class ProductRepository extends Repository
     {
         return $product->actors()->sync($actorsId);
     }
+
+    public function LatestPagination($page = 10)
+    {
+        return $this->model->latest()->paginate($page);
+    }
 }

@@ -39,7 +39,7 @@ class CommentsController extends Controller
     {
         $this->commentService->update($id, $request->all());
 
-        return redirect()->route('comments.show', $id)->with('message', '編輯成功');
+        return redirect()->back()->with('message', '編輯成功');
     }
 
     public function destroy($id)

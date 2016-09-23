@@ -20,17 +20,6 @@
 
 @section('content')
     <div class="container">
-        <div class="links align-text">
-            <a href="{{ route('categories.create') }}">建立分類</a>
-            <a href="{{ route('products.create') }}">建立產品</a>
-            <a href="{{ route('collections.create') }}">建立收藏集</a>
-            <a href="{{ route('authors.create') }}">建立作者</a>
-            <a href="{{ route('actors.create') }}">建立演員</a>
-            <a href="{{ route('vendors.create') }}">建立廠商</a>
-        </div>
-
-        <hr>
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">

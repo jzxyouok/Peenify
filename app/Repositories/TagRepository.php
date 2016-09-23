@@ -17,4 +17,9 @@ class TagRepository extends Repository
     {
         return $this->model->where('name', 'like', "%" . $name . "%")->get();
     }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
 }

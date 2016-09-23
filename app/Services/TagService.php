@@ -25,7 +25,7 @@ class TagService
 
     public function all()
     {
-        return $this->tagRepository->all();
+        return $this->tagRepository->getAll();
     }
 
     public function findOrFail($id)

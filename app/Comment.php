@@ -24,4 +24,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function owner()
+    {
+        return $this->where('user_id', auth()->user()->id);
+    }
 }

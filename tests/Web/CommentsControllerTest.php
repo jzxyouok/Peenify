@@ -84,7 +84,9 @@ class CommentsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        factory(\App\Comment::class)->create();
+        factory(\App\Comment::class)->create([
+            'user_id' => auth()->user()->id,
+        ]);
 
         $this->visit(route('comments.edit', 1))->see(12345);
     }
@@ -95,7 +97,11 @@ class CommentsControllerTest extends TestCase
      */
     public function testUpdate()
     {
-        factory(\App\Comment::class)->create();
+        $this->loginFakeUser();
+
+        factory(\App\Comment::class)->create([
+            'user_id' => auth()->user()->id,
+        ]);
 
         $this->call('put', route('comments.update', 1), [
             'description' => 'updated!'

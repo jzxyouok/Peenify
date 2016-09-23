@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AccessOwner;
 use App\Http\Middleware\BackendAuthenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -54,5 +55,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'backend.auth' => BackendAuthenticate::class,
+        'owner' => AccessOwner::class,
     ];
 }

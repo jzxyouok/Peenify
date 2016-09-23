@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function product()
     {
-        $products = $this->productService->all();
+        $products = $this->productService->getAllPagination(10);
 
         return view('backend.products.index', compact('products'));
     }
