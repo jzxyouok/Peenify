@@ -49,8 +49,6 @@
             @include('products._partials.actors')
         @endif
 
-        <a class="btn btn-default" href="{{ route('products.edit', $product->id) }}">編輯</a>
-
         <div class="form-group">
             @include('_partials.emojis', [
                 'relation' => $product,

@@ -32,4 +32,9 @@ class CollectionRepository extends Repository
             'user_id' => $user_id,
         ])->get();
     }
+
+    public function LatestPagination($page = 10)
+    {
+        return $this->model->latest()->paginate($page);
+    }
 }

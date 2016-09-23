@@ -48,7 +48,7 @@
                 <li><a href="{{ route('backend.categories') }}">分類</a></li>
                 <li><a href="{{ route('backend.products') }}">產品</a></li>
                 <li><a href="{{ route('backend.tags') }}">標籤</a></li>
-                <li><a href="{{ route('collections.index') }}">收藏集</a></li>
+                <li><a href="{{ route('backend.collections') }}">收藏集</a></li>
                 <li><a href="{{ route('authors.index') }}">作者</a></li>
                 <li><a href="{{ route('actors.index') }}">演員</a></li>
                 <li><a href="{{ route('vendors.index') }}">廠商</a></li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Services\CategoryService;
+use App\Services\CollectionService;
 use App\Services\ProductService;
 use App\Services\TagService;
 use Illuminate\Http\Request;
@@ -24,12 +25,17 @@ class HomeController extends Controller
      * @var TagService
      */
     private $tagService;
+    /**
+     * @var CollectionService
+     */
+    private $collectionService;
 
-    public function __construct(ProductService $productService, CategoryService $categoryService, TagService $tagService)
+    public function __construct(ProductService $productService, CategoryService $categoryService, TagService $tagService, CollectionService $collectionService)
     {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
         $this->tagService = $tagService;
+        $this->collectionService = $collectionService;
     }
 
     public function index()
@@ -56,5 +62,12 @@ class HomeController extends Controller
         $tags = $this->tagService->paginate(10);
 
         return view('backend.tags', compact('tags'));
+    }
+
+    public function collections()
+    {
+        $collections = $this->collectionService->getAllPagination(10);
+
+        return view('backend.collections', compact('collections'));
     }
 }

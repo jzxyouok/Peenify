@@ -63,4 +63,9 @@ class CollectionService extends Service
 
         return false;
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->collectionRepository->LatestPagination($page);
+    }
 }

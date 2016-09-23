@@ -30,7 +30,7 @@
                         <a class="btn btn-default" href="{{ route('products.edit', $product->id) }}">編輯</a>
                     </td>
                     <td>
-                        @include('products._partials.destroy', [
+                        @include('products._forms.destroy', [
                          'product' => $product
                         ])
                     </td>

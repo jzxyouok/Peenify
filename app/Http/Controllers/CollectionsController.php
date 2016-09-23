@@ -63,7 +63,7 @@ class CollectionsController extends Controller
     {
         $this->collectionService->destroy($id);
 
-        return redirect()->route('collections.index')->with('message', '刪除成功');
+        return redirect()->back()->with('message', '刪除成功');
     }
 
     /**

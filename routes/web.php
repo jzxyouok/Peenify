@@ -524,6 +524,14 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], 
     ]);
 
     /*
+     * 所有收藏集頁面
+     */
+    Route::get('collections', [
+        'as' => 'backend.collections',
+        'uses' => 'Backend\HomeController@collections',
+    ]);
+
+    /*
      * 刪除評論
      */
     Route::delete('{comment}', [

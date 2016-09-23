@@ -66,6 +66,6 @@ class ProductsController extends Controller
     {
         $this->productService->destroy($id);
 
-        return redirect()->route('products.index')->with('message', '刪除成功');
+        return redirect()->back()->with('message', '刪除成功');
     }
 }
