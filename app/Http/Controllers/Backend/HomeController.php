@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Services\CategoryService;
 use App\Services\ProductService;
+use App\Services\TagService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,91 +16,45 @@ class HomeController extends Controller
      * @var ProductService
      */
     private $productService;
+    /**
+     * @var CategoryService
+     */
+    private $categoryService;
+    /**
+     * @var TagService
+     */
+    private $tagService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, CategoryService $categoryService, TagService $tagService)
     {
         $this->productService = $productService;
+        $this->categoryService = $categoryService;
+        $this->tagService = $tagService;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('backend.index');
     }
 
-    public function product()
+    public function products()
     {
         $products = $this->productService->getAllPagination(10);
 
-        return view('backend.products.index', compact('products'));
+        return view('backend.products', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function categories()
     {
-        //
+        $categories = $this->categoryService->getAllPagination(10);
+
+        return view('backend.categories', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function tags()
     {
-        //
-    }
+        $tags = $this->tagService->getAllPagination(10);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('backend.tags', compact('tags'));
     }
 }

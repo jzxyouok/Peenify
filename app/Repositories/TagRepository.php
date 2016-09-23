@@ -22,4 +22,9 @@ class TagRepository extends Repository
     {
         return $this->model->all();
     }
+
+    public function LatestPagination($page = 10)
+    {
+        return $this->model->paginate($page);
+    }
 }

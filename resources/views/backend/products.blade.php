@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('backend.layouts.app')
 
 @section('content')
     <div class="container">
@@ -23,7 +23,7 @@
                     </td>
                     <td>
                         @include('products._partials.tags', [
-                             '$product' => $product
+                             'product' => $product
                         ])
                     </td>
                     <td>

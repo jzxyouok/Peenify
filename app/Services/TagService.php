@@ -32,4 +32,9 @@ class TagService
     {
         return $this->tagRepository->findOrFail($id);
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->tagRepository->LatestPagination($page);
+    }
 }

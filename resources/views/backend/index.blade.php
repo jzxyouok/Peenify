@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('backend.layouts.app')
 
 @section('style')
     <style>
@@ -22,7 +22,6 @@
     <div class="container">
         <div class="links align-text">
             <a href="{{ route('categories.create') }}">分類</a>
-            <a href="{{ route('backend.product') }}">產品</a>
             <a href="{{ route('collections.create') }}">收藏集</a>
             <a href="{{ route('authors.create') }}">作者</a>
             <a href="{{ route('actors.create') }}">演員</a>

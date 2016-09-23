@@ -39,4 +39,9 @@ class CategoryService extends Service
     {
         return $this->categoryRepository->destroy($id);
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->categoryRepository->LatestPagination($page);
+    }
 }

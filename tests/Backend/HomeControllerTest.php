@@ -33,7 +33,7 @@ class HomeControllerTest extends TestCase
             'role_id' => $role->id,
         ]);
 
-        $this->visit(route('backend.index'))->see('yish')->see('welcome to backend');
+        $this->visit(route('backend.index'))->see('Backend');
     }
 
     /**
@@ -60,10 +60,10 @@ class HomeControllerTest extends TestCase
      * @group backend
      * @test
      */
-    public function product()
+    public function products()
     {
         factory(\App\Product::class)->times(5)->create();
 
-        $this->visit(route('backend.product'))->see(5);
+        $this->visit(route('backend.products'))->see(5);
     }
 }

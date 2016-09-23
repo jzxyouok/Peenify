@@ -103,6 +103,6 @@ class CategoriesController extends Controller
     {
         $this->categoryService->destroy($id);
 
-        return redirect()->route('categories.index')->with('message', '刪除成功');
+        return redirect()->back()->with('message', '刪除成功');
     }
 }

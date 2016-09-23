@@ -500,11 +500,27 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], 
     ]);
 
     /*
+     * 所有分類頁面
+     */
+    Route::get('categories', [
+        'as' => 'backend.categories',
+        'uses' => 'Backend\HomeController@categories',
+    ]);
+
+    /*
      * 所有產品頁面
      */
     Route::get('products', [
-        'as' => 'backend.product',
-        'uses' => 'Backend\HomeController@product',
+        'as' => 'backend.products',
+        'uses' => 'Backend\HomeController@products',
+    ]);
+
+    /*
+     * 所有標籤頁面
+     */
+    Route::get('tags', [
+        'as' => 'backend.tags',
+        'uses' => 'Backend\HomeController@tags',
     ]);
 
     /*
