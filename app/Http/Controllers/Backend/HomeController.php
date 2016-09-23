@@ -53,7 +53,7 @@ class HomeController extends Controller
 
     public function tags()
     {
-        $tags = $this->tagService->getAllPagination(10);
+        $tags = $this->tagService->paginate(10);
 
         return view('backend.tags', compact('tags'));
     }
