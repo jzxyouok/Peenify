@@ -35,6 +35,10 @@ class ProductService extends Service
             $this->syncActorIfExist($attributes['actors'], $product);
         }
 
+        if (isset($attributes['movie'])) {
+            $this->addToMovieOptions($product, $attributes['movie']);
+        }
+
         return $product;
     }
 
@@ -74,5 +78,10 @@ class ProductService extends Service
     public function getAllPagination($page)
     {
         return $this->productRepository->LatestPagination($page);
+    }
+
+    private function addToMovieOptions($product, $options)
+    {
+        return $this->productRepository->saveToMovie($product, $options);
     }
 }

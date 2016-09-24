@@ -55,4 +55,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Collection::class);
     }
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }

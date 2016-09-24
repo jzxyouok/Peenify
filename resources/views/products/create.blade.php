@@ -51,6 +51,9 @@
                 <select name="tags[]" id="tags" class="form-control"></select>
             </div>
 
+            <!--額外的電影選項-->
+            @include('products._forms.movies')
+
             <div class="form-group">
                 <input type="submit" value="建立" class="btn btn-default">
             </div>
@@ -62,6 +65,10 @@
     <script>
         $(function () {
             $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss'
+            });
+
+            $('#datetimepicker2').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss'
             });
         });

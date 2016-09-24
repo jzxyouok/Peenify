@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Comment;
+use App\Movie;
 use App\Product;
 
 class ProductRepository extends Repository
@@ -46,5 +46,10 @@ class ProductRepository extends Repository
     public function LatestPagination($page = 10)
     {
         return $this->model->latest()->paginate($page);
+    }
+
+    public function saveToMovie($product, $options)
+    {
+        return $product->movies()->save(new Movie($options));
     }
 }

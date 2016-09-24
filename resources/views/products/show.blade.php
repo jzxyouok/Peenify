@@ -22,6 +22,11 @@
             'product' => $product
             ])
 
+        <!--電影額外選項-->
+        @include('products._partials.movies', [
+            'movie' => $product->movies()->first()
+        ])
+
         <h1>
             {{ $product->name }}
             @if($product->wishes->count())
