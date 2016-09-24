@@ -61,13 +61,13 @@ class AuthorsController extends Controller
     {
         $this->authorService->update($id, update_image($request, 'avatar', 'avatars.authors'));
 
-        return redirect()->route('authors.show', $id)->with('message', '編輯成功');
+        return redirect()->back()->with('message', '編輯成功');
     }
 
     public function destroy($id)
     {
         $this->authorService->destroy($id);
 
-        return redirect()->route('authors.index')->with('message', '刪除成功');
+        return redirect()->back()->with('message', '刪除成功');
     }
 }

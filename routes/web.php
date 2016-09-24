@@ -524,11 +524,43 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], 
     ]);
 
     /*
+     * 所有作者頁面
+     */
+    Route::get('authors', [
+        'as' => 'backend.authors',
+        'uses' => 'Backend\HomeController@authors',
+    ]);
+
+    /*
+     * 所有演員頁面
+     */
+    Route::get('actors', [
+        'as' => 'backend.actors',
+        'uses' => 'Backend\HomeController@actors',
+    ]);
+
+    /*
+     * 所有演員頁面
+     */
+    Route::get('vendors', [
+        'as' => 'backend.vendors',
+        'uses' => 'Backend\HomeController@vendors',
+    ]);
+
+    /*
      * 所有收藏集頁面
      */
     Route::get('collections', [
         'as' => 'backend.collections',
         'uses' => 'Backend\HomeController@collections',
+    ]);
+
+    /*
+     * 所有 User 頁面
+     */
+    Route::get('users', [
+        'as' => 'backend.users',
+        'uses' => 'Backend\HomeController@users',
     ]);
 
     /*

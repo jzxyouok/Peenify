@@ -61,13 +61,13 @@ class ActorsController extends Controller
     {
         $this->actorService->update($id, update_image($request, 'avatar', 'avatars.actors'));
 
-        return redirect()->route('actors.show', $id)->with('message', '編輯成功');
+        return redirect()->back()->with('message', '編輯成功');
     }
 
     public function destroy($id)
     {
         $this->actorService->destroy($id);
 
-        return redirect()->route('actors.index')->with('message', '刪除成功');
+        return redirect()->back()->with('message', '刪除成功');
     }
 }

@@ -37,4 +37,9 @@ class UserRepository extends Repository
     {
         return $instance->fill($attributes)->save();
     }
+
+    public function LatestPagination($page = 10)
+    {
+        return $this->model->latest()->paginate($page);
+    }
 }

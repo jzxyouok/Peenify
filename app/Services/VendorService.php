@@ -41,4 +41,9 @@ class VendorService extends Service
     {
         return $this->vendorRepository->destroy($id);
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->vendorRepository->LatestPagination($page);
+    }
 }

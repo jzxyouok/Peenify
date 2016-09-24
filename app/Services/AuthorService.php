@@ -40,4 +40,9 @@ class AuthorService extends Service
     {
         return $this->authorRepository->destroy($id);
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->authorRepository->LatestPagination($page);
+    }
 }

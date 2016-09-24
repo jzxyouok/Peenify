@@ -49,9 +49,10 @@
                 <li><a href="{{ route('backend.products') }}">產品</a></li>
                 <li><a href="{{ route('backend.tags') }}">標籤</a></li>
                 <li><a href="{{ route('backend.collections') }}">收藏集</a></li>
-                <li><a href="{{ route('authors.index') }}">作者</a></li>
-                <li><a href="{{ route('actors.index') }}">演員</a></li>
-                <li><a href="{{ route('vendors.index') }}">廠商</a></li>
+                <li><a href="{{ route('backend.authors') }}">作者</a></li>
+                <li><a href="{{ route('backend.actors') }}">演員</a></li>
+                <li><a href="{{ route('backend.vendors') }}">廠商</a></li>
+                <li><a href="{{ route('backend.users') }}">使用者</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

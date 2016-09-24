@@ -40,4 +40,9 @@ class ActorService extends Service
     {
         return $this->actorRepository->destroy($id);
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->actorRepository->LatestPagination($page);
+    }
 }

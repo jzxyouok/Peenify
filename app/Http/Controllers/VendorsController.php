@@ -57,13 +57,13 @@ class VendorsController extends Controller
     {
         $this->vendorService->update($id, $request->all());
 
-        return redirect()->route('vendors.show', $id)->with('message', '編輯成功');
+        return redirect()->back()->with('message', '編輯成功');
     }
 
     public function destroy($id)
     {
         $this->vendorService->destroy($id);
 
-        return redirect()->route('vendors.index')->with('message', '刪除成功');
+        return redirect()->back()->with('message', '刪除成功');
     }
 }

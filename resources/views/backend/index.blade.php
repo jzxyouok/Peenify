@@ -20,14 +20,6 @@
 
 @section('content')
     <div class="container">
-        <div class="links align-text">
-            <a href="{{ route('categories.create') }}">分類</a>
-            <a href="{{ route('collections.create') }}">收藏集</a>
-            <a href="{{ route('authors.create') }}">作者</a>
-            <a href="{{ route('actors.create') }}">演員</a>
-            <a href="{{ route('vendors.create') }}">廠商</a>
-        </div>
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">

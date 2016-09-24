@@ -55,4 +55,9 @@ class UserService extends Service
     {
         return $this->userRepository->attachRoles($id, (array)$role_ids);
     }
+
+    public function getAllPagination($page)
+    {
+        return $this->userRepository->LatestPagination($page);
+    }
 }
