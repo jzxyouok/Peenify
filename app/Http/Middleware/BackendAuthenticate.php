@@ -15,11 +15,9 @@ class BackendAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        $roles = auth()->user()->roles()->get()->map(function($role) {
-            return $role->name;
-        });
+        $roles = auth()->user()->roles()->pluck('name')->toArray();
 
-        if (!in_array('Administrator', $roles->toArray())) {
+        if (!in_array('Administrator', $roles)) {
             return redirect('/home');
         }
 

@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label for="name">釋出時間</label>
                 <div class='input-group date' id='datetimepicker1'>
-                    <input name="launched_at" type='text' class="form-control"/>
+                    <input name="launched_at" type='text' class="form-control" value="{{old('launched_at')}}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="form-group">
-                <label for="name">標籤</label>
+                <label for="tags">標籤</label>
                 <select name="tags[]" id="tags" class="form-control"></select>
             </div>
 
