@@ -40,24 +40,6 @@ class CommentsControllerTest extends TestCase
      * @test
      * @group comment
      */
-    public function storeWithUser()
-    {
-        $this->loginFakeUser();
-
-        $user = factory(\App\User::class)->create();
-
-        $this->call('post', route('comments.store', ['commentable_type' => 'user',
-            'commentable_id' => $user->id]), [
-            'description' => 'this is a comment'
-        ]);
-
-        $this->assertResponseStatus(302);
-    }
-
-    /**
-     * @test
-     * @group comment
-     */
     public function testShow()
     {
         $product = factory(\App\Product::class)->create();

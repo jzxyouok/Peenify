@@ -57,26 +57,6 @@ class CommentServiceTest extends TestCase
      * @test
      * @group comment
      */
-    public function testCreateWithUser()
-    {
-        $this->loginFakeUser();
-        $user = factory(\App\User::class)->create();
-        $service = app(\App\Services\CommentService::class);
-
-        $service->saveComment('user', $user->id, ['description' => 'test2']);
-
-        $this->seeInDatabase('comments', [
-            'commentable_id' => $user->id,
-            'commentable_type' => 'user',
-            'user_id' => auth()->user()->id,
-            'description' => 'test2',
-        ]);
-    }
-
-    /**
-     * @test
-     * @group comment
-     */
     public function testShow()
     {
         $repository = $this->initMock(CommentRepository::class);

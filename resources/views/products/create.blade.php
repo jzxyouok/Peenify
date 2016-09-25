@@ -52,7 +52,7 @@
             </div>
 
             <!--額外的電影選項-->
-{{--            @include('products._forms.movies')--}}
+            @include('products._forms.movies')
 
             <!--額外的影集選項-->
             影集

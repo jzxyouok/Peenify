@@ -23,9 +23,9 @@
             ])
 
         <!--電影額外選項-->
-        {{--@include('products._partials.movies', [--}}
-            {{--'movie' => $product->movies()->first()--}}
-        {{--])--}}
+        @include('products._partials.movies', [
+            'movie' => $product->movie()
+        ])
 
         <h1>
             {{ $product->name }}
