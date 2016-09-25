@@ -27,17 +27,11 @@ class ProductService extends Service
 
         $product->tag($attributes['tags']);
 
-        if (isset($attributes['authors'])) {
-            $this->syncAuthorIfExist($attributes['authors'], $product);
-        }
+        $this->syncAuthorIfExist(array_get($attributes, 'authors'), $product);
 
-        if (isset($attributes['actors'])) {
-            $this->syncActorIfExist($attributes['actors'], $product);
-        }
+        $this->syncActorIfExist(array_get($attributes, 'actors'), $product);
 
-        if (isset($attributes['movie'])) {
-            $this->addToMovieOptions($product, $attributes['movie']);
-        }
+        $this->addToMovieOptions($product, array_get($attributes,'movie'));
 
         return $product;
     }
@@ -82,6 +76,10 @@ class ProductService extends Service
 
     private function addToMovieOptions($product, $options)
     {
-        return $this->productRepository->saveToMovie($product, $options);
+        if (!empty($options)) {
+            return $this->productRepository->saveToMovie($product, $options);
+        }
+        
+        return;
     }
 }

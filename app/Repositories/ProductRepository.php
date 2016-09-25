@@ -50,6 +50,6 @@ class ProductRepository extends Repository
 
     public function saveToMovie($product, $options)
     {
-        return $product->movies()->save(new Movie($options));
+        return $product->movie()->save(new Movie($options));
     }
 }
