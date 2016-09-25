@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Movie;
 use App\Product;
+use App\Series;
 
 class ProductRepository extends Repository
 {
@@ -51,5 +52,10 @@ class ProductRepository extends Repository
     public function saveToMovie($product, $options)
     {
         return $product->movie()->save(new Movie($options));
+    }
+
+    public function saveToSeries($product, $options)
+    {
+        return $product->series()->save(new Series($options));
     }
 }

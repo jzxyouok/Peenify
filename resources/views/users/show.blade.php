@@ -23,16 +23,6 @@
             'relation' => $user,
             'type' => 'user',
             ])
-
-    @include('comments._partials.create', [
-    'commentable_type' => 'user',
-    'commentable_id' => $user->id,
-    'relation' => $user,
-])
-
-    @include('comments._partials.show', [
-        'comments' => $user->comments
-    ])
 @endsection
 
 @section('script')
