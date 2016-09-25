@@ -60,4 +60,9 @@ class Product extends Model
     {
         return $this->hasOne(Movie::class);
     }
+
+    public function series()
+    {
+        return $this->hasOne(Series::class);
+    }
 }

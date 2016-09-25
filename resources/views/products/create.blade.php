@@ -52,7 +52,11 @@
             </div>
 
             <!--額外的電影選項-->
-            {{--@include('products._forms.movies')--}}
+{{--            @include('products._forms.movies')--}}
+
+            <!--額外的影集選項-->
+            影集
+            @include('products._forms.series')
 
             <div class="form-group">
                 <input type="submit" value="建立" class="btn btn-default">

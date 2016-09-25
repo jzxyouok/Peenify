@@ -33,6 +33,8 @@ class ProductService extends Service
 
         $this->addToMovieOptions($product, array_get($attributes,'movie'));
 
+        $this->addToSeriesOptions($product, array_get($attributes,'series'));
+
         return $product;
     }
 
@@ -80,6 +82,15 @@ class ProductService extends Service
             return $this->productRepository->saveToMovie($product, $options);
         }
         
+        return;
+    }
+
+    private function addToSeriesOptions($product, $options)
+    {
+        if (!empty($options)) {
+            return $this->productRepository->saveToSeries($product, $options);
+        }
+
         return;
     }
 }
