@@ -178,7 +178,7 @@ Route::group(['prefix' => 'categories'], function () {
  * 產品可操作功能
  */
 Route::group(['prefix' => 'products'], function () {
-    Route::group(['middleware' => ['auth', 'backend.auth']], function () {
+    Route::group(['middleware' => ['auth']], function () {
         /*
          * 建立產品
          */
@@ -326,7 +326,7 @@ Route::group(['prefix' => 'authors'], function () {
     /**
      * Accessible Administrator.
      */
-    Route::group(['middleware' => ['auth', 'backend.auth']], function() {
+    Route::group(['middleware' => ['auth']], function() {
         Route::get('create', [
             'as' => 'authors.create',
             'uses' => 'AuthorsController@create',
@@ -371,7 +371,7 @@ Route::group(['prefix' => 'actors'], function () {
     /**
      * Accessible Administrator.
      */
-    Route::group(['middleware' => ['auth', 'backend.auth']], function() {
+    Route::group(['middleware' => ['auth']], function() {
         Route::get('create', [
             'as' => 'actors.create',
             'uses' => 'ActorsController@create',
@@ -416,7 +416,7 @@ Route::group(['prefix' => 'vendors'], function () {
     /**
      * Accessible Administrator.
      */
-    Route::group(['middleware' => ['auth', 'backend.auth']], function() {
+    Route::group(['middleware' => ['auth']], function() {
         Route::get('create', [
             'as' => 'vendors.create',
             'uses' => 'VendorsController@create',
@@ -490,7 +490,7 @@ Route::get('/home', 'HomeController@index');
  * Backend 後台可操作功能
  * TODO 依據需求開始加強操作
  */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth']], function () {
     /*
      * 後台登錄頁面
      */
@@ -498,6 +498,9 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'backend.auth']], 
         'as' => 'backend.index',
         'uses' => 'Backend\HomeController@index',
     ]);
+
+    Route::resource('permissions', 'Backend\PermissionsController');
+    Route::resource('roles', 'Backend\RolesController');
 
     /*
      * 所有分類頁面

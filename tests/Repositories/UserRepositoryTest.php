@@ -17,33 +17,4 @@ class UserRepositoryTest extends TestCase
     {
         parent::tearDown();
     }
-
-    /**
-     * @test
-     * @group user
-     */
-    public function attachRoles()
-    {
-        factory(\App\Role::class)->create();
-        factory(\App\Role::class)->create([
-            'name' => 'Elite',
-            'description' => '菁英'
-        ]);
-
-        $user = factory(\App\User::class)->create();
-
-        $repo = app(\App\Repositories\UserRepository::class);
-
-        $repo->attachRoles($user->id, [1,2]);
-
-        $this->seeInDatabase('role_user', [
-            'role_id' => 1,
-            'user_id' => 1,
-        ]);
-
-        $this->seeInDatabase('role_user', [
-            'role_id' => 2,
-            'user_id' => 1,
-        ]);
-    }
 }

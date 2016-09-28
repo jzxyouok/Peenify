@@ -103,17 +103,26 @@ $factory->define(App\Actor::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Role::class, function (Faker\Generator $faker) {
-    return [
-        'name' => 'Administrator',
-        'description' => '管理員',
-    ];
-});
-
 $factory->define(App\Tag::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'namespace' => 'product',
         'slug' => base64_encode($faker->name)
+    ];
+});
+
+$factory->define(App\Role::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'Admin',
+        'label' => 'Administrator',
+        'user_id' => factory(App\User::class)->create()->id,
+    ];
+});
+
+$factory->define(App\Permission::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'edit_all',
+        'label' => 'it can edit all.',
+        'user_id' => factory(App\User::class)->create()->id,
     ];
 });

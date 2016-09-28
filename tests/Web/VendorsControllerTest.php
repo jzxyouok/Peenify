@@ -40,8 +40,6 @@ class VendorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->beAdmin();
-
         $this->visit(route('vendors.create'))
             ->see('Create Vendor')
             ->see('create');
@@ -54,8 +52,6 @@ class VendorsControllerTest extends TestCase
     public function testStore()
     {
         $this->loginFakeUser();
-
-        $this->beAdmin();
 
         $this->call('post', route('vendors.store'), [
             'user_id' => auth()->user()->id,
@@ -88,8 +84,6 @@ class VendorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->beAdmin();
-
         $vendor = factory(\App\Vendor::class)->create();
 
         $this->visit(route('vendors.edit', 1))->see($vendor->name);
@@ -102,8 +96,6 @@ class VendorsControllerTest extends TestCase
     public function testUpdate()
     {
         $this->loginFakeUser();
-
-        $this->beAdmin();
 
         factory(\App\Vendor::class)->create();
 
@@ -122,8 +114,6 @@ class VendorsControllerTest extends TestCase
     public function testDestroy()
     {
         $this->loginFakeUser();
-
-        $this->beAdmin();
 
         factory(\App\Vendor::class)->create();
 

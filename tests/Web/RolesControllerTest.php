@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ActorsControllerTest extends TestCase
+class RolesControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -20,43 +20,39 @@ class ActorsControllerTest extends TestCase
 
     /**
      * @test
-     * @group actor
+     * @group role
      */
     public function testIndex()
     {
-        $actor = factory(\App\Actor::class)->create();
-        $actor2 = factory(\App\Actor::class)->create([
-            'name' => 'yish',
-        ]);
+        $this->loginFakeUser();
 
-        $this->visit(route('actors.index'))->see($actor->name)->see($actor2->name);
+        factory(\App\Role::class)->create();
+
+        $this->visit(route('roles.index'))->see('Admin');
     }
 
     /**
      * @test
-     * @group actor
+     * @group role
      */
     public function testCreate()
     {
         $this->loginFakeUser();
 
-        $this->visit(route('actors.create'))->assertResponseStatus(200);
+        $this->visit(route('roles.create'))->assertResponseStatus(200);
     }
 
     /**
      * @test
-     * @group actor
+     * @group role
      */
     public function testStore()
     {
         $this->loginFakeUser();
 
-        $this->call('post', route('actors.store'), [
-            'user_id' => auth()->user()->id,
-            'name' => 'travel',
-            'description' => 'this is travel',
-            'gender' => 'male',
-            'country' => 'TW',
+        $this->call('post', route('roles.store'), [
+            'name' => 'Admin',
+            'label' => 'this is warcraft',
         ]);
 
         $this->assertResponseStatus(302);
@@ -64,43 +60,43 @@ class ActorsControllerTest extends TestCase
 
     /**
      * @test
-     * @group actor
+     * @group role
      */
     public function testShow()
     {
         $this->loginFakeUser();
 
-        $actor = factory(\App\Actor::class)->create();
+        factory(\App\Role::class)->create();
 
-        $this->visit(route('actors.show', 1))->see($actor->name);
+        $this->visit(route('roles.show', 1))->see('Admin');
     }
 
     /**
      * @test
-     * @group actor
+     * @group role
      */
     public function testEdit()
     {
         $this->loginFakeUser();
 
-        $actor = factory(\App\Actor::class)->create();
+        $role = factory(\App\Role::class)->create();
 
-        $this->visit(route('actors.edit', 1))->see($actor->name);
+        $this->visit(route('roles.edit', $role->id))->see('Admin');
     }
 
     /**
      * @test
-     * @group actor
+     * @group role
      */
     public function testUpdate()
     {
         $this->loginFakeUser();
 
-        factory(\App\Actor::class)->create();
+        factory(\App\Role::class)->create();
 
-        $this->call('put', route('actors.update', 1), [
+        $this->call('put', route('roles.update', 1), [
             'name' => 'updated!',
-            'description' => 'this is travel, updated!'
+            'label' => 'this is travel, updated!'
         ]);
 
         $this->assertResponseStatus(302);
@@ -108,15 +104,15 @@ class ActorsControllerTest extends TestCase
 
     /**
      * @test
-     * @group actor
+     * @group role
      */
     public function testDestroy()
     {
         $this->loginFakeUser();
 
-        factory(\App\Actor::class)->create();
+        factory(\App\Role::class)->create();
 
-        $this->call('delete', route('actors.destroy', 1));
+        $this->call('delete', route('roles.destroy', 1));
 
         $this->assertResponseStatus(302);
     }

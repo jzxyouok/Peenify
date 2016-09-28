@@ -55,11 +55,4 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         $this->be($user);
     }
-
-    public function beAdmin()
-    {
-        $role = factory(\App\Role::class)->create();
-
-        return app(\App\Repositories\UserRepository::class)->attachRoles(auth()->user()->id, $role->id);
-    }
 }

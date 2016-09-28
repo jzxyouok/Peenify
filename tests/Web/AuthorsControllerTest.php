@@ -40,8 +40,6 @@ class AuthorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->beAdmin();
-
         $this->visit(route('authors.create'))->assertResponseStatus(200);
     }
 
@@ -52,8 +50,6 @@ class AuthorsControllerTest extends TestCase
     public function testStore()
     {
         $this->loginFakeUser();
-
-        $this->beAdmin();
 
         $this->call('post', route('authors.store'), [
             'user_id' => auth()->user()->id,
@@ -87,8 +83,6 @@ class AuthorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->beAdmin();
-
         $author = factory(\App\Author::class)->create();
 
         $this->visit(route('authors.edit', 1))->see($author->name);
@@ -101,8 +95,6 @@ class AuthorsControllerTest extends TestCase
     public function testUpdate()
     {
         $this->loginFakeUser();
-
-        $this->beAdmin();
 
         factory(\App\Author::class)->create();
 
@@ -121,8 +113,6 @@ class AuthorsControllerTest extends TestCase
     public function testDestroy()
     {
         $this->loginFakeUser();
-
-        $this->beAdmin();
 
         factory(\App\Author::class)->create();
 
