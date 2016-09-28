@@ -11,7 +11,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['電影', '遊戲', '動畫'];
+        $categories = ['電影', '劇集', '動畫'];
         $user = factory(\App\User::class)->create();
 
         foreach ($categories as $category) {
