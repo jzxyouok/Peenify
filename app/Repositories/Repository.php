@@ -19,6 +19,11 @@ abstract class Repository
         return $this->model->create($attributes);
     }
 
+    public function find($id, $columns = ['*'])
+    {
+        return $this->model->find($id, $columns);
+    }
+
     public function findOrFail($id)
     {
         return $this->model->findOrFail($id);

@@ -22,6 +22,11 @@ class Role extends Model
         return $this->permissions()->save($permission);
     }
 
+    public function syncPermissionsTo(array $permissions)
+    {
+        return $this->permissions()->sync($permissions);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

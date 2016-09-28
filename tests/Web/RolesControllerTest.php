@@ -50,9 +50,12 @@ class RolesControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
+        factory(\App\Permission::class)->create();
+
         $this->call('post', route('roles.store'), [
             'name' => 'Admin',
             'label' => 'this is warcraft',
+            'permissions' => [1]
         ]);
 
         $this->assertResponseStatus(302);
