@@ -46,20 +46,4 @@ class UserServiceTest extends TestCase
 
         $service->findOrFail(1);
     }
-
-    /**
-     * @test
-     * @group user
-     */
-    public function attachRoles()
-    {
-        $this->loginFakeUser();
-
-        $repository = $this->initMock(UserRepository::class);
-        $repository->shouldReceive('attachRoles')->once();
-
-        $service = new \App\Services\UserService($repository);
-
-        $service->attachRoles(auth()->user()->id, [1,2]);
-    }
 }

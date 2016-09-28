@@ -12,7 +12,7 @@
 */
 
 /*
- * 歡迎頁面，到時候要客製化跟 promote 一些產品特性
+ * 歡迎頁面
  */
 Route::get('/', function () {
     return view('welcome');
@@ -100,11 +100,10 @@ Route::group(['prefix' => 'users'], function () {
  * ex: 電影／遊戲／旅遊／餐廳／文具／．．．．
  */
 Route::group(['prefix' => 'categories'], function () {
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth', 'auth.backend']], function () {
 
         /*
          * 建立類別
-         * TODO 由後台建立
          */
         Route::get('create', [
             'as' => 'categories.create',
@@ -113,7 +112,6 @@ Route::group(['prefix' => 'categories'], function () {
 
         /*
          * 儲存建立類別
-         * TODO 由後台建立
          */
         Route::post('/', [
             'as' => 'categories.store',
@@ -121,17 +119,7 @@ Route::group(['prefix' => 'categories'], function () {
         ]);
 
         /*
-         * 取得分類下的所有產品
-         * TODO 搬移到外面不需登入也可操作
-         */
-        Route::get('{category}/products', [
-            'as' => 'categories.products',
-            'uses' => 'CategoriesController@products',
-        ]);
-
-        /*
          * 編輯類別
-         * TODO 由後台建立
          */
         Route::match(['PUT', 'PATCH'], '{category}', [
             'as' => 'categories.update',
@@ -140,7 +128,6 @@ Route::group(['prefix' => 'categories'], function () {
 
         /*
          * 更新類別
-         * TODO 由後台建立
          */
         Route::get('{category}/edit', [
             'as' => 'categories.edit',
@@ -156,6 +143,14 @@ Route::group(['prefix' => 'categories'], function () {
             'uses' => 'CategoriesController@destroy',
         ]);
     });
+
+    /*
+     * 取得分類下的所有產品
+     */
+    Route::get('{category}/products', [
+        'as' => 'categories.products',
+        'uses' => 'CategoriesController@products',
+    ]);
 
     /*
      * 類別清單
@@ -178,7 +173,7 @@ Route::group(['prefix' => 'categories'], function () {
  * 產品可操作功能
  */
 Route::group(['prefix' => 'products'], function () {
-    Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['auth', 'auth.backend']], function () {
         /*
          * 建立產品
          */
@@ -326,7 +321,7 @@ Route::group(['prefix' => 'authors'], function () {
     /**
      * Accessible Administrator.
      */
-    Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['auth', 'auth.backend']], function() {
         Route::get('create', [
             'as' => 'authors.create',
             'uses' => 'AuthorsController@create',
@@ -371,7 +366,7 @@ Route::group(['prefix' => 'actors'], function () {
     /**
      * Accessible Administrator.
      */
-    Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['auth', 'auth.backend']], function() {
         Route::get('create', [
             'as' => 'actors.create',
             'uses' => 'ActorsController@create',
@@ -416,7 +411,7 @@ Route::group(['prefix' => 'vendors'], function () {
     /**
      * Accessible Administrator.
      */
-    Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['auth', 'auth.backend']], function() {
         Route::get('create', [
             'as' => 'vendors.create',
             'uses' => 'VendorsController@create',
@@ -490,7 +485,7 @@ Route::get('/home', 'HomeController@index');
  * Backend 後台可操作功能
  * TODO 依據需求開始加強操作
  */
-Route::group(['prefix' => 'backend', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'auth.backend']], function () {
     /*
      * 後台登錄頁面
      */

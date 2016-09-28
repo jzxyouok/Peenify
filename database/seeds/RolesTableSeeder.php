@@ -11,20 +11,11 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Role::class)->create();
-        factory(\App\Role::class)->create([
-            'name' => 'Elite',
-            'description' => '菁英'
-        ]);
-
-        factory(\App\Role::class)->create([
-            'name' => 'Beta - Elite',
-            'description' => '內測菁英'
-        ]);
-
-        factory(\App\Role::class)->create([
-            'name' => 'Normal',
-            'description' => '一般會員'
-        ]);
+        foreach (config('role') as $role => $value) {
+            factory(\App\Role::class)->create([
+                'name' => $role,
+                'label' => $value['label'],
+            ]);
+        }
     }
 }

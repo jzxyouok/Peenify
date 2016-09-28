@@ -56,4 +56,14 @@ class User extends Authenticatable
 
         return !! $role->intersect($this->roles)->count();
     }
+
+    public function giveRoleTo(Role $role)
+    {
+        return $this->roles()->save($role);
+    }
+
+    public function syncRolesTo(array $roles)
+    {
+        return $this->roles()->sync($roles);
+    }
 }

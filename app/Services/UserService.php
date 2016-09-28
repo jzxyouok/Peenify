@@ -29,9 +29,9 @@ class UserService extends Service
             'password' => ($exist) ? $model->password : bcrypt(str_random(10)),
         ]);
 
-//        if (! $exist) {
-//            $this->userRepository->attachRoles($model->id, 3); //beta
-//        }
+        if (! $exist) {
+            $model->syncRolesTo([1,2]);
+        }
 
         return $model;
     }

@@ -16,8 +16,8 @@ class BackendAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        if(Gate::denies('edit_all')) {
-            abort(403, 'You cant access this page');
+        if(Gate::denies('all') AND Gate::denies('backend')) {
+            abort(403, 'You cant access backend.');
         };
 
         return $next($request);

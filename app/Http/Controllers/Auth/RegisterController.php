@@ -37,7 +37,7 @@ class RegisterController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param UserService $userService
      */
     public function __construct(UserService $userService)
     {
@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $this->userService->attachRoles($user->id, 3);//Beta
+        $user->syncRolesTo([1,2]);
 
         return $user;
     }
