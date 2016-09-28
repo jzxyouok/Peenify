@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('backend.layouts.app')
 
 @section('content')
     <div class="container">
-        <h1>建立分類</h1>
+        <h2>建立分類</h2>
         <form action="{{ route('categories.store') }}" method="post" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">

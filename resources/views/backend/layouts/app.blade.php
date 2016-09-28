@@ -45,8 +45,30 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">&nbsp;
-                <li><a href="{{ route('backend.categories') }}">分類</a></li>
-                <li><a href="{{ route('backend.products') }}">產品</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        分類 <span class="caret"></span></a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{{ route('categories.create') }}">建立分類</a>
+                            <a href="{{ route('backend.categories') }}">分類頁</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        產品 <span class="caret"></span></a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{{ route('products.create') }}">建立分類</a>
+                            <a href="{{ route('backend.products') }}">產品頁</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li><a href="{{ route('backend.tags') }}">標籤</a></li>
                 <li><a href="{{ route('backend.collections') }}">收藏集</a></li>
                 <li><a href="{{ route('backend.authors') }}">作者</a></li>
