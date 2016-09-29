@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\ProductRepository;
+use App\User;
 
 class ProductService extends Service
 {
@@ -92,5 +93,25 @@ class ProductService extends Service
         }
 
         return;
+    }
+
+    /**
+     * 同步最愛
+     * @param $id
+     * @param User $user
+     * @return bool
+     */
+    public function syncFavoriteByUser($id, User $user)
+    {
+        $product = $this->productRepository->find($id);
+
+        if ($product->isExistFavoriteByUser($user)) {
+            $product->removeFavoriteToUser($user);
+
+            return false;
+        }
+        $product->giveFavoriteToUser($user);
+
+        return true;
     }
 }

@@ -3,17 +3,26 @@
 namespace App;
 
 use App\Extensions\EmojiableTrait;
+use App\Extensions\FavoriteableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Tags\TaggableTrait;
 
 class Product extends Model
 {
-    use EmojiableTrait, TaggableTrait;
+    use EmojiableTrait, TaggableTrait, FavoriteableTrait;
 
     protected $table = 'products';
 
     protected $fillable = [
-        'id', 'name', 'description', 'status', 'cover', 'user_id', 'category_id', 'launched_at', 'site'
+        'id',
+        'name',
+        'description',
+        'status',
+        'cover',
+        'user_id',
+        'category_id',
+        'launched_at',
+        'site'
     ];
 
     public function category()

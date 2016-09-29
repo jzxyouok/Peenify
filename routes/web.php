@@ -287,6 +287,11 @@ Route::post('collections/addProduct/{product}', [
 
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::post('favorites/{favoriteable_id}', [
+        'as' => 'favorites.sync',
+        'uses' => 'FavoritesController@sync',
+    ]);
+
     /*
      * 同步評分
      * TODO 重構

@@ -72,6 +72,15 @@
             <span class="badge emoji-count">{{ $product->emojis()->where('type', 'bad')->count() }}</span>
         </div>
 
+
+        @if($product->favorites()->where('user_id', auth()->user()->id)->count())
+            <div class="favorite btn btn-danger"
+                 data-id={{ $product->id }} data-token={{ csrf_token() }}> 取消最愛 </div>
+        @else
+            <div class="favorite btn btn-default"
+                 data-id={{ $product->id }} data-token={{ csrf_token() }}> 最愛 </div>
+        @endif
+
         @include('comments._partials.create', [
             'commentable_type' => 'product',
             'commentable_id' => $product->id,
@@ -120,6 +129,32 @@
                     } else {
                         $(".emoji").removeClass('btn-danger').addClass('btn-default');
                         $this.addClass('btn-danger').removeClass('btn-default');
+                    }
+                });
+            });
+
+            $(document).on('click', '.favorite', function () {
+                var $this = $(this);
+                var token = $this.data('token');
+                var id = $this.data('id');
+                $.post('/favorites/' + id, {
+                    '_token': token
+                }, function (result) {
+                    if (result.status == 'create') {
+                        $this.addClass('btn-danger').removeClass('btn-default').text('取消最愛');
+                    } else {
+                        swal({
+                            title: "Are you sure?",
+                            text: "你要取消最愛這個嗎？？",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "對，我不想看到了",
+                            closeOnConfirm: false
+                        }, function () {
+                            swal("取消最愛成功!", "你已經取消最愛囉", "success");
+                            $this.addClass('btn-default').removeClass('btn-danger').text('最愛');
+                        });
                     }
                 });
             });
