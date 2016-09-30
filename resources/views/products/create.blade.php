@@ -17,13 +17,13 @@
 
             <div class="form-group">
                 <label for="name">產品名稱</label>
-                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                <input type="text" name="name" class="form-control">
             </div>
 
             <div class="form-group">
                 <label for="description">產品描述</label>
                 <textarea name="description" rows="4" cols="50" placeholder="請輸入產品描述..."
-                          class="form-control">{{ old('description') }}</textarea>
+                          class="form-control"></textarea>
             </div>
 
             <div class="form-group">
@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label for="name">釋出時間</label>
                 <div class='input-group date' id='datetimepicker1'>
-                    <input name="launched_at" type='text' class="form-control" value="{{old('launched_at')}}"/>
+                    <input name="launched_at" type='text' class="form-control"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
