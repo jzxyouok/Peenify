@@ -2,13 +2,11 @@
 
 namespace App\Services;
 
-use App\Extensions\syncFollowToUser;
 use App\Repositories\FollowRepository;
 use App\Repositories\UserRepository;
 
 class FollowService extends Service
 {
-    use syncFollowToUser;
 
     /**
      * @var FollowRepository
@@ -37,5 +35,12 @@ class FollowService extends Service
         });
 
         return $this->userRepository->getUserByIds($userIds->toArray());
+    }
+
+    public function syncFollow($followable_type, $followable_id, $attributes)
+    {
+        $instance = app(ucfirst('App\\' . $followable_type));
+
+        return $instance->syncFollow($followable_id, array_add($attributes, 'user_id', auth()->user()->id));
     }
 }
