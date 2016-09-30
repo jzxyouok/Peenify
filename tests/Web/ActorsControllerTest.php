@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ActorsControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     public function setUp()
     {
@@ -19,6 +19,7 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
+     * 不需要登入即可看到
      * @test
      * @group actor
      */
@@ -33,17 +34,17 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
+     * 簡單的表單
      * @test
      * @group actor
      */
     public function testCreate()
     {
-        $this->loginFakeUser();
-
         $this->visit(route('actors.create'))->assertResponseStatus(200);
     }
 
     /**
+     * 需要寫入 user_id 誰建立的，所以必須登入
      * @test
      * @group actor
      */
@@ -52,7 +53,6 @@ class ActorsControllerTest extends TestCase
         $this->loginFakeUser();
 
         $this->call('post', route('actors.store'), [
-            'user_id' => auth()->user()->id,
             'name' => 'travel',
             'description' => 'this is travel',
             'gender' => 'male',
@@ -63,32 +63,31 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
+     * 不需登入看演員
      * @test
      * @group actor
      */
     public function testShow()
     {
-        $this->loginFakeUser();
-
         $actor = factory(\App\Actor::class)->create();
 
         $this->visit(route('actors.show', 1))->see($actor->name);
     }
 
     /**
+     * 簡單表單
      * @test
      * @group actor
      */
     public function testEdit()
     {
-        $this->loginFakeUser();
-
         $actor = factory(\App\Actor::class)->create();
 
         $this->visit(route('actors.edit', 1))->see($actor->name);
     }
 
     /**
+     * 更新需要 user_id
      * @test
      * @group actor
      */
@@ -96,24 +95,25 @@ class ActorsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        factory(\App\Actor::class)->create();
+        $actor = factory(\App\Actor::class)->create();
 
-        $this->call('put', route('actors.update', 1), [
+        $this->call('put', route('actors.update', $actor->id), [
             'name' => 'updated!',
-            'description' => 'this is travel, updated!'
+            'description' => 'this is travel',
+            'gender' => 'male',
+            'country' => 'TW',
         ]);
 
         $this->assertResponseStatus(302);
     }
 
     /**
+     * 刪除
      * @test
      * @group actor
      */
     public function testDestroy()
     {
-        $this->loginFakeUser();
-
         factory(\App\Actor::class)->create();
 
         $this->call('delete', route('actors.destroy', 1));

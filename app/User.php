@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->hasMany(Collection::class);
     }
 
+    public function actors()
+    {
+        return $this->hasMany(Actor::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

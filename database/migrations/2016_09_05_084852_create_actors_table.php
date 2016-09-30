@@ -22,6 +22,7 @@ class CreateActorsTable extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('country');
             $table->tinyInteger('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

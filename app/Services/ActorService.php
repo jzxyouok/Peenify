@@ -23,7 +23,7 @@ class ActorService extends Service
 
     public function create(array $attributes)
     {
-        return $this->actorRepository->create($this->authUser($attributes));
+        return auth()->user()->actors()->create($attributes);
     }
 
     public function findOrFail($id)
