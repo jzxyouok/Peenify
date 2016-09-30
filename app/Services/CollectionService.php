@@ -23,7 +23,7 @@ class CollectionService extends Service
 
     public function create(array $attributes)
     {
-        return $this->collectionRepository->create($this->authUser($attributes));
+        return auth()->user()->collections()->create($attributes);
     }
 
     public function findOrFail($id)

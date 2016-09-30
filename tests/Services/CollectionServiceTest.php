@@ -37,22 +37,6 @@ class CollectionServiceTest extends TestCase
      * @test
      * @group collection
      */
-    public function testCreate()
-    {
-        $this->loginFakeUser();
-
-        $repository = $this->initMock(CollectionRepository::class);
-        $repository->shouldReceive('create')->once();
-
-        $service = new \App\Services\CollectionService($repository);
-
-        $service->create(['name' => 'test', 'description' => 'test2']);
-    }
-
-    /**
-     * @test
-     * @group collection
-     */
     public function testShow()
     {
         $repository = $this->initMock(CollectionRepository::class);

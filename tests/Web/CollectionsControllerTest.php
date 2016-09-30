@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CollectionsControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     public function setUp()
     {
@@ -50,7 +50,6 @@ class CollectionsControllerTest extends TestCase
         $this->loginFakeUser();
 
         $this->call('post', route('collections.store'), [
-            'user_id' => auth()->user()->id,
             'name' => 'travel',
             'description' => 'this is travel'
         ]);
@@ -113,7 +112,7 @@ class CollectionsControllerTest extends TestCase
 
     /**
      * @test
-     * @group collection1
+     * @group collection
      */
     public function addProductToCollection()
     {

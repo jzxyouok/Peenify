@@ -19,6 +19,7 @@ class CreateCollectionsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->tinyInteger('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
