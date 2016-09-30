@@ -85,8 +85,8 @@ $factory->define(App\Vendor::class, function (Faker\Generator $faker) {
 $factory->define(App\Author::class, function (Faker\Generator $faker) {
     return [
         'user_id' => factory(App\User::class)->create()->id,
-        'name' => '拉拉雅拉伯汗',
-        'description' => '我拍過鋼鐵人我超厲害的',
+        'name' => $faker->name,
+        'description' => $faker->paragraph,
         'gender' => 'male',
         'country' => 'TW',
     ];
@@ -95,8 +95,8 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
 $factory->define(App\Actor::class, function (Faker\Generator $faker) {
     return [
         'user_id' => factory(App\User::class)->create()->id,
-        'name' => '李奧納多皮卡丘',
-        'description' => '我拍過鐵達尼號',
+        'name' => $faker->name,
+        'description' => $faker->paragraph,
         'gender' => 'male',
         'country' => 'US',
     ];
