@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Extensions;
+namespace App\Foundation;
 
 use App\Favorite;
 use App\User;
 
-trait FavoriteableTrait
+trait Favoriteable
 {
     /**
      * Laravel related
