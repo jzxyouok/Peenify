@@ -48,9 +48,9 @@ class UserService extends Service
         return $this->userRepository->findOrFail($id);
     }
 
-    public function update($id, array $attributes)
+    public function update(array $attributes)
     {
-        return $this->userRepository->update($id, $attributes);
+        return auth()->user()->update($attributes);
     }
 
     public function attachRoles($id, $role_ids)
