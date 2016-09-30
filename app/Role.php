@@ -22,9 +22,9 @@ class Role extends Model
         return $this->permissions()->save($permission);
     }
 
-    public function syncPermissionsTo(array $permissions)
+    public function syncPermissionsTo($permissions)
     {
-        return $this->permissions()->sync($permissions);
+        return $this->permissions()->sync((array) $permissions);
     }
 
     public function user()

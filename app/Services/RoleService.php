@@ -23,11 +23,8 @@ class RoleService extends Service
 
     public function create(array $attributes)
     {
-        $role = $this->roleRepository->create($this->authUser($attributes));
-
-        $role->syncPermissionsTo((array)$attributes['permissions']);
-
-        return $role;
+        return auth()->user()->relatedRoles()
+            ->create($attributes)->syncPermissionsTo((array)$attributes['permissions']);
     }
 
     public function findOrFail($id)
@@ -48,12 +45,5 @@ class RoleService extends Service
     public function getAllPagination($page)
     {
         return $this->roleRepository->LatestPagination($page);
-    }
-
-    public function syncPermissions($id, $permissionIds)
-    {
-        $role = $this->roleRepository->find($id);
-
-        return $role->syncPermissionsTo((array)$permissionIds);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RolesControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     public function setUp()
     {
@@ -24,8 +24,6 @@ class RolesControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $this->loginFakeUser();
-
         factory(\App\Role::class)->create();
 
         $this->visit(route('roles.index'))->see('Admin');
@@ -37,8 +35,6 @@ class RolesControllerTest extends TestCase
      */
     public function testCreate()
     {
-        $this->loginFakeUser();
-
         $this->visit(route('roles.create'))->assertResponseStatus(200);
     }
 
