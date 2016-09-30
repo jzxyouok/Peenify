@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->integer('product_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
             $table->text('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

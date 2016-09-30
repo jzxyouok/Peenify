@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PermissionsControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     public function setUp()
     {
@@ -24,8 +24,6 @@ class PermissionsControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $this->loginFakeUser();
-
         factory(\App\Permission::class)->create();
 
         $this->visit(route('permissions.index'))->see('edit_all');
@@ -37,8 +35,6 @@ class PermissionsControllerTest extends TestCase
      */
     public function testCreate()
     {
-        $this->loginFakeUser();
-
         $this->visit(route('permissions.create'))->assertResponseStatus(200);
     }
 
@@ -64,8 +60,6 @@ class PermissionsControllerTest extends TestCase
      */
     public function testShow()
     {
-        $this->loginFakeUser();
-
         factory(\App\Permission::class)->create();
 
         $this->visit(route('permissions.show', 1))->see('edit_all');
@@ -77,8 +71,6 @@ class PermissionsControllerTest extends TestCase
      */
     public function testEdit()
     {
-        $this->loginFakeUser();
-
         $permission = factory(\App\Permission::class)->create();
 
         $this->visit(route('permissions.edit', $permission->id))->see('edit_all');
@@ -108,8 +100,6 @@ class PermissionsControllerTest extends TestCase
      */
     public function testDestroy()
     {
-        $this->loginFakeUser();
-
         factory(\App\Permission::class)->create();
 
         $this->call('delete', route('permissions.destroy', 1));

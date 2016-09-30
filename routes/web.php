@@ -482,13 +482,11 @@ Auth::routes();
 
 /*
  * 登錄頁面
- * TODO 客製化與清單調整
  */
 Route::get('/home', 'HomeController@index');
 
 /*
  * Backend 後台可操作功能
- * TODO 依據需求開始加強操作
  */
 Route::group(['prefix' => 'backend', 'middleware' => ['auth', 'auth.backend']], function () {
     /*

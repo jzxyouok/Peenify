@@ -4,9 +4,12 @@ namespace App;
 
 use App\Extensions\EmojiableTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
+    use SoftDeletes;
+
     use EmojiableTrait;
 
     protected $table = 'comments';
@@ -14,6 +17,8 @@ class Comment extends Model
     protected $fillable = [
         'description', 'status', 'user_id', 'product_id',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function products()
     {

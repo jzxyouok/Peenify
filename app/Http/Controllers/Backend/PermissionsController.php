@@ -19,11 +19,7 @@ class PermissionsController extends Controller
     {
         $this->permissionService = $permissionService;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $permissions = $this->permissionService->all();
@@ -31,22 +27,11 @@ class PermissionsController extends Controller
         return view('backend.permissions.index', compact('permissions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('backend.permissions.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->permissionService->create($request->all());

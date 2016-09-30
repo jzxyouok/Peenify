@@ -23,7 +23,7 @@ class PermissionService extends Service
 
     public function create(array $attributes)
     {
-        return $this->permissionRepository->create($this->authUser($attributes));
+        return auth()->user()->permissions()->create($attributes);
     }
 
     public function findOrFail($id)
