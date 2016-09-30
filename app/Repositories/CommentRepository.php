@@ -15,13 +15,4 @@ class CommentRepository extends Repository
     {
         $this->model = $model;
     }
-
-    public function saveComment($commentable_type, $commentable_id, $attributes)
-    {
-        $instance = app('App\\' . ucfirst($commentable_type))->find($commentable_id);
-
-        $comment = new Comment($attributes);
-
-        return $instance->comments()->save($comment);
-    }
 }

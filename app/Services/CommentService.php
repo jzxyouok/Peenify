@@ -21,11 +21,9 @@ class CommentService extends Service
         return $this->commentRepository->all();
     }
 
-    public function create(array $attributes, $product_id)
+    public function create(array $attributes)
     {
-        $attributes = array_add($attributes, 'product_id', $product_id);
-
-        return $this->commentRepository->create($this->authUser($attributes));
+        return auth()->user()->comments()->create($attributes);
     }
 
     public function findOrFail($id)
@@ -41,10 +39,5 @@ class CommentService extends Service
     public function destroy($id)
     {
         return $this->commentRepository->destroy($id);
-    }
-
-    public function saveComment($commentable_type, $commentable_id, $attributes)
-    {
-        return $this->commentRepository->saveComment($commentable_type, $commentable_id, $this->authUser($attributes));
     }
 }

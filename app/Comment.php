@@ -15,9 +15,9 @@ class Comment extends Model
         'description', 'status', 'user_id', 'product_id',
     ];
 
-    public function commentable()
+    public function products()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Product::class);
     }
 
     public function user()

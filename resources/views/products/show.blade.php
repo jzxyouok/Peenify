@@ -85,9 +85,7 @@
         @endif
 
         @include('comments._partials.create', [
-            'commentable_type' => 'product',
-            'commentable_id' => $product->id,
-            'relation' => $product,
+            'product' => $product,
         ])
 
         @include('comments._partials.show', [

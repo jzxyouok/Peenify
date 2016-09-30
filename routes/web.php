@@ -136,7 +136,6 @@ Route::group(['prefix' => 'categories'], function () {
 
         /*
          * 刪除類別
-         * TODO 改軟刪除
          */
         Route::delete('{category}', [
             'as' => 'categories.destroy',
@@ -208,7 +207,6 @@ Route::group(['prefix' => 'products'], function () {
 
         /*
          * 刪除產品
-         * TODO 軟刪除
          */
         Route::delete('{product}', [
             'as' => 'products.destroy',
@@ -241,7 +239,7 @@ Route::group(['prefix' => 'comments'], function () {
         /*
          * 儲存建立評論
          */
-        Route::post('{commentable_type}/{commentable_id}', [
+        Route::post('{product_id}', [
             'as' => 'comments.store',
             'uses' => 'CommentsController@store',
         ]);
@@ -272,7 +270,6 @@ Route::group(['prefix' => 'comments'], function () {
 
 /*
  * 收藏集 CURD
- * TODO 依照需求後續拆解
  * User
  */
 Route::resource('collections', 'CollectionsController');
@@ -286,6 +283,9 @@ Route::post('collections/addProduct/{product}', [
 ]);
 
 
+/*
+ * 功能 favoriteable, emojiable, followable, ajaxTags
+ */
 Route::group(['middleware' => 'auth'], function () {
     Route::post('favorites/{favoriteable_id}', [
         'as' => 'favorites.sync',

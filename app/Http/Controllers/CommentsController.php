@@ -21,11 +21,11 @@ class CommentsController extends Controller
         $this->commentService = $commentService;
     }
 
-    public function store(Request $request, $commentable_type, $commentable_id)
+    public function store(Request $request, $product_id)
     {
-        $this->commentService->saveComment($commentable_type, $commentable_id, $request->all());
+        $this->commentService->create(array_add($request->all(), 'product_id', $product_id));
 
-        return redirect()->route("{$commentable_type}s.show", $commentable_id)->with('message', '建立成功');
+        return redirect()->route("products.show", $product_id)->with('message', '建立成功');
     }
 
     public function edit($id)

@@ -44,8 +44,7 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
 $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     return [
         'user_id' => factory(App\User::class)->create()->id,
-        'commentable_type' => 'product',
-        'commentable_id' => factory(\App\Product::class)->create()->id,
+        'product_id' => factory(\App\Product::class)->create()->id,
         'description' => 12345,
     ];
 });

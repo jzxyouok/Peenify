@@ -28,8 +28,7 @@ class CommentsControllerTest extends TestCase
 
         $product = factory(\App\Product::class)->create();
 
-        $this->call('post', route('comments.store', ['commentable_type' => 'product',
-        'commentable_id' => $product->id]), [
+        $this->call('post', route('comments.store', $product->id), [
             'description' => 'this is a comment'
         ]);
 
@@ -45,13 +44,12 @@ class CommentsControllerTest extends TestCase
         $product = factory(\App\Product::class)->create();
 
         factory(\App\Comment::class)->create([
-            'commentable_id' => $product->id,
-            'user_id' => factory(\App\User::class)->create(),
+            'product_id' => $product->id,
             'description' => 'hi'
         ]);
+
         factory(\App\Comment::class)->create([
-            'commentable_id' => $product->id,
-            'user_id' => factory(\App\User::class)->create(),
+            'product_id' => $product->id,
             'description' => 'hi 2',
         ]);
 
