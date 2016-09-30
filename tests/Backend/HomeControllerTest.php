@@ -17,45 +17,7 @@ class HomeControllerTest extends TestCase
     {
         parent::tearDown();
     }
-
-    /**
-     * @group backend
-     * @test
-     */
-    public function index()
-    {
-        $this->loginFakeUser();
-
-        $role = factory(\App\Role::class)->create();
-
-        DB::table('role_user')->insert([
-            'user_id' => auth()->user()->id,
-            'role_id' => $role->id,
-        ]);
-
-        $this->visit(route('backend.index'))->see('Backend');
-    }
-
-    /**
-     * @group backend
-     * @test
-     */
-    public function indexNoAuth()
-    {
-        $this->loginFakeUser();
-
-        $user = factory(\App\User::class)->create();
-
-        $role = factory(\App\Role::class)->create();
-
-        DB::table('role_user')->insert([
-            'user_id' => $user->id,
-            'role_id' => $role->id,
-        ]);
-
-        $this->visit(route('backend.index'))->see('儀表板');
-    }
-
+    
     /**
      * @group backend
      * @test

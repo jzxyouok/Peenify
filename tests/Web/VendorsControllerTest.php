@@ -52,7 +52,6 @@ class VendorsControllerTest extends TestCase
         $this->loginFakeUser();
 
         $this->call('post', route('vendors.store'), [
-            'user_id' => auth()->user()->id,
             'name' => 'travel',
             'description' => 'this is travel',
             'agent' => 'TW'
@@ -67,8 +66,6 @@ class VendorsControllerTest extends TestCase
      */
     public function testShow()
     {
-        $this->loginFakeUser();
-
         $vendor = factory(\App\Vendor::class)->create();
 
         $this->visit(route('vendors.show', 1))->see($vendor->name);
@@ -80,8 +77,6 @@ class VendorsControllerTest extends TestCase
      */
     public function testEdit()
     {
-        $this->loginFakeUser();
-
         $vendor = factory(\App\Vendor::class)->create();
 
         $this->visit(route('vendors.edit', 1))->see($vendor->name);

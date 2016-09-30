@@ -91,4 +91,9 @@ class User extends Authenticatable
     {
         return $this->roles()->sync($roles);
     }
+
+    public function vendors()
+    {
+        return $this->hasMany(Vendor::class);
+    }
 }

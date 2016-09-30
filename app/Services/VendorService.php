@@ -24,7 +24,7 @@ class VendorService extends Service
 
     public function create(array $attributes)
     {
-        return $this->vendorRepository->create($this->authUser($attributes));
+        return auth()->user()->vendors()->create($attributes);
     }
 
     public function findOrFail($id)
