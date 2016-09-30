@@ -19,7 +19,6 @@ class AuthorsController extends Controller
         $this->authorService = $authorService;
     }
 
-
     public function index()
     {
         $authors = $this->authorService->all();
