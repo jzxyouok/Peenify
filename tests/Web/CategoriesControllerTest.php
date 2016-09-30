@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CategoriesControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     public function setUp()
     {
@@ -40,8 +40,6 @@ class CategoriesControllerTest extends TestCase
      */
     public function testCreate()
     {
-        $this->loginFakeUser();
-
         $this->visit(route('categories.create'))->assertResponseStatus(200);
     }
 
@@ -54,7 +52,6 @@ class CategoriesControllerTest extends TestCase
         $this->loginFakeUser();
 
         $this->call('post', route('categories.store'), [
-            'user_id' => auth()->user()->id,
             'name' => 'travel',
             'description' => 'this is travel'
         ]);

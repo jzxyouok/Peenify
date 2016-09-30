@@ -22,7 +22,7 @@ class CategoryService extends Service
 
     public function create(array $attributes)
     {
-        return $this->categoryRepository->create($this->authUser($attributes));
+        return auth()->user()->categories()->create($attributes);
     }
 
     public function findOrFail($id)
