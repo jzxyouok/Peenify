@@ -2,15 +2,13 @@
 
 namespace App;
 
-use App\Extensions\EmojiableTrait;
+use App\Foundation\Emojiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    use SoftDeletes;
-
-    use EmojiableTrait;
+    use SoftDeletes, Emojiable;
 
     protected $table = 'comments';
 

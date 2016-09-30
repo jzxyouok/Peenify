@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Extensions;
+namespace App\Foundation;
 
 use App\Follow;
 
-trait FollowableTrait
+trait Followable
 {
     public function follows()
     {
@@ -40,4 +40,5 @@ trait FollowableTrait
 
         return true;
     }
+
 }

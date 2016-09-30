@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Extensions\EmojiableTrait;
+use App\Foundation\Emojiable;
 use App\Foundation\Favoriteable;
 use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Tags\TaggableTrait;
@@ -10,9 +10,7 @@ use Cartalyst\Tags\TaggableTrait;
 class Product extends Model
 {
     use TaggableTrait;
-    use Favoriteable;
-
-    use EmojiableTrait;
+    use Favoriteable, Emojiable;
 
     protected $table = 'products';
 

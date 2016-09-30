@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Extensions;
+namespace App\Foundation;
 
 use App\Emoji;
 
-trait EmojiableTrait
+trait Emojiable
 {
     public function emojis()
     {

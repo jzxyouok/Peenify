@@ -303,7 +303,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     /*
      * 同步跟隨
-     * TODO 重構
      */
     Route::post('follows/{followable_type}/{followable_id}', [
         'as' => 'follows.sync',

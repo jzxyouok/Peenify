@@ -17,7 +17,7 @@ class HomeControllerTest extends TestCase
     {
         parent::tearDown();
     }
-    
+
     /**
      * @group backend
      * @test

@@ -2,13 +2,12 @@
 
 namespace App;
 
-use App\Extensions\FollowableTrait;
-use App\Extensions\syncFollowToUser;
+use App\Foundation\Followable;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use FollowableTrait;
+    use Followable;
 
     protected $table = 'categories';
 

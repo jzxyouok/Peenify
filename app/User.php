@@ -2,13 +2,13 @@
 
 namespace App;
 
-use App\Extensions\FollowableTrait;
+use App\Foundation\Followable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, FollowableTrait;
+    use Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
