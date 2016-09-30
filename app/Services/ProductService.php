@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\ProductRepository;
-use App\User;
 
 class ProductService extends Service
 {
@@ -24,17 +23,14 @@ class ProductService extends Service
 
     public function create(array $attributes)
     {
-        $product = $this->productRepository->create($this->authUser($attributes));
+        $product = auth()->user()->products()->create($attributes);
 
-        $product->tag($attributes['tags']);
+        $product->setSlug()->tag($attributes['tags']);
 
-        $this->syncAuthorIfExist(array_get($attributes, 'authors'), $product);
-
-        $this->syncActorIfExist(array_get($attributes, 'actors'), $product);
-
-        $this->addToMovieOptions($product, array_get($attributes,'movie'));
-
-        $this->addToSeriesOptions($product, array_get($attributes,'series'));
+        $product->syncAuthors(array_get($attributes, 'authors'))
+                ->syncActors(array_get($attributes, 'actors'))
+                ->giveMovieTo(array_get($attributes,'movie'))
+                ->giveSeriesTo(array_get($attributes,'series'));
 
         return $product;
     }
@@ -54,54 +50,15 @@ class ProductService extends Service
         return $this->productRepository->destroy($id);
     }
 
-    public function syncAuthorIfExist($authorsId, $product)
-    {
-        if (!empty($authorsId)) {
-            $this->productRepository->syncAuthors($product, $authorsId);
-        }
-
-        return;
-    }
-
-    public function syncActorIfExist($actorsId, $product)
-    {
-        if (!empty($actorsId)) {
-            $this->productRepository->syncActors($product, $actorsId);
-        }
-
-        return;
-    }
-
     public function getAllPagination($page)
     {
         return $this->productRepository->LatestPagination($page);
     }
 
-    private function addToMovieOptions($product, $options)
-    {
-        if (!empty($options)) {
-            return $this->productRepository->saveToMovie($product, $options);
-        }
-        
-        return;
-    }
-
-    private function addToSeriesOptions($product, $options)
-    {
-        if (!empty($options)) {
-            return $this->productRepository->saveToSeries($product, $options);
-        }
-
-        return;
-    }
-
     /**
      * 同步最愛
-     * @param $id
-     * @param User $user
-     * @return bool
      */
-    public function syncFavoriteByUser($id, User $user)
+    public function syncFavoriteByUser($id, $user)
     {
         $product = $this->productRepository->find($id);
 

@@ -77,14 +77,12 @@ class ProductsControllerTest extends TestCase
         $product = factory(\App\Product::class)->create();
 
         factory(\App\Comment::class)->create([
-            'commentable_type' => 'product',
-            'commentable_id' => $product->id,
+            'product_id' => $product->id,
             'description' => 'hihi'
         ]);
 
         factory(\App\Comment::class)->create([
-            'commentable_type' => 'product',
-            'commentable_id' => $product->id,
+            'product_id' => $product->id,
             'description' => 'hihi2'
         ]);
 

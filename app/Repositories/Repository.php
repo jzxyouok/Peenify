@@ -41,14 +41,6 @@ abstract class Repository
         return $this->model->destroy($id);
     }
 
-    public function setSlugGenerator()
-    {
-        $this->model->setSlugGenerator(function($name) {
-            return base64_encode($name);
-        });
-        return $this->model;
-    }
-
     public function firstOrNew(array $attributes)
     {
         return $this->model->firstOrNew($attributes);

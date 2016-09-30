@@ -25,6 +25,15 @@ class Product extends Model
         'site'
     ];
 
+    public function setSlug()
+    {
+        $this->setSlugGenerator(function($name) {
+            return base64_encode($name);
+        });
+
+        return $this;
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -55,9 +64,27 @@ class Product extends Model
         return $this->belongsToMany(Author::class);
     }
 
+    public function syncAuthors($authorIds)
+    {
+        if (! empty($authorIds)) {
+            $this->authors()->sync((array) $authorIds);
+        }
+
+        return $this;
+    }
+
     public function actors()
     {
         return $this->belongsToMany(Actor::class);
+    }
+
+    public function syncActors($actorIds)
+    {
+        if (! empty($actorIds)) {
+            $this->actors()->sync((array) $actorIds);
+        }
+
+        return $this;
     }
 
     public function collections()
@@ -70,8 +97,26 @@ class Product extends Model
         return $this->hasOne(Movie::class);
     }
 
+    public function giveMovieTo($options)
+    {
+        if (! empty($options)) {
+            $this->movie()->save(new Movie($options));
+        }
+
+        return $this;
+    }
+
     public function series()
     {
         return $this->hasOne(Series::class);
+    }
+
+    public function giveSeriesTo($options)
+    {
+        if (! empty($options)) {
+            $this->series()->save(new Series($options));
+        }
+
+        return $this;
     }
 }
