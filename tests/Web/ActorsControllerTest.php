@@ -19,7 +19,6 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
-     * 不需要登入即可看到
      * @test
      * @group actor
      */
@@ -34,7 +33,6 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
-     * 簡單的表單
      * @test
      * @group actor
      */
@@ -44,7 +42,6 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
-     * 需要寫入 user_id 誰建立的，所以必須登入
      * @test
      * @group actor
      */
@@ -63,7 +60,6 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
-     * 不需登入看演員
      * @test
      * @group actor
      */
@@ -75,7 +71,6 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
-     * 簡單表單
      * @test
      * @group actor
      */
@@ -87,7 +82,6 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
-     * 更新需要 user_id
      * @test
      * @group actor
      */
@@ -108,7 +102,6 @@ class ActorsControllerTest extends TestCase
     }
 
     /**
-     * 刪除
      * @test
      * @group actor
      */

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthorsControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     public function setUp()
     {
@@ -38,8 +38,6 @@ class AuthorsControllerTest extends TestCase
      */
     public function testCreate()
     {
-        $this->loginFakeUser();
-
         $this->visit(route('authors.create'))->assertResponseStatus(200);
     }
 
@@ -52,7 +50,6 @@ class AuthorsControllerTest extends TestCase
         $this->loginFakeUser();
 
         $this->call('post', route('authors.store'), [
-            'user_id' => auth()->user()->id,
             'name' => 'travel',
             'description' => 'this is travel',
             'gender' => 'male',
@@ -68,8 +65,6 @@ class AuthorsControllerTest extends TestCase
      */
     public function testShow()
     {
-        $this->loginFakeUser();
-
         $author = factory(\App\Author::class)->create();
 
         $this->visit(route('authors.show', 1))->see($author->name);
@@ -81,8 +76,6 @@ class AuthorsControllerTest extends TestCase
      */
     public function testEdit()
     {
-        $this->loginFakeUser();
-
         $author = factory(\App\Author::class)->create();
 
         $this->visit(route('authors.edit', 1))->see($author->name);
@@ -112,8 +105,6 @@ class AuthorsControllerTest extends TestCase
      */
     public function testDestroy()
     {
-        $this->loginFakeUser();
-
         factory(\App\Author::class)->create();
 
         $this->call('delete', route('authors.destroy', 1));

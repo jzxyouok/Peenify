@@ -23,7 +23,7 @@ class AuthorService extends Service
 
     public function create(array $attributes)
     {
-        return $this->authorRepository->create($this->authUser($attributes));
+        return auth()->user()->authors()->create($attributes);
     }
 
     public function findOrFail($id)

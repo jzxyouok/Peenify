@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasMany(Actor::class);
     }
 
+    public function authors()
+    {
+        return $this->hasMany(Author::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
