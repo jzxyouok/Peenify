@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class VendorsControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithoutMiddleware;
 
     public function setUp()
     {
@@ -38,8 +38,6 @@ class VendorsControllerTest extends TestCase
      */
     public function testCreate()
     {
-        $this->loginFakeUser();
-
         $this->visit(route('vendors.create'))
             ->see('Create Vendor')
             ->see('create');

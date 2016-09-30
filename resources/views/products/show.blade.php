@@ -18,11 +18,11 @@
              src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x600' }}">
 
         <!--標籤-->
-        @include('products._partials.tags', [
-            'product' => $product
-            ])
+    @include('products._partials.tags', [
+        'product' => $product
+        ])
 
-        <!--電影額外選項-->
+    <!--電影額外選項-->
         @include('products._partials.movies', [
             'movie' => $product->movie()
         ])
@@ -72,13 +72,16 @@
             <span class="badge emoji-count">{{ $product->emojis()->where('type', 'bad')->count() }}</span>
         </div>
 
-
-        @if($product->favorites()->where('user_id', auth()->user()->id)->count())
-            <div class="favorite btn btn-danger"
-                 data-id={{ $product->id }} data-token={{ csrf_token() }}> 取消最愛 </div>
-        @else
-            <div class="favorite btn btn-default"
-                 data-id={{ $product->id }} data-token={{ csrf_token() }}> 最愛 </div>
+        @if (auth()->check())
+            @if($product->favorites()->where('user_id', auth()->user()->id)->count())
+                <div class="favorite btn btn-danger"
+                     data-id={{ $product->id }} data-token={{ csrf_token() }}> 取消最愛
+                </div>
+            @else
+                <div class="favorite btn btn-default"
+                     data-id={{ $product->id }} data-token={{ csrf_token() }}> 最愛
+                </div>
+            @endif
         @endif
 
         @include('comments._partials.create', [
