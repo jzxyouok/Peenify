@@ -4,26 +4,16 @@
         <p>{{ $comment->description }}</p>
         <a href="{{ route('comments.edit', $comment) }}">Edit</a>
 
-        @include('_partials.emojis', [
-        'relation' => $comment,
-        'type' => 'comment',
-        'emoji' => 'like',
-        'icon' => '&#x1F44D;',
-        ])
+        <div id="emoji" class="btn btn-{{ $comment->existEmojiByAuth('like') ? 'danger' : 'default' }}"
+             data-type="comment" data-emoji="like"
+             data-id={{ $comment->id }} data-token={{ csrf_token() }}> 喜歡
+            （{{ $comment->countEmojis('like') }}）
+        </div>
 
-        @include('_partials.emojis', [
-        'relation' => $comment,
-        'type' => 'comment',
-        'emoji' => 'normal',
-        'icon' => '&#x1F466;',
-        ])
-
-        @include('_partials.emojis', [
-        'relation' => $comment,
-        'type' => 'comment',
-        'emoji' => 'bad',
-        'icon' => '&#x1F44E;',
-        ])
-
+        <div id="emoji" class="btn btn-{{ $comment->existEmojiByAuth('bad') ? 'danger' : 'default' }}"
+             data-type="comment" data-emoji="bad"
+             data-id={{ $comment->id }} data-token={{ csrf_token() }}> 不喜歡
+            （{{ $comment->countEmojis('bad') }}）
+        </div>
     @endforeach
 </div>

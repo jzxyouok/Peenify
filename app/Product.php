@@ -120,4 +120,24 @@ class Product extends Model
 
         return $this;
     }
+
+    public function existEmojiByAuth($type)
+    {
+        return $this->emojis()->where('type', $type)->where('user_id', auth()->user()->id)->exists();
+    }
+
+    public function countEmojis($type)
+    {
+        return $this->emojis()->where('type', $type)->count();
+    }
+
+    public function existWishByAuth()
+    {
+        return $this->wishes()->where('user_id', auth()->user()->id)->exists();
+    }
+
+    public function existFavoriteByAuth()
+    {
+        return $this->favorites()->where('user_id', auth()->user()->id)->exists();
+    }
 }

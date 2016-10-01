@@ -32,4 +32,14 @@ class Comment extends Model
     {
         return $this->where('user_id', auth()->user()->id);
     }
+
+    public function existEmojiByAuth($type)
+    {
+        return $this->emojis()->where('type', $type)->where('user_id', auth()->user()->id)->exists();
+    }
+
+    public function countEmojis($type)
+    {
+        return $this->emojis()->where('type', $type)->count();
+    }
 }

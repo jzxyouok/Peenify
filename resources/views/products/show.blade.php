@@ -1,9 +1,7 @@
 @extends('layouts.app')
+
 @section('style')
     <style>
-        .emoji {
-        }
-
         .image-size {
             width: 50%;
             height: 50%;
@@ -15,29 +13,30 @@
 
     <div class="container">
         <img class="image-size"
-             src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x600' }}">
+             src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/400x400' }}">
 
         <!--標籤-->
-    @include('products._partials.tags', [
+        @include('products._partials.tags', [
         'product' => $product
         ])
 
-    <!--電影額外選項-->
+        <!--電影額外選項-->
         @include('products._partials.movies', [
             'movie' => $product->movie()
         ])
 
-        <h1>
-            {{ $product->name }}
-            @if($product->wishes->count())
-                <div id="wish" class="btn btn-danger" data-id={{ $product->id }} data-token={{ csrf_token() }}>從願望清單移除
+        <h1>{{ $product->name }}</h1>
+        <p>{{ $product->description }}</p>
+
+        <!--需要登入願望清單-->
+        @if(auth()->check())
+            <div class="form-group">
+                <div id="wish" class="btn btn-{{ $product->existWishByAuth() ? 'danger' : 'default' }}"
+                     data-id={{ $product->id }} data-token={{ csrf_token() }}>
+                    {{ $product->existWishByAuth() ? '從願望清單移除' : '加到願望清單'}}
                 </div>
-            @else
-                <div id="wish" class="btn btn-default" data-id={{ $product->id }} data-token={{ csrf_token() }}>加到願望清單
-                </div>
-            @endif
-        </h1>
-        <p>{{ $product->description }}</p><br>
+            </div>
+        @endif
 
         @if (auth()->check())
             @include('products._forms.collections', [
@@ -54,34 +53,27 @@
             @include('products._partials.actors')
         @endif
 
-        <div class="form-group">
-            @include('_partials.emojis', [
-                'relation' => $product,
-                'type' => 'product',
-                'emoji' => 'like',
-                'icon' => '&#x1F44D;',
-                ])
-            <span class="badge emoji-count">{{ $product->emojis()->where('type', 'like')->count() }}</span>
+        @if(auth()->check())
+            <div class="form-group">
+                <div id="emoji" class="btn btn-{{ $product->existEmojiByAuth('like') ? 'danger' : 'default' }}"
+                     data-type="product" data-emoji="like"
+                     data-id={{ $product->id }} data-token={{ csrf_token() }}> 喜歡
+                    （{{ $product->countEmojis('like') }}）
+                </div>
 
-            @include('_partials.emojis', [
-                'relation' => $product,
-                'type' => 'product',
-                'emoji' => 'bad',
-                'icon' => '&#x1F44E;',
-                ])
-            <span class="badge emoji-count">{{ $product->emojis()->where('type', 'bad')->count() }}</span>
-        </div>
+                <div id="emoji" class="btn btn-{{ $product->existEmojiByAuth('bad') ? 'danger' : 'default' }}"
+                     data-type="product" data-emoji="bad"
+                     data-id={{ $product->id }} data-token={{ csrf_token() }}> 不喜歡
+                    （{{ $product->countEmojis('bad') }}）
+                </div>
+            </div>
+        @endif
 
         @if (auth()->check())
-            @if($product->favorites()->where('user_id', auth()->user()->id)->count())
-                <div class="favorite btn btn-danger"
-                     data-id={{ $product->id }} data-token={{ csrf_token() }}> 取消最愛
-                </div>
-            @else
-                <div class="favorite btn btn-default"
-                     data-id={{ $product->id }} data-token={{ csrf_token() }}> 最愛
-                </div>
-            @endif
+            <div class="favorite btn btn-{{ $product->existFavoriteByAuth() ? 'danger' : 'default' }}"
+                 data-id={{ $product->id }} data-token={{ csrf_token() }}>
+                {{ $product->existWishByAuth() ? '取消最愛' : '最愛'}}
+            </div>
         @endif
 
         @include('comments._partials.create', [
@@ -115,7 +107,7 @@
                 });
             });
 
-            $(document).on('click', '.emoji', function () {
+            $(document).on('click', '#emoji', function () {
                 var $this = $(this);
                 var token = $this.data('token');
                 var id = $this.data('id');
