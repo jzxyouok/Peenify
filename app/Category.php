@@ -24,4 +24,9 @@ class Category extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function existFollowByAuth()
+    {
+        return $this->follows()->where('user_id', auth()->user()->id)->exists();
+    }
 }

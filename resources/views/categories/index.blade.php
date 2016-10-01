@@ -21,10 +21,12 @@
                 <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
             </h3>
 
-            @include('_partials.follows', [
-            'relation' => $category,
-            'type' => 'category',
-            ])
+            <div class="form-group">
+                <div id="follow" class="btn btn-{{ $category->existFollowByAuth() ? 'danger' : 'default' }}"
+                     data-type="category" data-id={{ $category->id }} data-token={{ csrf_token() }}>
+                    {{ $category->existFollowByAuth() ? '取消關注' : '關注' }}
+                </div>
+            </div>
 
             <p>{{ $category->description }}</p>
             <p>{{ $category->created_at->diffForHumans() }}</p>
@@ -36,7 +38,7 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            $(document).on('click', '.follow', function () {
+            $(document).on('click', '#follow', function () {
                 var $this = $(this);
                 var token = $this.data('token');
                 var id = $this.data('id');
