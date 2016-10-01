@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('style')
     <style>
         .image-size {
@@ -7,6 +8,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <div class="container">
         <h1>所有產品</h1>
@@ -18,26 +20,16 @@
                         <a href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
                     </h3>
                 </div>
+
                 <div class="panel-body">
                     {{ str_limit($product->description) }}
                 </div>
 
                 <div class="panel-footer">
-                    @include('products._partials.tags', [
-                        '$product' => $product
-                    ])
+                    @include('products._partials.tags')
                     {{ $product->created_at->diffForHumans() }}
                 </div>
             </div>
         @endforeach
     </div>
 @endsection
-
-@section('style')
-    <style>
-        #tag-link {
-            color: #FFFFFF;
-            text-decoration: none;
-        }
-    </style>
-    @endsection

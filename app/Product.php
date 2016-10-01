@@ -100,11 +100,7 @@ class Product extends Model
 
     public function giveMovieTo($options)
     {
-        if (! empty($options)) {
-            $this->movie()->save(new Movie($options));
-        }
-
-        return $this;
+        return array_isEmpty($options) ? $this : $this->movie()->save(new Movie($options));
     }
 
     public function series()
@@ -114,11 +110,7 @@ class Product extends Model
 
     public function giveSeriesTo($options)
     {
-        if (! empty($options)) {
-            $this->series()->save(new Series($options));
-        }
-
-        return $this;
+        return array_isEmpty($options) ? $this : $this->series()->save(new Series($options));
     }
 
     public function existEmojiByAuth($type)
