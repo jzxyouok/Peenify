@@ -294,7 +294,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     /*
      * 同步評分
-     * TODO 重構
      */
     Route::post('emojis/{emojiable_type}/{emojiable_id}', [
         'as' => 'emojis.sync',

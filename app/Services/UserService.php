@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Mail\WelcomeToSite;
 use App\Repositories\UserRepository;
+use Mail;
 
 class UserService extends Service
 {
@@ -31,6 +33,7 @@ class UserService extends Service
 
         if (! $exist) {
             $model->syncRolesTo([1,2]);
+            Mail::to($user->email)->send(new WelcomeToSite($user));
         }
 
         return $model;

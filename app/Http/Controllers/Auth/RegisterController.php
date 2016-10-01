@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\WelcomeToSite;
 use App\Services\UserService;
 use App\User;
+use Mail;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -75,6 +77,7 @@ class RegisterController extends Controller
         ]);
 
         $user->syncRolesTo([1,2]);
+        Mail::to($user->email)->send(new WelcomeToSite($user));
 
         return $user;
     }
