@@ -51,6 +51,11 @@ class CollectionService extends Service
         return $this->collectionRepository->getAllByUser($user_id);
     }
 
+    public function getAllByAuth()
+    {
+        return $this->collectionRepository->getAllByUser(auth()->user()->id);
+    }
+
     public function duplicateProductInCollection($id, $product_id)
     {
         $collection = $this->collectionRepository->findOrFail($id);
