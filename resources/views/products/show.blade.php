@@ -43,7 +43,7 @@
             @include('products._funcs.favorites')
 
             <!--收藏集-->
-            @include('products._lists.collections')
+            @include('products._forms.collections')
 
             <!--評分-->
             @include('products._funcs.emojis')
