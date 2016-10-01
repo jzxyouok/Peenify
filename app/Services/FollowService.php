@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Mail\NotifyFollowedUser;
 use App\Repositories\FollowRepository;
 use App\Repositories\UserRepository;
 

@@ -3,6 +3,8 @@
 namespace App\Foundation;
 
 use App\Follow;
+use App\Mail\NotifyFollowedUser;
+use App\User;
 
 trait Followable
 {
@@ -34,6 +36,10 @@ trait Followable
             $this->deleteFollow($instance, $attributes);
 
             return false;
+        }
+
+        if ($instance instanceof User) {
+            \Mail::to($instance->email)->send(new NotifyFollowedUser($instance, auth()->user()));
         }
 
         $this->createFollow($instance, $attributes);
