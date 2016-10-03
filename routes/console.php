@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\SendWeekly;
 use Illuminate\Foundation\Inspiring;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 });
+
+//Artisan::command('send_biweekly', function(){
+//    $this->comment(SendWeekly::send());
+//});
