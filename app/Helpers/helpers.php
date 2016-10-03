@@ -50,9 +50,13 @@ if (!function_exists('update_image')) {
     }
 }
 
-if (!function_exists('array_isEmpty')) {
-    function array_isEmpty(array $attributes)
+if (!function_exists('options_isEmpty')) {
+    function options_isEmpty($attributes)
     {
+        if (is_string($attributes) OR is_null($attributes)) {
+            return empty($attributes);
+        }
+
         return empty(array_filter($attributes));
     }
 }

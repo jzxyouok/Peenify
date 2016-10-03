@@ -8,8 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-<h1>{{ $follower->name }} 目前跟隨您了</h1>
+<h1>{{ $subscriber->name }} 目前跟隨您了</h1>
 
-<p>Hi. 親愛的 {{ $followed->name }}，恭喜你被跟隨囉</p>
+<p>Hi. 親愛的 {{ $subscribed->name }}，恭喜你被跟隨囉</p>
 </body>
 </html>

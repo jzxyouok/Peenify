@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Foundation\Followable;
+use App\Foundation\Subscribable;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use Followable;
+    use Subscribable;
 
     protected $table = 'categories';
 
@@ -23,10 +23,5 @@ class Category extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function existFollowByAuth()
-    {
-        return $this->follows()->where('user_id', auth()->user()->id)->exists();
     }
 }

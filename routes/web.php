@@ -79,14 +79,6 @@ Route::group(['prefix' => 'users'], function () {
     ]);
 
     /*
-     * User 跟隨以及被跟隨的清單
-     */
-    Route::get('{user}/follows', [
-        'as' => 'users.follows',
-        'uses' => 'FollowsController@showByUser'
-    ]);
-
-    /*
      * User 個人資料
      */
     Route::get('{user}', [
@@ -284,7 +276,7 @@ Route::post('collections/addProduct/{product}', [
 
 
 /*
- * 功能 favoriteable, emojiable, followable, ajaxTags
+ * 功能 favoriteable, emojiable, subscribable, ajaxTags
  */
 Route::group(['middleware' => 'auth'], function () {
     Route::post('favorites/{favoriteable_id}', [
@@ -301,11 +293,27 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
     /*
-     * 同步跟隨
+     * 訂閱
      */
-    Route::post('follows/{followable_type}/{followable_id}', [
-        'as' => 'follows.sync',
-        'uses' => 'FollowsController@sync',
+    Route::post('subscribe/{type}/{id}', [
+        'as' => 'subscribe.sync',
+        'uses' => 'SubscribesController@sync',
+    ]);
+
+    /*
+     * 被訂閱清單
+     */
+    Route::get('{type}/{id}/subscribers', [
+        'as' => 'subscribe.subscribers',
+        'uses' => 'SubscribesController@subscriber'
+    ]);
+
+    /*
+     * 訂閱清單
+     */
+    Route::get('{type}/{id}/subscribed', [
+        'as' => 'subscribe.subscribed',
+        'uses' => 'SubscribesController@subscribed'
     ]);
 
     /*

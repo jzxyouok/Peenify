@@ -97,7 +97,6 @@
                                 <a href="{{ route('users.show', auth()->user()->id) }}">個人頁面</a>
                                 <a href="{{ route('users.emojis', auth()->user()->id) }}">已經評分過的</a>
                                 <a href="{{ route('wishes.user', auth()->user()->id) }}">願望清單</a>
-                                <a href="{{ route('users.follows', auth()->user()->id) }}">關注</a>
                                 <a href="{{ route('users.edit') }}">Edit</a>
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault();

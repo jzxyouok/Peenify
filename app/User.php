@@ -2,13 +2,13 @@
 
 namespace App;
 
-use App\Foundation\Followable;
+use App\Foundation\Subscribable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable;
+    use Notifiable, Subscribable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'facebook_user_id', 'description', 'avatar'
+        'id', 'name', 'email', 'password', 'facebook_user_id', 'description', 'avatar'
     ];
 
     /**
@@ -95,10 +95,5 @@ class User extends Authenticatable
     public function vendors()
     {
         return $this->hasMany(Vendor::class);
-    }
-
-    public function existFollowByAuth()
-    {
-        return $this->follows()->where('user_id', auth()->user()->id)->exists();
     }
 }

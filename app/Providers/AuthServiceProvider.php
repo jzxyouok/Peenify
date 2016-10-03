@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        if($this->app->environment() !== 'testing') {
+        if($this->app->environment() !== 'testing' && $this->app->environment() !== 'local') {
             foreach ($this->getPermissions() as $permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasRole($permission->roles);

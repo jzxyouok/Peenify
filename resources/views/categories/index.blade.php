@@ -21,12 +21,15 @@
                 <a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a>
             </h3>
 
-            <div class="form-group">
-                <div id="follow" class="btn btn-{{ $category->existFollowByAuth() ? 'danger' : 'default' }}"
-                     data-type="category" data-id={{ $category->id }} data-token={{ csrf_token() }}>
-                    {{ $category->existFollowByAuth() ? '取消關注' : '關注' }}
+            @if(auth()->check())
+                <div class="form-group">
+                    <div id="subscribe"
+                         class="btn btn-{{ $category->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
+                         data-type="category" data-id={{ $category->id }} data-token={{ csrf_token() }}>
+                        {{ $category->isSubscribe(auth()->user()) ? '取消訂閱' : '訂閱' }}
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <p>{{ $category->description }}</p>
             <p>{{ $category->created_at->diffForHumans() }}</p>
@@ -38,28 +41,28 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            $(document).on('click', '#follow', function () {
+            $(document).on('click', '#subscribe', function () {
                 var $this = $(this);
                 var token = $this.data('token');
                 var id = $this.data('id');
                 var type = $this.data('type');
-                $.post('/follows/' + type + '/' + id, {
+                $.post('/subscribe/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
-                    if (result.status == 'create') {
-                        $this.addClass('btn-danger').removeClass('btn-default').text('取消關注');
+                    if (result.status == 'subscribe') {
+                        $this.addClass('btn-danger').removeClass('btn-default').text('取消訂閱');
                     } else {
                         swal({
                             title: "Are you sure?",
-                            text: "你要取消關注這個類別嗎？？",
+                            text: "你要取消訂閱這個類別嗎？？",
                             type: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "對，我不想看到了",
                             closeOnConfirm: false
                         }, function () {
-                            swal("取消關注成功!", "你已經取消關注囉", "success");
-                            $this.addClass('btn-default').removeClass('btn-danger').text('關注');
+                            swal("取消訂閱成功!", "你已經取消訂閱囉", "success");
+                            $this.addClass('btn-default').removeClass('btn-danger').text('訂閱');
                         });
                     }
                 });
