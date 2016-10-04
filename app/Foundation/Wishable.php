@@ -24,6 +24,6 @@ trait Wishable
 
     public function isWish(User $user)
     {
-        return (bool) $this->wishes()->where('user_id', $user->id)->exists();
+        return $this->wishes()->where('user_id', $user->id)->exists();
     }
 }

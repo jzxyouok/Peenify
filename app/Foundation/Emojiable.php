@@ -3,6 +3,7 @@
 namespace App\Foundation;
 
 use App\Emoji;
+use App\User;
 
 trait Emojiable
 {
@@ -11,46 +12,37 @@ trait Emojiable
         return $this->morphMany(Emoji::class, 'emojiable');
     }
 
-    public function createEmoji($instance, $attributes)
+    public function emoji(User $user, $type)
     {
-        return $instance->emojis()->save(new Emoji($attributes));
+        return $this->emojis()->save(new Emoji(['user_id' => $user->id, 'type' => $type]));
     }
 
-    public function updateEmoji($instance, $attributes)
+    public function unEmoji(User $user)
     {
-        return $instance->emojis()->where('user_id', $attributes['user_id'])->update(['type' => $attributes['type']]);
+        return $this->emojis()->delete(new Emoji(['user_id' => $user->id]));
     }
 
-    public function deleteEmoji($instance, $attributes)
+    public function updateEmoji(User $user, $type)
     {
-        return $instance->emojis()->delete(new Emoji($attributes));
+        return $this->emojis()->where('user_id', $user->id)->update(['type' => $type]);
     }
 
-    public function isExistEmoji($instance, $user_id)
+    public function isEmoji(User $user)
     {
-        return (bool) $instance->emojis()->where('user_id', $user_id)->count();
-    }
-
-    public function updateOrDeleteEmoji($instance, $attributes)
-    {
-        if ($instance->emojis()->first()->type == $attributes['type']) {
-            return $this->deleteEmoji($instance, $attributes);
-        }
-        return $this->updateEmoji($instance, $attributes);
-    }
-
-    public function syncEmoji($id, $attributes)
-    {
-        $instance = $this->find($id);
-
-        if ($this->isExistEmoji($instance, $attributes['user_id'])) {
-            $this->updateOrDeleteEmoji($instance, $attributes);
-
-            return false;
+        if (array_key_exists(1, func_get_args())) {
+            return $this->emojis()->where(['user_id' => $user->id, 'type' => func_get_arg(1)])->exists();
         }
 
-        $this->createEmoji($instance, $attributes);
+        return $this->emojis()->where(['user_id' => $user->id])->exists();
+    }
 
-        return true;
+    public function countEmoji(User $user, $type)
+    {
+        return $this->emojis()->where(['user_id' => $user->id, 'type' => $type])->count();
+    }
+
+    public function getEmoji($column = 'type')
+    {
+        return $this->emojis()->first((array)$column)->{$column};
     }
 }

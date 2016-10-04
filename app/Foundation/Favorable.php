@@ -24,6 +24,6 @@ trait Favorable
 
     public function isFavorite(User $user)
     {
-        return (bool) $this->favorites()->where('user_id', $user->id)->exists();
+        return $this->favorites()->where('user_id', $user->id)->exists();
     }
 }

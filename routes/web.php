@@ -289,27 +289,36 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 /*
- * 功能 favoriteable, emojiable, subscribable, ajaxTags, wishable
+ * 評分功能
  */
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('favorites/{type}/{id}', [
-        'as' => 'favorites.sync',
-        'uses' => 'FavoritesController@sync',
+Route::group(['middleware' => 'auth'], function() {
+    Route::post('emojis/{type}/{id}', [
+        'as' => 'emojis.sync',
+        'uses' => 'EmojisController@sync',
     ]);
+});
 
+/*
+ * 願望功能
+ */
+Route::group(['middleware' => 'auth'], function() {
     Route::post('wishes/{type}/{id}', [
         'as' => 'wishes.sync',
         'uses' => 'WishesController@sync',
     ]);
+});
 
-    /*
-     * 同步評分
-     */
-    Route::post('emojis/{emojiable_type}/{emojiable_id}', [
-        'as' => 'emojis.sync',
-        'uses' => 'EmojisController@sync',
+/*
+ * 最愛功能
+ */
+Route::group(['middleware' => 'auth'], function() {
+    Route::post('favorites/{type}/{id}', [
+        'as' => 'favorites.sync',
+        'uses' => 'FavoritesController@sync',
     ]);
+});
 
+Route::group(['middleware' => 'auth'], function () {
     /*
      * 標籤 auto complete api 接口
      */

@@ -95,12 +95,12 @@
                 var emoji = $this.data('emoji');
                 $.post('/emojis/' + type + '/' + id, {
                     '_token': token,
-                    'type': emoji
+                    'emoji': emoji
                 }, function (result) {
-                    if (result.status == 'create') {
+                    if (result.status == 'emoji') {
                         $this.addClass('btn-danger').removeClass('btn-default');
                     } else {
-                        $(".emoji").removeClass('btn-danger').addClass('btn-default');
+                        $("#emoji").removeClass('btn-danger').addClass('btn-default');
                         $this.addClass('btn-danger').removeClass('btn-default');
                     }
                 });

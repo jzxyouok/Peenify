@@ -24,6 +24,6 @@ trait Subscribable
 
     public function isSubscribe(User $user)
     {
-        return (bool) $this->subscribes()->where('user_id', $user->id)->exists();
+        return $this->subscribes()->where('user_id', $user->id)->exists();
     }
 }

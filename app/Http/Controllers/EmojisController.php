@@ -9,27 +9,24 @@ use App\Http\Requests;
 
 class EmojisController extends Controller
 {
-    /**
-     * @var EmojiService
-     */
-    private $emojiService;
-
-    public function __construct(EmojiService $emojiService)
+    public function sync(Request $request, $type, $id)
     {
-        $this->emojiService = $emojiService;
-    }
+        $instance = app(ucfirst('App\\' . $type))->find($id);
 
-    public function sync(Request $request, $emojiable_type, $emojiable_id)
-    {
-        $result = $this->emojiService->syncEmoji($emojiable_type, $emojiable_id, $request->all());
+        if ($instance->isEmoji(auth()->user())) {
+            if ($instance->getEmoji('type') == $request->get('emoji')) {
+                $instance->unEmoji(auth()->user());
 
-        return response()->json(['status' => ($result) ? 'create' : 'edit']);
-    }
+                return response()->json(['status' => 'unEmoji']);
+            }
 
-    public function showByUser($user_id)
-    {
-        $emojis = $this->emojiService->getAllByUser($user_id);
+            $instance->updateEmoji(auth()->user(), $request->get('emoji'));
 
-        return view('users.emojis', compact('emojis'));
+            return response()->json(['status' => 'updateEmoji']);
+        }
+
+        $instance->emoji(auth()->user(), $request->get('emoji'));
+
+        return response()->json(['status' => 'emoji']);
     }
 }
