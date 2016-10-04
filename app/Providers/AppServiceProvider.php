@@ -8,7 +8,6 @@ use App\Category;
 use App\Collection;
 use App\Comment;
 use App\Product;
-use App\Tag;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Relation;
