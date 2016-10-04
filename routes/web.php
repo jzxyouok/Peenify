@@ -44,22 +44,6 @@ Route::group(['prefix' => 'users'], function () {
             'as' => 'users.update',
             'uses' => 'UsersController@update',
         ]);
-
-        /*
-         * User 願望清單
-         */
-        Route::get('{user}/wishlist', [
-            'as' => 'wishes.user',
-            'uses' => 'WishesController@showByUser'
-        ]);
-
-        /*
-         * 加入或刪除願望
-         */
-        Route::post('wishes/{product}', [
-            'as' => 'wishes.sync',
-            'uses' => 'WishesController@sync'
-        ]);
     });
 
     /*
@@ -276,25 +260,12 @@ Route::post('collections/addProduct/{product}', [
 
 
 /*
- * 功能 favoriteable, emojiable, subscribable, ajaxTags
+ * 訂閱功能
  */
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('favorites/{type}/{id}', [
-        'as' => 'favorites.sync',
-        'uses' => 'FavoritesController@sync',
-    ]);
-
+Route::group(['middleware' => 'auth'], function() {
     /*
-     * 同步評分
-     */
-    Route::post('emojis/{emojiable_type}/{emojiable_id}', [
-        'as' => 'emojis.sync',
-        'uses' => 'EmojisController@sync',
-    ]);
-
-    /*
-     * 訂閱
-     */
+    * 訂閱
+    */
     Route::post('subscribes/{type}/{id}', [
         'as' => 'subscribes.sync',
         'uses' => 'SubscribesController@sync',
@@ -314,6 +285,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('{type}/{id}/subscribed', [
         'as' => 'subscribes.subscribed',
         'uses' => 'SubscribesController@subscribed'
+    ]);
+});
+
+/*
+ * 功能 favoriteable, emojiable, subscribable, ajaxTags, wishable
+ */
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('favorites/{type}/{id}', [
+        'as' => 'favorites.sync',
+        'uses' => 'FavoritesController@sync',
+    ]);
+
+    Route::post('wishes/{type}/{id}', [
+        'as' => 'wishes.sync',
+        'uses' => 'WishesController@sync',
+    ]);
+
+    /*
+     * 同步評分
+     */
+    Route::post('emojis/{emojiable_type}/{emojiable_id}', [
+        'as' => 'emojis.sync',
+        'uses' => 'EmojisController@sync',
     ]);
 
     /*

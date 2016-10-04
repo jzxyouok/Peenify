@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Actor;
+use App\Author;
 use App\Category;
+use App\Collection;
 use App\Comment;
 use App\Product;
+use App\Tag;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -24,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
             'product' => Product::class,
             'comment' => Comment::class,
             'user' => User::class,
+            'collection' => Collection::class,
+            'author' => Author::class,
+            'actor' => Actor::class,
         ]);
     }
 

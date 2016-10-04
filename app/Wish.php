@@ -9,12 +9,14 @@ class Wish extends Model
     protected $table = 'wishes';
 
     protected $fillable = [
-        'id', 'user_id', 'product_id',
+        'wishable_type',
+        'wishable_id',
+        'user_id',
     ];
 
-    public function product()
+    public function wishable()
     {
-        return $this->belongsTo(Product::class);
+        return $this->morphTo();
     }
 
     public function user()

@@ -4,12 +4,13 @@ namespace App;
 
 use App\Foundation\Emojiable;
 use App\Foundation\Favorable;
+use App\Foundation\Wishable;
 use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Tags\TaggableTrait;
 
 class Product extends Model
 {
-    use TaggableTrait, Favorable;
+    use TaggableTrait, Favorable, Wishable;
     use Emojiable;
 
     protected $table = 'products';
@@ -43,11 +44,6 @@ class Product extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-    public function wishes()
-    {
-        return $this->hasMany(Wish::class);
     }
 
     public function user()
@@ -129,10 +125,5 @@ class Product extends Model
     public function countEmojis($type)
     {
         return $this->emojis()->where('type', $type)->count();
-    }
-
-    public function existWishByAuth()
-    {
-        return $this->wishes()->where('user_id', auth()->user()->id)->exists();
     }
 }

@@ -9,34 +9,18 @@ use App\Http\Requests;
 
 class WishesController extends Controller
 {
-    /**
-     * @var WishService
-     */
-    private $wishService;
-
-    public function __construct(WishService $wishService)
+    public function sync($type, $id)
     {
-        $this->wishService = $wishService;
-    }
+        $instance = app(ucfirst('App\\' . $type))->find($id);
 
-    public function showByUser($user_id)
-    {
-        $wishes = $this->wishService->getAllByUser($user_id);
+        if ($instance->isWish(auth()->user())) {
+            $instance->unWish(auth()->user());
 
-        return view('users.wishes', compact('wishes'));
-    }
-
-    public function sync($product_id)
-    {
-        if ($this->wishService->getWishByProductAndAuth($product_id)) {
-            $this->wishService->destroy($product_id);
-            $status = 'delete';
-        } else {
-            $this->wishService->create($product_id);
-
-            $status = 'create';
+            return response()->json(['status' => 'unWish']);
         }
 
-        return response()->json(['status' => $status]);
+        $instance->wish(auth()->user());
+
+        return response()->json(['status' => 'wish']);
     }
 }

@@ -71,7 +71,6 @@
                             <li>
                                 <a href="{{ route('users.show', auth()->user()->id) }}">個人頁面</a>
                                 <a href="{{ route('users.emojis', auth()->user()->id) }}">已經評分過的</a>
-                                <a href="{{ route('wishes.user', auth()->user()->id) }}">願望清單</a>
                                 <a href="{{ route('subscribes.subscribers', ['type' => 'user', 'id' => auth()->user()->id]) }}">訂閱</a>
                                 <a href="{{ route('subscribes.subscribed', ['type' => 'user', 'id' => auth()->user()->id]) }}">訂閱你的人</a>
                                 <a href="{{ route('users.edit') }}">Edit</a>

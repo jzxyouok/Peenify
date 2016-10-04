@@ -15,7 +15,8 @@ class CreateWishesTable extends Migration
     {
         Schema::create('wishes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id')->unsigned()->index();
+            $table->string('wishable_type');
+            $table->integer('wishable_id');
             $table->integer('user_id')->unsigned()->index();
             $table->timestamps();
         });
