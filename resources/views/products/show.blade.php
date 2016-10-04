@@ -99,11 +99,12 @@
             $(document).on('click', '#favorite', function () {
                 var $this = $(this);
                 var token = $this.data('token');
+                var type = $this.data('type');
                 var id = $this.data('id');
-                $.post('/favorites/' + id, {
+                $.post('/favorites/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
-                    if (result.status == 'create') {
+                    if (result.status == 'favorite') {
                         $this.addClass('btn-danger').removeClass('btn-default').text('取消最愛');
                     } else {
                         swal({

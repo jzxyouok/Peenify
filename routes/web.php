@@ -279,7 +279,7 @@ Route::post('collections/addProduct/{product}', [
  * 功能 favoriteable, emojiable, subscribable, ajaxTags
  */
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('favorites/{favoriteable_id}', [
+    Route::post('favorites/{type}/{id}', [
         'as' => 'favorites.sync',
         'uses' => 'FavoritesController@sync',
     ]);
@@ -295,8 +295,8 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * 訂閱
      */
-    Route::post('subscribe/{type}/{id}', [
-        'as' => 'subscribe.sync',
+    Route::post('subscribes/{type}/{id}', [
+        'as' => 'subscribes.sync',
         'uses' => 'SubscribesController@sync',
     ]);
 
@@ -304,7 +304,7 @@ Route::group(['middleware' => 'auth'], function () {
      * 被訂閱清單
      */
     Route::get('{type}/{id}/subscribers', [
-        'as' => 'subscribe.subscribers',
+        'as' => 'subscribes.subscribers',
         'uses' => 'SubscribesController@subscriber'
     ]);
 
@@ -312,7 +312,7 @@ Route::group(['middleware' => 'auth'], function () {
      * 訂閱清單
      */
     Route::get('{type}/{id}/subscribed', [
-        'as' => 'subscribe.subscribed',
+        'as' => 'subscribes.subscribed',
         'uses' => 'SubscribesController@subscribed'
     ]);
 

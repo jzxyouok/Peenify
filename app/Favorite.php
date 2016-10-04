@@ -9,12 +9,12 @@ class Favorite extends Model
     protected $table = 'favorites';
 
     protected $fillable = [
-        'favoriteable_type',
-        'favoriteable_id',
+        'favorable_type',
+        'favorable_id',
         'user_id',
     ];
 
-    public function followable()
+    public function favorable()
     {
         return $this->morphTo();
     }

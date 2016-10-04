@@ -46,7 +46,7 @@
                 var token = $this.data('token');
                 var id = $this.data('id');
                 var type = $this.data('type');
-                $.post('/subscribe/' + type + '/' + id, {
+                $.post('/subscribes/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
                     if (result.status == 'subscribe') {

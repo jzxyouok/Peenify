@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ProductService;
+use App\Services\FavoriteService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,19 +10,27 @@ use App\Http\Requests;
 class FavoritesController extends Controller
 {
     /**
-     * @var ProductService
+     * @var FavoriteService
      */
-    private $productService;
+    private $favoriteService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(FavoriteService $favoriteService)
     {
-        $this->productService = $productService;
+        $this->favoriteService = $favoriteService;
     }
 
-    public function sync(Request $request, $favoriteable_id)
+    public function sync($type, $id)
     {
-        $result = $this->productService->syncFavoriteByUser($favoriteable_id, auth()->user());
+        $instance = app(ucfirst('App\\' . $type))->find($id);
 
-        return response()->json(['status' => ($result) ? 'create' : 'edit']);
+        if ($instance->isFavorite(auth()->user())) {
+            $instance->unFavorite(auth()->user());
+
+            return response()->json(['status' => 'unFavorite']);
+        }
+
+        $instance->favorite(auth()->user());
+
+        return response()->json(['status' => 'favorite']);
     }
 }

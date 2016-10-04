@@ -3,14 +3,14 @@
 namespace App;
 
 use App\Foundation\Emojiable;
-use App\Foundation\Favoriteable;
+use App\Foundation\Favorable;
 use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Tags\TaggableTrait;
 
 class Product extends Model
 {
-    use TaggableTrait;
-    use Favoriteable, Emojiable;
+    use TaggableTrait, Favorable;
+    use Emojiable;
 
     protected $table = 'products';
 
@@ -134,10 +134,5 @@ class Product extends Model
     public function existWishByAuth()
     {
         return $this->wishes()->where('user_id', auth()->user()->id)->exists();
-    }
-
-    public function existFavoriteByAuth()
-    {
-        return $this->favorites()->where('user_id', auth()->user()->id)->exists();
     }
 }
