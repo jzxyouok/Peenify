@@ -23,9 +23,9 @@ class WishService extends Service
         return $this->wishRepository->create($this->authUser($attributes));
     }
 
-    public function getAllByUser($user_id)
+    public function getByUser($user_id)
     {
-        return $this->wishRepository->getAllByUser($user_id);
+        return $this->wishRepository->getByUser($user_id);
     }
 
     public function destroy($product_id)

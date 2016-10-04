@@ -73,4 +73,9 @@ class CollectionService extends Service
     {
         return $this->collectionRepository->LatestPagination($page);
     }
+
+    public function findByUser($user_id)
+    {
+        return $this->collectionRepository->getByUser($user_id);
+    }
 }

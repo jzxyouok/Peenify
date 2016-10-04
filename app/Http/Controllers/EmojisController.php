@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Emoji;
 use App\Services\EmojiService;
 use Illuminate\Http\Request;
 
@@ -9,6 +10,23 @@ use App\Http\Requests;
 
 class EmojisController extends Controller
 {
+    /**
+     * @var EmojiService
+     */
+    private $emojiService;
+
+    public function __construct(EmojiService $emojiService)
+    {
+        $this->emojiService = $emojiService;
+    }
+
+    public function showByUser($user_id)
+    {
+        $emojis = $this->emojiService->findByUser($user_id);
+
+        return view('users.emojis', compact('emojis'));
+    }
+
     public function sync(Request $request, $type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);

@@ -9,6 +9,16 @@ use App\Http\Requests;
 
 class WishesController extends Controller
 {
+    /**
+     * @var WishService
+     */
+    private $wishService;
+
+    public function __construct(WishService $wishService)
+    {
+        $this->wishService = $wishService;
+    }
+
     public function sync($type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);
@@ -22,5 +32,12 @@ class WishesController extends Controller
         $instance->wish(auth()->user());
 
         return response()->json(['status' => 'wish']);
+    }
+
+    public function showByUser($user_id)
+    {
+        $wishes = $this->wishService->getByUser($user_id);
+
+        return view('users.wishes', compact('wishes'));
     }
 }

@@ -66,6 +66,13 @@ class CollectionsController extends Controller
         return redirect()->back()->with('message', '刪除成功');
     }
 
+    public function showByUser($user_id)
+    {
+        $collections = $this->collectionService->findByUser($user_id);
+
+        return view('users.collections', compact('collections'));
+    }
+
     /**
      * @param Request $request
      * @param $product_id

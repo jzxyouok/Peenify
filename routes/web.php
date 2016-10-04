@@ -55,11 +55,35 @@ Route::group(['prefix' => 'users'], function () {
     ]);
 
     /*
-     * User 評分過的所有 product
+     * User 評分清單
      */
     Route::get('{user}/emojis', [
         'as' => 'users.emojis',
         'uses' => 'EmojisController@showByUser'
+    ]);
+
+    /*
+     * User 願望清單
+     */
+    Route::get('{user}/wishes', [
+        'as' => 'users.wishes',
+        'uses' => 'WishesController@showByUser'
+    ]);
+
+    /*
+     * User 最愛清單
+     */
+    Route::get('{user}/favorites', [
+        'as' => 'users.favorites',
+        'uses' => 'FavoritesController@showByUser'
+    ]);
+
+    /*
+     * User 收藏清單
+     */
+    Route::get('{user}/collections', [
+        'as' => 'users.collections',
+        'uses' => 'CollectionsController@showByUser'
     ]);
 
     /*

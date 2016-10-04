@@ -2,13 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Emoji;
+use App\Favorite;
 
-class EmojiRepository extends Repository
+class FavoriteRepository
 {
-    protected $model;
+    /**
+     * @var Favorite
+     */
+    private $model;
 
-    public function __construct(Emoji $model)
+    public function __construct(Favorite $model)
     {
         $this->model = $model;
     }

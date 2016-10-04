@@ -1,6 +1,6 @@
 @inject('collections', 'App\Services\CollectionService')
 
-@if ($collections->getAllByAuth()->isEmpty())
+@if ($collections->findByUser(auth()->user()->id)->isEmpty())
     還沒有收藏集嗎？
     <div class="form-group">
         <a class="btn btn-default" href="{{ route('collections.create') }}">建立收藏集</a>
@@ -11,7 +11,7 @@
             {{ csrf_field() }}
             <div class="col-md-4">
                 <select class="form-control" name="collection_id">
-                    @foreach($collections->getAllByAuth() as $collection)
+                    @foreach($collections->findByUser(auth()->user()->id) as $collection)
                         <option value="{{ $collection->id }}">{{ $collection->name }}</option>
                     @endforeach
                 </select>
