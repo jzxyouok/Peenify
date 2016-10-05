@@ -16,7 +16,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-control">
+            <div>
                 <input class="btn btn-default" type="submit" value="加入到此收藏集">
             </div>
         </form>

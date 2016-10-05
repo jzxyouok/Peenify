@@ -102,6 +102,20 @@ class Product extends Model
         return $this;
     }
 
+    public function game()
+    {
+        return $this->hasOne(Game::class);
+    }
+
+    public function giveGameTo($options)
+    {
+        if (! options_isEmpty($options)) {
+            $this->game()->save(new Game($options));
+        }
+
+        return $this;
+    }
+
     public function series()
     {
         return $this->hasOne(Series::class);

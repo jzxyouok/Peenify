@@ -58,6 +58,10 @@
             影集
             @include('products._forms.series')
 
+            <!--額外的遊戲選項-->
+            遊戲
+            @include('products._forms.games')
+
             <div class="form-group">
                 <input type="submit" value="建立" class="btn btn-default">
             </div>
