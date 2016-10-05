@@ -54,6 +54,13 @@
                 <li><a href="{{ route('vendors.index') }}">廠商</a></li>
             </ul>
 
+            <form class="navbar-form navbar-left" action="{{ route('searches.result') }}">
+                <div class="form-group">
+                    <input type="text" name="term" class="form-control" placeholder="搜尋....">
+                </div>
+                <button type="submit" class="btn btn-default">搜尋</button>
+            </form>
+
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

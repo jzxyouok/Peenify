@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('searches/result', [
+    'as' => 'searches.result',
+    'uses' => 'SearchesController@result'
+]);
+
 /*
  * Facebook 登入回呼跟寫入服務
  */
@@ -443,7 +448,7 @@ Route::group(['prefix' => 'actors'], function () {
 });
 
 /*
- * 廠商/代理商 CURD
+ * 廠商/代理商
  */
 Route::group(['prefix' => 'vendors'], function () {
     /**
