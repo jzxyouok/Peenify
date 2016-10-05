@@ -14,6 +14,8 @@ class ProductsTableSeeder extends Seeder
     {
         DB::table('products')->truncate();
         DB::table('users')->truncate();
+        DB::table('tags')->truncate();
+        DB::table('tagged')->truncate();
 
         $categories = \App\Category::all();
         $faker = Faker::create();
@@ -21,12 +23,14 @@ class ProductsTableSeeder extends Seeder
 
         foreach ($categories as $category) {
             for ($i = 1; $i <= random_int(1, 20); $i++) {
-                \App\Product::create([
+                $product = \App\Product::create([
                     'category_id' => $category->id,
                     'user_id' => $user->id,
                     'name' => $faker->company,
                     'description' => $faker->sentence,
                 ]);
+
+                $product->tag([$faker->text(random_int(5, 10)), $faker->text(random_int(5, 10)), $faker->text(random_int(5, 10))]);
             }
         }
     }
