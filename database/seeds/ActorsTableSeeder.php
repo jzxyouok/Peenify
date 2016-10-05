@@ -11,6 +11,8 @@ class ActorsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('actors')->truncate();
+
         factory(\App\Actor::class)->times(10)->create();
     }
 }

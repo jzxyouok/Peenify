@@ -12,6 +12,9 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('products')->truncate();
+        DB::table('users')->truncate();
+
         $categories = \App\Category::all();
         $faker = Faker::create();
         $user = factory(\App\User::class)->create();

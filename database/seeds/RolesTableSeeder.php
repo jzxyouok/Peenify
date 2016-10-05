@@ -11,6 +11,8 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('roles')->truncate();
+
         foreach (config('role') as $role => $value) {
             factory(\App\Role::class)->create([
                 'name' => $role,

@@ -11,6 +11,8 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('permissions')->truncate();
+
         foreach (config('permission') as $permission => $value) {
             factory(\App\Permission::class)->create([
                 'name' => $permission,

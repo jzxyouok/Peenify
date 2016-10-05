@@ -11,6 +11,8 @@ class AuthorsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('authors')->truncate();
+
         factory(\App\Author::class)->times(10)->create();
     }
 }
