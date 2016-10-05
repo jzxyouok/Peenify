@@ -26,6 +26,14 @@
         <!--標籤-->
         @include('products._partials.tags')
 
+        <!--作者-->
+        <h3>作者</h3>
+        @include('products._partials.authors')
+
+        <!--作者-->
+        <h3>演員</h3>
+        @include('products._partials.actors')
+
         <!------------------------------------->
 
         <!--電影額外選項-->

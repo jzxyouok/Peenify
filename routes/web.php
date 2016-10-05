@@ -18,6 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+ * 搜尋功能
+ */
 Route::get('searches/result', [
     'as' => 'searches.result',
     'uses' => 'SearchesController@result'
