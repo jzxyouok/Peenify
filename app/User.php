@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Foundation\Emojiable;
 use App\Foundation\Subscribable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Subscribable;
+    use Notifiable, Subscribable, Emojiable;
 
     /**
      * The attributes that are mass assignable.

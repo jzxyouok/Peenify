@@ -17,6 +17,9 @@
                     {{ $user->isSubscribe(auth()->user()) ? '取消關注' : '關注' }}
                 </div>
             </div>
+
+            <!--鼓勵-->
+            @include('users._funcs.emojis')
         @endif
     </div>
 
@@ -48,6 +51,24 @@
                             swal("取消關注成功!", "你已經取消關注他囉", "success");
                             $this.addClass('btn-default').removeClass('btn-danger').text('關注');
                         });
+                    }
+                });
+            });
+            
+            $(document).on('click', '#emoji', function () {
+                var $this = $(this);
+                var token = $this.data('token');
+                var id = $this.data('id');
+                var type = $this.data('type');
+                var emoji = $this.data('emoji');
+                $.post('/emojis/' + type + '/' + id, {
+                    '_token': token,
+                    'emoji': emoji
+                }, function (result) {
+                    if (result.status == 'emoji') {
+                        $this.addClass('btn-danger').removeClass('btn-default');
+                    } else {
+                        $this.removeClass('btn-danger').addClass('btn-default');
                     }
                 });
             });
