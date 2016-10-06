@@ -57,7 +57,9 @@
             @include('products._funcs.emojis')
 
             <!--評論表單-->
-            @include('comments._partials.create')
+            @if (! auth()->user()->hasBeenCommentByProduct($product->id))
+                @include('comments._partials.create')
+            @endif
         @endif
 
         <!--評論清單-->

@@ -43,6 +43,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function hasBeenCommentByProduct($product_id)
+    {
+        return $this->comments()->where('product_id', $product_id)->exists();
+    }
+
     public function collections()
     {
         return $this->hasMany(Collection::class);

@@ -23,7 +23,11 @@ class CommentsController extends Controller
 
     public function store(Request $request, $product_id)
     {
-        $this->commentService->create(array_add($request->all(), 'product_id', $product_id));
+        $result = $this->commentService->create(array_add($request->all(), 'product_id', $product_id));
+
+        if (! $result) {
+            return back()->with('warning', 'Oops! 每個使用者只能評論一次');
+        }
 
         return redirect()->route("products.show", $product_id)->with('message', '建立成功');
     }

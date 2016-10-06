@@ -2,6 +2,7 @@
     <h4>評論</h4>
     @foreach($product->comments as $comment)
         <p>{{ $comment->description }}</p>
+        <p>{{ $comment->user->name }}</p>
         @if(auth()->check())
             <a class="btn btn-default" href="{{ route('comments.edit', $comment) }}">Edit</a>
             <div id="emoji" class="btn btn-{{ $comment->existEmojiByAuth('like') ? 'danger' : 'default' }}"

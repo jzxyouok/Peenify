@@ -23,6 +23,10 @@ class CommentService extends Service
 
     public function create(array $attributes)
     {
+        if (auth()->user()->hasBeenCommentByProduct($attributes['product_id'])) {
+            return false;
+        }
+
         return auth()->user()->comments()->create($attributes);
     }
 
