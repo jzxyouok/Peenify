@@ -42,7 +42,7 @@ class SubscribeService
     public function sendMailToSubscribedUser($instance)
     {
         if ($instance instanceof User) {
-            return Mail::to($instance->email)->send(new SubscribedUser($instance, auth()->user()));
+            return Mail::to($instance->email)->later(config('queue.mail.subscription'), new SubscribedUser($instance, auth()->user()));
         }
 
         return;

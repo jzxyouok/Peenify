@@ -82,4 +82,15 @@ return [
         'table' => 'failed_jobs',
     ],
 
+
+    /*
+     * 寄送信件隊列延遲時間
+     * php artisan queue:listen
+     * time format: second.
+     */
+    'mail' => [
+        'registration' => 5,
+        'subscription' => 10,
+    ],
+
 ];

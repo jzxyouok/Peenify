@@ -77,7 +77,7 @@ class RegisterController extends Controller
         ]);
 
         $user->syncRolesTo([1,2]);
-        Mail::to($user->email)->send(new WelcomeToSite($user));
+        Mail::to($user->email)->later(config('queue.mail.registration'), new WelcomeToSite($user));
 
         return $user;
     }
