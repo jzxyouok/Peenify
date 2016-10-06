@@ -36,12 +36,20 @@ class CommentsController extends Controller
     {
         $comment = $this->commentService->findOrFail($id);
 
+        if (! $comment) {
+            return back()->with('warning', 'Oops! 你不是發表此評論的人');
+        }
+
         return view('comments.edit', compact('comment'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->commentService->update($id, $request->all());
+        $comment = $this->commentService->update($id, $request->all());
+
+        if (! $comment) {
+            return back()->with('warning', 'Oops! 你不是發表此評論的人');
+        }
 
         return redirect()->back()->with('message', '編輯成功');
     }

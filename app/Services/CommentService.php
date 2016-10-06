@@ -32,12 +32,16 @@ class CommentService extends Service
 
     public function findOrFail($id)
     {
-        return $this->commentRepository->findOrFail($id);
+        $comment = $this->commentRepository->findOrFail($id);
+
+        return $comment->owns(auth()->user()) ? $comment : false;
     }
 
     public function update($id, array $attributes)
     {
-        return $this->commentRepository->update($id, $attributes);
+        $comment = $this->commentRepository->find($id);
+
+        return $comment->updateByOwner($attributes);
     }
 
     public function destroy($id)

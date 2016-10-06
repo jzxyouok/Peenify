@@ -54,7 +54,7 @@
                     }
                 });
             });
-            
+
             $(document).on('click', '#emoji', function () {
                 var $this = $(this);
                 var token = $this.data('token');

@@ -255,23 +255,21 @@ Route::group(['prefix' => 'comments'], function () {
         /**
          * 擁有者可以編輯與更新自己的評論
          */
-        Route::group(['middleware' => 'owner:comment'], function () {
-            /*
-             * 編輯評論
-             */
-            Route::get('{comment}/edit', [
-                'as' => 'comments.edit',
-                'uses' => 'CommentsController@edit',
-            ]);
+        /*
+         * 編輯評論
+         */
+        Route::get('{comment}/edit', [
+            'as' => 'comments.edit',
+            'uses' => 'CommentsController@edit',
+        ]);
 
-            /*
-             * 更新評論
-             */
-            Route::match(['PUT', 'PATCH'], '{comment}', [
-                'as' => 'comments.update',
-                'uses' => 'CommentsController@update',
-            ]);
-        });
+        /*
+         * 更新評論
+         */
+        Route::match(['PUT', 'PATCH'], '{comment}', [
+            'as' => 'comments.update',
+            'uses' => 'CommentsController@update',
+        ]);
 
     });
 });

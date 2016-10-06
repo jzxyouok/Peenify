@@ -28,18 +28,27 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function owner()
+    public function owns()
     {
-        return $this->where('user_id', auth()->user()->id);
+        if (empty(func_get_args())) {
+            return $this->user_id == auth()->user()->id;
+        }
+
+        if (func_get_arg(0) instanceof User) {
+            $user = func_get_arg(0);
+
+            return $this->user_id == $user->id;
+        }
+
+        throw new \InvalidArgumentException("Must be instance of User");
     }
 
-    public function existEmojiByAuth($type)
+    public function updateByOwner(array $attributes)
     {
-        return $this->emojis()->where('type', $type)->where('user_id', auth()->user()->id)->exists();
-    }
+        if ($this->owns(auth()->user())) {
+            return $this->update($attributes);
+        }
 
-    public function countEmojis($type)
-    {
-        return $this->emojis()->where('type', $type)->count();
+        return false;
     }
 }

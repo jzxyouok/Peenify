@@ -37,14 +37,36 @@ class CommentServiceTest extends TestCase
      * @test
      * @group comment
      */
-    public function testShow()
+    public function testEdit()
     {
-        $repository = $this->initMock(CommentRepository::class);
-        $repository->shouldReceive('findOrFail')->once();
+        $this->loginFakeUser();
 
-        $service = new \App\Services\CommentService($repository);
+        $comment = factory(\App\Comment::class)->create([
+            'user_id' => auth()->user()->id,
+        ]);
 
-        $service->findOrFail(1);
+        $service = app(\App\Services\CommentService::class);
+
+        $result = $service->findOrFail($comment->id);
+
+        $this->assertEquals($result->id, $comment->id);
+    }
+
+    /**
+     * @test
+     * @group comment
+     */
+    public function testEditWithFalse()
+    {
+        $this->loginFakeUser();
+
+        $comment = factory(\App\Comment::class)->create();
+
+        $service = app(\App\Services\CommentService::class);
+
+        $result = $service->findOrFail($comment->id);
+
+        $this->assertFalse($result);
     }
 
     /**
@@ -53,14 +75,38 @@ class CommentServiceTest extends TestCase
      */
     public function testUpdate()
     {
-        $repository = $this->initMock(CommentRepository::class);
-        $repository->shouldReceive('update')->once();
+        $this->loginFakeUser();
 
-        $service = new \App\Services\CommentService($repository);
+        $comment = factory(\App\Comment::class)->create([
+            'user_id' => auth()->user()->id,
+        ]);
 
-        $service->update(1, [
+        $service = app(\App\Services\CommentService::class);
+
+        $result = $service->update($comment->id, [
             'description' => 'updated'
         ]);
+
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @test
+     * @group comment
+     */
+    public function testUpdateWithFalse()
+    {
+        $this->loginFakeUser();
+
+        $comment = factory(\App\Comment::class)->create();
+
+        $service = app(\App\Services\CommentService::class);
+
+        $result = $service->update($comment->id, [
+            'description' => 'updated'
+        ]);
+
+        $this->assertFalse($result);
     }
 
     /**
