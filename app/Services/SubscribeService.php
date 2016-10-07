@@ -25,18 +25,18 @@ class SubscribeService
         $this->userRepository = $userRepository;
     }
 
-    public function subscribers($type, $id)
+    public function subscribers($type, $id, $page)
     {
         $userIds = $this->subscribeRepository->pluckSubscriber($type, $id)->toArray();
 
-        return $this->userRepository->getUserByIds($userIds);
+        return $this->userRepository->paginateUsersByIds($userIds, $page);
     }
 
-    public function subscribed($type, $id)
+    public function subscribed($type, $id, $page)
     {
         $userIds = $this->subscribeRepository->pluckSubscribed($type, $id)->toArray();
 
-        return $this->userRepository->getUserByIds($userIds);
+        return $this->userRepository->paginateUsersByIds($userIds, $page);
     }
 
     public function sendMailToSubscribedUser($instance)

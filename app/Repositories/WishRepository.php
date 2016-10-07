@@ -13,8 +13,8 @@ class WishRepository extends Repository
         $this->model = $model;
     }
 
-    public function getByUser($user_id)
+    public function paginateByUser($user_id, $page)
     {
-        return $this->model->where('user_id', $user_id)->get();
+        return $this->model->where('user_id', $user_id)->paginate($page);
     }
 }

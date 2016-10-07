@@ -17,4 +17,9 @@ class EmojiRepository extends Repository
     {
         return $this->model->where('user_id', $user_id)->get();
     }
+
+    public function paginateByUser($user_id, $page)
+    {
+        return $this->model->where('user_id', $user_id)->paginate($page);
+    }
 }

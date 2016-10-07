@@ -9,6 +9,8 @@
             <p>{{ $author->name }}</p>
             <p>{{ $author->description }}</p>
         @endforeach
+
+        {!! $authors->links() !!}
     </div>
 
 @endsection

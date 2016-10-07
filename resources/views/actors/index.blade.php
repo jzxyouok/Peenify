@@ -9,6 +9,8 @@
             <p>{{ $actor->name }}</p>
             <p>{{ $actor->description }}</p>
         @endforeach
+
+        {!! $actors->links() !!}
     </div>
 
 @endsection

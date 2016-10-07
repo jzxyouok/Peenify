@@ -22,7 +22,7 @@ class VendorsController extends Controller
 
     public function index()
     {
-        $vendors = $this->vendorService->all();
+        $vendors = $this->vendorService->getAllPagination(10);
 
         return view('vendors.index', compact('vendors'));
     }

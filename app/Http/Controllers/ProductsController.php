@@ -20,7 +20,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = $this->productService->all();
+        $products = $this->productService->getAllPagination(10);
 
         return view('products.index', compact('products'));
     }

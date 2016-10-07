@@ -13,7 +13,7 @@ class SearchesController extends Controller
     {
         $term = request()->get('term');
 
-        $products = Product::where('name', 'like', "%{$term}%")->get();
+        $products = Product::where('name', 'like', "%{$term}%")->paginate(10);
 
         return view('searches.products', compact('products', 'term'));
     }

@@ -26,6 +26,11 @@ class UserRepository extends Repository
         return $this->model->whereIn('id', $userIds)->get();
     }
 
+    public function paginateUsersByIds($userIds, $page)
+    {
+        return $this->model->whereIn('id', $userIds)->paginate($page);
+    }
+
     public function attachRoles($user_id, $role_ids)
     {
         $user = $this->model->find($user_id);

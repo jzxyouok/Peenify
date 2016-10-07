@@ -13,8 +13,9 @@
                     {{ $favorite->favorable->isFavorite(auth()->user()) ? '取消最愛' : '最愛'}}
                 </div>
             </div>
-
         @endforeach
+
+        {!! $favorites->links() !!}
     </div>
 @endsection
 

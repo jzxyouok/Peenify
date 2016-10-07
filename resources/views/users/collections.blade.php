@@ -3,6 +3,8 @@
 @section('content')
 
     @foreach($collections as $collection)
-    <span>{{ $collection->name }}</span>
+        <span>{{ $collection->name }}</span>
     @endforeach
+
+    {!! $collections->links() !!}
 @endsection

@@ -24,7 +24,7 @@ class SubscribesController extends Controller
      */
     public function subscriber($type, $id)
     {
-        $subscribers = $this->subscribeService->subscribers($type, $id);
+        $subscribers = $this->subscribeService->subscribers($type, $id, 10);
 
         return view("{$type}s.subscribers", compact('subscribers'));
     }
@@ -34,7 +34,7 @@ class SubscribesController extends Controller
      */
     public function subscribed($type, $id)
     {
-        $subscribed = $this->subscribeService->subscribed($type, $id);
+        $subscribed = $this->subscribeService->subscribed($type, $id, 10);
 
         return view("{$type}s.subscribed", compact('subscribed'));
     }

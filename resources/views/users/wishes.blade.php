@@ -13,8 +13,9 @@
                     {{ $wish->wishable->isWish(auth()->user()) ? '從願望清單移除' : '加到願望清單'}}
                 </div>
             </div>
-
         @endforeach
+
+        {!! $wishes->links() !!}
     </div>
 @endsection
 

@@ -9,6 +9,8 @@
             <p>{{ $collection->description }}</p>
             <p>{{ $collection->created_at->diffForHumans() }}</p>
         @endforeach
+
+        {!! $collections->links() !!}
     </div>
 
 @endsection

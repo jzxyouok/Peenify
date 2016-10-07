@@ -78,4 +78,9 @@ class CollectionService extends Service
     {
         return $this->collectionRepository->getByUser($user_id);
     }
+
+    public function getPaginationByUser($user_id, $page = 10)
+    {
+        return $this->collectionRepository->paginateByUser($user_id, $page);
+    }
 }

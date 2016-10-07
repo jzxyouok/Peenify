@@ -21,7 +21,7 @@ class CollectionsController extends Controller
 
     public function index()
     {
-        $collections = $this->collectionService->all();
+        $collections = $this->collectionService->getAllPagination(10);
 
         return view('collections.index', compact('collections'));
     }
@@ -68,7 +68,7 @@ class CollectionsController extends Controller
 
     public function showByUser($user_id)
     {
-        $collections = $this->collectionService->findByUser($user_id);
+        $collections = $this->collectionService->getPaginationByUser($user_id, 10);
 
         return view('users.collections', compact('collections'));
     }

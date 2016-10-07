@@ -9,6 +9,8 @@
             <p>{{ $vendor->description }}</p>
             <p>{{ $vendor->agent }}</p>
         @endforeach
+
+        {!! $vendors->links() !!}
     </div>
 
 @endsection

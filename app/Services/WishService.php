@@ -23,18 +23,8 @@ class WishService extends Service
         return $this->wishRepository->create($this->authUser($attributes));
     }
 
-    public function getByUser($user_id)
+    public function getPaginationByUser($user_id, $page = 10)
     {
-        return $this->wishRepository->getByUser($user_id);
-    }
-
-    public function destroy($product_id)
-    {
-        return $this->wishRepository->destroyByUser($product_id, auth()->user()->id);
-    }
-
-    public function getWishByProductAndAuth($product_id)
-    {
-        return $this->wishRepository->getWishByProduct($product_id, auth()->user()->id);
+        return $this->wishRepository->paginateByUser($user_id, $page);
     }
 }

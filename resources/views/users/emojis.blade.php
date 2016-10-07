@@ -6,5 +6,7 @@
             <h3>{{ $emoji->emojiable->name }}</h3>
             <p>{{ $emoji->type }}</p>
         @endforeach
+
+        {!! $emojis->links() !!}
     </div>
 @endsection

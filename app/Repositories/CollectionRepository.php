@@ -29,4 +29,9 @@ class CollectionRepository extends Repository
     {
         return $this->model->latest()->paginate($page);
     }
+
+    public function paginateByUser($user_id, $page)
+    {
+        return $this->model->where('user_id', $user_id)->paginate($page);
+    }
 }

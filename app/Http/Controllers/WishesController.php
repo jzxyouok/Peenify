@@ -36,7 +36,7 @@ class WishesController extends Controller
 
     public function showByUser($user_id)
     {
-        $wishes = $this->wishService->getByUser($user_id);
+        $wishes = $this->wishService->getPaginationByUser($user_id, 10);
 
         return view('users.wishes', compact('wishes'));
     }
