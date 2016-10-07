@@ -54,21 +54,4 @@ class ProductService extends Service
     {
         return $this->productRepository->LatestPagination($page);
     }
-
-    /**
-     * 同步最愛
-     */
-    public function syncFavoriteByUser($id, $user)
-    {
-        $product = $this->productRepository->find($id);
-
-        if ($product->isExistFavoriteByUser($user)) {
-            $product->removeFavoriteToUser($user);
-
-            return false;
-        }
-        $product->giveFavoriteToUser($user);
-
-        return true;
-    }
 }

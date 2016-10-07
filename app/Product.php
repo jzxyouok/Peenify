@@ -7,9 +7,12 @@ use App\Foundation\Favorable;
 use App\Foundation\Wishable;
 use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Tags\TaggableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    use SoftDeletes;
+
     use TaggableTrait, Favorable, Wishable, Emojiable;
 
     protected $table = 'products';
@@ -25,6 +28,8 @@ class Product extends Model
         'launched_at',
         'site'
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function setSlug()
     {
