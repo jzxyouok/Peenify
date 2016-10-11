@@ -1,49 +1,7 @@
 @extends('layouts.app')
 
 @section('style')
-    <style>
-        .Card__details {
-            box-sizing: border-box;
-            background: rgb(255, 255, 255);
-            padding: 8px 12px;
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-        }
-
-        .Card__title {
-            box-sizing: border-box;
-            line-height: 1.3em;
-            color: rgb(80, 91, 105);
-            margin: 0px;
-            font-size: 17px;
-            -webkit-box-flex: 1;
-            flex: 110%;
-        }
-
-        .link_style {
-            box-sizing: border-box;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        .Card__count {
-            box-sizing: border-box;
-            font-weight: 600;
-            text-align: right;
-            font-size: 22px;
-            padding-left: 10px;
-        }
-
-        .utility-muted {
-            box-sizing: border-box;
-            color: rgb(155, 166, 181);
-            font-weight: 400;
-            display: block;
-            font-size: 13px;
-            margin-top: -5px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
 @endsection
 
 @section('content')
