@@ -21,7 +21,7 @@ class CollectionsController extends Controller
 
     public function index()
     {
-        $collections = $this->collectionService->getAllPagination(10);
+        $collections = $this->collectionService->getAllPagination(12);
 
         return view('collections.index', compact('collections'));
     }

@@ -2,12 +2,15 @@
 
 namespace App;
 
+use App\Foundation\Subscribable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Collection extends Model
 {
     use SoftDeletes;
+
+    use Subscribable;
 
     protected $table = 'collections';
 
