@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+@endsection
+
 @section('content')
-
     <div class="container">
-        <img src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/300x300' }}">
-        <h1>{{ $category->name }}</h1>
-        <p>{{ $category->description }}</p>
+        <div class="text-center">
+            <h1 style="border-bottom: 1px solid #000000; display: inline-block">{{ $category->name }}</h1>
+        </div>
+        <p class="text-center">{{ $category->description }}</p>
 
-        <a class="btn btn-default" href="{{ route('categories.edit', $category->id) }}">Edit</a>
+        <div class="row">
+            <img style="max-width: 100%; display: block; margin: 0 auto;"
+                 src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/800x300' }}">
+        </div>
 
-        <form action="{{ route('categories.destroy', $category->id) }}" method="post">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            <input type="submit" value="delete" class="btn btn-danger">
-        </form>
 
-    @include('categories._partials.products', [
-                'products' => $category->products,
-                ])
-
-    <!-- user -->
+        @include('categories._partials.products', [
+                    'products' => $category->products,
+                    ])
     </div>
 
 @endsection

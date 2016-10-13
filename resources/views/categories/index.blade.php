@@ -10,7 +10,7 @@
             @foreach($categories as $category)
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="panel panel-default">
-                        <img style="max-width: 100%;"
+                        <img class="img-responsive"
                              src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/1264x200' }}">
 
                         <div class="panel-title">

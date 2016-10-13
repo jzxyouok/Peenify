@@ -2,52 +2,45 @@
 
 @section('content')
     <div class="container">
-        <div class="panel panel-default">
-            <div>
-                <!--產品名稱-->
-                <h1 style="text-align: center">{{ $product->name }}</h1>
+        <div class="text-center">
+            <!--產品名稱-->
+            <h1 style="border-bottom: 1px solid #000000; display: inline-block">{{ $product->name }}</h1>
+        </div>
 
-                <!--圖片-->
-                <img style="max-width: 100%"
-                     src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/400x400' }}">
-                <!--產品描述-->
-                <div class="form-group">
-                    {{ $product->description }}
-                </div>
+        <!--圖片-->
+        <div class="row">
+            <img class="img-responsive" style="width: 800px; max-height:300px; display: block; margin: 0 auto;"
+                 src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x300' }}">
 
-                <!--標籤-->
-                @include('products._partials.tags')
+            <!--產品描述-->
+            <div style="margin: 0 auto;display: block;max-width:800px;padding: 0.5em 0.5em;">
+                <p>{{ $product->description }}</p>
+            </div>
+
+            <div class="text-center" style="margin: 0 auto;display: block;max-width:800px;padding: 0.5em 0.5em;">
+                <p>{{ $product->launched_at }}</p>
             </div>
         </div>
-        <!--作者-->
-        <h3>作者</h3>
-    @include('products._partials.authors')
 
-    <!--作者-->
-        <h3>演員</h3>
-    @include('products._partials.actors')
-
-    <!------------------------------------->
-
-        <!--電影額外選項-->
-    @include('products._partials.movies')
-
-    <!--劇集額外選項-->
-    @include('products._partials.series')
+        <!--標籤-->
+    @include('products._partials.tags')
 
     <!--需要登入才可操作項目-->
     @if(auth()->check())
+        <!--評分-->
+            <div class="form-group text-center">
+                @include('products._funcs.emojis')
+            </div>
+
+            <!--收藏集-->
+        @include('products._forms.collections')
+
         <!--願望清單-->
         @include('products._funcs.wishes')
 
         <!--最愛-->
         @include('products._funcs.favorites')
 
-        <!--收藏集-->
-        @include('products._forms.collections')
-
-        <!--評分-->
-        @include('products._funcs.emojis')
 
         <!--評論表單-->
         @if (! auth()->user()->hasBeenCommentByProduct($product->id))
@@ -55,8 +48,12 @@
         @endif
     @endif
 
-    <!--評論清單-->
-        @include('comments.lists')
+        <!--評論清單-->
+        @if ($product->isEmoji(auth()->user()))
+            @include('comments.lists')
+        @else
+            <h3>Oops 需要先給予評分才能看評論喔</h3>
+        @endif
     </div>
 @endsection
 

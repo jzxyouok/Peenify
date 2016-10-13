@@ -18,7 +18,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                         <div class="panel panel-default">
                             <a href="{{ route('products.show', $product->id) }}">
-                                <img style="max-width: 100%;"
+                                <img class="img-responsive"
                                      src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/348x261' }}">
                             </a>
 

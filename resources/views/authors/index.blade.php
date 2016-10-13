@@ -16,7 +16,7 @@
             @foreach($authors as $author)
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <div class="panel panel-default">
-                        <img style="max-width: 100%;"
+                        <img class="img-responsive"
                              src="{{ ($author->avatar) ? image_path('avatars.authors', $author->avatar):'holder.js/360x360' }}">
 
                         <div class="panel-title">
