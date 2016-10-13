@@ -7,53 +7,51 @@
 @section('content')
     <div id="app" class="container">
         <div class="row">
-            <div class="col-md-12">
-                @foreach($categories as $category)
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="panel panel-default">
-                            <img style="max-width: 100%;"
-                                 src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/1264x200' }}">
+            @foreach($categories as $category)
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <img style="max-width: 100%;"
+                             src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/1264x200' }}">
 
-                            <div class="panel-title">
-                                <div class="Card__details">
-                                    <h3 class="Card__title" style="font-size: 24px;">
-                                        <a href="{{ route('categories.show', $category->id) }}"
-                                           class="link_style">{{ str_limit($category->name, 20) }}
-                                        </a>
-                                    </h3>
-                                    @if(auth()->check())
-                                        <div class="Card__count">
+                        <div class="panel-title">
+                            <div class="Card__details">
+                                <h3 class="Card__title" style="font-size: 24px;">
+                                    <a href="{{ route('categories.show', $category->id) }}"
+                                       class="link_style">{{ str_limit($category->name, 20) }}
+                                    </a>
+                                </h3>
+                                @if(auth()->check())
+                                    <div class="Card__count">
                                             <span class="subscribe btn btn-{{ $category->isSubscribe(auth()->user()) ? 'danger' : 'default' }} btn-lg"
                                                   data-type="category"
                                                   data-id={{ $category->id }} data-token={{ csrf_token() }}>
                                                     {{ $category->isSubscribe(auth()->user()) ? '取消訂閱' : '訂閱' }}
                                             </span>
-                                        </div>
-                                    @endif
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="Card__details">
+                                <div class="Card__title">
+                                    {{ $category->description }}
                                 </div>
 
-                                <div class="Card__details">
-                                    <div class="Card__title">
-                                        {{ $category->description }}
-                                    </div>
+                                <div class="Card__count">
+                                    {{ $category->products()->count() }}
+                                    <span class="utility-muted">Products</span>
+                                </div>
 
-                                    <div class="Card__count">
-                                        {{ $category->products()->count() }}
-                                        <span class="utility-muted">Products</span>
+                                <div class="Card__count">
+                                    <div>
+                                        {{ $category->subscribes()->count() }}
                                     </div>
-
-                                    <div class="Card__count">
-                                        <div>
-                                            {{ $category->subscribes()->count() }}
-                                        </div>
-                                        <span class="utility-muted">Subscribers</span>
-                                    </div>
+                                    <span class="utility-muted">Subscribers</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 

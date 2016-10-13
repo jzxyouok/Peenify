@@ -22,7 +22,7 @@ class ActorsController extends Controller
 
     public function index()
     {
-        $actors = $this->actorService->getAllPagination(10);
+        $actors = $this->actorService->getAllPagination(12);
 
         return view('actors.index', compact('actors'));
     }

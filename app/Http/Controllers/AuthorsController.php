@@ -21,7 +21,7 @@ class AuthorsController extends Controller
 
     public function index()
     {
-        $authors = $this->authorService->getAllPagination(10);
+        $authors = $this->authorService->getAllPagination(12);
 
         return view('authors.index', compact('authors'));
     }

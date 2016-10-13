@@ -23,12 +23,14 @@
                                            href="{{ route('collections.show', $collection->id) }}">{{ $collection->name }}</a>
                                     </h3>
 
-                                    <div id="subscribe"
-                                         class="btn btn-{{ $collection->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
-                                         data-type="collection"
-                                         data-id={{ $collection->id }} data-token={{ csrf_token() }}>
-                                        {{ $collection->isSubscribe(auth()->user()) ? '取消訂閱' : '訂閱' }}
-                                    </div>
+                                    @if (auth()->check())
+                                        <div class="subscribe btn btn-{{ $collection->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
+                                             data-type="collection"
+                                             data-id={{ $collection->id }} data-token={{ csrf_token() }}>
+                                            {{ $collection->isSubscribe(auth()->user()) ? '取消訂閱' : '訂閱' }}
+                                        </div>
+                                    @endif
+
                                 </div>
                                 <div class="Card__details">
                                     <div class="Card__title">
@@ -41,8 +43,8 @@
                                     </div>
 
                                     <div class="Card__count">
-                                    {{ $collection->subscribes()->count() }}
-                                    <span class="utility-muted">subscribers</span>
+                                        {{ $collection->subscribes()->count() }}
+                                        <span class="utility-muted">subscribers</span>
                                     </div>
                                 </div>
                             </div>

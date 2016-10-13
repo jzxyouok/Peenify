@@ -1,68 +1,61 @@
 @extends('layouts.app')
 
-@section('style')
-    <style>
-        .image-size {
-            width: 50%;
-            height: 50%;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="container">
-        <!--圖片-->
-        <img class="image-size"
-             src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/400x400' }}">
+        <div class="panel panel-default">
+            <div>
+                <!--產品名稱-->
+                <h1 style="text-align: center">{{ $product->name }}</h1>
 
-        <!--產品名稱-->
-        <h1>{{ $product->name }}</h1>
+                <!--圖片-->
+                <img style="max-width: 100%"
+                     src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/400x400' }}">
+                <!--產品描述-->
+                <div class="form-group">
+                    {{ $product->description }}
+                </div>
 
-        <!--產品描述-->
-        <div class="form-group">
-            {{ $product->description }}
+                <!--標籤-->
+                @include('products._partials.tags')
+            </div>
         </div>
-
-        <!--標籤-->
-        @include('products._partials.tags')
-
         <!--作者-->
         <h3>作者</h3>
-        @include('products._partials.authors')
+    @include('products._partials.authors')
 
-        <!--作者-->
+    <!--作者-->
         <h3>演員</h3>
-        @include('products._partials.actors')
+    @include('products._partials.actors')
 
-        <!------------------------------------->
+    <!------------------------------------->
 
         <!--電影額外選項-->
-        @include('products._partials.movies')
+    @include('products._partials.movies')
 
-        <!--劇集額外選項-->
-        @include('products._partials.series')
+    <!--劇集額外選項-->
+    @include('products._partials.series')
 
-        <!--需要登入才可操作項目-->
-        @if(auth()->check())
-            <!--願望清單-->
-            @include('products._funcs.wishes')
+    <!--需要登入才可操作項目-->
+    @if(auth()->check())
+        <!--願望清單-->
+        @include('products._funcs.wishes')
 
-            <!--最愛-->
-            @include('products._funcs.favorites')
+        <!--最愛-->
+        @include('products._funcs.favorites')
 
-            <!--收藏集-->
-            @include('products._forms.collections')
+        <!--收藏集-->
+        @include('products._forms.collections')
 
-            <!--評分-->
-            @include('products._funcs.emojis')
+        <!--評分-->
+        @include('products._funcs.emojis')
 
-            <!--評論表單-->
-            @if (! auth()->user()->hasBeenCommentByProduct($product->id))
-                @include('comments._partials.create')
-            @endif
+        <!--評論表單-->
+        @if (! auth()->user()->hasBeenCommentByProduct($product->id))
+            @include('comments._partials.create')
         @endif
+    @endif
 
-        <!--評論清單-->
+    <!--評論清單-->
         @include('comments.lists')
     </div>
 @endsection
