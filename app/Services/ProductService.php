@@ -27,9 +27,7 @@ class ProductService extends Service
 
         $product->setSlug()->tag($attributes['tags']);
 
-        $product->syncAuthors(array_get($attributes, 'authors'))
-                ->syncActors(array_get($attributes, 'actors'))
-                ->giveMovieTo(array_get($attributes, 'movie'))
+        $product->giveMovieTo(array_get($attributes, 'movie'))
                 ->giveSeriesTo(array_get($attributes, 'series'));
 
         return $product;

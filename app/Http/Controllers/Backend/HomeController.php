@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Services\ActorService;
 use App\Services\ArticleService;
-use App\Services\AuthorService;
 use App\Services\CategoryService;
 use App\Services\CollectionService;
 use App\Services\ProductService;
 use App\Services\TagService;
 use App\Services\UserService;
-use App\Services\VendorService;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -35,18 +32,6 @@ class HomeController extends Controller
      */
     private $collectionService;
     /**
-     * @var AuthorService
-     */
-    private $authorService;
-    /**
-     * @var ActorService
-     */
-    private $actorService;
-    /**
-     * @var VendorService
-     */
-    private $vendorService;
-    /**
      * @var UserService
      */
     private $userService;
@@ -61,9 +46,6 @@ class HomeController extends Controller
      * @param CategoryService $categoryService
      * @param TagService $tagService
      * @param CollectionService $collectionService
-     * @param AuthorService $authorService
-     * @param ActorService $actorService
-     * @param VendorService $vendorService
      * @param UserService $userService
      * @param ArticleService $articleService
      */
@@ -72,9 +54,6 @@ class HomeController extends Controller
         CategoryService $categoryService,
         TagService $tagService,
         CollectionService $collectionService,
-        AuthorService $authorService,
-        ActorService $actorService,
-        VendorService $vendorService,
         UserService $userService,
         ArticleService $articleService
     ) {
@@ -82,9 +61,6 @@ class HomeController extends Controller
         $this->categoryService = $categoryService;
         $this->tagService = $tagService;
         $this->collectionService = $collectionService;
-        $this->authorService = $authorService;
-        $this->actorService = $actorService;
-        $this->vendorService = $vendorService;
         $this->userService = $userService;
         $this->articleService = $articleService;
     }
@@ -120,27 +96,6 @@ class HomeController extends Controller
         $collections = $this->collectionService->getAllPagination(10);
 
         return view('backend.collections', compact('collections'));
-    }
-
-    public function authors()
-    {
-        $authors = $this->authorService->getAllPagination(10);
-
-        return view('backend.authors', compact('authors'));
-    }
-
-    public function actors()
-    {
-        $actors = $this->actorService->getAllPagination(10);
-
-        return view('backend.actors', compact('actors'));
-    }
-
-    public function vendors()
-    {
-        $vendors = $this->vendorService->getAllPagination(10);
-
-        return view('backend.vendors', compact('vendors'));
     }
 
     public function users()

@@ -59,16 +59,6 @@ class User extends Authenticatable
         return $this->hasMany(Collection::class);
     }
 
-    public function actors()
-    {
-        return $this->hasMany(Actor::class);
-    }
-
-    public function authors()
-    {
-        return $this->hasMany(Author::class);
-    }
-
     public function permissions()
     {
         return $this->hasMany(Permission::class);
@@ -101,10 +91,5 @@ class User extends Authenticatable
     public function syncRolesTo(array $roles)
     {
         return $this->roles()->sync($roles);
-    }
-
-    public function vendors()
-    {
-        return $this->hasMany(Vendor::class);
     }
 }

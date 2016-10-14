@@ -9,12 +9,6 @@
         <!--類別清單-->
         @include('products._lists.categories')
 
-        <!--作者清單-->
-        @include('products._lists.authors')
-
-        <!--演員清單-->
-        @include('products._lists.actors')
-
             <div class="form-group">
                 <label for="name">產品名稱</label>
                 <input type="text" name="name" class="form-control">

@@ -37,11 +37,7 @@
             <ul class="nav navbar-nav">&nbsp;
                 <li><a href="{{ route('categories.index') }}">分類</a></li>
                 <li><a href="{{ route('products.index') }}">產品</a></li>
-                {{--<li><a href="{{ route('tags.index') }}">標籤雲</a></li>--}}
                 <li><a href="{{ route('collections.index') }}">收藏集</a></li>
-                <li><a href="{{ route('authors.index') }}">作者</a></li>
-                <li><a href="{{ route('actors.index') }}">演員</a></li>
-                {{--<li><a href="{{ route('vendors.index') }}">廠商</a></li>--}}
             </ul>
 
             <!-- Right Side Of Navbar -->

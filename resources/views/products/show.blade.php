@@ -49,7 +49,7 @@
     @endif
 
         <!--評論清單-->
-        @if ($product->isEmoji(auth()->user()))
+        @if (auth()->check() && $product->isEmoji(auth()->user()))
             @include('comments.lists')
         @else
             <h3>Oops 需要先給予評分才能看評論喔</h3>

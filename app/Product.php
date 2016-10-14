@@ -55,39 +55,6 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function vendors()
-    {
-        return $this->belongsToMany(Vendor::class);
-    }
-
-    public function authors()
-    {
-        return $this->belongsToMany(Author::class);
-    }
-
-    public function syncAuthors($authorIds)
-    {
-        if (! empty($authorIds)) {
-            $this->authors()->sync((array) $authorIds);
-        }
-
-        return $this;
-    }
-
-    public function actors()
-    {
-        return $this->belongsToMany(Actor::class);
-    }
-
-    public function syncActors($actorIds)
-    {
-        if (! empty($actorIds)) {
-            $this->actors()->sync((array) $actorIds);
-        }
-
-        return $this;
-    }
-
     public function collections()
     {
         return $this->belongsToMany(Collection::class);

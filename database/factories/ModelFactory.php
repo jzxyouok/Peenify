@@ -65,43 +65,6 @@ $factory->define(App\Wish::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Follow::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => factory(App\User::class)->create()->id,
-        'followable_type' => 'category',
-        'followable_id' => factory(\App\Category::class)->create()->id,
-    ];
-});
-
-$factory->define(App\Vendor::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => factory(App\User::class)->create()->id,
-        'name' => '福斯',
-        'description' => '21世紀炸雞',
-        'agent' => '我是代理商',
-    ];
-});
-
-$factory->define(App\Author::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => factory(App\User::class)->create()->id,
-        'name' => $faker->name,
-        'description' => $faker->paragraph,
-        'gender' => 'male',
-        'country' => 'TW',
-    ];
-});
-
-$factory->define(App\Actor::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => factory(App\User::class)->create()->id,
-        'name' => $faker->name,
-        'description' => $faker->paragraph,
-        'gender' => 'male',
-        'country' => 'US',
-    ];
-});
-
 $factory->define(App\Tag::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,

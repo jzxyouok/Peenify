@@ -83,9 +83,6 @@
 
                 <li><a href="{{ route('backend.tags') }}">標籤</a></li>
                 <li><a href="{{ route('backend.collections') }}">收藏集</a></li>
-                <li><a href="{{ route('backend.authors') }}">作者</a></li>
-                <li><a href="{{ route('backend.actors') }}">演員</a></li>
-                <li><a href="{{ route('backend.vendors') }}">廠商</a></li>
                 <li><a href="{{ route('backend.users') }}">使用者</a></li>
                 <li><a href="{{ route('permissions.index') }}">權限</a></li>
                 <li><a href="{{ route('roles.index') }}">身份</a></li>
