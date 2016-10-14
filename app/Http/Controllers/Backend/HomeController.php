@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Services\ArticleService;
 use App\Services\CategoryService;
 use App\Services\CollectionService;
 use App\Services\ProductService;
@@ -35,10 +34,6 @@ class HomeController extends Controller
      * @var UserService
      */
     private $userService;
-    /**
-     * @var ArticleService
-     */
-    private $articleService;
 
     /**
      * HomeController constructor.
@@ -47,22 +42,19 @@ class HomeController extends Controller
      * @param TagService $tagService
      * @param CollectionService $collectionService
      * @param UserService $userService
-     * @param ArticleService $articleService
      */
     public function __construct(
         ProductService $productService,
         CategoryService $categoryService,
         TagService $tagService,
         CollectionService $collectionService,
-        UserService $userService,
-        ArticleService $articleService
+        UserService $userService
     ) {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
         $this->tagService = $tagService;
         $this->collectionService = $collectionService;
         $this->userService = $userService;
-        $this->articleService = $articleService;
     }
 
     public function index()
@@ -103,12 +95,5 @@ class HomeController extends Controller
         $users = $this->userService->getAllPagination(10);
 
         return view('backend.users', compact('users'));
-    }
-
-    public function articles()
-    {
-        $articles = $this->articleService->getAllPagination(10);
-
-        return view('backend.articles', compact('articles'));
     }
 }

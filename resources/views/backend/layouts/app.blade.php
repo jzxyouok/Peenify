@@ -69,18 +69,6 @@
                     </ul>
                 </li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        文章 <span class="caret"></span></a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="{{ route('articles.create') }}">建立文章</a>
-                            <a href="{{ route('backend.articles') }}">文章頁</a>
-                        </li>
-                    </ul>
-                </li>
-
                 <li><a href="{{ route('backend.tags') }}">標籤</a></li>
                 <li><a href="{{ route('backend.collections') }}">收藏集</a></li>
                 <li><a href="{{ route('backend.users') }}">使用者</a></li>
