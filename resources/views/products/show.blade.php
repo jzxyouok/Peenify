@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="text-center">
@@ -110,6 +114,7 @@
 
             $(document).on('click', '#favorite', function () {
                 var $this = $(this);
+                var $amount = parseInt($('#favorite_amount').text());
                 var token = $this.data('token');
                 var type = $this.data('type');
                 var id = $this.data('id');
@@ -117,9 +122,11 @@
                     '_token': token
                 }, function (result) {
                     if (result.status == 'favorite') {
-                        $this.addClass('glyphicon-heart').removeClass('glyphicon-heart-empty');
+                        $this.addClass('glyphicon-heart').addClass('Favorite__heart__color').removeClass('glyphicon-heart-empty');
+                        $('#favorite_amount').html($amount + 1);
                     } else {
-                        $this.addClass('glyphicon-heart-empty').removeClass('glyphicon-heart');
+                        $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
+                        $('#favorite_amount').html($amount - 1);
                     }
                 });
             });

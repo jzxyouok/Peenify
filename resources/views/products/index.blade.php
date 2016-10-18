@@ -37,8 +37,7 @@
 
                         <div class="Card__option">
                             <span style="padding-right: 5px;">
-                                <i class="glyphicon glyphicon-heart"></i>
-                                10
+                                @include('products._funcs.favorites')
                             </span>
 
                             <span style="padding-right: 5px;">
@@ -59,4 +58,29 @@
         </div>
 
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#favorite', function () {
+                var $this = $(this);
+                var $amount = parseInt($('#favorite_amount').text());
+                var token = $this.data('token');
+                var type = $this.data('type');
+                var id = $this.data('id');
+                $.post('/favorites/' + type + '/' + id, {
+                    '_token': token
+                }, function (result) {
+                    if (result.status == 'favorite') {
+                        $this.addClass('glyphicon-heart').addClass('Favorite__heart__color').removeClass('glyphicon-heart-empty');
+                        $('#favorite_amount').html($amount + 1);
+                    } else {
+                        $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
+                        $('#favorite_amount').html($amount - 1);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
