@@ -1,41 +1,65 @@
-.Card__details {
-    box-sizing: border-box;
-    background: rgb(255, 255, 255);
+.Card__detail {
     padding: 8px 12px;
+    display: -webkit-box;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
+    padding-bottom: 12px;
 }
 
 .Card__title {
-    box-sizing: border-box;
-    line-height: 1.3em;
-    color: rgb(80, 91, 105);
-    margin: 0px;
+    margin: 0;
     font-size: 17px;
+    font-weight: 600;
     -webkit-box-flex: 1;
-    flex: 110%;
-}
-
-.link_style {
-    box-sizing: border-box;
-    background-color: transparent;
-    text-decoration: none;
+    flex: 1;
 }
 
 .Card__count {
-    box-sizing: border-box;
     font-weight: 600;
     text-align: right;
     font-size: 22px;
     padding-left: 10px;
 }
 
-.utility-muted {
-    box-sizing: border-box;
-    color: rgb(155, 166, 181);
+.Card__image {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: 250px;
+}
+
+.Card__count__description {
     font-weight: 400;
     display: block;
     font-size: 13px;
     margin-top: -5px;
+}
+
+.Card__panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    height: 350px;
+}
+
+.Card__option {
+    border-top: 1px dotted #ccc;
+    padding: 6px 12px;
+    background-color: #fff;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.Card__title__link {
+    text-decoration: none;
+    color: #000000;
+}
+
+.Card__category__name {
+    display: inline-block;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #000000;
+    letter-spacing: 4px;
 }
