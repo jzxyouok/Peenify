@@ -18,7 +18,7 @@
             </div>
 
             <div class="text-center" style="margin: 0 auto;display: block;max-width:800px;padding: 0.5em 0.5em;">
-                <p>{{ $product->launched_at }}</p>
+                發行日期:<p>{{ $product->launched_at }}</p>
             </div>
         </div>
 
@@ -26,33 +26,34 @@
     @include('products._partials.tags')
 
     <!--需要登入才可操作項目-->
-    @if(auth()->check())
-        <!--評分-->
+        @if(auth()->check())
             <div class="form-group text-center">
+                <!--評分-->
                 @include('products._funcs.emojis')
             </div>
 
-            <!--收藏集-->
-        @include('products._forms.collections')
+            <div class="form-group text-center">
+                <!--收藏集-->
+                <a class="btn btn-default" href="{{ route('collections.addProduct', $product->id) }}">加入收藏集</a>
 
-        <!--願望清單-->
-        @include('products._funcs.wishes')
+                <!--願望清單-->
+            @include('products._funcs.wishes')
 
-        <!--最愛-->
-        @include('products._funcs.favorites')
+            <!--最愛-->
+                @include('products._funcs.favorites')
+            </div>
 
-
-        <!--評論表單-->
-        @if (! auth()->user()->hasBeenCommentByProduct($product->id))
-            @include('comments._partials.create')
-        @endif
-    @endif
+            <!--評論表單-->
+            @if (! auth()->user()->hasBeenCommentByProduct($product->id))
+                @include('comments._partials.create')
+            @endif
 
         <!--評論清單-->
-        @if (auth()->check() && $product->isEmoji(auth()->user()))
-            @include('comments.lists')
-        @else
-            <h3>Oops 需要先給予評分才能看評論喔</h3>
+            @if ($product->isEmoji(auth()->user()))
+                @include('comments.lists')
+            @else
+                <h3>Oops! 需要先給予評分才能看評論喔</h3>
+            @endif
         @endif
     </div>
 @endsection
@@ -99,6 +100,7 @@
                 }, function (result) {
                     if (result.status == 'emoji') {
                         $this.addClass('btn-danger').removeClass('btn-default');
+                        window.location.reload();
                     } else {
                         $("#emoji").removeClass('btn-danger').addClass('btn-default');
                         $this.addClass('btn-danger').removeClass('btn-default');
@@ -115,20 +117,9 @@
                     '_token': token
                 }, function (result) {
                     if (result.status == 'favorite') {
-                        $this.addClass('btn-danger').removeClass('btn-default').text('取消最愛');
+                        $this.addClass('glyphicon-heart').removeClass('glyphicon-heart-empty');
                     } else {
-                        swal({
-                            title: "Are you sure?",
-                            text: "你要取消最愛這個嗎？？",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "對，我不想看到了",
-                            closeOnConfirm: false
-                        }, function () {
-                            swal("取消最愛成功!", "你已經取消最愛囉", "success");
-                            $this.addClass('btn-default').removeClass('btn-danger').text('最愛');
-                        });
+                        $this.addClass('glyphicon-heart-empty').removeClass('glyphicon-heart');
                     }
                 });
             });

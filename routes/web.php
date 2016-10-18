@@ -283,9 +283,14 @@ Route::resource('collections', 'CollectionsController');
 /*
  * 將產品加入到自訂的收藏集內
  */
-Route::post('collections/addProduct/{product}', [
+Route::get('collections/add/products/{product}', [
     'as' => 'collections.addProduct',
     'uses' => 'CollectionsController@addProduct',
+]);
+
+Route::post('collections/addProduct/{product}', [
+    'as' => 'collections.storeProduct',
+    'uses' => 'CollectionsController@storeProduct',
 ]);
 
 

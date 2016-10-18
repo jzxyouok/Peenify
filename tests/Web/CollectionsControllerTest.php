@@ -120,7 +120,7 @@ class CollectionsControllerTest extends TestCase
 
         $collection = factory(\App\Collection::class)->create();
 
-        $this->call('post', route('collections.addProduct', $product->id), [
+        $this->call('post', route('collections.storeProduct', $product->id), [
             'collection_id' => $collection->id,
         ]);
 

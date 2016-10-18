@@ -73,12 +73,17 @@ class CollectionsController extends Controller
         return view('users.collections', compact('collections'));
     }
 
+    public function addProduct($product_id)
+    {
+        return view('products.collections', compact('product_id'));
+    }
+
     /**
      * @param Request $request
      * @param $product_id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addProduct(Request $request, $product_id)
+    public function storeProduct(Request $request, $product_id)
     {
         if ($this->collectionService->duplicateProductInCollection($request->get('collection_id'), $product_id)) {
             return redirect()->back()->with('message', '重複了');
