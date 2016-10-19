@@ -43,10 +43,7 @@
 
                         <div class="Card__option">
                             <span class="icon__distance">
-                                <i class="glyphicon glyphicon-bookmark"></i>
-                                <span>
-                                    10
-                                </span>
+                                @include('products._funcs.wishes')
                             </span>
 
                             <span class="icon__distance">
@@ -91,6 +88,25 @@
                     } else {
                         $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
                         $this.find('#favorite_amount').html($amount - 1);
+                    }
+                });
+            });
+
+            $(document).on('click', '#wish', function () {
+                var $this = $(this);
+                var $amount = parseInt($this.find('#wish_amount').text());
+                var token = $this.data('token');
+                var type = $this.data('type');
+                var id = $this.data('id');
+                $.post('/wishes/' + type + '/' + id, {
+                    '_token': token
+                }, function (result) {
+                    if (result.status == 'wish') {
+                        $this.addClass('Favorite__heart__color');
+                        $this.find('#wish_amount').html($amount + 1);
+                    } else {
+                        $this.removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
+                        $this.find('#wish_amount').html($amount - 1);
                     }
                 });
             });

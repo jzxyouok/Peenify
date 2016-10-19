@@ -1,4 +1,6 @@
-<div id="wish" class="btn btn-{{ $product->isWish(auth()->user()) ? 'danger' : 'default' }}"
+<div id="wish" class="glyphicon glyphicon-bookmark{{ $product->isWish(auth()->user()) ? ' Favorite__heart__color' : '' }}"
      data-type="product" data-id={{ $product->id }} data-token={{ csrf_token() }}>
-    {{ $product->isWish(auth()->user()) ? '從願望清單移除' : '加到願望清單'}}
+<span id="wish_amount">
+    {{ $product->wishes()->count() }}
+</span>
 </div>

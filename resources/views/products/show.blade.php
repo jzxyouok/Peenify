@@ -68,7 +68,7 @@
                 <!--收藏集-->
                 <a class="btn btn-default" href="{{ route('collections.addProduct', $product->id) }}">加入收藏集</a>
 
-                <!--願望清單-->
+            <!--願望清單-->
             @include('products._funcs.wishes')
 
             <!--最愛-->
@@ -95,6 +95,7 @@
         $(document).ready(function () {
             $(document).on('click', '#wish', function () {
                 var $this = $(this);
+                var $amount = parseInt($this.find('#wish_amount').text());
                 var token = $this.data('token');
                 var type = $this.data('type');
                 var id = $this.data('id');
@@ -102,20 +103,11 @@
                     '_token': token
                 }, function (result) {
                     if (result.status == 'wish') {
-                        $this.addClass('btn-danger').removeClass('btn-default').text('取消願望');
+                        $this.addClass('Favorite__heart__color');
+                        $this.find('#wish_amount').html($amount + 1);
                     } else {
-                        swal({
-                            title: "Are you sure?",
-                            text: "你要取消願望這個嗎？？",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "對，我不想看到了",
-                            closeOnConfirm: false
-                        }, function () {
-                            swal("取消願望成功!", "你已經取消願望囉", "success");
-                            $this.addClass('btn-default').removeClass('btn-danger').text('願望');
-                        });
+                        $this.removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
+                        $this.find('#wish_amount').html($amount - 1);
                     }
                 });
             });
