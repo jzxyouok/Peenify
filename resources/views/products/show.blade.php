@@ -73,7 +73,7 @@
                 <a class="btn btn-default" href="{{ route('collections.addProduct', $product->id) }}">加入收藏集</a>
 
                 <!--願望清單-->
-            @include('products._funcs.bookmarks')
+                @include('products._funcs.bookmarks')
 
             <!--最愛-->
                 @include('products._funcs.favorites')
@@ -102,12 +102,10 @@
                 $.post('/bookmarks/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
-                    if (result.status == 'wish') {
-                        $this.addClass('Favorite__heart__color');
-                        $this.find('#wish_amount').html($amount + 1);
+                    if (result.status == 'bookmark') {
+                        $this.addClass('Favorite__heart__color').find('#bookmark_amount').html($amount + 1);
                     } else {
-                        $this.removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
-                        $this.find('#wish_amount').html($amount - 1);
+                        $this.removeClass('Favorite__heart__color').find('#bookmark_amount').html($amount - 1);
                     }
                 });
             });
@@ -162,6 +160,44 @@
                     } else {
                         $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
                         $('#favorite_amount').html(amount - 1);
+                    }
+                });
+            });
+        });
+
+
+        $(document).ready(function () {
+            $(document).on('click', '.emoji_comment', function () {
+                var $this = $(this);
+                var token = $this.data('token');
+                var id = $this.data('id');
+                var type = $this.data('type');
+                var emoji = $this.data('emoji');
+                var amount = parseInt($this.find('.amount').text());
+
+                var bad = $('#bad_comment' + id);
+                var bad_amount = parseInt(bad.find('.amount').text());
+                var like = $('#like_comment' + id);
+                var like_amount = parseInt(like.find('.amount').text());
+                $.post('/emojis/' + type + '/' + id, {
+                    '_token': token,
+                    'emoji': emoji
+                }, function (result) {
+                    if (result.status == 'emoji') {
+                        $this.find('.amount').html(amount + 1);
+                        $this.addClass('Favorite__heart__color');
+                    } else if (result.status == 'updateEmoji') {
+                        if (emoji == 'like') {
+                            bad.removeClass('Favorite__heart__color').find('.amount').html(bad_amount - 1);
+                        } else {
+                            like.removeClass('Favorite__heart__color').find('.amount').html(like_amount - 1);
+                        }
+
+                        $this.addClass('Favorite__heart__color');
+                        $this.find('.amount').html(parseInt($this.find('.amount').text()) + 1);
+                    } else {
+                        $this.find('.amount').html(amount - 1);
+                        $this.removeClass('Favorite__heart__color');
                     }
                 });
             });

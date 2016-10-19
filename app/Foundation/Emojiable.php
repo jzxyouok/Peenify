@@ -36,9 +36,9 @@ trait Emojiable
         return $this->emojis()->where(['user_id' => $user->id])->exists();
     }
 
-    public function countEmoji(User $user, $type)
+    public function countEmoji($type)
     {
-        return $this->emojis()->where(['user_id' => $user->id, 'type' => $type])->count();
+        return $this->emojis()->where('type', $type)->count();
     }
 
     public function getEmoji($column = 'type')
