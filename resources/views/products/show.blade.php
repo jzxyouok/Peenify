@@ -24,10 +24,6 @@
             padding: 0.5em 0.5em;
             text-align: justify;
         }
-
-        .emoji {
-
-        }
     </style>
 @endsection
 

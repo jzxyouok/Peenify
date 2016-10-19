@@ -1,6 +1,9 @@
 <style>
-    .amount {
+    .emoji {
+        cursor: pointer;
+    }
 
+    .amount {
     }
 </style>
 
