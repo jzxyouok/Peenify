@@ -24,6 +24,10 @@
             padding: 0.5em 0.5em;
             text-align: justify;
         }
+
+        .emoji {
+
+        }
     </style>
 @endsection
 
@@ -37,7 +41,7 @@
         <!--圖片-->
         <div class="row">
             <img class="cover img-responsive"
-                 src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x300' }}">
+                 src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/500x300' }}">
 
             <!--site, youtube-->
             <div class="text-center">
@@ -68,11 +72,11 @@
                 <!--收藏集-->
                 <a class="btn btn-default" href="{{ route('collections.addProduct', $product->id) }}">加入收藏集</a>
 
-            <!--願望清單-->
+                <!--願望清單-->
             @include('products._funcs.bookmarks')
 
             <!--最愛-->
-            @include('products._funcs.favorites')
+                @include('products._funcs.favorites')
             </div>
 
             <!--評論表單-->
@@ -112,7 +116,7 @@
                 });
             });
 
-            $(document).on('click', '#emoji', function () {
+            $(document).on('click', '.emoji', function () {
                 var $this = $(this);
                 var token = $this.data('token');
                 var id = $this.data('id');
@@ -123,11 +127,22 @@
                     'emoji': emoji
                 }, function (result) {
                     if (result.status == 'emoji') {
-                        $this.addClass('btn-danger').removeClass('btn-default');
-                        window.location.reload();
+                        $('.emoji').removeClass('Favorite__heart__color');
+                        $this.addClass('Favorite__heart__color');
+                    } else if (result.status == 'updateEmoji') {
+                        if (emoji == 'like') {
+                            $('#emoji_bad').removeClass('Favorite__heart__color');
+                            $('#emoji_bad_amount').html(parseInt($('#emoji_bad_amount').text()) - 1);
+                            $('#emoji_like').addClass('Favorite__heart__color');
+                            $('#emoji_like_amount').html(parseInt($('#emoji_like_amount').text()) + 1);
+                        } else {
+                            $('#emoji_like').removeClass('Favorite__heart__color');
+                            $('#emoji_like_amount').html(parseInt($('#emoji_like_amount').text()) - 1);
+                            $('#emoji_bad').addClass('Favorite__heart__color');
+                            $('#emoji_bad_amount').html(parseInt($('#emoji_bad_amount').text()) + 1);
+                        }
                     } else {
-                        $("#emoji").removeClass('btn-danger').addClass('btn-default');
-                        $this.addClass('btn-danger').removeClass('btn-default');
+                        $this.removeClass('Favorite__heart__color');
                     }
                 });
             });
