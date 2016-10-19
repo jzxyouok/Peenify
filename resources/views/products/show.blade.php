@@ -84,12 +84,8 @@
                 @include('comments._partials.create')
             @endif
 
-        <!--評論清單-->
-            @if ($product->isEmoji(auth()->user()))
-                @include('comments.lists')
-            @else
-                <h3>Oops! 需要先給予評分才能看評論喔</h3>
-            @endif
+            <!--評論清單-->
+            @include('comments.lists')
         @endif
     </div>
 @endsection
@@ -122,26 +118,30 @@
                 var id = $this.data('id');
                 var type = $this.data('type');
                 var emoji = $this.data('emoji');
+                var amount = parseInt($this.find('.amount').text());
+
+                var bad = $('#bad');
+                var bad_amount = parseInt(bad.find('.amount').text());
+                var like = $('#like');
+                var like_amount = parseInt(like.find('.amount').text());
                 $.post('/emojis/' + type + '/' + id, {
                     '_token': token,
                     'emoji': emoji
                 }, function (result) {
                     if (result.status == 'emoji') {
-                        $('.emoji').removeClass('Favorite__heart__color');
+                        $this.find('.amount').html(amount + 1);
                         $this.addClass('Favorite__heart__color');
                     } else if (result.status == 'updateEmoji') {
                         if (emoji == 'like') {
-                            $('#emoji_bad').removeClass('Favorite__heart__color');
-                            $('#emoji_bad_amount').html(parseInt($('#emoji_bad_amount').text()) - 1);
-                            $('#emoji_like').addClass('Favorite__heart__color');
-                            $('#emoji_like_amount').html(parseInt($('#emoji_like_amount').text()) + 1);
+                            bad.removeClass('Favorite__heart__color').find('.amount').html(bad_amount - 1);
                         } else {
-                            $('#emoji_like').removeClass('Favorite__heart__color');
-                            $('#emoji_like_amount').html(parseInt($('#emoji_like_amount').text()) - 1);
-                            $('#emoji_bad').addClass('Favorite__heart__color');
-                            $('#emoji_bad_amount').html(parseInt($('#emoji_bad_amount').text()) + 1);
+                            like.removeClass('Favorite__heart__color').find('.amount').html(like_amount - 1);
                         }
+
+                        $this.addClass('Favorite__heart__color');
+                        $this.find('.amount').html(parseInt($this.find('.amount').text()) + 1);
                     } else {
+                        $this.find('.amount').html(amount - 1);
                         $this.removeClass('Favorite__heart__color');
                     }
                 });
@@ -149,7 +149,7 @@
 
             $(document).on('click', '#favorite', function () {
                 var $this = $(this);
-                var $amount = parseInt($('#favorite_amount').text());
+                var amount = parseInt($('#favorite_amount').text());
                 var token = $this.data('token');
                 var type = $this.data('type');
                 var id = $this.data('id');
@@ -158,10 +158,10 @@
                 }, function (result) {
                     if (result.status == 'favorite') {
                         $this.addClass('glyphicon-heart').addClass('Favorite__heart__color').removeClass('glyphicon-heart-empty');
-                        $('#favorite_amount').html($amount + 1);
+                        $('#favorite_amount').html(amount + 1);
                     } else {
                         $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
-                        $('#favorite_amount').html($amount - 1);
+                        $('#favorite_amount').html(amount - 1);
                     }
                 });
             });
