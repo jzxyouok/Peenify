@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWishesTable extends Migration
+class CreateBookmarksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateWishesTable extends Migration
      */
     public function up()
     {
-        Schema::create('wishes', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('wishable_type');
-            $table->integer('wishable_id');
+            $table->string('bookmarkable_type');
+            $table->integer('bookmarkable_id');
             $table->integer('user_id')->unsigned()->index();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateWishesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('wishes');
+        Schema::dropIfExists('bookmarks');
     }
 }

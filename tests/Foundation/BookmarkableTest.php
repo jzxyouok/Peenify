@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class WishableTest extends TestCase
+class BookmarkableTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -20,74 +20,74 @@ class WishableTest extends TestCase
 
     /**
      * @test
-     * @group wishable
+     * @group bookmarkable
      */
-    public function wish()
+    public function bookmark()
     {
         $this->loginFakeUser();
 
         $instance = factory(\App\Product::class)->create();
 
-        $instance->wish(auth()->user());
+        $instance->bookmark(auth()->user());
 
-        $this->seeInDatabase('wishes', [
-            'wishable_type' => 'product',
-            'wishable_id' => $instance->id,
+        $this->seeInDatabase('bookmarks', [
+            'bookmarkable_type' => 'product',
+            'bookmarkable_id' => $instance->id,
             'user_id' => auth()->user()->id,
         ]);
     }
 
     /**
      * @test
-     * @group wishable
+     * @group bookmarkable
      */
-    public function unWish()
+    public function removeBookmark()
     {
         $this->loginFakeUser();
 
         $instance = factory(\App\Product::class)->create();
 
-        $instance->wish(auth()->user());
+        $instance->bookmark(auth()->user());
 
-        $instance->unWish(auth()->user());
+        $instance->removeBookmark(auth()->user());
 
-        $this->dontSeeInDatabase('subscribes', [
-            'wishable_type' => 'product',
-            'wishable_id' => $instance->id,
+        $this->dontSeeInDatabase('bookmarks', [
+            'bookmarkable_type' => 'product',
+            'bookmarkable_id' => $instance->id,
             'user_id' => auth()->user()->id,
         ]);
     }
 
     /**
      * @test
-     * @group wishable
+     * @group bookmarkable
      */
-    public function isWish()
+    public function isBookmark()
     {
         $this->loginFakeUser();
 
         $instance = factory(\App\Product::class)->create();
 
-        $instance->wish(auth()->user());
+        $instance->bookmark(auth()->user());
 
-        $result = $instance->isWish(auth()->user());
+        $result = $instance->isBookmark(auth()->user());
 
         $this->assertTrue($result);
     }
 
     /**
      * @test
-     * @group wishable
+     * @group bookmarkable
      */
-    public function isWishFalse()
+    public function isBookmarkFalse()
     {
         $this->loginFakeUser();
 
         $instance = factory(\App\Product::class)->create();
 
-        $instance->wish(new \App\User(['id' => 2, 'name' => 'yish2']));
+        $instance->bookmark(new \App\User(['id' => 2, 'name' => 'yish2']));
 
-        $result = $instance->isWish(auth()->user());
+        $result = $instance->isBookmark(auth()->user());
 
         $this->assertFalse($result);
     }

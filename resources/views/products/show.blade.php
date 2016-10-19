@@ -69,10 +69,10 @@
                 <a class="btn btn-default" href="{{ route('collections.addProduct', $product->id) }}">加入收藏集</a>
 
             <!--願望清單-->
-            @include('products._funcs.wishes')
+            @include('products._funcs.bookmarks')
 
             <!--最愛-->
-                @include('products._funcs.favorites')
+            @include('products._funcs.favorites')
             </div>
 
             <!--評論表單-->
@@ -93,13 +93,13 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            $(document).on('click', '#wish', function () {
+            $(document).on('click', '#bookmark', function () {
                 var $this = $(this);
-                var $amount = parseInt($this.find('#wish_amount').text());
+                var $amount = parseInt($this.find('#bookmark_amount').text());
                 var token = $this.data('token');
                 var type = $this.data('type');
                 var id = $this.data('id');
-                $.post('/wishes/' + type + '/' + id, {
+                $.post('/bookmarks/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
                     if (result.status == 'wish') {

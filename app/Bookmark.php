@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Wish extends Model
+class Bookmark extends Model
 {
-    protected $table = 'wishes';
+    protected $table = 'bookmarks';
 
     protected $fillable = [
-        'wishable_type',
-        'wishable_id',
+        'bookmarkable_type',
+        'bookmarkable_id',
         'user_id',
     ];
 
-    public function wishable()
+    public function bookmarkable()
     {
         return $this->morphTo();
     }

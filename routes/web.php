@@ -71,11 +71,11 @@ Route::group(['prefix' => 'users'], function () {
     ]);
 
     /*
-     * User 願望清單
+     * User 書籤清單
      */
-    Route::get('{user}/wishes', [
-        'as' => 'users.wishes',
-        'uses' => 'WishesController@showByUser'
+    Route::get('{user}/bookmarks', [
+        'as' => 'users.bookmarks',
+        'uses' => 'BookmarksController@showByUser'
     ]);
 
     /*
@@ -334,12 +334,12 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 /*
- * 願望功能
+ * 書籤功能
  */
 Route::group(['middleware' => 'auth'], function() {
-    Route::post('wishes/{type}/{id}', [
-        'as' => 'wishes.sync',
-        'uses' => 'WishesController@sync',
+    Route::post('bookmarks/{type}/{id}', [
+        'as' => 'bookmarks.sync',
+        'uses' => 'BookmarksController@sync',
     ]);
 });
 

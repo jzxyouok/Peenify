@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Wish;
+use App\Bookmark;
 
-class WishRepository extends Repository
+class BookmarkRepository extends Repository
 {
     protected $model;
 
-    public function __construct(Wish $model)
+    public function __construct(Bookmark $model)
     {
         $this->model = $model;
     }

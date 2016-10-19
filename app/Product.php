@@ -2,9 +2,9 @@
 
 namespace App;
 
+use App\Foundation\Bookmarkable;
 use App\Foundation\Emojiable;
 use App\Foundation\Favorable;
-use App\Foundation\Wishable;
 use Illuminate\Database\Eloquent\Model;
 use Cartalyst\Tags\TaggableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +13,7 @@ class Product extends Model
 {
     use SoftDeletes;
 
-    use TaggableTrait, Favorable, Wishable, Emojiable;
+    use TaggableTrait, Favorable, Bookmarkable, Emojiable;
 
     protected $table = 'products';
 

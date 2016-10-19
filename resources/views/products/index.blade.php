@@ -30,7 +30,8 @@
                         <div>
                             <div class="Card__detail">
                                 <h3 class="Card__title">
-                                    <a class="Card__title__link" href="{{ route('products.show', $product->id) }}">{{ str_limit($product->name, 20) }}
+                                    <a class="Card__title__link"
+                                       href="{{ route('products.show', $product->id) }}">{{ str_limit($product->name, 20) }}
                                     </a>
                                 </h3>
 
@@ -41,22 +42,24 @@
                             </div>
                         </div>
 
-                        <div class="Card__option">
+                        @if (auth()->check())
+                            <div class="Card__option">
                             <span class="icon__distance">
-                                @include('products._funcs.wishes')
+                                @include('products._funcs.bookmarks')
                             </span>
 
-                            <span class="icon__distance">
+                                <span class="icon__distance">
                                 @include('products._funcs.favorites')
                             </span>
 
-                            <span class="icon__distance">
+                                <span class="icon__distance">
                                 <i class="glyphicon glyphicon-comment"></i>
-                                {{ $product->comments()->count() }}
+                                    {{ $product->comments()->count() }}
                             </span>
 
-                            <i class="glyphicon glyphicon-share"></i>
-                        </div>
+                                <i class="glyphicon glyphicon-share"></i>
+                            </div>
+                        @endif
 
                     </div>
                 </div>
@@ -92,21 +95,21 @@
                 });
             });
 
-            $(document).on('click', '#wish', function () {
+            $(document).on('click', '#bookmark', function () {
                 var $this = $(this);
-                var $amount = parseInt($this.find('#wish_amount').text());
+                var $amount = parseInt($this.find('#bookmark_amount').text());
                 var token = $this.data('token');
                 var type = $this.data('type');
                 var id = $this.data('id');
-                $.post('/wishes/' + type + '/' + id, {
+                $.post('/bookmarks/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
-                    if (result.status == 'wish') {
+                    if (result.status == 'bookmark') {
                         $this.addClass('Favorite__heart__color');
-                        $this.find('#wish_amount').html($amount + 1);
+                        $this.find('#bookmark_amount').html($amount + 1);
                     } else {
                         $this.removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
-                        $this.find('#wish_amount').html($amount - 1);
+                        $this.find('#bookmark_amount').html($amount - 1);
                     }
                 });
             });
