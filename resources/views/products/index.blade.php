@@ -2,6 +2,12 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+
+    <style>
+        .icon__distance {
+            margin: 10px 10px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -36,11 +42,18 @@
                         </div>
 
                         <div class="Card__option">
-                            <span style="padding-right: 5px;">
+                            <span class="icon__distance">
+                                <i class="glyphicon glyphicon-bookmark"></i>
+                                <span>
+                                    10
+                                </span>
+                            </span>
+
+                            <span class="icon__distance">
                                 @include('products._funcs.favorites')
                             </span>
 
-                            <span style="padding-right: 5px;">
+                            <span class="icon__distance">
                                 <i class="glyphicon glyphicon-comment"></i>
                                 {{ $product->comments()->count() }}
                             </span>
@@ -65,7 +78,7 @@
         $(document).ready(function () {
             $(document).on('click', '#favorite', function () {
                 var $this = $(this);
-                var $amount = parseInt($('#favorite_amount').text());
+                var $amount = parseInt($this.find('#favorite_amount').text());
                 var token = $this.data('token');
                 var type = $this.data('type');
                 var id = $this.data('id');
@@ -74,10 +87,10 @@
                 }, function (result) {
                     if (result.status == 'favorite') {
                         $this.addClass('glyphicon-heart').addClass('Favorite__heart__color').removeClass('glyphicon-heart-empty');
-                        $('#favorite_amount').html($amount + 1);
+                        $this.find('#favorite_amount').html($amount + 1);
                     } else {
                         $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
-                        $('#favorite_amount').html($amount - 1);
+                        $this.find('#favorite_amount').html($amount - 1);
                     }
                 });
             });

@@ -2,23 +2,51 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+
+    <style>
+        h1 {
+            border-bottom: 1px solid #000000;
+            display: inline-block;
+        }
+
+        .cover {
+            width: 500px;
+            max-height: 300px;
+            display: block;
+            margin: 0 auto;
+            padding-bottom: 10px;
+        }
+
+        .description {
+            margin: 0 auto;
+            display: block;
+            max-width: 500px;
+            padding: 0.5em 0.5em;
+            text-align: justify;
+        }
+    </style>
 @endsection
 
 @section('content')
     <div class="container">
-        <div class="text-center">
+        <div class="text-center" style="padding-bottom: 20px;">
             <!--產品名稱-->
-            <h1 style="border-bottom: 1px solid #000000; display: inline-block">{{ $product->name }}</h1>
+            <h1>{{ $product->name }}</h1>
         </div>
 
         <!--圖片-->
         <div class="row">
-            <img class="img-responsive" style="width: 800px; max-height:300px; display: block; margin: 0 auto;"
+            <img class="cover img-responsive"
                  src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/800x300' }}">
 
+            <!--site, youtube-->
+            <div class="text-center">
+
+            </div>
+
             <!--產品描述-->
-            <div style="margin: 0 auto;display: block;max-width:800px;padding: 0.5em 0.5em;">
-                <p>{{ $product->description }}</p>
+            <div class="description">
+                {{ $product->description }}
             </div>
 
             <div class="text-center" style="margin: 0 auto;display: block;max-width:800px;padding: 0.5em 0.5em;">
