@@ -144,7 +144,7 @@ class EmojiableTest extends TestCase
 
         $instance->emoji(auth()->user(), 'bad');
 
-        $result = $instance->getEmoji('type');
+        $result = $instance->getEmoji(auth()->user(), 'type');
 
         $this->assertEquals('bad', $result);
     }

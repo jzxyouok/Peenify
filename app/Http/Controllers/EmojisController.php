@@ -32,7 +32,7 @@ class EmojisController extends Controller
         $instance = app(ucfirst('App\\' . $type))->find($id);
 
         if ($instance->isEmoji(auth()->user())) {
-            if ($instance->getEmoji('type') == $request->get('emoji')) {
+            if ($instance->getEmoji(auth()->user(), 'type') == $request->get('emoji')) {
                 $instance->unEmoji(auth()->user());
 
                 return response()->json(['status' => 'unEmoji']);
