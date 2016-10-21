@@ -2,51 +2,59 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+
+    <style>
+        .Card__panel__category {
+            margin-bottom: 20px;
+            background-color: #fff;
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .subscribe {
+            cursor: pointer;
+        }
+    </style>
 @endsection
 
 @section('content')
     <div id="app" class="container">
         <div class="row">
             @foreach($categories as $category)
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="panel panel-default">
-                        <img class="img-responsive"
-                             src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/1264x200' }}">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 20px;padding-right: 20px;">
+                    <div class="Card__panel__category" style="border: 1px solid #ccc">
+                        <img class="Card__image img-responsive"
+                             src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/1280x200' }}">
 
-                        <div class="panel-title">
-                            <div class="Card__details">
-                                <h3 class="Card__title" style="font-size: 24px;">
-                                    <a href="{{ route('categories.show', $category->id) }}"
-                                       class="link_style">{{ str_limit($category->name, 20) }}
+
+                        <div>
+                            <div class="Card__detail" style="height: auto;">
+                                <h3 class="Card__title">
+                                    <a class="Card__title__link"
+                                       href="{{ route('categories.show', $category->id) }}">{{ str_limit($category->name, 20) }}
                                     </a>
                                 </h3>
-                                @if(auth()->check())
-                                    <div class="Card__count">
-                                            <span class="subscribe btn btn-{{ $category->isSubscribe(auth()->user()) ? 'danger' : 'default' }} btn-lg"
-                                                  data-type="category"
-                                                  data-id={{ $category->id }} data-token={{ csrf_token() }}>
-                                                    {{ $category->isSubscribe(auth()->user()) ? '取消訂閱' : '訂閱' }}
-                                            </span>
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="Card__details">
-                                <div class="Card__title">
-                                    {{ $category->description }}
-                                </div>
 
                                 <div class="Card__count">
                                     {{ $category->products()->count() }}
-                                    <span class="utility-muted">Products</span>
+                                    <span class="Card__count__description">產品</span>
                                 </div>
 
-                                <div class="Card__count">
-                                    <div>
-                                        {{ $category->subscribes()->count() }}
-                                    </div>
-                                    <span class="utility-muted">Subscribers</span>
+                                <div id="subscribe{{ $category->id }}" class="Card__count">
+                                    <span id="amount">{{ $category->subscribes()->count() }}</span>
+                                    <span class="Card__count__description">訂閱數</span>
                                 </div>
+
+                                @if(auth()->check())
+                                    <div class="Card__count">
+                                            <span class="subscribe btn btn-{{ $category->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
+                                                  data-type="category"
+                                                  data-id={{ $category->id }} data-token={{ csrf_token() }}>
+                                                    {{ $category->isSubscribe(auth()->user()) ? '取消' : '訂閱' }}
+                                            </span>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -65,12 +73,16 @@
                 var token = $this.data('token');
                 var id = $this.data('id');
                 var type = $this.data('type');
+                var subscribe = $('#subscribe' + id);
+                var subscribe_amount = parseInt(subscribe.find('#amount').text());
                 $.post('/subscribes/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
                     if (result.status == 'subscribe') {
-                        $this.addClass('btn-danger').removeClass('btn-default').text('取消訂閱');
+                        subscribe.find('#amount').html(subscribe_amount + 1);
+                        $this.addClass('btn-danger').removeClass('btn-default').text('取消');
                     } else {
+                        subscribe.find('#amount').html(subscribe_amount - 1);
                         $this.addClass('btn-default').removeClass('btn-danger').text('訂閱');
                     }
                 });
