@@ -1,26 +1,64 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        .round {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+        }
+
+        .round img {
+            display: block;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .Card__image {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .description {
+            margin: 0 auto;
+            display: inline-block;
+            max-width: 500px;
+            padding: 0.5em 0.5em;
+            text-align: justify;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <div class="container">
-        <img class="image-size"
-             src="{{ ($user->avatar) ? image_path('avatars.users', $user->avatar):'holder.js/300x300' }}">
-        <h1>{{ $user->name }}</h1>
-        <div class="form-group">{{ $user->description }}</div>
-
-        @if (auth()->check())
-            <a class="btn btn-default" href="{{ route('users.edit') }}">Edit</a>
-
-            <div class="form-group">
-                <div id="subscribe" class="btn btn-{{ $user->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
-                     data-type="user" data-id={{ $user->id }} data-token={{ csrf_token() }}>
-                    {{ $user->isSubscribe(auth()->user()) ? '取消關注' : '關注' }}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4" style="background-color: #fff;height: auto; max-width: 360px;padding-top: 30px;">
+                <div style="padding-top: 20px;">
+                    <div class="round" style="margin: auto;">
+                        <img class="Card__image"
+                             src="{{ ($user->avatar) ? image_path('avatars.users', $user->avatar):'holder.js/300x300' }}">
+                    </div>
                 </div>
-            </div>
+                <h3 class="text-center" style="padding-top: 10px;margin: auto;">{{ $user->name }}</h3>
+                @if (auth()->check())
+                    <div class="text-center" style="padding:10px 10px">
+                        <div id="subscribe"
+                             class="btn btn-{{ $user->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
+                             data-type="user" data-id={{ $user->id }} data-token={{ csrf_token() }}>
+                            {{ $user->isSubscribe(auth()->user()) ? '取消關注' : '關注' }}
+                        </div>
+                    </div>
+                @endif
 
-            <!--鼓勵-->
-            @include('users._funcs.emojis')
-        @endif
+                <span class="description">
+                    {{ $user->description }}
+                </span>
+            </div>
+        </div>
     </div>
 
 @endsection
