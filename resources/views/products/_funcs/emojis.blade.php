@@ -1,6 +1,7 @@
 <style>
     .emoji {
         cursor: pointer;
+        padding-right: 15px;
     }
 
     .amount {
