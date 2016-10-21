@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Foundation\Subscribable;
+use App\Foundation\Favorable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -10,7 +10,7 @@ class Collection extends Model
 {
     use SoftDeletes;
 
-    use Subscribable;
+    use Favorable;
 
     protected $table = 'collections';
 

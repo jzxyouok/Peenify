@@ -2,80 +2,98 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+
+    <style>
+        .Card__panel__collection {
+            margin-bottom: 20px;
+            background-color: #fff;
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .Collection__title {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .Collection_description {
+            margin: 0;
+            -webkit-box-flex: 1;
+            flex: 1;
+        }
+
+        #favorite {
+            cursor: pointer;
+        }
+    </style>
 @endsection
 
 @section('content')
     <div class="container">
-        <div class="col-md-12 text-center">
-            <h2 style="display: inline-block; padding-bottom: 6px; border-bottom: 2px solid; letter-spacing: 4px;">
-                為您精選的收藏集
-            </h2>
-        </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center" style="padding-bottom: 20px">
+                <h2 class="Card__category__name">
+                    為您精選收藏集
+                </h2>
+            </div>
+
+            <div class="row">
                 @foreach($collections as $collection)
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-title">
-                                <div class="Card__details">
-                                    <h3 class="Card__title">
-                                        <a class="link_style"
-                                           href="{{ route('collections.show', $collection->id) }}">{{ $collection->name }}</a>
-                                    </h3>
+                    <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div class="Card__panel__collection" style="border: 1px solid #ccc">
+                            <h3 class="Collection__title">
+                                <a class="Card__title__link"
+                                   href="{{ route('collections.show', $collection->id) }}">{{ str_limit($collection->name, 20) }}
+                                </a>
+                            </h3>
 
-                                    @if (auth()->check())
-                                        <div class="subscribe btn btn-{{ $collection->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
-                                             data-type="collection"
-                                             data-id={{ $collection->id }} data-token={{ csrf_token() }}>
-                                            {{ $collection->isSubscribe(auth()->user()) ? '取消訂閱' : '訂閱' }}
-                                        </div>
-                                    @endif
+                            <div id="favorite" class="glyphicon glyphicon-heart{{ $collection->isFavorite(auth()->user()) ? ' Favorite__heart__color' : '-empty' }}"
+                                 data-type="collection" data-id={{ $collection->id }} data-token={{ csrf_token() }}>
+                                    <span id="favorite_amount">
+                                        {{ $collection->favorites()->count() }}
+                                    </span>
+                            </div>
 
-                                </div>
-                                <div class="Card__details">
-                                    <div class="Card__title">
-                                        {{ $collection->description }}
+                                <div class="Card__detail">
+                                    <div class="Collection_description">
+                                        {{ str_limit($collection->description, 20) }}
                                     </div>
 
                                     <div class="Card__count">
                                         {{ $collection->products()->count() }}
-                                        <span class="utility-muted">total</span>
-                                    </div>
-
-                                    <div class="Card__count">
-                                        {{ $collection->subscribes()->count() }}
-                                        <span class="utility-muted">subscribers</span>
+                                        <span class="Card__count__description">產品</span>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
+                @endforeach
             </div>
-            @endforeach
+
+            <div style="text-align: center">
+                {!! $collections->links() !!}
+            </div>
         </div>
     </div>
-
-    <div style="text-align: center">
-        {!! $collections->links() !!}
-    </div>
-
 @endsection
 
 @section('script')
     <script>
         $(document).ready(function () {
-            $(document).on('click', '#subscribe', function () {
+            $(document).on('click', '#favorite', function () {
                 var $this = $(this);
+                var $amount = parseInt($this.find('#favorite_amount').text());
                 var token = $this.data('token');
-                var id = $this.data('id');
                 var type = $this.data('type');
-                $.post('/subscribes/' + type + '/' + id, {
+                var id = $this.data('id');
+                $.post('/favorites/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
-                    if (result.status == 'subscribe') {
-                        $this.addClass('btn-danger').removeClass('btn-default').text('取消訂閱');
+                    if (result.status == 'favorite') {
+                        $this.addClass('glyphicon-heart').addClass('Favorite__heart__color').removeClass('glyphicon-heart-empty');
+                        $this.find('#favorite_amount').html($amount + 1);
                     } else {
-                        $this.addClass('btn-default').removeClass('btn-danger').text('訂閱');
+                        $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
+                        $this.find('#favorite_amount').html($amount - 1);
                     }
                 });
             });
