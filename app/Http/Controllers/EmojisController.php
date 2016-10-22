@@ -22,7 +22,7 @@ class EmojisController extends Controller
 
     public function showByUser($user_id)
     {
-        $emojis = $this->emojiService->getPaginationByUser($user_id, 10);
+        $emojis = $this->emojiService->getPaginationByUser($user_id, 12);
 
         return view('users.emojis', compact('emojis'));
     }

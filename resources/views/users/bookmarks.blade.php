@@ -3,19 +3,19 @@
 @section('content')
 
     <div class="container">
-        @foreach($wishes as $wish)
-            <h2>{{ $wish->wishable->name }}</h2>
-            <h3>{{ $wish->created_at->diffForHumans() }}</h3>
+        @foreach($bookmarks as $bookmark)
+            <h2>{{ $bookmark->bookmarkable->name }}</h2>
+            <h3>{{ $bookmark->created_at->diffForHumans() }}</h3>
 
             <div class="form-group">
-                <div id="wish" class="btn btn-{{ $wish->wishable->isWish(auth()->user()) ? 'danger' : 'default' }}"
-                     data-type="product" data-id={{ $wish->wishable->id }} data-token={{ csrf_token() }}>
-                    {{ $wish->wishable->isWish(auth()->user()) ? '從願望清單移除' : '加到願望清單'}}
+                <div id="wish" class="btn btn-{{ $bookmark->bookmarkable->isBookmark(auth()->user()) ? 'danger' : 'default' }}"
+                     data-type="product" data-id={{ $bookmark->bookmarkable->id }} data-token={{ csrf_token() }}>
+                    {{ $bookmark->bookmarkable->isBookmark(auth()->user()) ? '從願望清單移除' : '加到願望清單'}}
                 </div>
             </div>
         @endforeach
 
-        {!! $wishes->links() !!}
+        {!! $bookmarks->links() !!}
     </div>
 @endsection
 
