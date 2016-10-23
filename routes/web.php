@@ -67,7 +67,7 @@ Route::group(['prefix' => 'users'], function () {
      */
     Route::get('{user}/emojis', [
         'as' => 'users.emojis',
-        'uses' => 'User\ShowEmoji'
+        'uses' => 'User\ShowEmojis'
     ]);
 
     /*
@@ -75,7 +75,7 @@ Route::group(['prefix' => 'users'], function () {
      */
     Route::get('{user}/bookmarks', [
         'as' => 'users.bookmarks',
-        'uses' => 'BookmarksController@showByUser'
+        'uses' => 'User\ShowBookmarks'
     ]);
 
     /*
@@ -83,7 +83,7 @@ Route::group(['prefix' => 'users'], function () {
      */
     Route::get('{user}/favorites', [
         'as' => 'users.favorites',
-        'uses' => 'FavoritesController@showByUser'
+        'uses' => 'User\ShowFavorites'
     ]);
 
     /*
@@ -91,7 +91,7 @@ Route::group(['prefix' => 'users'], function () {
      */
     Route::get('{user}/collections', [
         'as' => 'users.collections',
-        'uses' => 'CollectionsController@showByUser'
+        'uses' => 'User\ShowCollections'
     ]);
 
     /*

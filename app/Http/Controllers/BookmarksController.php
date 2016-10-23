@@ -33,11 +33,4 @@ class BookmarksController extends Controller
 
         return response()->json(['status' => 'bookmark']);
     }
-
-    public function showByUser($user_id)
-    {
-        $bookmarks = $this->bookmarkService->getPaginationByUser($user_id, 10);
-
-        return view('users.bookmarks', compact('bookmarks'));
-    }
 }

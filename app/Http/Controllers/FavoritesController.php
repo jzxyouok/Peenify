@@ -19,13 +19,6 @@ class FavoritesController extends Controller
         $this->favoriteService = $favoriteService;
     }
 
-    public function showByUser($user_id)
-    {
-        $favorites = $this->favoriteService->getPaginationByUser($user_id, 10);
-
-        return view('users.favorites', compact('favorites'));
-    }
-
     public function sync($type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);

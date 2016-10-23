@@ -66,13 +66,6 @@ class CollectionsController extends Controller
         return redirect()->back()->with('message', '刪除成功');
     }
 
-    public function showByUser($user_id)
-    {
-        $collections = $this->collectionService->getPaginationByUser($user_id, 10);
-
-        return view('users.collections', compact('collections'));
-    }
-
     public function addProduct($product_id)
     {
         return view('products.collections', compact('product_id'));
