@@ -109,7 +109,6 @@ Route::group(['prefix' => 'users'], function () {
  */
 Route::group(['prefix' => 'categories'], function () {
     Route::group(['middleware' => ['auth', 'auth.backend']], function () {
-
         /*
          * 建立類別
          */
@@ -295,17 +294,9 @@ Route::post('collections/addProduct/{product}', [
 
 
 /*
- * 訂閱功能
+ * 訂閱
  */
 Route::group(['middleware' => 'auth'], function() {
-    /*
-    * 訂閱
-    */
-    Route::post('subscribes/{type}/{id}', [
-        'as' => 'subscribes.sync',
-        'uses' => 'SubscribesController@sync',
-    ]);
-
     /*
      * 跟隨者
      */
@@ -323,30 +314,35 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 });
 
-/*
- * 評分功能
- */
-Route::group(['middleware' => 'auth'], function() {
-    Route::post('emojis/{type}/{id}', [
-        'as' => 'emojis.sync',
-        'uses' => 'EmojisController@sync',
-    ]);
-});
 
-/*
- * 書籤功能
- */
 Route::group(['middleware' => 'auth'], function() {
+    /*
+     * 訂閱
+     */
+    Route::post('subscribes/{type}/{id}', [
+        'as' => 'subscribes.sync',
+        'uses' => 'SubscribesController@sync',
+    ]);
+
+    /*
+     * 書籤功能
+     */
     Route::post('bookmarks/{type}/{id}', [
         'as' => 'bookmarks.sync',
         'uses' => 'BookmarksController@sync',
     ]);
-});
 
-/*
- * 最愛功能
- */
-Route::group(['middleware' => 'auth'], function() {
+    /*
+     * 評分功能
+     */
+    Route::post('emojis/{type}/{id}', [
+        'as' => 'emojis.sync',
+        'uses' => 'EmojisController@sync',
+    ]);
+
+    /*
+     * 最愛功能
+     */
     Route::post('favorites/{type}/{id}', [
         'as' => 'favorites.sync',
         'uses' => 'FavoritesController@sync',
