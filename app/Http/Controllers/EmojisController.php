@@ -20,13 +20,6 @@ class EmojisController extends Controller
         $this->emojiService = $emojiService;
     }
 
-    public function showByUser($user_id)
-    {
-        $emojis = $this->emojiService->getPaginationByUser($user_id, 12);
-
-        return view('users.emojis', compact('emojis'));
-    }
-
     public function sync(Request $request, $type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);

@@ -67,7 +67,7 @@ Route::group(['prefix' => 'users'], function () {
      */
     Route::get('{user}/emojis', [
         'as' => 'users.emojis',
-        'uses' => 'EmojisController@showByUser'
+        'uses' => 'User\ShowEmoji'
     ]);
 
     /*
