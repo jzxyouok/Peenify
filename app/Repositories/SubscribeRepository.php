@@ -16,7 +16,7 @@ class SubscribeRepository
         $this->model = $model;
     }
 
-    public function pluckSubscriber($type, $id, $pluckColumn = 'subscribable_id')
+    public function pluckSubscriber($type, $id, $pluckColumn = 'user_id')
     {
         return $this->model->where([
             'subscribable_type' => $type,
@@ -24,7 +24,7 @@ class SubscribeRepository
         ])->pluck($pluckColumn);
     }
 
-    public function pluckSubscribed($type, $id, $pluckColumn = 'user_id')
+    public function pluckSubscribed($type, $id, $pluckColumn = 'subscribable_id')
     {
         return $this->model->where([
             'subscribable_type' => $type,
