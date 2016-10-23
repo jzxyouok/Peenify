@@ -1,19 +1,65 @@
 @extends('layouts.app')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+
+    <style>
+        .Card__panel {
+            height: auto;
+        }
+
+        #favorite {
+            cursor: pointer;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <div class="container">
-        @foreach($favorites as $favorite)
-            <h2>{{ $favorite->favorable->name }}</h2>
-            <h3>{{ $favorite->created_at->diffForHumans() }}</h3>
+        <div class="col-md-12 text-center" style="padding-bottom: 20px">
+            <h2 class="Card__category__name">
+                {{ $user->name }}'s 最愛
+            </h2>
+        </div>
 
-            <div class="form-group">
-                <div id="favorite" class="btn btn-{{ $favorite->favorable->isFavorite(auth()->user()) ? 'danger' : 'default' }}"
-                     data-type="product" data-id={{ $favorite->favorable->id }} data-token={{ csrf_token() }}>
-                    {{ $favorite->favorable->isFavorite(auth()->user()) ? '取消最愛' : '最愛'}}
+        <div class="row">
+
+            @foreach($favorites as $favorite)
+                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                    <div class="Card__panel" style="border: 1px solid #ccc">
+                        <a href="{{ route('products.show', $favorite->favorable->id) }}">
+                            <img class="Card__image"
+                                 src="{{ ($favorite->favorable->cover) ? image_path('products', $favorite->favorable->cover):'holder.js/380x260?auto=yes' }}">
+                        </a>
+
+                        <div>
+                            <div class="Card__detail">
+                                <h3 class="Card__title">
+                                    <a class="Card__title__link"
+                                       href="{{ route('products.show', $favorite->favorable->id) }}">{{ str_limit($favorite->favorable->name, 20) }}
+                                    </a>
+                                </h3>
+
+                                @if(auth()->check() && $favorite->owns())
+                                    <div class="Card__count">
+                                        <div id="favorite"
+                                             class="glyphicon glyphicon-heart{{ $favorite->favorable->isFavorite(auth()->user()) ? ' Favorite__heart__color' : '-empty' }}"
+                                             data-type="product"
+                                             data-id={{ $favorite->favorable->id }} data-token={{ csrf_token() }}>
+                                        </div>
+
+                                        <span class="Card__count__description">
+                                                    {{ $favorite->created_at->diffForHumans() }}
+                                                </span>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
 
         {!! $favorites->links() !!}
     </div>
@@ -31,20 +77,9 @@
                     '_token': token
                 }, function (result) {
                     if (result.status == 'favorite') {
-                        $this.addClass('btn-danger').removeClass('btn-default').text('取消最愛');
+                        $this.addClass('glyphicon-heart').addClass('Favorite__heart__color').removeClass('glyphicon-heart-empty');
                     } else {
-                        swal({
-                            title: "Are you sure?",
-                            text: "你要取消最愛這個嗎？？",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "對，我不想看到了",
-                            closeOnConfirm: false
-                        }, function () {
-                            swal("取消最愛成功!", "你已經取消最愛囉", "success");
-                            $this.addClass('btn-default').removeClass('btn-danger').text('最愛');
-                        });
+                        $this.addClass('glyphicon-heart-empty').removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
                     }
                 });
             });

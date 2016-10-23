@@ -23,4 +23,9 @@ class Favorite extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function owns()
+    {
+        return $this->user_id == auth()->user()->id;
+    }
 }
