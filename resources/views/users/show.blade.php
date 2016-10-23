@@ -33,7 +33,6 @@
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4" style="background-color: #fff;height: auto; max-width: 360px;padding-top: 30px;">
@@ -60,7 +59,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('script')
@@ -89,24 +87,6 @@
                             swal("取消關注成功!", "你已經取消關注他囉", "success");
                             $this.addClass('btn-default').removeClass('btn-danger').text('關注');
                         });
-                    }
-                });
-            });
-
-            $(document).on('click', '#emoji', function () {
-                var $this = $(this);
-                var token = $this.data('token');
-                var id = $this.data('id');
-                var type = $this.data('type');
-                var emoji = $this.data('emoji');
-                $.post('/emojis/' + type + '/' + id, {
-                    '_token': token,
-                    'emoji': emoji
-                }, function (result) {
-                    if (result.status == 'emoji') {
-                        $this.addClass('btn-danger').removeClass('btn-default');
-                    } else {
-                        $this.removeClass('btn-danger').addClass('btn-default');
                     }
                 });
             });
