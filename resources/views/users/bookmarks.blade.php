@@ -1,19 +1,58 @@
 @extends('layouts.app')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
+
+    <style>
+        .Card__panel {
+            height: auto;
+        }
+
+        #bookmark {
+            cursor: pointer;
+        }
+    </style>
+@endsection
+
 @section('content')
-
     <div class="container">
-        @foreach($bookmarks as $bookmark)
-            <h2>{{ $bookmark->bookmarkable->name }}</h2>
-            <h3>{{ $bookmark->created_at->diffForHumans() }}</h3>
+        <div class="col-md-12 text-center" style="padding-bottom: 20px">
+            <h2 class="Card__category__name">
+                {{ $user->name }}'s 書籤
+            </h2>
+        </div>
 
-            <div class="form-group">
-                <div id="wish" class="btn btn-{{ $bookmark->bookmarkable->isBookmark(auth()->user()) ? 'danger' : 'default' }}"
-                     data-type="product" data-id={{ $bookmark->bookmarkable->id }} data-token={{ csrf_token() }}>
-                    {{ $bookmark->bookmarkable->isBookmark(auth()->user()) ? '從願望清單移除' : '加到願望清單'}}
+        <div class="row">
+            @foreach($bookmarks as $bookmark)
+                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                    <div class="Card__panel" style="border: 1px solid #ccc">
+                        <a href="{{ route('products.show', $bookmark->bookmarkable->id) }}">
+                            <img class="Card__image"
+                                 src="{{ ($bookmark->bookmarkable->cover) ? image_path('products', $bookmark->bookmarkable->cover):'holder.js/380x260?auto=yes' }}">
+                        </a>
+
+                        <div>
+                            <div class="Card__detail">
+                                <h3 class="Card__title">
+                                    <a class="Card__title__link"
+                                       href="{{ route('products.show', $bookmark->bookmarkable->id) }}">{{ str_limit($bookmark->bookmarkable->name, 20) }}
+                                    </a>
+                                </h3>
+
+                                @if(auth()->check() && $bookmark->owns())
+                                    <div class="Card__count">
+                                        <div id="bookmark" class="glyphicon glyphicon-bookmark{{ $bookmark->bookmarkable->isBookmark(auth()->user()) ? ' Favorite__heart__color' : '' }}"
+                                             data-type="product" data-id={{ $bookmark->bookmarkable->id }} data-token={{ csrf_token() }}>
+                                        </div>
+                                        <span class="Card__count__description">{{ $bookmark->created_at->diffForHumans() }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
 
         {!! $bookmarks->links() !!}
     </div>
@@ -22,29 +61,21 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            $(document).on('click', '#wish', function () {
+            $(document).on('click', '#bookmark', function () {
                 var $this = $(this);
+                var $amount = parseInt($this.find('#bookmark_amount').text());
                 var token = $this.data('token');
                 var type = $this.data('type');
                 var id = $this.data('id');
-                $.post('/wishes/' + type + '/' + id, {
+                $.post('/bookmarks/' + type + '/' + id, {
                     '_token': token
                 }, function (result) {
-                    if (result.status == 'wish') {
-                        $this.addClass('btn-danger').removeClass('btn-default').text('取消願望');
+                    if (result.status == 'bookmark') {
+                        $this.addClass('Favorite__heart__color');
+                        $this.find('#bookmark_amount').html($amount + 1);
                     } else {
-                        swal({
-                            title: "Are you sure?",
-                            text: "你要取消願望這個嗎？？",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "對，我不想看到了",
-                            closeOnConfirm: false
-                        }, function () {
-                            swal("取消願望成功!", "你已經取消願望囉", "success");
-                            $this.addClass('btn-default').removeClass('btn-danger').text('願望');
-                        });
+                        $this.removeClass('Favorite__heart__color').removeClass('glyphicon-heart');
+                        $this.find('#bookmark_amount').html($amount - 1);
                     }
                 });
             });
