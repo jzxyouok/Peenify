@@ -275,6 +275,7 @@ Route::group(['prefix' => 'comments'], function () {
 
 /*
  * 收藏集 CURD
+ * TODO clear
  * User
  */
 Route::resource('collections', 'CollectionsController');
@@ -347,9 +348,7 @@ Route::group(['middleware' => 'auth'], function() {
         'as' => 'favorites.sync',
         'uses' => 'FavoritesController@sync',
     ]);
-});
 
-Route::group(['middleware' => 'auth'], function () {
     /*
      * 標籤 auto complete api 接口
      */
