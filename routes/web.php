@@ -307,19 +307,19 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 
     /*
-     * 被訂閱清單
+     * 跟隨者
      */
     Route::get('{type}/{id}/subscribers', [
         'as' => 'subscribes.subscribers',
-        'uses' => 'SubscribesController@subscriber'
+        'uses' => 'Subscribe\ShowSubscriber'
     ]);
 
     /*
-     * 訂閱清單
+     * 正在訂閱
      */
     Route::get('{type}/{id}/subscribed', [
         'as' => 'subscribes.subscribed',
-        'uses' => 'SubscribesController@subscribed'
+        'uses' => 'Subscribe\ShowSubscribed'
     ]);
 });
 

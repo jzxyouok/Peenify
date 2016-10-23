@@ -19,26 +19,6 @@ class SubscribesController extends Controller
         $this->subscribeService = $subscribeService;
     }
 
-    /**
-     * 訂閱你的人
-     */
-    public function subscriber($type, $id)
-    {
-        $subscribers = $this->subscribeService->subscribers($type, $id, 10);
-
-        return view("{$type}s.subscribers", compact('subscribers'));
-    }
-
-    /**
-     * 訂閱清單
-     */
-    public function subscribed($type, $id)
-    {
-        $subscribed = $this->subscribeService->subscribed($type, $id, 10);
-
-        return view("{$type}s.subscribed", compact('subscribed'));
-    }
-
     public function sync($type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);
