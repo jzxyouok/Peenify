@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\updateRequest;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,7 @@ class UsersController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(updateRequest $request)
     {
         $this->userService->update(update_image($request, 'avatar', 'avatars.users'));
 

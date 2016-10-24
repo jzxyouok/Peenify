@@ -56,8 +56,10 @@
                                 <i class="glyphicon glyphicon-comment"></i>
                                     {{ $product->comments()->count() }}
                             </span>
+                                <a style="color: #000000;" href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('products.show', $product->id)) }}">
+                                    <i class="glyphicon glyphicon-share"></i>
+                                </a>
 
-                                <i class="glyphicon glyphicon-share"></i>
                             </div>
                         @endif
 
