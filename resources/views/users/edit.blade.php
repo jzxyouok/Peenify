@@ -1,30 +1,68 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        .avatar {
+            margin: 0 auto;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+@endsection
+
 @section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">修改個人資料</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('users.update') }}"
+                          enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
 
-    <div class="container">
-        <h1>Edit User</h1>
-        <form action="{{ route('users.update') }}" method="post" role="form" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            {{ method_field('PUT') }}
-            <div class="form-group">
-                <label for="name">名稱</label>
-                <input type="text" name="name" value="{{ $user->name }}" class="form-control">
+                        <div class="form-group">
+                            <img class="avatar img-responsive" src="{{ ($user->avatar) ? image_path('avatars.users', $user->avatar):'holder.js/300x300' }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 control-label">大頭貼</label>
+
+                            <div class="col-md-6">
+                                <input type="file" name="avatar" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 control-label">名稱</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="name" value="{{ $user->name }}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">簡介</label>
+
+                            <div class="col-md-6">
+                                <textarea name="description" rows="4" cols="50"
+                                          class="form-control">{{ $user->description }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-default">
+                                    更新
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="description">描述</label>
-                <textarea name="description" rows="4" cols="50"
-                          class="form-control">{{ $user->description }}</textarea>
-            </div>
-            <div class="form-group">
-                <label for="name">大頭貼</label>
-                <img class="image-size" src="{{ ($user->avatar) ? image_path('avatars.users', $user->avatar):'holder.js/300x300' }}">
-                <input type="file" name="avatar" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="更新" class="btn btn-default">
-            </div>
-        </form>
+        </div>
     </div>
-
+</div>
 @endsection
