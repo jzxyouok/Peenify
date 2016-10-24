@@ -38,12 +38,12 @@
         <h2>跟隨者</h2>
         <div class="row">
             @foreach($subscribers as $subscriber)
-                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4" style="border: 1px solid #ccc;padding :10px 10px;">
-                    <div style="padding-top: 20px">
-                        <img src="{{ ($subscriber->avatar) ? image_path('avatars.users', $subscriber->avatar):'holder.js/50x50' }}">
-                        <div>
-                            <a href="{{ route('users.show', $subscriber->id) }}">{{ $subscriber->name }}</a>
-                            <p>{{ $subscriber->description }}</p>
+                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img class="round" src="{{ ($subscriber->avatar) ? image_path('avatars.users', $subscriber->avatar):'holder.js/50x50' }}">
+                                <a href="{{ route('users.show', $subscriber->id) }}">{{ $subscriber->name }}</a>
+                                <p>{{ $subscriber->description }}</p>
                         </div>
                     </div>
                 </div>
