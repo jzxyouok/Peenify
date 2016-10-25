@@ -65,7 +65,6 @@
                                 <a href="{{ route('subscribes.subscribers', ['type' => 'user', 'id' => auth()->user()->id]) }}">跟隨者</a>
                                 <a href="{{ route('subscribes.subscribed', ['type' => 'user', 'id' => auth()->user()->id]) }}">正在訂閱</a>
                                 <a href="{{ route('users.collections', auth()->user()->id) }}">你的收藏集</a>
-                                <a href="{{ route('users.edit') }}">編輯個人資料</a>
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

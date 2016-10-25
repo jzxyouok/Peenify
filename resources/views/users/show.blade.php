@@ -45,11 +45,15 @@
                 <h3 class="text-center" style="padding-top: 10px;margin: auto;">{{ $user->name }}</h3>
                 @if (auth()->check())
                     <div class="text-center" style="padding:10px 10px">
-                        <div id="subscribe"
-                             class="btn btn-{{ $user->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
-                             data-type="user" data-id={{ $user->id }} data-token={{ csrf_token() }}>
-                            {{ $user->isSubscribe(auth()->user()) ? '取消關注' : '關注' }}
-                        </div>
+                        @if ($user->owns())
+                            <a href="{{ route('users.edit') }}">編輯個人資料</a>
+                        @else
+                            <div id="subscribe"
+                                 class="btn btn-{{ $user->isSubscribe(auth()->user()) ? 'danger' : 'default' }}"
+                                 data-type="user" data-id={{ $user->id }} data-token={{ csrf_token() }}>
+                                {{ $user->isSubscribe(auth()->user()) ? '取消關注' : '關注' }}
+                            </div>
+                        @endif
                     </div>
                 @endif
 

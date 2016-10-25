@@ -87,4 +87,9 @@ class User extends Authenticatable
     {
         return $this->roles()->sync($roles);
     }
+
+    public function owns()
+    {
+        return $this->id == auth()->user()->id;
+    }
 }

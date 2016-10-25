@@ -1,0 +1,32 @@
+.emoji_comment {
+    cursor: pointer;
+    padding: auto;
+    margin-right: 10px;
+}
+
+.Comment__box {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px 10px;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.comment_container {
+    position: relative;
+    min-height: 1px;
+}
+
+.Comment__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px 20px;
+}
+
+.Comment__description {
+    padding: 10px 10px;
+}
