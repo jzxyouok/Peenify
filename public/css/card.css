@@ -60,3 +60,8 @@
 .Card__option__distance {
     margin: 10px 10px;
 }
+
+.Card__collection__title {
+    display: inline-block;
+    margin-left: 10px;
+}
