@@ -1,6 +1,10 @@
-.Card__category__name {
+.slogan {
     display: inline-block;
     padding-bottom: 6px;
     border-bottom: 2px solid #000000;
     letter-spacing: 4px;
+}
+
+.slogan__distance {
+    padding-bottom: 20px;
 }
