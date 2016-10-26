@@ -111,7 +111,7 @@
 
     <div class="content">
         <div class="title m-b-md">
-            Welcome to Minimal, 查詢評分的平台。
+            Peenify: 電影、劇集、遊戲的評分平台。
         </div>
     </div>
 </div>

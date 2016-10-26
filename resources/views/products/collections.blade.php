@@ -12,7 +12,7 @@
             @else
                 <div class="text-center">
                     <div class="col-xs-12 col-md-12">
-                        <form class="form-group" action="{{ route('collections.addProduct', $product_id) }}">
+                        <form class="form-group" action="{{ route('collections.storeProduct', $product_id) }}" method="post">
                             {{ csrf_field() }}
                             <div class="col-xs-8 col-md-10">
                                 <select class="form-control" name="collection_id">
