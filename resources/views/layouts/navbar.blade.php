@@ -38,7 +38,6 @@
                 <li><a href="{{ route('categories.index') }}">分類</a></li>
                 <li><a href="{{ route('products.index') }}">產品</a></li>
                 <li><a href="{{ route('collections.index') }}">探索收藏集</a></li>
-                <li><a href="#">為您準備專屬收藏集</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

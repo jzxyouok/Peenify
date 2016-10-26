@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('/css/card.css') }}">
     <style>
-        .Card__panel {
-            height: auto;
-        }
-
         .subscribe {
             cursor: pointer;
         }

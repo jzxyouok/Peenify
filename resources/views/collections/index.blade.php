@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('/css/card.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/area.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/func.css') }}">
-
     <style>
         .Card__panel {
             height: auto;

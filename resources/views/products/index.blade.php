@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-    <link rel="stylesheet" href="{{ asset('/css/card.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/area.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/func.css') }}">
-@endsection
-
 @section('content')
     <div class="container">
         <div class="row">
