@@ -10,9 +10,9 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row grid">
             @foreach($products as $product)
-                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                <div class="grid-item col-xs-12 col-sm-8 col-md-4 col-lg-4">
                     <div class="Card__panel">
                         <a href="{{ route('products.show', $product->id) }}">
                             <img class="Card__image img-responsive"
@@ -68,6 +68,7 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('/js/masonry-loader.js') }}"></script>
     <script src="{{ asset('/js/favorite.js') }}"></script>
     <script src="{{ asset('/js/bookmark.js') }}"></script>
 @endsection

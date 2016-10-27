@@ -63,7 +63,7 @@
 
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="{{ route('products.create') }}">建立分類</a>
+                            <a href="{{ route('products.create') }}">建立產品</a>
                             <a href="{{ route('backend.products') }}">產品頁</a>
                         </li>
                     </ul>
