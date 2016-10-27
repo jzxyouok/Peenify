@@ -17,7 +17,7 @@ class CreateSeriesTable extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned()->index();
             $table->string('origin_name')->nullable();
-            $table->dateTime('runtime_at')->nullable();
+            $table->string('runtime_at')->nullable();
             $table->string('country')->nullable();
             $table->string('trailer')->nullable();
         });
