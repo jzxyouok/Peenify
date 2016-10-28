@@ -2,16 +2,17 @@
 
 @section('content')
     <div class="container">
-
-        <!--search bar-->
-        @include('searches._partials.productbar')
-
         <div class="row">
             <div class="col-md-12 text-center slogan__distance">
                 <h2 class="slogan">
                     搜尋 {{ $term }} 結果
                 </h2>
             </div>
+        </div>
+
+        <!--search bar-->
+        <div class="row Searchbar__distance">
+            @include('searches._partials.productbar')
         </div>
 
         <div class="row grid">
@@ -23,18 +24,16 @@
                                  src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/380x260?auto=yes' }}">
                         </a>
 
-                        <div>
-                            <div class="Card__detail">
-                                <h3 class="Card__title">
-                                    <a class="Card__title__link"
-                                       href="{{ route('products.show', $product->id) }}">{{ str_limit($product->name, 20) }}
-                                    </a>
-                                </h3>
+                        <div class="Card__detail">
+                            <h3 class="Card__title">
+                                <a class="Card__title__link"
+                                   href="{{ route('products.show', $product->id) }}">{{ str_limit($product->name, 20) }}
+                                </a>
+                            </h3>
 
-                                <div class="Card__count">
-                                    {{ $product->emojis()->count() }}
-                                    <span class="Card__count__description">評價</span>
-                                </div>
+                            <div class="Card__count">
+                                {{ $product->emojis()->count() }}
+                                <span class="Card__count__description">評價</span>
                             </div>
                         </div>
 

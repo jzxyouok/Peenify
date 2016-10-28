@@ -6,7 +6,7 @@
                     <input type="text" name="term" class="form-control" placeholder="Search for...">
 
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
+                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
                     </span>
                 </div>
             </form>
