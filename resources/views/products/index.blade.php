@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+
+        @include('searches._partials.productbar')
+
         <div class="row">
             <div class="col-md-12 text-center slogan__distance">
                 <h2 class="slogan">
@@ -36,18 +39,18 @@
 
                         @if (auth()->check())
                             <div class="Card__option">
-                                <span class="Card__option__distance">
-                                    @include('products._funcs.bookmarks')
-                                </span>
+                                    <span class="Card__option__distance">
+                                        @include('products._funcs.bookmarks')
+                                    </span>
 
                                 <span class="Card__option__distance">
-                                    @include('products._funcs.favorites')
-                                </span>
+                                        @include('products._funcs.favorites')
+                                    </span>
 
                                 <span class="Card__option__distance">
-                                <i class="glyphicon glyphicon-comment"></i>
+                                    <i class="glyphicon glyphicon-comment"></i>
                                     {{ $product->comments()->count() }}
-                                </span>
+                                    </span>
 
                                 <a class="Card__title__link"
                                    href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('products.show', $product->id)) }}">
@@ -64,7 +67,7 @@
             {!! $products->links('vendor.pagination.simple-default') !!}
         </div>
 
-    </div>
+        </div>
 @endsection
 
 @section('script')

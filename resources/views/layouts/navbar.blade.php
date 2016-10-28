@@ -23,15 +23,6 @@
             </a>
         </div>
 
-        <form class="navbar-form navbar-left" action="{{ route('searches.result') }}">
-            <div class="input-group">
-                <input type="text" name="term" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-                </span>
-            </div>
-        </form>
-
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">&nbsp;

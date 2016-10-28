@@ -26,6 +26,11 @@ Route::get('searches/result', [
     'uses' => 'SearchesController@result'
 ]);
 
+Route::get('searches/collections/result', [
+    'as' => 'searches.collections.result',
+    'uses' => 'SearchesController@resultForCollections'
+]);
+
 /*
  * Facebook 登入回呼跟寫入服務
  */

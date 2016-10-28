@@ -20,6 +20,9 @@
 
 @section('content')
 <div class="container">
+
+    @include('searches._partials.collectionbar')
+
     <div class="row">
         <div class="col-md-12 text-center slogan__distance">
             <h1 class="slogan">

@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+
+        @include('searches._partials.productbar')
+
         <div class="row">
             <div class="col-md-12 text-center slogan__distance">
                 <h2 class="slogan">
@@ -10,9 +13,9 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row grid">
             @foreach($products as $product)
-                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                <div class="grid-item col-xs-12 col-sm-8 col-md-4 col-lg-4">
                     <div class="Card__panel">
                         <a href="{{ route('products.show', $product->id) }}">
                             <img class="Card__image img-responsive"
@@ -36,18 +39,18 @@
 
                         @if (auth()->check())
                             <div class="Card__option">
-                                <span class="Card__option__distance">
-                                    @include('products._funcs.bookmarks')
-                                </span>
+                                    <span class="Card__option__distance">
+                                        @include('products._funcs.bookmarks')
+                                    </span>
 
                                 <span class="Card__option__distance">
-                                    @include('products._funcs.favorites')
-                                </span>
+                                        @include('products._funcs.favorites')
+                                    </span>
 
                                 <span class="Card__option__distance">
-                                <i class="glyphicon glyphicon-comment"></i>
+                                    <i class="glyphicon glyphicon-comment"></i>
                                     {{ $product->comments()->count() }}
-                                </span>
+                                    </span>
 
                                 <a class="Card__title__link"
                                    href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('products.show', $product->id)) }}">
@@ -61,13 +64,14 @@
         </div>
 
         <div class="text-center">
-            {!! $products->links('vendor.pagination.simple-default') !!}
+            {!! $products->appends(['term' => $term])->links('vendor.pagination.simple-default') !!}
         </div>
 
     </div>
 @endsection
 
 @section('script')
+    <script src="{{ asset('/js/masonry-loader.js') }}"></script>
     <script src="{{ asset('/js/favorite.js') }}"></script>
     <script src="{{ asset('/js/bookmark.js') }}"></script>
 @endsection
