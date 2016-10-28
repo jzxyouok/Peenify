@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Mail\SubscribedUser;
+use App\Repositories\ProductRepository;
 use App\Repositories\SubscribeRepository;
 use App\Repositories\UserRepository;
 use App\User;
@@ -18,11 +19,16 @@ class SubscribeService
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var ProductRepository
+     */
+    private $productRepository;
 
-    public function __construct(SubscribeRepository $subscribeRepository, UserRepository $userRepository)
+    public function __construct(SubscribeRepository $subscribeRepository, UserRepository $userRepository, ProductRepository $productRepository)
     {
         $this->subscribeRepository = $subscribeRepository;
         $this->userRepository = $userRepository;
+        $this->productRepository = $productRepository;
     }
 
     public function subscribers($type, $id, $page)
@@ -46,5 +52,17 @@ class SubscribeService
         }
 
         return;
+    }
+
+    public function existSubscribe($type, User $user)
+    {
+        return $this->subscribeRepository->existSubscribe($type, $user->id);
+    }
+
+    public function forUserProducts(User $user)
+    {
+        $category_ids = $this->subscribeRepository->pluckSubscribed('category', $user->id)->toArray();
+
+        return $this->productRepository->getByCategory($category_ids, 6);
     }
 }

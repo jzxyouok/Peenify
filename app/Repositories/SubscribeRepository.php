@@ -31,4 +31,12 @@ class SubscribeRepository
             'user_id' => $id
         ])->pluck($pluckColumn);
     }
+
+    public function existSubscribe($type, $user_id)
+    {
+        return $this->model->where([
+            'subscribable_type' => $type,
+            'user_id' => $user_id
+        ])->exists();
+    }
 }

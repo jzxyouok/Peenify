@@ -18,7 +18,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/home') }}">
                 Peenify
             </a>
         </div>
@@ -36,7 +36,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">&nbsp;
                 <li><a href="{{ route('categories.index') }}">分類</a></li>
-                <li><a href="{{ route('products.index') }}">產品</a></li>
+                <li><a href="{{ route('products.index') }}">探索產品</a></li>
                 <li><a href="{{ route('collections.index') }}">探索收藏集</a></li>
             </ul>
 
