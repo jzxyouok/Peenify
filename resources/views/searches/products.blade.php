@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
 
+        <!--search bar-->
         @include('searches._partials.productbar')
 
         <div class="row">
@@ -39,18 +40,18 @@
 
                         @if (auth()->check())
                             <div class="Card__option">
-                                    <span class="Card__option__distance">
-                                        @include('products._funcs.bookmarks')
-                                    </span>
+                                <span class="Card__option__distance">
+                                    @include('products._funcs.bookmarks')
+                                </span>
 
                                 <span class="Card__option__distance">
-                                        @include('products._funcs.favorites')
-                                    </span>
+                                    @include('products._funcs.favorites')
+                                </span>
 
                                 <span class="Card__option__distance">
                                     <i class="glyphicon glyphicon-comment"></i>
                                     {{ $product->comments()->count() }}
-                                    </span>
+                                </span>
 
                                 <a class="Card__title__link"
                                    href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('products.show', $product->id)) }}">
@@ -58,6 +59,7 @@
                                 </a>
                             </div>
                         @endif
+
                     </div>
                 </div>
             @endforeach

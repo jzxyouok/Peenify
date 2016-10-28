@@ -21,6 +21,7 @@
 @section('content')
     <div class="container">
 
+        <!--collection bar-->
         @include('searches._partials.collectionbar')
         
         <div class="row">

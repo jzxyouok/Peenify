@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @inject('collections', 'App\Services\CollectionService')
 
 @section('content')
