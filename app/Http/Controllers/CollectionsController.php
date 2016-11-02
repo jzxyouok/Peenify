@@ -33,9 +33,9 @@ class CollectionsController extends Controller
 
     public function store(Request $request)
     {
-        $this->collectionService->create($request->all());
+        $collection = $this->collectionService->create($request->all());
 
-        return redirect()->route('collections.index')->with('message', '建立成功');
+        return redirect()->route('collections.show', $collection->id)->with('message', '建立成功');
     }
 
     public function show($id)
@@ -63,7 +63,7 @@ class CollectionsController extends Controller
     {
         $this->collectionService->destroy($id);
 
-        return redirect()->back()->with('message', '刪除成功');
+        return redirect()->route('users.collections', auth()->user()->id)->with('message', '刪除成功');
     }
 
     public function addProduct($product_id)

@@ -3,29 +3,20 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <!--搜尋要加入到收藏集的產品-->
-            @include('searches.collection.productbar', [
-                'collection' => $collection
-            ])
-        </div>
-
-        <div class="row" style="padding-bottom: 20px">
-            <div style="background-color: #1b6d85;color: #FFFFFF">
-                <h1>{{ $collection->name }}</h1>
-                <p>{{ $collection->description }}</p>
-
-                <a class="btn btn-default" href="{{ route('collections.edit', $collection->id) }}">Edit</a>
-
-                <form action="{{ route('collections.destroy', $collection->id) }}" method="post">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <input type="submit" value="delete" class="btn btn-danger">
-                </form>
+            <div class="col-md-12 text-center slogan__distance">
+                <h2 class="slogan">
+                    搜尋 {{ $term }} 結果
+                </h2>
             </div>
         </div>
 
+        <!--search bar-->
+        <div class="row Searchbar__distance">
+            @include('searches.collection.productbar')
+        </div>
+
         <div class="row grid">
-            @foreach($collection->products()->get() as $product)
+            @foreach($products as $product)
                 <div class="grid-item col-xs-12 col-sm-8 col-md-4 col-lg-4">
                     <div class="Card__panel">
                         <a href="{{ route('products.show', $product->id) }}">
@@ -61,16 +52,27 @@
                                     {{ $product->comments()->count() }}
                                 </span>
 
+                                <span class="Card__option__distance">
+                                    <!--收藏集-->
+                                    @include('collections._funcs.products')
+                                </span>
+
                                 <a class="Card__title__link"
                                    href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('products.show', $product->id)) }}">
                                     <i class="glyphicon glyphicon-share"></i>
                                 </a>
                             </div>
                         @endif
+
                     </div>
                 </div>
             @endforeach
         </div>
+
+        <div class="text-center">
+            {!! $products->appends(['term' => $term])->links('vendor.pagination.simple-default') !!}
+        </div>
+
     </div>
 @endsection
 

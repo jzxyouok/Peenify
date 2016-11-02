@@ -55,8 +55,8 @@
                 <!--最愛-->
                 @include('products._funcs.favorites')
 
-                <!--收藏集-->
-                <a href="{{ route('collections.addProduct', $product->id) }}"><i class="glyphicon glyphicon-th-list"></i></a>
+                {{--<!--收藏集-->--}}
+                {{--<a href="{{ route('collections.addProduct', $product->id) }}"><i class="glyphicon glyphicon-th-list"></i></a>--}}
             </div>
 
             <hr style="max-width: 500px">

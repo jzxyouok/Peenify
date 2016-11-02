@@ -31,6 +31,11 @@ Route::get('searches/collections/result', [
     'uses' => 'SearchesController@resultForCollections'
 ]);
 
+Route::get('searches/collection/product/result/{collection}', [
+    'as' => 'searches.collection.product.result',
+    'uses' => 'Search\Collection\ProductList'
+]);
+
 /*
  * Facebook 登入回呼跟寫入服務
  */
@@ -285,19 +290,6 @@ Route::group(['prefix' => 'comments'], function () {
  */
 Route::resource('collections', 'CollectionsController');
 
-/*
- * 將產品加入到自訂的收藏集內
- */
-Route::get('collections/add/products/{product}', [
-    'as' => 'collections.addProduct',
-    'uses' => 'CollectionsController@addProduct',
-]);
-
-Route::post('collections/addProduct/{product}', [
-    'as' => 'collections.storeProduct',
-    'uses' => 'CollectionsController@storeProduct',
-]);
-
 
 /*
  * 訂閱
@@ -360,6 +352,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/api/tags/ajaxTags', [
         'as' => 'tags.term',
         'uses' => 'TagsController@ajaxTags',
+    ]);
+
+    /*
+     * 將產品加入到自訂的收藏集內
+     */
+    Route::post('collections/{collection}/product/{product}', [
+        'as' => 'collections.product',
+        'uses' => 'Collection\SyncProduct',
     ]);
 });
 
