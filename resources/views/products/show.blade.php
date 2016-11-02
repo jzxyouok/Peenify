@@ -18,15 +18,16 @@
 
         <!--圖片-->
         <div class="row">
-            <!-- if trailer exist -> show video-->
             <div class="Product__cover">
-                <img class="img-responsive" src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/500x300' }}">
+                <!-- if trailer exist -> show video-->
+                @if (! empty($product->movie->trailer))
+                    <iframe width="500" height="300" src="https://www.youtube.com/embed/{{ $product->movie->trailer }}" frameborder="0"
+                            allowfullscreen></iframe>
+                @else
+                    <img class="img-responsive"
+                         src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/500x300' }}">
+                @endif
             </div>
-
-            <!--site, youtube-->
-            {{--<div class="Product__cover">--}}
-                {{--<iframe width="500" height="300" src="https://www.youtube.com/embed/i_7ALQz9XFI" frameborder="0" allowfullscreen></iframe>--}}
-            {{--</div>--}}
 
             <!--產品描述-->
             <div class="Product__description">
@@ -47,12 +48,12 @@
         @if(auth()->check())
             <div class="form-group text-center">
                 <!--評分-->
-                @include('products._funcs.emojis')
+            @include('products._funcs.emojis')
 
-                <!--願望清單-->
-                @include('products._funcs.bookmarks')
+            <!--願望清單-->
+            @include('products._funcs.bookmarks')
 
-                <!--最愛-->
+            <!--最愛-->
                 @include('products._funcs.favorites')
 
                 {{--<!--收藏集-->--}}
@@ -70,8 +71,8 @@
 
         @endif
 
-            <!--評論清單-->
-            @include('comments.lists')
+    <!--評論清單-->
+        @include('comments.lists')
     </div>
 @endsection
 
