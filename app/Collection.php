@@ -29,4 +29,9 @@ class Collection extends Model
     {
         return $this->belongsToMany(Product::class)->withTimestamps();
     }
+
+    public function owns()
+    {
+        return $this->user_id == auth()->user()->id;
+    }
 }

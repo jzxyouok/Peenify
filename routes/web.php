@@ -293,6 +293,10 @@ Route::group(['prefix' => 'comments'], function () {
  */
 Route::resource('collections', 'CollectionsController');
 
+Route::get('collections/confirm/destroy/{collection}', [
+    'as' => 'collections.confirm.destroy',
+    'uses' => 'Collection\ConfirmDestroy'
+]);
 
 /*
  * 訂閱

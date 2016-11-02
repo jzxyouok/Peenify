@@ -13,34 +13,38 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <!--搜尋要加入到收藏集的產品-->
-            @include('searches.collection.productbar', [
-                'collection' => $collection
-            ])
-        </div>
 
-        <div class="row" style="padding-bottom: 20px">
-            <div style="background-color: #1b6d85;color: #FFFFFF">
+        @if ($collection->owns())
+            <div class="row" style="margin-bottom: 20px">
+                <!--搜尋要加入到收藏集的產品-->
+                @include('searches.collection.productbar', [
+                    'collection' => $collection
+                ])
+            </div>
+        @endif
+
+        @if ($collection->owns())
+            <div class="row">
+                <div class="text-right">
+                        <a class="btn btn-default" href="{{ route('collections.edit', $collection->id) }}">Edit</a>
+                        <a class="btn btn-default" href="{{ route('collections.confirm.destroy', $collection->id) }}">Delete</a>
+                </div>
+            </div>
+        @endif
+
+        <div class="row" style="margin-bottom: 20px;background-color: #1b6d85;color: #FFFFFF">
+            <div class="col-md-4">
                 <h1>{{ $collection->name }}</h1>
                 <p>{{ $collection->description }}</p>
+            </div>
 
-                <div>
-                    <div class="round">
-                        <img class="Card__image"
-                             src="{{ ($collection->user->avatar) ? image_path('avatars.users', $collection->user->avatar):'holder.js/50x50' }}">
-                    </div>
-                    {{ $collection->user->name }}
-                </div>
+            <div class="col-md-4" style="margin-top: 20px;margin-bottom: 10px;">
+                <img class="round Card__image"
+                     src="{{ ($collection->user->avatar) ? image_path('avatars.users', $collection->user->avatar):'holder.js/50x50' }}">
+                {{ $collection->user->name }}
+            </div>
 
-                <a class="btn btn-default" href="{{ route('collections.edit', $collection->id) }}">Edit</a>
-
-                <form action="{{ route('collections.destroy', $collection->id) }}" method="post">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <input type="submit" value="delete" class="btn btn-danger">
-                </form>
-
+            <div class="col-md-4" style="margin-top: 30px;margin-bottom: 10px;">
                 <a class="Card__title__link"
                    href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('collections.show', $collection->id)) }}">
                     <i class="glyphicon glyphicon-share"></i>
