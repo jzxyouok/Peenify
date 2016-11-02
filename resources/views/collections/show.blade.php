@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        .round {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -14,6 +25,14 @@
                 <h1>{{ $collection->name }}</h1>
                 <p>{{ $collection->description }}</p>
 
+                <div>
+                    <div class="round">
+                        <img class="Card__image"
+                             src="{{ ($collection->user->avatar) ? image_path('avatars.users', $collection->user->avatar):'holder.js/50x50' }}">
+                    </div>
+                    {{ $collection->user->name }}
+                </div>
+
                 <a class="btn btn-default" href="{{ route('collections.edit', $collection->id) }}">Edit</a>
 
                 <form action="{{ route('collections.destroy', $collection->id) }}" method="post">
@@ -21,6 +40,11 @@
                     {{ method_field('DELETE') }}
                     <input type="submit" value="delete" class="btn btn-danger">
                 </form>
+
+                <a class="Card__title__link"
+                   href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('collections.show', $collection->id)) }}">
+                    <i class="glyphicon glyphicon-share"></i>
+                </a>
             </div>
         </div>
 
@@ -54,6 +78,11 @@
 
                                 <span class="Card__option__distance">
                                     @include('products._funcs.favorites')
+                                </span>
+
+                                <span class="Card__option__distance">
+                                    <!--收藏集-->
+                                    @include('collections._funcs.products')
                                 </span>
 
                                 <span class="Card__option__distance">
