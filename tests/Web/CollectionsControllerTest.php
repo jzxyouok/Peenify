@@ -109,21 +109,4 @@ class CollectionsControllerTest extends TestCase
 
         $this->assertResponseStatus(302);
     }
-
-    /**
-     * @test
-     * @group collection
-     */
-    public function addProductToCollection()
-    {
-        $product = factory(\App\Product::class)->create();
-
-        $collection = factory(\App\Collection::class)->create();
-
-        $this->call('post', route('collections.storeProduct', $product->id), [
-            'collection_id' => $collection->id,
-        ]);
-
-        $this->assertResponseStatus(302);
-    }
 }

@@ -65,25 +65,4 @@ class CollectionsController extends Controller
 
         return redirect()->route('users.collections', auth()->user()->id)->with('message', '刪除成功');
     }
-
-    public function addProduct($product_id)
-    {
-        return view('products.collections', compact('product_id'));
-    }
-
-    /**
-     * @param Request $request
-     * @param $product_id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function storeProduct(Request $request, $product_id)
-    {
-        if ($this->collectionService->duplicateProductInCollection($request->get('collection_id'), $product_id)) {
-            return redirect()->back()->with('message', '重複了');
-        }
-
-        $this->collectionService->attachProduct($request->get('collection_id'), $product_id);
-
-        return redirect()->back()->with('message', '加入成功');
-    }
 }

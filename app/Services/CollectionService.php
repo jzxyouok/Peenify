@@ -41,11 +41,6 @@ class CollectionService extends Service
         return $this->collectionRepository->destroy($id);
     }
 
-    public function attachProduct($id, $product_id)
-    {
-        return $this->collectionRepository->attachProduct($id, $product_id);
-    }
-
     public function getAllByUser($user_id)
     {
         return $this->collectionRepository->getAllByUser($user_id);
@@ -54,19 +49,6 @@ class CollectionService extends Service
     public function getAllByAuth()
     {
         return $this->collectionRepository->getAllByUser(auth()->user()->id);
-    }
-
-    public function duplicateProductInCollection($id, $product_id)
-    {
-        $collection = $this->collectionRepository->findOrFail($id);
-
-        foreach ($collection->products()->get() as $product) {
-            if ($product->id == $product_id) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public function getAllPagination($page)
