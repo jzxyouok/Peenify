@@ -21,20 +21,23 @@ Route::get('/', function () {
 /*
  * 搜尋功能
  */
-Route::get('searches/result', [
-    'as' => 'searches.result',
-    'uses' => 'SearchesController@result'
-]);
+Route::group(['prefix' => 'searches'], function () {
+    Route::get('result', [
+        'as' => 'searches.result',
+        'uses' => 'SearchesController@result'
+    ]);
 
-Route::get('searches/collections/result', [
-    'as' => 'searches.collections.result',
-    'uses' => 'SearchesController@resultForCollections'
-]);
+    Route::get('collections/result', [
+        'as' => 'searches.collections.result',
+        'uses' => 'SearchesController@resultForCollections'
+    ]);
 
-Route::get('searches/collection/product/result/{collection}', [
-    'as' => 'searches.collection.product.result',
-    'uses' => 'Search\Collection\ProductList'
-]);
+    Route::get('collection/product/result/{collection}', [
+        'as' => 'searches.collection.product.result',
+        'uses' => 'Search\Collection\ProductList'
+    ]);
+});
+
 
 /*
  * Facebook 登入回呼跟寫入服務
