@@ -103,7 +103,11 @@ class CollectionsControllerTest extends TestCase
      */
     public function testDestroy()
     {
-        factory(\App\Collection::class)->create();
+        $this->loginFakeUser();
+
+        factory(\App\Collection::class)->create([
+            'user_id' => auth()->id()
+        ]);
 
         $this->call('delete', route('collections.destroy', 1));
 

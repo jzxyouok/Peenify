@@ -2,17 +2,52 @@
 
 @section('content')
     <div class="container">
+        @if ($collection->owns())
+            <div class="row" style="margin-bottom: 20px">
+                <!--搜尋要加入到收藏集的產品-->
+                @include('searches.collection.productbar', [
+                    'collection' => $collection
+                ])
+            </div>
+        @endif
+
+        @if ($collection->owns())
+            <div style="padding-bottom: 10px;">
+                <div class="row">
+                    <div class="text-right">
+                        <a class="btn btn-default" href="{{ route('collections.edit', $collection->id) }}">Edit</a>
+                        <a class="btn btn-default" href="{{ route('collections.confirm.destroy', $collection->id) }}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <div class="row" style="margin-bottom: 20px;background-color: #1b6d85;color: #FFFFFF">
+            <div class="col-md-4">
+                <h1>{{ $collection->name }}</h1>
+                <p>{{ $collection->description }}</p>
+            </div>
+
+            <div class="col-md-4" style="margin-top: 20px;margin-bottom: 10px;">
+                <img class="round Card__image"
+                     src="{{ ($collection->user->avatar) ? image_path('avatars.users', $collection->user->avatar):'holder.js/50x50' }}">
+                {{ $collection->user->name }}
+            </div>
+
+            <div class="col-md-4" style="margin-top: 30px;margin-bottom: 10px;">
+                <a class="Card__title__link"
+                   href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('collections.show', $collection->id)) }}">
+                    <i class="glyphicon glyphicon-share"></i>
+                </a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12 text-center slogan__distance">
                 <h2 class="slogan">
                     搜尋 {{ $term }} 結果
                 </h2>
             </div>
-        </div>
-
-        <!--search bar-->
-        <div class="row Searchbar__distance">
-            @include('searches.collection.productbar')
         </div>
 
         <div class="row grid">

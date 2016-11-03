@@ -24,12 +24,12 @@ Route::get('/', function () {
 Route::group(['prefix' => 'searches'], function () {
     Route::get('result', [
         'as' => 'searches.result',
-        'uses' => 'SearchesController@result'
+        'uses' => 'Search\Product\ResultName'
     ]);
 
     Route::get('collections/result', [
         'as' => 'searches.collections.result',
-        'uses' => 'SearchesController@resultForCollections'
+        'uses' => 'Search\Collection\ResultName'
     ]);
 
     Route::get('collection/product/result/{collection}', [

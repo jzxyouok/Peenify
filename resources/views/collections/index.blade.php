@@ -42,12 +42,14 @@
                             </a>
                         </h3>
 
-                        <div class="favorite fa fa-heart{{ $collection->isFavorite(auth()->user()) ? ' favorite__color' : '-o' }}"
-                             data-type="collection" data-id={{ $collection->id }} data-token={{ csrf_token() }}>
+                        @if (auth()->check())
+                            <div class="favorite fa fa-heart{{ $collection->isFavorite(auth()->user()) ? ' favorite__color' : '-o' }}"
+                                 data-type="collection" data-id={{ $collection->id }} data-token={{ csrf_token() }}>
                                 <span id="favorite_amount">
                                     {{ $collection->favorites()->count() }}
                                 </span>
-                        </div>
+                            </div>
+                        @endif
 
                         <div class="Card__detail">
                             <div class="Collection_description">

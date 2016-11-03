@@ -27,4 +27,9 @@ class CollectionRepository extends Repository
     {
         return $this->model->where('user_id', $user_id)->paginate($page);
     }
+
+    public function paginateSearchResult($term, $sort, $page)
+    {
+        return $this->model->where('name', 'like', "%{$term}%")->{$sort}()->paginate($page);
+    }
 }

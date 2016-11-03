@@ -79,18 +79,4 @@ class CollectionServiceTest extends TestCase
 
         $service->destroy(1);
     }
-
-    /**
-     * @test
-     * @group collection
-     */
-    public function attachProduct()
-    {
-        $repository = $this->initMock(CollectionRepository::class);
-        $repository->shouldReceive('attachProduct')->once();
-
-        $service = new \App\Services\CollectionService($repository);
-
-        $service->attachProduct(1, 1);
-    }
 }

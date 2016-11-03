@@ -65,4 +65,9 @@ class CollectionService extends Service
     {
         return $this->collectionRepository->paginateByUser($user_id, $page);
     }
+
+    public function paginateSearchResult($term, $page = 12)
+    {
+        return $this->collectionRepository->paginateSearchResult($term, 'latest', $page);
+    }
 }

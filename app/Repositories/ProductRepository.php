@@ -39,4 +39,9 @@ class ProductRepository extends Repository
 
         return $this->model->whereIn('category_id', $category_ids)->paginate($page);
     }
+
+    public function paginateSearchResult($term, $sort, $page)
+    {
+        return $this->model->where('name', 'like', "%{$term}%")->{$sort}()->paginate($page);
+    }
 }

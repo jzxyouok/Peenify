@@ -58,13 +58,6 @@ $factory->define(App\Collection::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Wish::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => factory(App\User::class)->create()->id,
-        'product_id' => factory(App\Product::class)->create()->id,
-    ];
-});
-
 $factory->define(App\Tag::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,

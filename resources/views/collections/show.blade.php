@@ -14,22 +14,27 @@
 @section('content')
     <div class="container">
 
-        @if ($collection->owns())
-            <div class="row" style="margin-bottom: 20px">
-                <!--搜尋要加入到收藏集的產品-->
-                @include('searches.collection.productbar', [
-                    'collection' => $collection
-                ])
-            </div>
-        @endif
-
-        @if ($collection->owns())
-            <div class="row">
-                <div class="text-right">
-                        <a class="btn btn-default" href="{{ route('collections.edit', $collection->id) }}">Edit</a>
-                        <a class="btn btn-default" href="{{ route('collections.confirm.destroy', $collection->id) }}">Delete</a>
+        @if (auth()->check())
+            @if ($collection->owns())
+                <div class="row" style="margin-bottom: 20px">
+                    <!--搜尋要加入到收藏集的產品-->
+                    @include('searches.collection.productbar', [
+                        'collection' => $collection
+                    ])
                 </div>
-            </div>
+            @endif
+
+            @if ($collection->owns())
+                <div style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="text-right">
+                            <a class="btn btn-default" href="{{ route('collections.edit', $collection->id) }}">Edit</a>
+                            <a class="btn btn-default"
+                               href="{{ route('collections.confirm.destroy', $collection->id) }}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
         @endif
 
         <div class="row" style="margin-bottom: 20px;background-color: #1b6d85;color: #FFFFFF">
@@ -53,7 +58,7 @@
         </div>
 
         <div class="row grid">
-            @foreach($collection->products()->get() as $product)
+            @foreach($products = $collection->products()->paginate(12) as $product)
                 <div class="grid-item col-xs-12 col-sm-8 col-md-4 col-lg-4">
                     <div class="Card__panel">
                         <a href="{{ route('products.show', $product->id) }}">
@@ -103,6 +108,10 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        <div class="text-center">
+            {!! $products->links('vendor.pagination.simple-default') !!}
         </div>
     </div>
 @endsection

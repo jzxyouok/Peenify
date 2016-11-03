@@ -52,4 +52,9 @@ class ProductService extends Service
     {
         return $this->productRepository->LatestPagination($page);
     }
+
+    public function paginateSearchResult($term, $page = 12)
+    {
+        return $this->productRepository->paginateSearchResult($term, 'latest', $page);
+    }
 }
