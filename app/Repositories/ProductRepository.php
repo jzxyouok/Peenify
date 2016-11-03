@@ -36,7 +36,6 @@ class ProductRepository extends Repository
 
     public function getByCategory($category_ids, $page)
     {
-
         return $this->model->whereIn('category_id', $category_ids)->paginate($page);
     }
 

@@ -20,18 +20,23 @@ Route::get('/', function () {
 
 /*
  * 搜尋功能
+ * @test case: done
  */
 Route::group(['prefix' => 'searches'], function () {
+
+    //產品
     Route::get('result', [
-        'as' => 'searches.result',
+        'as' => 'searches.products.result',
         'uses' => 'Search\Product\ResultName'
     ]);
 
+    //收藏集
     Route::get('collections/result', [
         'as' => 'searches.collections.result',
         'uses' => 'Search\Collection\ResultName'
     ]);
 
+    //要將產品加入收藏集的搜尋列
     Route::get('collection/product/result/{collection}', [
         'as' => 'searches.collection.product.result',
         'uses' => 'Search\Collection\ProductList'

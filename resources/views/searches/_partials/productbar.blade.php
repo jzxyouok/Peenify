@@ -1,5 +1,5 @@
 <div class="col-lg-6 col-md-offset-3">
-    <form action="{{ route('searches.result') }}">
+    <form action="{{ route('searches.products.result') }}">
         <div class="input-group">
             <input type="text" name="term" class="form-control" placeholder="Search for...">
 
