@@ -19,9 +19,9 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row grid">
             @foreach($favorites as $favorite)
-                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                <div class="grid-item col-xs-12 col-sm-8 col-md-4 col-lg-4">
                     @if($favorite->favorable instanceof \App\Collection)
                         <div class="Card__panel">
                             {{ $favorite->favorable->name }}
@@ -69,5 +69,6 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('/js/masonry-loader.js') }}"></script>
     <script src="{{ asset('/js/favorite.js') }}"></script>
 @endsection

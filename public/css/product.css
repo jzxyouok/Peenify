@@ -32,3 +32,8 @@
     letter-spacing: 0px;
     border: none;
 }
+
+.Product__tag:hover {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+}

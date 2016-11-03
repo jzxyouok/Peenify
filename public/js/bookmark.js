@@ -1,5 +1,13 @@
 $(document).ready(function () {
-    $(document).on('click', '#bookmark', function () {
+    $('.bookmark').hover(function () {
+        $(this).removeClass('fa-bookmark-o').addClass('fa-bookmark');
+    }, function() {
+        if (! $(this).hasClass('bookmark__color')) {
+            $(this).removeClass('fa-bookmark').addClass('fa-bookmark-o');
+        }
+    });
+
+    $(document).on('click', '.bookmark', function () {
         var $this = $(this);
         var $amount = parseInt($this.find('#bookmark_amount').text());
         var token = $this.data('token');
@@ -9,10 +17,10 @@ $(document).ready(function () {
             '_token': token
         }, function (result) {
             if (result.status == 'bookmark') {
-                $this.addClass('bookmark__color');
+                $this.removeClass('fa-bookmark-o').addClass('fa-bookmark').addClass('bookmark__color');
                 $this.find('#bookmark_amount').html($amount + 1);
             } else {
-                $this.removeClass('bookmark__color').removeClass('glyphicon-heart');
+                $this.removeClass('bookmark__color').removeClass('fa-bookmark').addClass('fa-bookmark-o');
                 $this.find('#bookmark_amount').html($amount - 1);
             }
         });

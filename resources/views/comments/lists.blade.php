@@ -11,7 +11,7 @@
             </div>
             @if(auth()->check())
                 <div id="like_comment{{ $comment->id }}"
-                     class="emoji_comment glyphicon glyphicon-thumbs-up{{ $comment->isEmoji(auth()->user(), 'like') ? ' like__color' : '' }}"
+                     class="emoji_comment fa fa-thumbs-{{ $comment->isEmoji(auth()->user(), 'like') ? 'up like__color' : 'o-up' }}"
                      data-type="comment" data-emoji="like" data-id={{ $comment->id }} data-token={{ csrf_token() }}>
                     <span class="amount">
                         {{ $comment->countEmoji('like') }}
@@ -19,7 +19,7 @@
                 </div>
 
                 <div id="bad_comment{{ $comment->id }}"
-                     class="emoji_comment glyphicon glyphicon-thumbs-down{{ $comment->isEmoji(auth()->user(), 'bad') ? ' bad__color' : '' }}"
+                     class="emoji_comment fa fa-thumbs-{{ $comment->isEmoji(auth()->user(), 'bad') ? 'down bad__color' : 'o-down' }}"
                      data-type="comment" data-emoji="bad" data-id={{ $comment->id }} data-token={{ csrf_token() }}>
                     <span class="amount">
                         {{ $comment->countEmoji('bad') }}

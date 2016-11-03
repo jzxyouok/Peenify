@@ -1,15 +1,14 @@
 <div class="row">
-    <div style="padding-top: 20px;">
-        <div class="col-lg-6 col-md-offset-3">
-            <form action="{{ route('searches.collections.result') }}">
-                <div class="input-group">
-                    <input type="text" name="term" class="form-control" placeholder="Search for...">
+    <div class="col-lg-6 col-md-offset-3">
+        <form action="{{ route('searches.collections.result') }}">
+            <div class="input-group">
+                <input type="text" name="term" class="form-control" placeholder="Search for...">
 
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i
+                                    class="glyphicon glyphicon-search"></i></button>
                     </span>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>

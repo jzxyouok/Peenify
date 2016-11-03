@@ -49,13 +49,13 @@
                                 </span>
 
                                 <span class="Card__option__distance">
-                                    <i class="glyphicon glyphicon-comment"></i>
+                                    <i class="fa fa-comment"></i>
                                     {{ $product->comments()->count() }}
                                 </span>
 
                                 <a class="Card__title__link"
                                    href="https://www.facebook.com/sharer/sharer.php?u={{ url(route('products.show', $product->id)) }}">
-                                    <i class="glyphicon glyphicon-share"></i>
+                                    <i class="fa fa-share"></i>
                                 </a>
                             </div>
                         @endif
