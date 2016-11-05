@@ -1,16 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-    <style>
-        .avatar {
-            margin: 0 auto;
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-        }
-    </style>
-@endsection
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -39,7 +28,7 @@
                             <label for="name" class="col-md-4 control-label">名稱</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="name" value="{{ $user->name }}" class="form-control">
+                                <input type="text" name="name" value="{{ old('name') ?? $user->name }}" class="form-control">
                             </div>
                         </div>
 
@@ -48,7 +37,7 @@
 
                             <div class="col-md-6">
                                 <textarea name="description" rows="4" cols="50"
-                                          class="form-control">{{ $user->description }}</textarea>
+                                          class="form-control">{{ old('description') ?? $user->description }}</textarea>
                             </div>
                         </div>
 

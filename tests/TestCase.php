@@ -47,7 +47,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 
     public function loginFakeUser()
     {
-        Session::start();
+        $this->startSession();
 
         $user = factory(User::class)->create([
             'name' => 'yish'

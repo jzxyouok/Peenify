@@ -81,3 +81,32 @@ $factory->define(App\Permission::class, function (Faker\Generator $faker) {
         'user_id' => factory(App\User::class)->create()->id,
     ];
 });
+
+/*
+ * Relations Foundation.
+ */
+
+$factory->define(App\Emoji::class, function () {
+    return [
+        'emojiable_id' => factory(App\Product::class)->create()->id,
+        'emojiable_type' => 'product',
+        'user_id' => factory(App\User::class)->create()->id,
+        'type' => 'like',
+    ];
+});
+
+$factory->define(App\Bookmark::class, function () {
+    return [
+        'bookmarkable_id' => factory(App\Product::class)->create()->id,
+        'bookmarkable_type' => 'product',
+        'user_id' => factory(App\User::class)->create()->id,
+    ];
+});
+
+$factory->define(App\Favorite::class, function () {
+    return [
+        'favorable_id' => factory(App\Product::class)->create()->id,
+        'favorable_type' => 'product',
+        'user_id' => factory(App\User::class)->create()->id,
+    ];
+});

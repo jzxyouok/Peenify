@@ -79,4 +79,23 @@ class CollectionServiceTest extends TestCase
 
         $service->destroy(1);
     }
+
+    /**
+     * @test
+     * @group collection
+     */
+    public function getPaginationByUser()
+    {
+        $this->loginFakeUser();
+
+        $collection = factory(\App\Collection::class)->create([
+            'user_id' => auth()->user()->id,
+        ]);
+
+        $service = app(\App\Services\CollectionService::class);
+
+        $result = $service->getPaginationByUser(auth()->user()->id, 12);
+
+        $this->assertEquals($collection->name, $result[0]->name);
+    }
 }

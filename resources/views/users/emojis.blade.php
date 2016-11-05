@@ -1,29 +1,22 @@
 @extends('layouts.app')
 
-@section('style')
-    <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
-
-    <style>
-        .Card__panel {
-            height: auto;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="container">
-        <div class="col-md-12 text-center" style="padding-bottom: 20px">
-            <h2 class="Card__category__name">
-                評分紀錄
-            </h2>
-        </div>
+
         <div class="row">
+            <div class="col-md-12 text-center slogan__distance">
+                <h2 class="slogan">
+                    評分紀錄
+                </h2>
+            </div>
+        </div>
+
+        <div class="row grid">
             @foreach($emojis as $emoji)
-                @if ($emoji->emojiable_type == 'product')
-                    <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
-                        <div class="Card__panel" style="border: 1px solid #ccc">
+                    <div class="grid-item col-xs-12 col-sm-8 col-md-4 col-lg-4">
+                        <div class="Card__panel">
                             <a href="{{ route('products.show', $emoji->emojiable->id) }}">
-                                <img class="Card__image"
+                                <img class="Card__image img-responsive"
                                      src="{{ ($emoji->emojiable->cover) ? image_path('products', $emoji->emojiable->cover):'holder.js/380x260?auto=yes' }}">
                             </a>
 
@@ -37,26 +30,23 @@
 
                                     <div class="Card__count">
                                         @if ($emoji->type == 'like')
-                                            <span style="color: green;" class="glyphicon glyphicon-thumbs-up"></span>
+                                            <span class="like__color fa fa-thumbs-up fa-lg"></span>
                                         @else
-                                            <span style="color: red;" class="glyphicon glyphicon-thumbs-down"></span>
+                                            <span class="bad__color fa fa-thumbs-down fa-lg"></span>
                                         @endif
-                                    </div>
-
-                                    <div class="Card__count">
-                                        {{ $emoji->emojiable->emojis()->count() }}
-                                        <span class="Card__count__description">評價</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endif
             @endforeach
 
-            <div style="text-align: center">
+            <div class="text-center">
                 {!! $emojis->links('vendor.pagination.simple-default') !!}
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
 @endsection

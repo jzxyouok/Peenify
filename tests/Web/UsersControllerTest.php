@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UsersControllerTest extends TestCase
 {
-    use DatabaseMigrations, WithoutMiddleware;
+    use DatabaseMigrations;
 
     public function setUp()
     {
@@ -15,22 +15,6 @@ class UsersControllerTest extends TestCase
     public function tearDown()
     {
         parent::tearDown();
-    }
-
-    /**
-     * @test
-     * @group user
-     */
-    public function index()
-    {
-        factory(\App\User::class)->create([
-            'name' => 'yish2',
-        ]);
-        factory(\App\User::class)->create([
-            'name' => 'yish',
-        ]);
-
-        $this->visit(route('users.index'))->see('yish')->see('yish2');
     }
 
     /**
@@ -54,7 +38,7 @@ class UsersControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $this->visit(route('users.edit'))->see('yish');
+        $this->visit(route('users.edit'))->seeStatusCode(200);
     }
 
     /**

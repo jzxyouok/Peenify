@@ -53,11 +53,13 @@ Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallbac
 
 /*
  * User 可操作功能
+ * @test case:
  */
 Route::group(['prefix' => 'users'], function () {
     Route::group(['middleware' => 'auth'], function () {
         /*
          * 編輯個人資料
+         * @test:done
          */
         Route::get('edit', [
             'as' => 'users.edit',
@@ -66,6 +68,7 @@ Route::group(['prefix' => 'users'], function () {
 
         /*
          * 更新個人資料
+         * @test:done
          */
         Route::match(['PUT', 'PATCH'], 'update', [
             'as' => 'users.update',
@@ -74,15 +77,8 @@ Route::group(['prefix' => 'users'], function () {
     });
 
     /*
-     * 所有 User 清單
-     */
-    Route::get('/', [
-        'as' => 'users.index',
-        'uses' => 'UsersController@index',
-    ]);
-
-    /*
      * User 評分清單
+     * @test:done
      */
     Route::get('{user}/emojis', [
         'as' => 'users.emojis',
@@ -91,6 +87,7 @@ Route::group(['prefix' => 'users'], function () {
 
     /*
      * User 書籤清單
+     * @test:done
      */
     Route::get('{user}/bookmarks', [
         'as' => 'users.bookmarks',
@@ -99,6 +96,7 @@ Route::group(['prefix' => 'users'], function () {
 
     /*
      * User 最愛清單
+     * @test:done
      */
     Route::get('{user}/favorites', [
         'as' => 'users.favorites',
@@ -107,6 +105,7 @@ Route::group(['prefix' => 'users'], function () {
 
     /*
      * User 收藏清單
+     * @test:done
      */
     Route::get('{user}/collections', [
         'as' => 'users.collections',
@@ -115,6 +114,7 @@ Route::group(['prefix' => 'users'], function () {
 
     /*
      * User 個人資料
+     * @test:done
      */
     Route::get('{user}', [
         'as' => 'users.show',

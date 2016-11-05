@@ -62,6 +62,9 @@
 <!--vue-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
 
+<!--flow-->
+<script src="{{ asset('/js/masonry-loader.js') }}"></script>
+
 <!--flow load, image loader-->
 <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
