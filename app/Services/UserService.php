@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Mail\WelcomeToSite;
+use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Mail;
 
@@ -12,10 +13,15 @@ class UserService extends Service
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var RoleRepository
+     */
+    private $roleRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
     {
         $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     public function updateOrCreateWithFacebook($user)
@@ -32,7 +38,10 @@ class UserService extends Service
         ]);
 
         if (! $exist) {
-            $model->syncRolesTo([1,2]);
+            $model->syncRolesTo([config('role.Beta - Elite.id'), config('role.Basic.id')]);
+
+            $this->roleRepository->find(config('role.Basic.id'))->syncPermissionsTo([config('permission.basic.id')]);
+
             Mail::to($user->email)->later(config('queue.mail.registration'), new WelcomeToSite($user));
         }
 

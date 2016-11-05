@@ -60,8 +60,11 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('facebook')->user();
+
         $user = $this->userService->updateOrCreateWithFacebook($user);
+
         Auth::loginUsingId($user->id);
+
         return redirect()->back();
     }
 }

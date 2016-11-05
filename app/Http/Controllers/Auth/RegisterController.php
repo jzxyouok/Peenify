@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Mail\WelcomeToSite;
+use App\Role;
 use App\Services\UserService;
 use App\User;
 use Mail;
@@ -76,7 +77,10 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $user->syncRolesTo([1,2]);
+        $user->syncRolesTo([config('role.Beta - Elite.id'), config('role.Basic.id')]);
+
+        Role::find(config('role.Basic.id'))->syncPermissionsTo([config('permission.basic.id')]);
+
         Mail::to($user->email)->later(config('queue.mail.registration'), new WelcomeToSite($user));
 
         return $user;

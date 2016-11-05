@@ -16,7 +16,8 @@ class PermissionTableSeeder extends Seeder
         foreach (config('permission') as $permission => $value) {
             factory(\App\Permission::class)->create([
                 'name' => $permission,
-                'label' => $value,
+                'label' => $value['description'],
+                'user_id' => 1
             ]);
         }
     }

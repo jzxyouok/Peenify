@@ -46,6 +46,7 @@ Route::group(['prefix' => 'searches'], function () {
 
 /*
  * Facebook 登入回呼跟寫入服務
+ * @test case: done
  */
 Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');

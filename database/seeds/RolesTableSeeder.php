@@ -17,6 +17,7 @@ class RolesTableSeeder extends Seeder
             factory(\App\Role::class)->create([
                 'name' => $role,
                 'label' => $value['label'],
+                'user_id' => 1,
             ]);
         }
     }
