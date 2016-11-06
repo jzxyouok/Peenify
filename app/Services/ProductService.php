@@ -57,4 +57,9 @@ class ProductService extends Service
     {
         return $this->productRepository->paginateSearchResult($term, 'latest', $page);
     }
+
+    public function paginateByCategory($category_id, $page = 12)
+    {
+        return $this->productRepository->paginateByCategory($category_id, $page);
+    }
 }

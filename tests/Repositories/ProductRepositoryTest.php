@@ -34,4 +34,30 @@ class ProductRepositoryTest extends TestCase
 
         $this->assertEquals($product->name, $result[0]->name);
     }
+
+    /**
+     * @test
+     * @group product
+     */
+    public function paginateByCategory()
+    {
+        $category = factory(\App\Category::class)->create();
+
+        $product = factory(\App\Product::class)->create([
+            'name' => 'test for 12345',
+            'category_id' => $category->id,
+        ]);
+
+        $product1 = factory(\App\Product::class)->create([
+            'name' => 'test for 12345',
+            'category_id' => $category->id,
+        ]);
+
+        $repository = app(\App\Repositories\ProductRepository::class);
+
+        $result = $repository->paginateByCategory($category->id, 12);
+
+        $this->assertEquals($product->name, $result[0]->name);
+        $this->assertEquals($product1->name, $result[1]->name);
+    }
 }

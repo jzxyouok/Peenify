@@ -43,4 +43,9 @@ class ProductRepository extends Repository
     {
         return $this->model->where('name', 'like', "%{$term}%")->{$sort}()->paginate($page);
     }
+
+    public function paginateByCategory($category_id, $page)
+    {
+        return $this->model->where('category_id', $category_id)->latest()->paginate($page);
+    }
 }

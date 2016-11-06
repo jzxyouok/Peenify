@@ -1,25 +1,33 @@
 @extends('layouts.app')
 
-@section('style')
-    <link rel="stylesheet" href="{{ asset('/css/card-style.css') }}">
-@endsection
-
 @section('content')
     <div class="container">
-        <div class="text-center">
-            <h1 style="border-bottom: 1px solid #000000; display: inline-block">{{ $category->name }}</h1>
+        <div class="row">
+            <div class="col-md-12 text-center slogan__distance">
+                <h2 class="slogan">
+                    {{ $category->name }}
+                </h2>
+            </div>
         </div>
+
         <p class="text-center">{{ $category->description }}</p>
 
         <div class="row">
-            <img style="max-width: 100%; display: block; margin: 0 auto;"
+            <img class="Card__image img-responsive"
                  src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/800x300' }}">
         </div>
 
+        <hr>
 
-        @include('categories._partials.products', [
-                    'products' => $category->products,
+        <!--僅秀出9個最新產品做 promote-->
+        @include('products._partials.products', [
+                    'products' => $category->products()->latest()->limit(9)->get(),
                     ])
+
+        <div class="text-center" style="padding-bottom: 10px">
+            <a class="btn btn-default" href="{{ route('categories.products', $category->id) }}">more</a>
+        </div>
+
     </div>
 
 @endsection

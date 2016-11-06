@@ -130,6 +130,7 @@ Route::group(['prefix' => 'categories'], function () {
     Route::group(['middleware' => ['auth', 'auth.backend']], function () {
         /*
          * 建立類別
+         * @test:done
          */
         Route::get('create', [
             'as' => 'categories.create',
@@ -138,6 +139,7 @@ Route::group(['prefix' => 'categories'], function () {
 
         /*
          * 儲存建立類別
+         * @test:done
          */
         Route::post('/', [
             'as' => 'categories.store',
@@ -146,6 +148,7 @@ Route::group(['prefix' => 'categories'], function () {
 
         /*
          * 編輯類別
+         * @test:done
          */
         Route::match(['PUT', 'PATCH'], '{category}', [
             'as' => 'categories.update',
@@ -154,6 +157,7 @@ Route::group(['prefix' => 'categories'], function () {
 
         /*
          * 更新類別
+         * @test:done
          */
         Route::get('{category}/edit', [
             'as' => 'categories.edit',
@@ -162,6 +166,7 @@ Route::group(['prefix' => 'categories'], function () {
 
         /*
          * 刪除類別
+         * @test:done
          */
         Route::delete('{category}', [
             'as' => 'categories.destroy',
@@ -171,14 +176,16 @@ Route::group(['prefix' => 'categories'], function () {
 
     /*
      * 取得分類下的所有產品
+     * @test:done
      */
     Route::get('{category}/products', [
         'as' => 'categories.products',
-        'uses' => 'CategoriesController@products',
+        'uses' => 'Category\ShowProduct',
     ]);
 
     /*
      * 類別清單
+     * @test:done
      */
     Route::get('/', [
         'as' => 'categories.index',
@@ -187,6 +194,7 @@ Route::group(['prefix' => 'categories'], function () {
 
     /*
      * 類別頁面
+     * @test:done
      */
     Route::get('{category}', [
         'as' => 'categories.show',
