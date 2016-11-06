@@ -22,6 +22,9 @@ class ShowSubscriber extends Controller
 
     /**
      * 跟隨者
+     * @param $type
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function __invoke($type, $id)
     {

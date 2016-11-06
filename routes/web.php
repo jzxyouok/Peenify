@@ -209,6 +209,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::group(['middleware' => ['auth', 'auth.backend']], function () {
         /*
          * 建立產品
+         * @test:done
          */
         Route::get('create', [
             'as' => 'products.create',
@@ -217,6 +218,7 @@ Route::group(['prefix' => 'products'], function () {
 
         /*
          * 儲存建立產品
+         * @test:done
          */
         Route::post('/', [
             'as' => 'products.store',
@@ -225,6 +227,7 @@ Route::group(['prefix' => 'products'], function () {
 
         /*
          * 編輯產品
+         * @test:done
          */
         Route::get('{product}/edit', [
             'as' => 'products.edit',
@@ -233,6 +236,7 @@ Route::group(['prefix' => 'products'], function () {
 
         /*
          * 更新產品
+         * @test:done
          */
         Route::match(['PUT', 'PATCH'], '{product}', [
             'as' => 'products.update',
@@ -241,6 +245,7 @@ Route::group(['prefix' => 'products'], function () {
 
         /*
          * 刪除產品
+         * @test:done
          */
         Route::delete('{product}', [
             'as' => 'products.destroy',
@@ -250,6 +255,7 @@ Route::group(['prefix' => 'products'], function () {
 
     /*
      * 所有產品清單
+     * @test:done
      */
     Route::get('/', [
         'as' => 'products.index',
@@ -258,6 +264,7 @@ Route::group(['prefix' => 'products'], function () {
 
     /*
      * 產品頁面
+     * @test:done
      */
     Route::get('{product}', [
         'as' => 'products.show',
@@ -272,17 +279,17 @@ Route::group(['prefix' => 'comments'], function () {
     Route::group(['middleware' => 'auth'], function () {
         /*
          * 儲存建立評論
+         * @test:done
          */
         Route::post('{product_id}', [
             'as' => 'comments.store',
             'uses' => 'CommentsController@store',
         ]);
 
-        /**
-         * 擁有者可以編輯與更新自己的評論
-         */
         /*
          * 編輯評論
+         * 擁有者可以編輯與更新自己的評論
+         * @test:done
          */
         Route::get('{comment}/edit', [
             'as' => 'comments.edit',
@@ -291,6 +298,7 @@ Route::group(['prefix' => 'comments'], function () {
 
         /*
          * 更新評論
+         * @test:done
          */
         Route::match(['PUT', 'PATCH'], '{comment}', [
             'as' => 'comments.update',
@@ -302,11 +310,14 @@ Route::group(['prefix' => 'comments'], function () {
 
 /*
  * 收藏集 CURD
- * TODO clear
  * User
  */
 Route::resource('collections', 'CollectionsController');
 
+/*
+ * 確認刪除收藏集
+ * @test:done
+ */
 Route::get('collections/confirm/destroy/{collection}', [
     'as' => 'collections.confirm.destroy',
     'uses' => 'Collection\ConfirmDestroy'
@@ -318,6 +329,7 @@ Route::get('collections/confirm/destroy/{collection}', [
 Route::group(['middleware' => 'auth'], function() {
     /*
      * 跟隨者
+     * @test:done
      */
     Route::get('{type}/{id}/subscribers', [
         'as' => 'subscribes.subscribers',
@@ -326,6 +338,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     /*
      * 正在訂閱
+     * @test:done
      */
     Route::get('{type}/{id}/subscribed', [
         'as' => 'subscribes.subscribed',

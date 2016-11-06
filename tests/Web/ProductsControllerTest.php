@@ -74,7 +74,7 @@ class ProductsControllerTest extends TestCase
     {
         $this->loginFakeUser();
 
-        $product = factory(\App\Product::class)->create();
+        factory(\App\Product::class)->create();
 
         $this->visit(route('products.show', 1))->seeStatusCode(200);
     }
