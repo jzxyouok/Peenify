@@ -408,6 +408,7 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['prefix' => 'tags'], function () {
     /*
      * 所有標籤清單
+     * @test:done
      */
     Route::get('/', [
         'as' => 'tags.index',
@@ -416,6 +417,7 @@ Route::group(['prefix' => 'tags'], function () {
 
     /*
      * 標籤頁面
+     * @test:done
      */
     Route::get('{tag}', [
         'as' => 'tags.show',
