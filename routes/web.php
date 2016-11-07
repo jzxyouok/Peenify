@@ -350,34 +350,38 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'auth'], function() {
     /*
      * 訂閱
+     * @test:done
      */
     Route::post('subscribes/{type}/{id}', [
         'as' => 'subscribes.sync',
-        'uses' => 'SubscribesController@sync',
+        'uses' => 'Subscribe\SyncRelations',
     ]);
 
     /*
      * 書籤功能
+     * @test:done
      */
     Route::post('bookmarks/{type}/{id}', [
         'as' => 'bookmarks.sync',
-        'uses' => 'BookmarksController@sync',
+        'uses' => 'Bookmark\SyncRelations',
     ]);
 
     /*
      * 評分功能
+     * @test:done
      */
     Route::post('emojis/{type}/{id}', [
         'as' => 'emojis.sync',
-        'uses' => 'EmojisController@sync',
+        'uses' => 'Emoji\SyncRelations',
     ]);
 
     /*
      * 最愛功能
+     * @test:done
      */
     Route::post('favorites/{type}/{id}', [
         'as' => 'favorites.sync',
-        'uses' => 'FavoritesController@sync',
+        'uses' => 'Favorite\SyncRelations',
     ]);
 
     /*
@@ -390,6 +394,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     /*
      * 將產品加入到自訂的收藏集內
+     * @test:done
      */
     Route::post('collections/{collection}/product/{product}', [
         'as' => 'collections.product',

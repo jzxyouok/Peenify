@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Favorite;
 
 use App\Services\FavoriteService;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-use App\Http\Requests;
-
-class FavoritesController extends Controller
+class SyncRelations extends Controller
 {
     /**
      * @var FavoriteService
@@ -19,7 +18,7 @@ class FavoritesController extends Controller
         $this->favoriteService = $favoriteService;
     }
 
-    public function sync($type, $id)
+    public function __invoke($type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);
 

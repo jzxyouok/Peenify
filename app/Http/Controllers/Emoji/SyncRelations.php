@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Emoji;
 
-use App\Emoji;
 use App\Services\EmojiService;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-use App\Http\Requests;
-
-class EmojisController extends Controller
+class SyncRelations extends Controller
 {
     /**
      * @var EmojiService
@@ -20,7 +18,7 @@ class EmojisController extends Controller
         $this->emojiService = $emojiService;
     }
 
-    public function sync(Request $request, $type, $id)
+    public function __invoke(Request $request, $type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);
 

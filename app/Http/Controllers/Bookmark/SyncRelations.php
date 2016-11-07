@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bookmark;
 
 use App\Services\BookmarkService;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-use App\Http\Requests;
-
-class BookmarksController extends Controller
+class SyncRelations extends Controller
 {
     /**
      * @var BookmarkService
@@ -19,7 +18,7 @@ class BookmarksController extends Controller
         $this->bookmarkService = $bookmarkService;
     }
 
-    public function sync($type, $id)
+    public function __invoke($type, $id)
     {
         $instance = app(ucfirst('App\\' . $type))->find($id);
 
