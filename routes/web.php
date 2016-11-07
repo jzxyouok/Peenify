@@ -98,9 +98,14 @@ Route::group(['prefix' => 'users'], function () {
      * User 最愛清單
      * @test:done
      */
-    Route::get('{user}/favorites', [
-        'as' => 'users.favorites',
-        'uses' => 'User\ShowFavorites'
+    Route::get('{user}/favorites/products', [
+        'as' => 'users.favorites.products',
+        'uses' => 'User\ShowFavoriteProducts'
+    ]);
+
+    Route::get('{user}/favorites/collections', [
+        'as' => 'users.favorites.collections',
+        'uses' => 'User\ShowFavoriteCollections'
     ]);
 
     /*

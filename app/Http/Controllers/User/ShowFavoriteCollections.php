@@ -5,11 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Services\FavoriteService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ShowFavorites extends Controller
+class ShowFavoriteCollections extends Controller
 {
     /**
      * @var FavoriteService
@@ -30,8 +28,8 @@ class ShowFavorites extends Controller
     {
         $user = $this->userService->findOrFail($id);
 
-        $favorites = $this->favoriteService->getPaginationByUser($id, 12);
+        $favorites = $this->favoriteService->getPaginationByUser($id, 12, 'collection');
 
-        return view('users.favorites', compact('favorites', 'user'));
+        return view('users.favorites.collections', compact('favorites', 'user'));
     }
 }

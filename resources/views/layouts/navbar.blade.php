@@ -48,13 +48,14 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ route('users.show', auth()->user()->id) }}">個人頁面</a>
                                 <a href="{{ route('users.emojis', auth()->user()->id) }}">評分紀錄</a>
                                 <a href="{{ route('users.bookmarks', auth()->user()->id) }}">書籤</a>
-                                <a href="{{ route('users.favorites', auth()->user()->id) }}">最愛</a>
+                                <a href="{{ route('users.favorites.products', auth()->user()->id) }}">你最愛的產品</a>
+                                <a href="{{ route('users.favorites.collections', auth()->user()->id) }}">你最愛的收藏集</a>
+                                <a href="{{ route('users.collections', auth()->user()->id) }}">你所建立收藏集</a>
                                 <a href="{{ route('subscribes.subscribers', ['type' => 'user', 'id' => auth()->user()->id]) }}">跟隨者</a>
                                 <a href="{{ route('subscribes.subscribed', ['type' => 'user', 'id' => auth()->user()->id]) }}">正在訂閱</a>
-                                <a href="{{ route('users.collections', auth()->user()->id) }}">你的收藏集</a>
+                                <a href="{{ route('users.show', auth()->user()->id) }}">個人頁面</a>
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

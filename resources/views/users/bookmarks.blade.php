@@ -2,7 +2,7 @@
 
 @section('style')
     <style>
-        #bookmark {
+        .bookmark {
             cursor: pointer;
         }
     </style>
@@ -37,11 +37,10 @@
 
                                 @if(auth()->check() && $bookmark->owns())
                                     <div class="Card__count">
-                                        <div id="bookmark"
-                                             class="glyphicon glyphicon-bookmark{{ $bookmark->bookmarkable->isBookmark(auth()->user()) ? ' bookmark__color' : '' }}"
-                                             data-type="product"
-                                             data-id={{ $bookmark->bookmarkable->id }} data-token={{ csrf_token() }}>
+                                        <div class="bookmark fa fa-bookmark{{ $bookmark->bookmarkable->isBookmark(auth()->user()) ? ' bookmark__color' : '-o' }}"
+                                             data-type="product" data-id={{ $bookmark->bookmarkable->id }} data-token={{ csrf_token() }}>
                                         </div>
+
                                         <span class="Card__count__description">{{ $bookmark->created_at->diffForHumans() }}</span>
                                     </div>
                                 @endif
@@ -56,8 +55,4 @@
             {!! $bookmarks->links() !!}
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script src="{{ asset('/js/bookmark.js') }}"></script>
 @endsection

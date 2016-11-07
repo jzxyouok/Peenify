@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ShowFavoritesTest extends TestCase
+class ShowFavoriteProductsTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -22,7 +22,7 @@ class ShowFavoritesTest extends TestCase
      * @test
      * @group favorite
      */
-    public function showFavorites()
+    public function showFavoritesProducts()
     {
         $this->loginFakeUser();
 
@@ -32,19 +32,22 @@ class ShowFavoritesTest extends TestCase
 
         factory(\App\Favorite::class)->create([
             'favorable_id' => $product->id,
+            'favorable_type' => 'product',
             'user_id' => auth()->user()->id,
         ]);
 
         factory(\App\Favorite::class)->create([
             'favorable_id' => $product1->id,
+            'favorable_type' => 'product',
             'user_id' => auth()->user()->id,
         ]);
 
         factory(\App\Favorite::class)->create([
             'favorable_id' => $product2->id,
+            'favorable_type' => 'product',
             'user_id' => auth()->user()->id,
         ]);
 
-        $this->visit(route('users.favorites', auth()->user()->id))->see($product->name);
+        $this->visit(route('users.favorites.products', auth()->user()->id))->see($product->name);
     }
 }

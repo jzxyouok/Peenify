@@ -21,8 +21,8 @@ class FavoriteService
         return $this->favoriteRepository->getByUser($user_id);
     }
 
-    public function getPaginationByUser($user_id, $page = 10)
+    public function getPaginationByUser($user_id, $page = 10, $type = 'product')
     {
-        return $this->favoriteRepository->paginateByUser($user_id, $page);
+        return $this->favoriteRepository->paginateByUser($user_id, $page, $type);
     }
 }
