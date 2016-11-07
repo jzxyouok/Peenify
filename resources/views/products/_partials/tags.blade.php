@@ -1,7 +1,7 @@
 <div class="text-center">
     @foreach($product->tags as $tag)
-        <a class="Product__tag" href="{{ route('tags.show', $tag->id) }}">
+        <span class="Product__tag">
             {{ $tag->name }}
-        </a>
+        </span>
     @endforeach
 </div>
