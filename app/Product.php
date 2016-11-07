@@ -101,4 +101,9 @@ class Product extends Model
 
         return $this;
     }
+
+    public function paginateComments($sort = 'latest', $page = 10)
+    {
+        return $this->comments()->{$sort}()->paginate($page);
+    }
 }

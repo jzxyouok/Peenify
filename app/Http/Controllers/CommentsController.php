@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Product;
+use App\Http\Requests\Comment\createRequest;
+use App\Http\Requests\Comment\updateRequest;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class CommentsController extends Controller
         $this->commentService = $commentService;
     }
 
-    public function store(Request $request, $product_id)
+    public function store(createRequest $request, $product_id)
     {
         $result = $this->commentService->create(array_add($request->all(), 'product_id', $product_id));
 
@@ -36,14 +36,16 @@ class CommentsController extends Controller
     {
         $comment = $this->commentService->findOrFail($id);
 
+        $product_id = request()->get('pid');
+
         if (! $comment) {
             return back()->with('warning', 'Oops! 你不是發表此評論的人');
         }
 
-        return view('comments.edit', compact('comment'));
+        return view('comments.edit', compact('comment', 'product_id'));
     }
 
-    public function update(Request $request, $id)
+    public function update(updateRequest $request, $id)
     {
         $comment = $this->commentService->update($id, $request->all());
 
@@ -51,7 +53,7 @@ class CommentsController extends Controller
             return back()->with('warning', 'Oops! 你不是發表此評論的人');
         }
 
-        return redirect()->back()->with('message', '編輯成功');
+        return redirect()->route('products.show', $request->get('product_id'))->with('message', '編輯成功');
     }
 
     public function destroy($id)
