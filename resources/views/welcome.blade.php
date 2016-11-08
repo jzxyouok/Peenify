@@ -56,12 +56,13 @@
 
         .links > a {
             color: #FFFFFF;
-            padding: 0 25px;
-            font-size: 12px;
+            padding: 15px 25px;
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
+
         }
 
         .m-b-md {
@@ -92,28 +93,50 @@
         .nav-btn {
             color: #FFFFFF;
         }
+
+        .description {
+            padding-bottom: 50px;
+        }
+
+        .link__distance {
+            margin: 2.5px 2.5px;
+        }
     </style>
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login') && Auth::guest())
-        <div class="top-right links">
-            <a href="{{ url('/login') }}">Login</a>
-            <a href="{{ url('/auth/facebook') }}">Login via Facebook</a>
-            <a href="{{ url('/register') }}">Register</a>
+    <div class="content container">
+        <div class="row title">
+            <div class="text-center">
+                Peenify
+            </div>
         </div>
-
-    @else
-        <div class="top-right links">
-            <a href="{{ url('/home') }}">Home</a>
+        <div class="row description">
+            <div class="text-center">
+                終極的評分平台。
+            </div>
         </div>
-    @endif
-
-    <div class="content">
-        <div class="title m-b-md">
-            Peenify: 電影、劇集、遊戲的評分平台。
-        </div>
+        @if (Route::has('login') && Auth::guest())
+            <div class="row">
+                <div class="links col-md-4">
+                    <a class="link__distance" href="{{ url('/login') }}">登入</a>
+                </div>
+                <div class="links col-md-4">
+                    <a class="link__distance" href="{{ url('/auth/facebook') }}">Facebook 登入/註冊</a>
+                </div>
+                <div class="links col-md-4">
+                    <a class="link__distance" href="{{ url('/register') }}">註冊</a>
+                </div>
+            </div>
+        @else
+            <div class="row">
+                <div class="links">
+                    <a href="{{ url('/home') }}">Home</a>
+                </div>
+            </div>
+        @endif
     </div>
+</div>
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
