@@ -47,7 +47,7 @@
         <!--需要登入才可操作項目-->
         @if(auth()->check())
             <div class="form-group text-center">
-                <!--評分-->
+            <!--評分-->
             @include('products._funcs.emojis')
 
             <!--願望清單-->
@@ -62,14 +62,19 @@
             <!--評論表單-->
             @if (! auth()->user()->hasBeenCommentByProduct($product->id))
                 @include('comments._partials.create')
-
-                <hr style="max-width: 500px">
             @endif
 
         @endif
 
         <!--評論清單-->
-        @include('comments.lists')
+        <hr style="max-width: 500px">
+        @if ($product->comments()->exists())
+            @include('comments.lists')
+        @else
+            <div class="text-center">
+                <h3>目前尚未有評論 :(</h3>
+            </div>
+        @endif
     </div>
 @endsection
 
