@@ -65,6 +65,6 @@ class LoginController extends Controller
 
         Auth::loginUsingId($user->id);
 
-        return redirect()->back();
+        return redirect()->to('/home');
     }
 }

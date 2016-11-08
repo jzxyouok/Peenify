@@ -54,7 +54,7 @@ class CategoriesController extends Controller
 
         $this->categoryService->create(array_set($data, 'cover', $filename));
 
-        return redirect()->route('categories.index')->with('message', '建立成功');
+        return redirect()->route('backend.index')->with('message', '建立成功');
     }
 
     /**

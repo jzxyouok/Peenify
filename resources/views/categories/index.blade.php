@@ -14,9 +14,10 @@
             @foreach($categories as $category)
                 <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4" style="padding-left: 20px;padding-right: 20px;">
                     <div class="Card__panel">
+                        <a href="{{ route('categories.show', $category->id) }}">
                         <img class="Card__image img-responsive"
                              src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/380x260?auto=yes' }}">
-
+                        </a>
 
                             <div class="Card__detail">
                                 <h3 class="Card__title">

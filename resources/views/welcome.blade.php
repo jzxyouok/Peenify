@@ -50,7 +50,7 @@
         }
 
         .title {
-            font-size: 84px;
+            font-size: 70px;
             font-family: "Raleway", Helvetica, Arial, sans-serif;
         }
 

@@ -12,11 +12,6 @@
 
         <p class="text-center">{{ $category->description }}</p>
 
-        <div class="row">
-            <img class="Card__image img-responsive"
-                 src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/800x300' }}">
-        </div>
-
         <hr>
 
         <!--僅秀出9個最新產品做 promote-->

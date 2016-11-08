@@ -20,7 +20,7 @@ class CategoriesTableSeeder extends Seeder
             \App\Category::create([
                 'user_id' => $user->id,
                 'name' => $category,
-                'description' => $category . '分類',
+                'description' => '最新最熱門的' . $category . '情報與評論。',
             ]);
         }
     }
