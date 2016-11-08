@@ -71,7 +71,7 @@
 <!--function js-->
 <script src="{{ asset('/js/favorite.js') }}"></script>
 <script src="{{ asset('/js/bookmark.js') }}"></script>
-
+<script src="{{ asset('/js/collection.js') }}"></script>
 @yield('script')
 </body>
 </html>

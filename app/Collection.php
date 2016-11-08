@@ -34,4 +34,9 @@ class Collection extends Model
     {
         return $this->user_id == auth()->user()->id;
     }
+
+    public function paginateProducts($sort = 'latest', $page = 12)
+    {
+        return $this->products()->{$sort}()->paginate($page);
+    }
 }

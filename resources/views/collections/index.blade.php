@@ -43,7 +43,7 @@
                         </h3>
 
                         @if (auth()->check())
-                            <div class="favorite fa fa-heart{{ $collection->isFavorite(auth()->user()) ? ' favorite__color' : '-o' }}"
+                            <div class="favorite fa fa-heart{{ $collection->isFavorite(auth()->user()) ? ' favorite__color' : '-o' }} fa-lg"
                                  data-type="collection" data-id={{ $collection->id }} data-token={{ csrf_token() }}>
                                 <span id="favorite_amount">
                                     {{ $collection->favorites()->count() }}
