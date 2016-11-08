@@ -15,7 +15,7 @@
             </div>
             <textarea name="description" rows="4" cols="50" placeholder="請輸入評論..." class="form-control"></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group text-right">
             <input type="submit" value="評論" class="btn btn-default">
         </div>
     </form>

@@ -36,9 +36,9 @@
         @else
             <div class="row">
                 <div class="col-md-12 text-center slogan__distance">
-                    <h2 class="slogan">
-                        推薦給您專屬的個人產品...
-                    </h2>
+                    <h3 class="slogan">
+                        For you...
+                    </h3>
                 </div>
             </div>
 
