@@ -39,7 +39,7 @@
 @yield('style')
 @yield('content')
 
-@include('layouts.footer')
+{{--@include('layouts.footer')--}}
 
 <!-- Scripts -->
 {{--<script src="/js/app.js"></script>--}}

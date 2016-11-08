@@ -39,6 +39,7 @@
                     <li><a href="{{ url('auth/facebook') }}">Facebook 登入</a></li>
                     <li><a href="{{ url('/register') }}">註冊</a></li>
                 @else
+                    <li><a href="{{ route('users.collections', auth()->user()->id) }}">建立收藏集</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img style="width: 20px;height: 20px; border-radius: 20px 20px"
@@ -47,20 +48,32 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ route('users.bookmarks', auth()->user()->id) }}">書籤</a></li>
+                            <li><a href="{{ route('users.emojis', auth()->user()->id) }}">評分紀錄</a></li>
+                            <li role="separator" class="divider"></li>
                             <li>
-                                <a href="{{ route('users.emojis', auth()->user()->id) }}">評分紀錄</a>
-                                <a href="{{ route('users.bookmarks', auth()->user()->id) }}">書籤</a>
                                 <a href="{{ route('users.favorites.products', auth()->user()->id) }}">你最愛的產品</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('users.favorites.collections', auth()->user()->id) }}">你最愛的收藏集</a>
-                                <a href="{{ route('users.collections', auth()->user()->id) }}">收藏集</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('subscribes.subscribers', ['type' => 'user', 'id' => auth()->user()->id]) }}">跟隨者</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('subscribes.subscribed', ['type' => 'user', 'id' => auth()->user()->id]) }}">正在訂閱</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
                                 <a href="{{ route('users.show', auth()->user()->id) }}">個人頁面</a>
-                                <a href="{{ url('/logout') }}"
-                                   onclick="event.preventDefault();
+                            </li>
+                                <li>
+                                    <a href="{{ url('/logout') }}"
+                                       onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                    登出
-                                </a>
+                                        登出
+                                    </a>
+                                </li>
 
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST"
                                       style="display: none;">

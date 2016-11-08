@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CollectionsControllerTest extends TestCase
 {
-    use DatabaseMigrations, WithoutMiddleware;
+    use DatabaseMigrations;
 
     public function setUp()
     {

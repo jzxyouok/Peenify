@@ -8,11 +8,11 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="name">名稱</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" value="{{ old('name') }}">
             </div>
             <div class="form-group">
                 <label for="description">描述</label>
-                <textarea name="description" rows="4" cols="50" placeholder="請輸入描述..." class="form-control"></textarea>
+                <textarea name="description" rows="4" cols="50" placeholder="請輸入描述..." class="form-control">{{ old('description') }}</textarea>
             </div>
             <div class="form-group">
                 <input type="submit" value="建立" class="btn btn-default">
