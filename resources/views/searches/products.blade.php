@@ -70,9 +70,3 @@
 
     </div>
 @endsection
-
-@section('script')
-    <script src="{{ asset('/js/masonry-loader.js') }}"></script>
-    <script src="{{ asset('/js/favorite.js') }}"></script>
-    <script src="{{ asset('/js/bookmark.js') }}"></script>
-@endsection

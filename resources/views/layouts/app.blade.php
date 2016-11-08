@@ -69,6 +69,8 @@
 <script src="{{ asset('/js/masonry-loader.js') }}"></script>
 
 <!--function js-->
+<script src="{{ asset('/js/emoji.js') }}"></script>
+<script src="{{ asset('/js/emoji_comment.js') }}"></script>
 <script src="{{ asset('/js/favorite.js') }}"></script>
 <script src="{{ asset('/js/bookmark.js') }}"></script>
 <script src="{{ asset('/js/collection.js') }}"></script>

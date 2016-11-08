@@ -77,10 +77,3 @@
         @endif
     </div>
 @endsection
-
-@section('script')
-    <script src="{{ asset('/js/favorite.js') }}"></script>
-    <script src="{{ asset('/js/bookmark.js') }}"></script>
-    <script src="{{ asset('/js/emoji.js') }}"></script>
-    <script src="{{ asset('/js/emoji_comment.js') }}"></script>
-@endsection
