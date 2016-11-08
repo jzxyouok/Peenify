@@ -87,7 +87,7 @@
             },
             computed: {
                 comment_surplus: function () {
-                    return 140 - this.comment.length
+                    return 200 - this.comment.length
                 }
             }
         })
