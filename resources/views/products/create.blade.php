@@ -1,7 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" id="app">
         <div class="text-center">
             <h2 style="padding-bottom: 20px;">
                 建立產品
@@ -54,19 +54,19 @@
 
                 <div class="col-md-6">
                     <!--額外的電影選項-->
-                    <div style="color: #FFFFFF;background-color: #1f648b; padding: 10px 10px">
+                    <div style="color: #FFFFFF;background-color: #1f648b; padding: 10px 10px" v-if="category == 1">
                         額外的電影選項
                         @include('products._forms.movies')
                     </div>
 
                     <!--額外的影集選項-->
-                    <div style="color: #FFFFFF;background-color: #ad4844; padding: 10px 10px">
+                    <div style="color: #FFFFFF;background-color: #ad4844; padding: 10px 10px" v-if="category == 2">
                         額外的影集選項
                         @include('products._forms.series')
                     </div>
 
                     <!--額外的遊戲選項-->
-                    <div style="color: #FFFFFF;background-color: #5cb85c; padding: 10px 10px">
+                    <div style="color: #FFFFFF;background-color: #5cb85c; padding: 10px 10px" v-if="category == 4">
                         額外的遊戲選項
                         @include('products._forms.games')
                     </div>
@@ -114,5 +114,13 @@
                 cache: true
             }
         });
+    </script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                category: '1'
+            }
+        })
     </script>
 @endsection
