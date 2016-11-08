@@ -83,6 +83,13 @@
 
 @section('script')
     <script>
+        new Vue({
+            el: '#app',
+            data: {
+                category: '1'
+            }
+        });
+
         $(function () {
             $('#datetimepicker1').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss'
@@ -114,13 +121,5 @@
                 cache: true
             }
         });
-    </script>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                category: '1'
-            }
-        })
     </script>
 @endsection
