@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" id="app">
         <div class="row">
             <div class="col-md-12 text-center slogan__distance">
                 <h1 class="slogan">
@@ -76,4 +76,20 @@
             </div>
         @endif
     </div>
+@endsection
+
+@section('script')
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                comment: ''
+            },
+            computed: {
+                comment_surplus: function () {
+                    return 140 - this.comment.length
+                }
+            }
+        })
+    </script>
 @endsection

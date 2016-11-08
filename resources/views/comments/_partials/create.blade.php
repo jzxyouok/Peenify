@@ -13,7 +13,8 @@
             <div style="text-align: center">
                 <label for="description">為 {{ $product->name }} 寫下評論...</label>
             </div>
-            <textarea name="description" rows="4" cols="50" placeholder="請輸入評論..." class="form-control"></textarea>
+            <textarea name="description" rows="4" cols="50" placeholder="請輸入評論..." class="form-control" v-model="comment"></textarea>
+            <span>剩餘 @{{ comment_surplus }} 字</span>
         </div>
         <div class="form-group text-right">
             <input type="submit" value="評論" class="btn btn-default">
