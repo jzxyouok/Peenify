@@ -21,8 +21,8 @@ class EmojiService extends Service
         return $this->emojiRepository->getByUser($user_id);
     }
 
-    public function getPaginationByUser($user_id, $page = 10)
+    public function getPaginationByUser($user_id, $page = 10, $type = 'product')
     {
-        return $this->emojiRepository->paginateByUser($user_id, $page);
+        return $this->emojiRepository->paginateByUser($user_id, $page, $type);
     }
 }
