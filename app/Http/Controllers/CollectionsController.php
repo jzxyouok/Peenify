@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Collection\createRequest;
+use App\Http\Requests\Collection\updateRequest;
 use App\Services\CollectionService;
 use Illuminate\Http\Request;
 
@@ -31,7 +33,7 @@ class CollectionsController extends Controller
         return view('collections.create');
     }
 
-    public function store(Request $request)
+    public function store(createRequest $request)
     {
         $collection = $this->collectionService->create($request->all());
 
@@ -52,7 +54,7 @@ class CollectionsController extends Controller
         return view('collections.edit', compact('collection'));
     }
 
-    public function update(Request $request, $id)
+    public function update(updateRequest $request, $id)
     {
         $this->collectionService->update($id, $request->all());
 
