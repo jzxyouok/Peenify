@@ -12,10 +12,10 @@
     <div id="app" class="container">
         <div class="row">
             @foreach($categories as $category)
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left: 20px;padding-right: 20px;">
+                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4" style="padding-left: 20px;padding-right: 20px;">
                     <div class="Card__panel">
                         <img class="Card__image img-responsive"
-                             src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/1280x200' }}">
+                             src="{{ ($category->cover) ? image_path('categories', $category->cover):'holder.js/380x260?auto=yes' }}">
 
 
                             <div class="Card__detail">

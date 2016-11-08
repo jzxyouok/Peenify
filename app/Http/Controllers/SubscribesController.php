@@ -29,7 +29,7 @@ class SubscribesController extends Controller
             return response()->json(['status' => 'describe']);
         }
 
-        $this->subscribeService->sendMailToSubscribedUser($instance);
+//        $this->subscribeService->sendMailToSubscribedUser($instance);
 
         $instance->subscribe(auth()->user());
 
