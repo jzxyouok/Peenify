@@ -20,7 +20,7 @@ class SyncRelations extends Controller
 
     public function __invoke($type, $id)
     {
-        $instance = app(ucfirst('App\\' . $type))->find($id);
+        $instance = app(ucfirst('App\\' . ucfirst($type)))->find($id);
 
         if ($instance->isFavorite(auth()->user())) {
             $instance->unFavorite(auth()->user());
