@@ -102,6 +102,21 @@ class Product extends Model
         return $this;
     }
 
+    public function anime()
+    {
+        return $this->hasOne(Game::class);
+    }
+
+    public function giveAnimeTo($options)
+    {
+        if (! options_isEmpty($options)) {
+            $this->anime()->save(new Anime($options));
+        }
+
+        return $this;
+    }
+
+
     public function paginateComments($sort = 'latest', $page = 10)
     {
         return $this->comments()->{$sort}()->paginate($page);

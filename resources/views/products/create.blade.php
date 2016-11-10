@@ -65,6 +65,12 @@
                         @include('products._forms.series')
                     </div>
 
+                    <!--額外的動畫選項-->
+                    <div style="color: #FFFFFF;background-color: #3A558E; padding: 10px 10px" v-if="category == 3">
+                        額外的動畫選項
+                        @include('products._forms.animes')
+                    </div>
+
                     <!--額外的遊戲選項-->
                     <div style="color: #FFFFFF;background-color: #5cb85c; padding: 10px 10px" v-if="category == 4">
                         額外的遊戲選項

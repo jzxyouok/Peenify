@@ -29,7 +29,8 @@ class ProductService extends Service
 
         $product->giveMovieTo(array_get($attributes, 'movie'))
                 ->giveSeriesTo(array_get($attributes, 'series'))
-                ->giveGameTo(array_get($attributes, 'game'));
+                ->giveGameTo(array_get($attributes, 'game'))
+                ->giveAnimeTo(array_get($attributes, 'anime'));
 
         return $product;
     }
