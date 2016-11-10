@@ -8,6 +8,8 @@
     <meta property="og:site_name" content="Peenify"/>
     <meta property="og:image"
           content="{{ ($product->cover) ? image_path('products', $product->cover):'http://i.imgur.com/eCWz6hF.png' }}"/>
+    <meta property="og:image:width" content="660" />
+    <meta property="og:image:height" content="440" />
     <meta property="og:locale" content="zh_TW"/>
 @endsection
 

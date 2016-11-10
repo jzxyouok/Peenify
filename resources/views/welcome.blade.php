@@ -13,6 +13,8 @@
     <meta property="og:description" content="查詢評分與新品上市評價情報。" />
     <meta property="og:site_name" content="Peenify" />
     <meta property="og:image" content="http://i.imgur.com/eCWz6hF.png" />
+    <meta property="og:image:width" content="660" />
+    <meta property="og:image:height" content="440" />
     <meta property="og:locale" content="zh_TW" />
 
     <!-- Fonts -->
