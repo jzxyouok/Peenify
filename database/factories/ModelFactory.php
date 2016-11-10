@@ -70,7 +70,7 @@ $factory->define(App\Role::class, function (Faker\Generator $faker) {
     return [
         'name' => 'Admin',
         'label' => 'Administrator',
-        'user_id' => factory(App\User::class)->create()->id,
+        'user_id' => 1,
     ];
 });
 
@@ -78,7 +78,7 @@ $factory->define(App\Permission::class, function (Faker\Generator $faker) {
     return [
         'name' => 'edit_all',
         'label' => 'it can edit all.',
-        'user_id' => factory(App\User::class)->create()->id,
+        'user_id' => 1,
     ];
 });
 
