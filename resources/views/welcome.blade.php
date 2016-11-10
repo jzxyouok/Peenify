@@ -5,7 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Peenify</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Peenify - 終極評分平台" />
+    <meta property="og:url" content="https://peenify.com" />
+    <meta property="og:description" content="查詢評分與新品上市評價情報。" />
+    <meta property="og:site_name" content="Peenify" />
+    <meta property="og:image" content="http://i.imgur.com/eCWz6hF.png" />
+    <meta property="og:locale" content="zh_TW" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -113,7 +121,7 @@
         </div>
         <div class="row description">
             <div class="text-center">
-                終極的評分平台。
+                終極評分平台。
             </div>
         </div>
         @if (Route::has('login') && Auth::guest())
