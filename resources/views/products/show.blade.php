@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('style')
+    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
     <style>
         .video-container {
             position: relative;
@@ -17,7 +19,7 @@
             height: 100%;
         }
     </style>
-    @endsection
+@endsection
 
 @section('facebook_meta')
     <meta property="og:type" content="website"/>
