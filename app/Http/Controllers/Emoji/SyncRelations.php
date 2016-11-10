@@ -20,7 +20,7 @@ class SyncRelations extends Controller
 
     public function __invoke(Request $request, $type, $id)
     {
-        $instance = app(ucfirst('App\\' . $type))->find($id);
+        $instance = app(ucfirst('App\\' . ucfirst($type)))->find($id);
 
         if ($instance->isEmoji(auth()->user())) {
             if ($instance->getEmoji(auth()->user(), 'type') == $request->get('emoji')) {
