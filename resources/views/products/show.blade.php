@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
+@section('facebook_meta')
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="{{ $product->name }}"/>
+    <meta property="og:url" content="{{ route('products.show', $product->id) }}"/>
+    <meta property="og:description" content="{{ $product->description }}"/>
+    <meta property="og:site_name" content="Peenify"/>
+    <meta property="og:image"
+          content="{{ ($product->cover) ? image_path('products', $product->cover):'http://i.imgur.com/eCWz6hF.png' }}"/>
+    <meta property="og:locale" content="zh_TW"/>
+@endsection
+
 @section('style')
     <link rel="stylesheet" href="{{ asset('/css/product.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/comment.css') }}">
@@ -21,8 +32,8 @@
             <div class="Product__cover">
                 <!-- if trailer exist -> show video-->
                 @if (! empty($product->movie->trailer))
-                    <iframe width="500" height="300" src="https://www.youtube.com/embed/{{ $product->movie->trailer }}" frameborder="0"
-                            allowfullscreen></iframe>
+                    <iframe width="500" height="300" src="https://www.youtube.com/embed/{{ $product->movie->trailer }}"
+                            frameborder="0" allowfullscreen></iframe>
                 @else
                     <img class="img-responsive"
                          src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/500x300' }}">
@@ -47,7 +58,7 @@
         <!--需要登入才可操作項目-->
         @if(auth()->check())
             <div class="form-group text-center">
-            <!--評分-->
+                <!--評分-->
             @include('products._funcs.emojis')
 
             <!--願望清單-->
@@ -66,7 +77,7 @@
 
         @endif
 
-        <!--評論清單-->
+    <!--評論清單-->
         <hr style="max-width: 500px">
         @if ($product->comments()->exists())
             @include('comments.lists')
