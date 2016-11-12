@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/video.css') }}">
-@endsection
-
 @section('facebook_meta')
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="{{ $product->name }}"/>
@@ -60,11 +54,11 @@
         <!--標籤-->
         @include('products._partials.tags')
 
-        <hr style="max-width: 500px">
-
         <!--需要登入才可操作項目-->
         @if(auth()->check())
-                <div class="form-group text-center">
+            <hr style="max-width: 500px">
+
+            <div class="form-group text-center">
                 <!--評分-->
                 @include('products._funcs.emojis')
 
