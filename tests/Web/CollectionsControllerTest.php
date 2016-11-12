@@ -63,6 +63,8 @@ class CollectionsControllerTest extends TestCase
      */
     public function testShow()
     {
+        $this->loginFakeUser();
+
         factory(\App\Collection::class)->create();
 
         $this->visit(route('collections.show', 1))->see('my collection');
