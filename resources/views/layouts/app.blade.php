@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker.min.css">
 
+    <!--video player css-->
+    <link rel="stylesheet" href="https://cdn.plyr.io/2.0.10/plyr.css">
 
     <!--custom styles-->
     <link rel="stylesheet" href="{{ asset('/css/card.css') }}">
@@ -59,6 +61,9 @@
 <!--flow load, image loader-->
 <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+
+<!--video player-->
+<script src="https://cdn.plyr.io/2.0.10/plyr.js"></script>
 
 <!--flow-->
 <script src="{{ asset('/js/masonry-loader.js') }}"></script>
