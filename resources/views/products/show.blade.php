@@ -3,22 +3,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/product.css') }}">
     <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
-    <style>
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            padding-top: 30px; height: 0; overflow: hidden;
-        }
-        .video-container iframe,
-        .video-container object,
-        .video-container embed {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/video.css') }}">
 @endsection
 
 @section('facebook_meta')
@@ -55,10 +40,7 @@
             <div class="Product__cover">
                 <!-- if trailer exist -> show video-->
                 @if (! empty($product->movie->trailer))
-                    <div class="video-container">
-                    <iframe width="500" height="300" src="https://www.youtube.com/embed/{{ $product->movie->trailer }}"
-                            frameborder="0" allowfullscreen></iframe>
-                    </div>
+                    <div id="js-player" class="video-container" data-type="youtube" data-video-id="{{ $product->movie->trailer }}"></div>
                 @else
                     <img class="img-responsive"
                          src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/500x300' }}">
@@ -82,14 +64,14 @@
 
         <!--需要登入才可操作項目-->
         @if(auth()->check())
-            <div class="form-group text-center">
-            <!--評分-->
-            @include('products._funcs.emojis')
+                <div class="form-group text-center">
+                <!--評分-->
+                @include('products._funcs.emojis')
 
-            <!--願望清單-->
-            @include('products._funcs.bookmarks')
+                <!--願望清單-->
+                @include('products._funcs.bookmarks')
 
-            <!--最愛-->
+                <!--最愛-->
                 @include('products._funcs.favorites')
             </div>
 
@@ -126,6 +108,8 @@
                     return 200 - this.comment.length
                 }
             }
-        })
+        });
+
+        plyr.setup('#js-player');
     </script>
 @endsection
