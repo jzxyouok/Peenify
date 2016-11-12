@@ -71,7 +71,7 @@
             </div>
 
             <div class="text-center" style="margin: 0 auto;display: block;max-width:800px;padding: 0.5em 0.5em;">
-                發行日期:<p>{{ $product->launched_at }}</p>
+                發行日期:<p>{{ parse_time($product->created_at) }}</p>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
         <!--需要登入才可操作項目-->
         @if(auth()->check())
             <div class="form-group text-center">
-                <!--評分-->
+            <!--評分-->
             @include('products._funcs.emojis')
 
             <!--願望清單-->
