@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{ asset('/css/card.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/area.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/func.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/video.css') }}">
 
     <!-- Scripts -->
     <script>
