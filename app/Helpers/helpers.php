@@ -51,6 +51,11 @@ if (!function_exists('update_image')) {
 }
 
 if (!function_exists('options_isEmpty')) {
+    /**
+     * @param $attributes
+     * @return bool
+     * check attributes is empty.
+     */
     function options_isEmpty($attributes)
     {
         if (is_string($attributes) OR is_null($attributes)) {
@@ -58,6 +63,19 @@ if (!function_exists('options_isEmpty')) {
         }
 
         return empty(array_filter($attributes));
+    }
+}
+
+
+if (!function_exists('parse_time')) {
+    /**
+     * @param $time
+     * @return string
+     * 用於轉換字串的時間，目前僅取用到年月日
+     */
+    function parse_time($time)
+    {
+        return \Carbon\Carbon::parse($time)->toDateString();
     }
 }
 
