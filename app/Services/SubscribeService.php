@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Mail\SubscribedUser;
+use App\Product;
 use App\Repositories\ProductRepository;
 use App\Repositories\SubscribeRepository;
 use App\Repositories\UserRepository;
@@ -63,6 +64,6 @@ class SubscribeService
     {
         $category_ids = $this->subscribeRepository->pluckSubscribed('category', $user->id)->toArray();
 
-        return $this->productRepository->getByCategory($category_ids, 6);
+        return Product::whereIn('category_id', $category_ids)->latest()->paginate(6);
     }
 }
