@@ -114,7 +114,7 @@
 </nav>
 
 @include('layouts.message')
-@include('layouts.errors')
+{{--@include('layouts.errors')--}}
 
 @yield('style')
 @yield('content')
