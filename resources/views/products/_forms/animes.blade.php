@@ -4,12 +4,12 @@
 </div>
 
 <div class="form-group">
-    <label for="name">片長</label>
-    <input name="options[runtime_at]" type='text' class="form-control">
+    <label for="name">集數 * 25</label>
+    <input name="options[episodes]" type='text' class="form-control">
 </div>
 
 <div class="form-group">
-    <label for="name">預告片</label>
+    <label for="name">預告片  * 輸入 youtube id 即可</label>
     <input type="text" name="options[trailer]" class="form-control">
 </div>
 

@@ -39,10 +39,11 @@
                     <div class="form-group">
                         <label for="name">釋出時間</label>
                         <div class='input-group date' id='datetimepicker1'>
-                            <input name="launched_at" type='text' class="form-control"/>
                             <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+
+                            <input name="launched_at" type='text' class="form-control"/>
                         </div>
                     </div>
 
@@ -98,7 +99,7 @@
 
         $(function () {
             $('#datetimepicker1').datetimepicker({
-                format: 'YYYY-MM-DD HH:mm:ss'
+                format: 'YYYY-MM-DD'
             });
         });
 
