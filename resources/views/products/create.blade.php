@@ -15,40 +15,78 @@
                     <!--類別清單-->
                     @include('products._lists.categories')
 
-                    <div class="form-group">
-                        <label for="name">產品名稱</label>
-                        <input type="text" name="name" class="form-control">
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <label for="name">產品名稱 <span style="color: red">*</span></label>
+                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
-                    <div class="form-group">
-                        <label for="description">產品描述</label>
+                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                        <label for="description">產品描述 <span style="color: red">*</span></label>
                         <textarea name="description" rows="4" cols="50" placeholder="請輸入產品描述..."
-                                  class="form-control"></textarea>
+                                  class="form-control">{{ old('description') }}</textarea>
+
+                        @if ($errors->has('description'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('description') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('site') ? ' has-error' : '' }}">
                         <label for="name">產品網址</label>
-                        <input type="text" name="site" class="form-control">
+                        <input type="text" name="site" class="form-control" value="{{ old('site') }}">
+
+                        @if ($errors->has('site'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('site') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('cover') ? ' has-error' : '' }}">
                         <label for="name">產品封面</label>
                         <input type="file" name="cover" class="form-control">
+
+                        @if ($errors->has('cover'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('cover') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
-                    <div class="form-group">
-                        <label for="name">釋出時間</label>
+                    <div class="form-group{{ $errors->has('launched_at') ? ' has-error' : '' }}">
+                        <label for="name">釋出時間 <span style="color: red">*</span></label>
                         <div class='input-group date' id='datetimepicker1'>
-                            <input name="launched_at" type='text' class="form-control"/>
                             <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+
+                            <input name="launched_at" type='text' class="form-control"
+                                   value="{{ old('launched_at') }}"/>
                         </div>
+
+                        @if ($errors->has('launched_at'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('launched_at') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
-                    <div class="form-group">
-                        <label for="tags">標籤</label>
+                    <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                        <label for="tags">標籤 <span style="color: red">*</span></label>
                         <select name="tags[]" id="tags" class="form-control"></select>
+
+                        @if ($errors->has('tags'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('tags') }}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
 
@@ -98,7 +136,7 @@
 
         $(function () {
             $('#datetimepicker1').datetimepicker({
-                format: 'YYYY-MM-DD HH:mm:ss'
+                format: 'YYYY-MM-DD'
             });
         });
 

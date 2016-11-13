@@ -24,8 +24,6 @@ class ProductRepository extends Repository
 
         $product->update($attributes);
 
-        $product->tag($attributes['tags']);
-
         return $product->save();
     }
 

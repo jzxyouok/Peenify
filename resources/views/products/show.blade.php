@@ -33,8 +33,8 @@
         <div class="row">
             <div class="Product__cover">
                 <!-- if trailer exist -> show video-->
-                @if (! empty($product->movie->trailer))
-                    <div id="js-player" class="video-container" data-type="youtube" data-video-id="{{ $product->movie->trailer }}"></div>
+                @if (! empty($product->options['trailer']))
+                    <div id="js-player" class="video-container" data-type="youtube" data-video-id="{{ $product->options['trailer'] }}"></div>
                 @else
                     <img class="img-responsive"
                          src="{{ ($product->cover) ? image_path('products', $product->cover):'holder.js/500x300' }}">

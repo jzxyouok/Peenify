@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGamesTable extends Migration
+class AddOptionsToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_id')->unsigned()->index();
-            $table->string('origin_name')->nullable();
-            $table->string('trailer')->nullable();
+        Schema::table('products', function (Blueprint $table) {
+            $table->json('options')->after('site')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('options');
+        });
     }
 }

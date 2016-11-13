@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('cover')->nullable();
             $table->string('site')->nullable();
             $table->tinyInteger('status')->default(1);
-            $table->dateTime('launched_at')->nullable();
+            $table->date('launched_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

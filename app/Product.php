@@ -26,7 +26,12 @@ class Product extends Model
         'user_id',
         'category_id',
         'launched_at',
-        'site'
+        'site',
+        'options',
+    ];
+
+    protected $casts = [
+        'options' => 'json',
     ];
 
     protected $dates = ['deleted_at'];
@@ -59,63 +64,6 @@ class Product extends Model
     {
         return $this->belongsToMany(Collection::class);
     }
-
-    public function movie()
-    {
-        return $this->hasOne(Movie::class);
-    }
-
-    public function giveMovieTo($options)
-    {
-        if (! options_isEmpty($options)) {
-            $this->movie()->save(new Movie($options));
-        }
-
-        return $this;
-    }
-
-    public function game()
-    {
-        return $this->hasOne(Game::class);
-    }
-
-    public function giveGameTo($options)
-    {
-        if (! options_isEmpty($options)) {
-            $this->game()->save(new Game($options));
-        }
-
-        return $this;
-    }
-
-    public function series()
-    {
-        return $this->hasOne(Series::class);
-    }
-
-    public function giveSeriesTo($options)
-    {
-        if (! options_isEmpty($options)) {
-            $this->series()->save(new Series($options));
-        }
-
-        return $this;
-    }
-
-    public function anime()
-    {
-        return $this->hasOne(Game::class);
-    }
-
-    public function giveAnimeTo($options)
-    {
-        if (! options_isEmpty($options)) {
-            $this->anime()->save(new Anime($options));
-        }
-
-        return $this;
-    }
-
 
     public function paginateComments($sort = 'latest', $page = 10)
     {

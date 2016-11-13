@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class updateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,6 @@ class ProductRequest extends FormRequest
             'category_id' => 'required',
             'launched_at' => 'required',
             'site' => 'url',
-            'tags' => 'required',
             'cover' => 'sometimes|mimes:jpeg,bmp,png'
         ];
     }
@@ -42,7 +41,6 @@ class ProductRequest extends FormRequest
             'category_id.required' => '類別 必填',
             'launched_at.required' => '釋出時間 必填',
             'site.url' => 'URL 必須是正確格式',
-            'tags.required' => '標籤 必填',
             'cover.mimes' => '格式錯誤，必須是 jpeg,bmp,png',
         ];
     }

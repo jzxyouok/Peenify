@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\Product\createRequest;
+use App\Http\Requests\Product\updateRequest;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class ProductsController extends Controller
         return view('products.create');
     }
 
-    public function store(ProductRequest $request)
+    public function store(createRequest $request)
     {
         $filename = (is_null($request->file('cover'))) ? null : upload_image('products', $request->file('cover'));
 
@@ -55,7 +56,7 @@ class ProductsController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(ProductRequest $request, $id)
+    public function update(updateRequest $request, $id)
     {
         $this->productService->update($id, update_image($request, 'cover', 'products'));
 

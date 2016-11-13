@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>Peenify - 後台管理系統</title>
 
     <!-- Styles -->
     {{--<link href="/css/app.css" rel="stylesheet">--}}
@@ -114,7 +114,7 @@
 </nav>
 
 @include('layouts.message')
-@include('layouts.errors')
+{{--@include('layouts.errors')--}}
 
 @yield('style')
 @yield('content')

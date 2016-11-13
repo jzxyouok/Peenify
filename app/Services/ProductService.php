@@ -27,11 +27,6 @@ class ProductService extends Service
 
         $product->setSlug()->tag($attributes['tags']);
 
-        $product->giveMovieTo(array_get($attributes, 'movie'))
-                ->giveSeriesTo(array_get($attributes, 'series'))
-                ->giveGameTo(array_get($attributes, 'game'))
-                ->giveAnimeTo(array_get($attributes, 'anime'));
-
         return $product;
     }
 
