@@ -4,6 +4,6 @@
 </div>
 
 <div class="form-group">
-    <label for="name">預告片</label>
+    <label for="name">預告片 * 輸入 youtube id 即可</label>
     <input type="text" name="options[trailer]" class="form-control">
 </div>
