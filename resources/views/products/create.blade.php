@@ -69,13 +69,13 @@
 
                             <input name="launched_at" type='text' class="form-control"
                                    value="{{ old('launched_at') }}"/>
+                        </div>
 
-                            @if ($errors->has('launched_at'))
-                                <span class="help-block">
+                        @if ($errors->has('launched_at'))
+                            <span class="help-block">
                                 <strong>{{ $errors->first('launched_at') }}</strong>
                             </span>
-                            @endif
-                        </div>
+                        @endif
                     </div>
 
                     <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
